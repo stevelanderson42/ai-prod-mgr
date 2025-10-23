@@ -1,0 +1,23 @@
+name: Decision record
+description: Request/record a decision that needs an ADR
+title: "[ADR] "
+labels: ["decision"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      placeholder: Constraints, evidence, metrics baseline
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options considered
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed decision
+      placeholder: Include trade-offs and links to evals
+    validations:
+      required: true

@@ -1,0 +1,18 @@
+{
+  "exact_match": {
+    "type": "float",
+    "description": "Exact match score 0..1"
+  },
+  "precision_at_5": {
+    "type": "float",
+    "description": "Precision@5 for retrieved passages"
+  },
+  "latency_p95_ms": {
+    "type": "number",
+    "description": "95th percentile latency in ms"
+  },
+  "refusal_rate": {
+    "type": "float",
+    "description": "Share of out-of-scope queries properly refused"
+  }
+}

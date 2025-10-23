@@ -1,0 +1,19 @@
+name: Feature request
+description: Propose a change; must include verification plan
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / goal
+      placeholder: What user/job-to-be-done? How will we know it worked?
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification plan
+      placeholder: Which metrics will move? Which eval dataset? Success criteria?
+    validations:
+      required: true

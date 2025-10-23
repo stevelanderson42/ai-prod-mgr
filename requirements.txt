@@ -1,0 +1,6 @@
+# Pin only what you actually need
+pydantic>=2.0
+pandas
+numpy
+matplotlib
+scikit-learn
