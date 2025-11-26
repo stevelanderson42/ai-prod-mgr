@@ -9,3 +9,5 @@ print(f"My name is {my_name}")
 # Basic math
 days_practicing = 1
 print(f"I've been practicing Python for {days_practicing} days")
+print('Hello, world!'
+      )
