@@ -8,6 +8,7 @@ This section links to Architecture Decision Records (ADRs) that define key reaso
 |-----|-------|------|--------|---------|
 | [ADR-0001](decisions/ADR-0001-first-decision.md) | Choose Verification-First Repo Scaffold | 2025-10-23 | ✅ Accepted | Establish structure for verifiable artifacts (`/decisions` \| `/evals` \| `/prompts` \| `/risk`) |
 | [ADR-0002](decisions/ADR-0002-Define%20Evaluation%20Workflow%20for%20Prompts%20and%20Evals.md) | Define Evaluation Workflow for Prompts & Evals | 2025-10-23 | ✅ Accepted | Formalize how prompts & evals are logged, measured, and cross-linked |
+| [COMMIT-c69cbd4] (https://github.com/stevelanderson42/ai-prod-mgr/commit/c69cbd46176eb13d920c320fd0ca28b8f4cae441) | 2025-11-27 |  ✅ Complete | test for verification index
 
 
 
