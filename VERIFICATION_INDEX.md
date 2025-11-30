@@ -2,7 +2,7 @@
 ---
 ## 🧩 Verification Decision Index
 
-This section links to Architecture Decision Records (ADRs) that define key reasoning and workflow choices.
+This section links to Architecture Decision Records (ADRs) and Commits - ADRs define key reasoning and workflow choices, while Commits are just the usual record of Commits.
 
 | ADR | Title | Date | Status | Purpose |
 |-----|-------|------|--------|---------|
