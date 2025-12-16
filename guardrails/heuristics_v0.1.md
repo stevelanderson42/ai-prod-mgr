@@ -260,6 +260,8 @@ Key checks:
 
 The following experiments from Week 1 informed this heuristics design:
 
+[View Prompt Experiments →](https://github.com/stevelanderson42/ai-prod-mgr/tree/main/prompt-experiments
+
 ### Experiment 01: Suitability Classification
 **Finding:** Vague classification prompts produce inconsistent results. 
 Structured output + explicit label definitions = reliable classification.
