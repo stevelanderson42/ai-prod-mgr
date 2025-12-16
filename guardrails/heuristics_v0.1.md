@@ -223,7 +223,8 @@ and 17a-4 recordkeeping:
 
 ## Connection to AI Query Sequence
 
-[Reference your 16-step, three-phase workflow]
+#### This section syncs up with the FinServ AI Query Lifecycle sequence diagrams and verbiage in my public notion folder.
+[](https://www.notion.so/stevelanderson42/FinServ-AI-Query-Lifecycle-2bea7858746d809c86acdd89cd9f7e86?source=copy_link)
 
 ### Phase 1 — Context Assembly
 Guardrails apply at:
