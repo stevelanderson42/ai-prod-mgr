@@ -305,3 +305,4 @@ out-of-scope questions. With grounding: "NOT_IN_DOCUMENT" response.
 | Version | Date | Changes |
 |---------|------|---------|
 | v0.1 | Dec 2025 | Initial heuristics framework |
+| v0.2 | Dec 2025 | Updated Notion AI Query Cycle and prompt experiment links |
