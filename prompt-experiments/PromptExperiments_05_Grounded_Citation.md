@@ -137,4 +137,176 @@ This experiment directly informs the **Compliance RAG Assistant** architecture. 
 
 
 
+# python code
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+client = OpenAI()
+
+def get_completion(prompt, model="gpt-3.5-turbo"):
+    messages = [{"role": "user", "content": prompt}]
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0,
+    )
+    return response.choices[0].message.content
+
+# A short "policy document" for the model to reference
+policy_document = """
+RETIREMENT ACCOUNT WITHDRAWAL POLICY (Effective January 2024)
+
+Section 3.1 - Early Withdrawal Penalties
+Withdrawals from 401(k) accounts before age 59½ are subject to a 10% 
+early withdrawal penalty in addition to applicable income taxes.
+
+Section 3.2 - Exceptions to Early Withdrawal Penalty
+The 10% penalty is waived in the following circumstances:
+- Qualified medical expenses exceeding 7.5% of adjusted gross income
+- Permanent disability as defined by IRS guidelines
+- Substantially equal periodic payments (SEPP/72t distributions)
+
+Section 3.3 - Required Minimum Distributions
+Account holders must begin taking required minimum distributions (RMDs) 
+by April 1 of the year following the year they reach age 73.
+"""
+
+# Question that IS answerable from the document
+question_1 = "What is the early withdrawal penalty for a 401(k)?"
+
+# Question that is NOT answerable from the document
+question_2 = "What is the early withdrawal penalty for a Roth IRA?"
+
+# ========== V1 PROMPT - no grounding requirement ==========
+prompt_v1 = f"""
+You are a helpful retirement planning assistant.
+
+Policy Document:
+{policy_document}
+
+Question: {question_2}
+"""
+
+print("=== V1 PROMPT (asking about Roth IRA - NOT in document) ===")
+print(prompt_v1)
+print("\n=== V1 OUTPUT ===")
+response_v1 = get_completion(prompt_v1)
+print(response_v1)
+
+# ========== V2 PROMPT - strict grounding required ==========
+prompt_v2 = f"""
+You are a compliance assistant for a financial institution.
+
+You must answer questions ONLY using the provided policy document. 
+
+Rules:
+- If the answer is in the document, provide it and quote the relevant section
+- If the answer is NOT in the document, respond with exactly: "NOT_IN_DOCUMENT: This question cannot be answered from the provided policy."
+- Do not use any knowledge outside the provided document
+- Do not guess or infer beyond what is explicitly stated
+
+Return JSON in this format:
+{{
+    "answerable": true/false,
+    "answer": "your answer here or NOT_IN_DOCUMENT message",
+    "source_section": "section number if applicable, empty string if not",
+    "quoted_text": "exact quote from document if applicable, empty string if not"
+}}
+
+Policy Document:
+{policy_document}
+
+Question: {question_2}
+"""
+
+print("\n=== V2 PROMPT (same question - Roth IRA) ===")
+print(prompt_v2)
+print("\n=== V2 OUTPUT ===")
+response_v2 = get_completion(prompt_v2)
+print(response_v2)
+
+
+
+# === V1 PROMPT (asking about Roth IRA - NOT in document) ===
+
+# You are a helpful retirement planning assistant.
+
+# Policy Document:
+
+# RETIREMENT ACCOUNT WITHDRAWAL POLICY (Effective January 2024)        
+
+# Section 3.1 - Early Withdrawal Penalties
+# Withdrawals from 401(k) accounts before age 59½ are subject to a 10% 
+# early withdrawal penalty in addition to applicable income taxes.     
+
+# Section 3.2 - Exceptions to Early Withdrawal Penalty
+# The 10% penalty is waived in the following circumstances:
+# - Qualified medical expenses exceeding 7.5% of adjusted gross income 
+# - Permanent disability as defined by IRS guidelines
+# - Substantially equal periodic payments (SEPP/72t distributions)     
+
+# Section 3.3 - Required Minimum Distributions
+# Account holders must begin taking required minimum distributions (RMDs)
+# by April 1 of the year following the year they reach age 73.
+
+
+# Question: What is the early withdrawal penalty for a Roth IRA?
+
+
+# === V1 OUTPUT ===
+# For a Roth IRA, withdrawals of contributions (not earnings) can be made penalty-free at any time. However, withdrawals of earnings before age 59½ may be subject to a 10% early withdrawal penalty in addition to applicable income 
+# taxes, unless an exception applies.
+
+# === V2 PROMPT (same question - Roth IRA) ===
+
+# You are a compliance assistant for a financial institution.
+
+# You must answer questions ONLY using the provided policy document.
+
+# Rules:
+# - If the answer is in the document, provide it and quote the relevant section
+# - If the answer is NOT in the document, respond with exactly: "NOT_IN_DOCUMENT: This question cannot be answered from the provided policy."
+# - Do not use any knowledge outside the provided document
+# - Do not guess or infer beyond what is explicitly stated
+
+# Return JSON in this format:
+# {
+#     "answerable": true/false,
+#     "answer": "your answer here or NOT_IN_DOCUMENT message",
+#     "source_section": "section number if applicable, empty string if not",
+#     "quoted_text": "exact quote from document if applicable, empty string if not"
+# }
+
+# Policy Document:
+
+# RETIREMENT ACCOUNT WITHDRAWAL POLICY (Effective January 2024)
+
+# Section 3.1 - Early Withdrawal Penalties
+# Withdrawals from 401(k) accounts before age 59½ are subject to a 10%
+# early withdrawal penalty in addition to applicable income taxes.
+
+# Section 3.2 - Exceptions to Early Withdrawal Penalty
+# The 10% penalty is waived in the following circumstances:
+# - Qualified medical expenses exceeding 7.5% of adjusted gross income
+# - Permanent disability as defined by IRS guidelines
+# - Substantially equal periodic payments (SEPP/72t distributions)
+
+# Section 3.3 - Required Minimum Distributions
+# Account holders must begin taking required minimum distributions (RMDs)
+# by April 1 of the year following the year they reach age 73.
+
+
+# Question: What is the early withdrawal penalty for a Roth IRA?
+
+
+# === V2 OUTPUT ===
+# {
+#     "answerable": false,
+#     "answer": "NOT_IN_DOCUMENT: This question cannot be answered from the provided policy.",
+#     "source_section": "",
+#     "quoted_text": ""
+# }
+# PS C:\Users\Steve\Documents\GitHub\ai-prod-mgr-sandbox> 
+
 

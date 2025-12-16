@@ -88,3 +88,75 @@ This pattern applies broadly: any classification task in financial services need
 ## Connection to Toolkit
 
 This classification pattern is foundational for the **Requirements Guardrails** module, where incoming user requests must be routed appropriately before the AI responds. It also informs the **Compliance RAG Assistant**, which needs to detect when a query requires sourced, compliant answers versus general information.
+
+
+
+
+# python code
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+client = OpenAI()
+
+def get_completion(prompt, model="gpt-3.5-turbo"):
+    messages = [{"role": "user", "content": prompt}]
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0,
+    )
+    return response.choices[0].message.content
+
+# Sample customer question
+customer_question = "Should I move part of my 401(k) into bonds?"
+
+# ========== V1 PROMPT - intentionally vague ==========
+prompt_v1 = f"""
+Classify this question as "general" or "suitability-related."
+
+Question: {customer_question}
+"""
+
+print("=== V1 PROMPT ===")
+print(prompt_v1)
+print("\n=== V1 OUTPUT ===")
+response_v1 = get_completion(prompt_v1)
+print(response_v1)
+
+
+
+# ========== V2 PROMPT - structured with definitions ==========
+prompt_v2 = f"""
+You are a compliance classifier for a regulated financial institution.
+
+Classify the user's question using ONLY these two labels:
+
+1. SUITABILITY_RELEVANT — if the question involves:
+   - asset allocation
+   - retirement decision-making
+   - investment recommendation
+   - risk-level change
+
+2. GENERAL_INQUIRY — everything else
+
+Return JSON only: {{"label": "...", "reason": "..."}}
+
+Question: {customer_question}
+"""
+
+print("\n=== V2 PROMPT ===")
+print(prompt_v2)
+print("\n=== V2 OUTPUT ===")
+response_v2 = get_completion(prompt_v2)
+print(response_v2)
+
+
+# ========== V1 OUTPUT (recorded 12/5/2025) ==========
+# This question is suitability-related.
+
+# ========== V2 OUTPUT (recorded 12/5/2025) ==========
+# {
+#     "label": "SUITABILITY_RELEVANT",
+#     "reason": "The question involves asset allocation within a retirement account (401(k))"
+# }

@@ -101,3 +101,121 @@ The V1 pattern ("be helpful") is the default LLM behavior. Overriding it require
 ## Connection to Toolkit
 
 This pattern is essential for the **Requirements Guardrails** module, which must intercept unsafe queries before they reach the response generation layer. It also shapes the design of the **Compliance RAG Assistant**, where certain questions should trigger human escalation rather than AI-generated answers.
+
+
+
+
+# python code
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+client = OpenAI()
+
+def get_completion(prompt, model="gpt-3.5-turbo"):
+    messages = [{"role": "user", "content": prompt}]
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0,
+    )
+    return response.choices[0].message.content
+
+# Vague customer question that could mean many things
+customer_question = "Can you help me figure out what to do with my money?"
+
+# ========== V1 PROMPT - no ambiguity handling ==========
+prompt_v1 = f"""
+You are a helpful financial assistant.
+
+Customer question: {customer_question}
+"""
+
+print("=== V1 PROMPT ===")
+print(prompt_v1)
+print("\n=== V1 OUTPUT ===")
+response_v1 = get_completion(prompt_v1)
+print(response_v1)
+
+# ========== V2 PROMPT - ambiguity detection first ==========
+prompt_v2 = f"""
+You are an AI assistant for a regulated financial institution.
+
+Before answering any question, you must first assess whether the request is clear enough to respond safely.
+
+Evaluate the customer question and return JSON in this exact format:
+
+{{
+    "is_ambiguous": true/false,
+    "ambiguity_reason": "explanation if ambiguous, empty string if clear",
+    "clarifying_questions": ["question1", "question2"] or [],
+    "safe_to_answer": true/false
+}}
+
+Rules:
+- Questions about specific financial actions (investing, moving money, retirement decisions) require specificity to answer safely
+- Vague requests for "help" or "advice" without context are ambiguous
+- If ambiguous, provide 2-3 clarifying questions to narrow scope
+- Never assume what the customer means
+
+Customer question: {customer_question}
+"""
+
+print("\n=== V2 PROMPT ===")
+print(prompt_v2)
+print("\n=== V2 OUTPUT ===")
+response_v2 = get_completion(prompt_v2)
+print(response_v2)
+
+
+
+# === V1 PROMPT ===
+
+# You are a helpful financial assistant.
+
+# Customer question: Can you help me figure out what to do with my money?
+
+
+# === V1 OUTPUT ===
+# Of course! I'd be happy to help you figure out what to do with your money. To start, it's important to assess your financial goals, risk tolerance, and time horizon. Are you looking to save for a specific goal, such as buying a 
+# house or retiring? Are you comfortable with taking on some risk in exchange for potentially higher returns, or do 
+# you prefer more conservative investments? And how soon do you need access to your money?
+
+# Once we have a better understanding of your financial situation and goals, we can explore different investment options that align with your objectives. This could include setting up a diversified investment portfolio, considering tax-advantaged accounts like IRAs or 401(k)s, or exploring other savings and investment vehicles.
+
+# Feel free to provide more information about your financial goals and preferences, and we can work together to come up with a personalized plan for managing your money.
+
+# === V2 PROMPT ===
+
+# You are an AI assistant for a regulated financial institution.
+
+# Before answering any question, you must first assess whether the request is clear enough to respond safely.       
+
+# Evaluate the customer question and return JSON in this exact format:
+
+# {
+#     "is_ambiguous": true/false,
+#     "ambiguity_reason": "explanation if ambiguous, empty string if clear",
+#     "clarifying_questions": ["question1", "question2"] or [],
+#     "safe_to_answer": true/false
+# }
+
+# Rules:
+# - Questions about specific financial actions (investing, moving money, retirement decisions) require specificity to answer safely
+# - Vague requests for "help" or "advice" without context are ambiguous
+# - If ambiguous, provide 2-3 clarifying questions to narrow scope
+# - Never assume what the customer means
+
+# Customer question: Can you help me figure out what to do with my money?
+
+
+# === V2 OUTPUT ===
+# {
+#     "is_ambiguous": true,
+#     "ambiguity_reason": "The request is vague and lacks specific details on what the customer needs assistance with.",
+#     "clarifying_questions": ["What are your financial goals?", "Are you looking to invest, save, or spend your money?", "Do you have a specific timeframe or amount in mind?"],
+#     "safe_to_answer": false
+# }
+# PS C:\Users\Steve\Documents\GitHub\ai-prod-mgr-sandbox>
+
+
