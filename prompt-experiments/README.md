@@ -1,76 +1,86 @@
 # Prompt Experiments
 
-Structured experiments exploring prompt engineering as a risk-control discipline for regulated financial services workflows.
+This folder contains a small, intentional set of **prompt experiments** used to explore how large language models behave under different constraints in regulated environments.
+
+These experiments are not “prompt hacks.”  
+They are structured learning inputs that informed the design of downstream systems such as:
+
+- Requirements Guardrails
+- Evaluation workflows
+- Compliance-aware response handling
+
+---
 
 ## Purpose
 
-These experiments document the difference between prompts that "work" and prompts that are production-safe in compliance-sensitive environments. Each experiment follows a v1 → v2 refinement pattern, showing how vague instructions fail and how explicit constraints succeed.
+The goal of these experiments was to answer practical product questions, such as:
 
-The goal is not clever prompting — it's predictable, auditable, machine-readable model behavior.
+- What kinds of ambiguity or risk can be reliably detected *before* model invocation?
+- How do explicit structure and schemas affect consistency and auditability?
+- Where do model behaviors require **pre-model guardrails** versus **post-model controls**?
+- Which failure modes appear early and can be mitigated cheaply?
 
-## Experiments
+Each experiment started as a v1 hypothesis and was iterated to v2 based on observed failure modes.
 
-| # | Experiment | Core Pattern | Key Insight |
-|---|------------|--------------|-------------|
-| 01 | Suitability Classification | Structured output + explicit definitions | Correct answers aren't enough; format and reasoning matter |
-| 02 | Compliance Rewrite | Constraint-based editing | "Professional" ≠ "compliant" — models need explicit rules |
-| 03 | Transcript Extraction | Schema-first design | "Extract key info" produces summaries; schemas produce data |
-| 04 | Ambiguity Detection | Safety gating | Helpful is not always safe — pause before answering |
-| 05 | Grounded Citation | Hallucination prevention | Models blend sources unless explicitly forbidden |
+---
 
-## Common Themes
+## What’s Included
 
-Across all five experiments, the same principles emerged:
+Each experiment document typically contains:
 
-**1. Role assignment matters**
-Generic roles ("helpful assistant") optimize for helpfulness. Compliance-specific roles ("compliance classifier for a regulated financial institution") change the model's defaults.
+- the original prompt (v1)
+- observed issues or inconsistencies
+- revised prompt (v2)
+- structured output examples (often JSON)
+- a short summary of what changed and why it mattered
 
-**2. Explicit constraints beat implicit expectations**
-The model doesn't know your rules unless you state them. "Be professional" is not the same as "remove performance predictions."
+The emphasis is on **learning and traceability**, not optimization for a single demo response.
 
-**3. Structured output enables integration**
-Free-form text requires parsing and breaks unpredictably. JSON with defined schemas integrates reliably with downstream systems.
+---
 
-**4. Refusal is a feature**
-A model that refuses to answer unclear or out-of-scope questions is safer than one that always tries to help. Design for appropriate refusal.
+## How These Experiments Are Used
 
-**5. Audit trails require citation**
-In regulated environments, knowing the answer isn't enough — you need to show where it came from.
+The experiments in this folder directly informed:
 
-## Connection to Toolkit
+- **Input guardrails**  
+  (e.g., suitability classification, ambiguity detection)
 
-These patterns form the behavioral foundation for the Regulated AI Workflow Toolkit:
+- **Output guardrails**  
+  (e.g., compliance rewrites, grounding and citation enforcement)
 
-- **Market Intelligence Monitor:** Extraction patterns (Experiment 03) for parsing news and filings
-- **ROI Decision Engine:** Classification patterns (Experiment 01) for categorizing inputs
-- **Requirements Guardrails:** Ambiguity detection (Experiment 04) and safety gating
-- **Compliance RAG Assistant:** Grounded citation (Experiment 05) and rewrite constraints (Experiment 02)
+- **Evaluation criteria**  
+  (e.g., what “good” looks like for refusal behavior or structured extraction)
 
-## Methodology
+They serve as *evidence* for design decisions captured elsewhere in the repository.
 
-Each experiment follows the same structure:
+---
 
-1. **Goal** — What behavior are we testing?
-2. **Prompt V1** — A naive or minimal prompt
-3. **Output V1** — What the model actually produced
-4. **Observation** — Why V1 fails or is risky
-5. **Prompt V2** — Refined with explicit constraints
-6. **Output V2** — Improved, production-safe output
-7. **Takeaway** — The generalizable lesson
+## Relationship to Other Parts of the Repo
 
-All experiments were run against GPT-3.5-turbo with temperature=0 for reproducibility.
+- The **narrative and system-level design** lives under:  
+  → `modules/requirements-guardrails/`
 
-## Files
-```
-/prompt-experiments
-    PromptExperiments_01_Suitability_Classification.md
-    PromptExperiments_02_Compliance_Rewrite.md
-    PromptExperiments_03_Transcript_Extraction.md
-    PromptExperiments_04_Ambiguity_Detection.md
-    PromptExperiments_05_Grounded_Citation.md
-    README.md
-```
+- These prompt experiments provide the **raw empirical grounding** that supports that design.
 
-## About
+Think of this folder as the lab notebook, not the finished product.
 
-These experiments were developed during Week 1 of a 17-week AI Product Manager transition program, with a focus on applying prompt engineering to regulated industry workflows in financial services.
+---
+
+## Scope and Non-Goals
+
+This folder intentionally does **not** include:
+
+- production prompt orchestration
+- agent frameworks
+- runtime infrastructure
+
+Those concerns are addressed at the module level, once the behavior is well understood.
+
+---
+
+## Status
+
+Stable.
+
+These experiments represent foundational learning and are not expected to grow significantly.  
+Future work focuses on applying these insights within system workflows, not expanding the experiment set.
