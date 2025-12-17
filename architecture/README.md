@@ -45,12 +45,19 @@ These decisions support consistency and long-term maintainability across modules
 
 ### 2. System and Lifecycle Artifacts
 
-This folder may also include:
+This folder may also include system-level artifacts such as:
+
 - AI query lifecycle diagrams
 - sequence flows showing where guardrails apply
 - conceptual architecture views that connect modules together
 
-These artifacts help readers understand **how requests move through the system**, and where evaluation, policy, and escalation occur.
+For readers who prefer a visual, narrative walkthrough, these concepts are also documented in my public Notion workspace:
+
+→ **FinServ AI Query Lifecycle (Notion)**
+https://www.notion.so/stevelanderson42/FinServ-AI-Query-Lifecycle-2bea7858746d809c86acdd89cd9f7e86
+
+The Notion materials provide annotated diagrams and explanatory context, while this repository serves as the source of record for architectural decisions and supporting artifacts.
+
 
 ---
 
