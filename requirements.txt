@@ -1,4 +1,6 @@
-# Pin only what you actually need
+# Minimal dependencies for illustrative scripts and evaluation examples.
+# This repository is design- and architecture-focused, not a production application.
+
 pydantic>=2.0
 pandas
 numpy
