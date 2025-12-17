@@ -1,10 +1,13 @@
 # Regulated AI Workflow Toolkit (AI Product Manager Portfolio)
 
-This repository is a cohesive portfolio demonstrating how a Product Manager designs **safe, auditable AI workflows** for regulated environments (e.g., financial services, healthcare, insurance).
+This repository is a cohesive portfolio demonstrating how a Product Manager designs **safe, auditable AI workflows** for regulated environments such as financial services, healthcare, and insurance.
 
-It is organized as a **four-module system**—not a collection of disconnected demos—focused on the core product challenge in regulated AI:
+*Designed as a portfolio artifact for senior AI Product Manager roles in regulated industries.*
 
-> **Enable value from AI while enforcing governance, traceability, and risk controls across the full lifecycle.**
+Rather than a collection of disconnected demos, this work is organized as a **four-module system** focused on the core product challenge in regulated AI:
+
+> **How do you enable real business value from AI while enforcing governance, traceability, and risk controls across the full lifecycle?**
+
 
 ---
 
