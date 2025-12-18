@@ -8,6 +8,23 @@ Rather than a collection of disconnected demos, this work is organized as a **fo
 
 > **How do you enable real business value from AI while enforcing governance, traceability, and risk controls across the full lifecycle?**
 
+---
+
+The system below reflects how these constraints are operationalized in practice.
+
+---
+
+## Governance-by-Design Approach
+
+This portfolio applies a **governance-by-design** philosophy aligned with established AI frameworks (Microsoft AI-900, Google Responsible AI).
+
+Rather than treating governance as a post-deployment control, the system embeds responsible AI principles across the full lifecycle:
+- **Opportunity selection** (risk-aware prioritization)
+- **Requirements definition** (ambiguity and compliance detection)
+- **Model invocation** (routing, escalation, refusal)
+- **Output grounding** (citation-first retrieval and traceability)
+
+This mirrors how regulated organizations operationalize responsible AI: through product design decisions, not policy documents alone.
 
 ---
 
@@ -44,7 +61,8 @@ These modules form an integrated workflow:
 **Market Intelligence** surfaces opportunities → **ROI Engine** prioritizes them →  
 **Guardrails** enforce safe execution → **RAG Assistant** delivers compliant, grounded outputs.
 
-This structure is designed to mirror how regulated organizations build AI-enabled products: with governance embedded, not bolted on.
+This structure is designed to mirror how regulated organizations build AI-enabled products: with governance embedded across the **model lifecycle**, not bolted on after deployment.
+
 
 ---
 
@@ -72,6 +90,23 @@ If you prefer a visual walkthrough, the system lifecycle and sequence diagrams a
   https://www.notion.so/stevelanderson42/FinServ-AI-Query-Lifecycle-2bea7858746d809c86acdd89cd9f7e86
 
 This GitHub repository is the source of record for decisions and supporting artifacts; Notion provides annotated narrative context.
+
+---
+
+## Alignment with Responsible AI Frameworks
+
+The design choices in this repository reflect common responsible AI frameworks:
+
+- **AI-900 Concepts**  
+  - Responsible AI principles → implemented via guardrails, routing, and refusal logic  
+  - Model lifecycle → reflected across opportunity intake, evaluation, deployment, and monitoring artifacts  
+  - Prebuilt vs custom models → explicitly accounted for in risk and governance decisions
+
+- **Google Responsible AI Framing**  
+  - Fairness, safety, and accountability are treated as *product constraints*, not model features  
+  - Human review and escalation paths are explicit for high-risk use cases
+
+This translation from principles to system design is intentional and central to the portfolio.
 
 ---
 
