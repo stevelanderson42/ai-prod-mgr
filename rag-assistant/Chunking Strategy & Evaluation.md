@@ -33,6 +33,9 @@ This document operationalizes mitigation strategies for the following failure cl
 
 ## Document Classes & Chunking Approach
 
+This section defines how different document types are chunked, indexed, and evaluated.
+Chunking strategies are selected based on content structure, regulatory risk, and retrieval behavior.
+
 | Document Type | Examples | Chunking Strategy | Rationale |
 |--------------|----------|-------------------|-----------|
 | Policies | Compliance manuals, regulatory guidance | Semantic + section-aware | Preserve rule boundaries |
@@ -42,6 +45,88 @@ This document operationalizes mitigation strategies for the following failure cl
 | Code / Logic | Pseudocode, rules engines | Recursive | Preserve logic blocks |
 
 ---
+
+### Tables (High-Risk, Atomic Content)
+
+#### Why Tables Are High-Risk in Regulated RAG
+
+Tables in compliance and financial documents often encode **binding rules**, not reference data. Common examples include:
+
+- Thresholds (limits, caps, eligibility cutoffs)
+- Rate matrices (fees, interest rates, penalties)
+- Conditional logic expressed across rows and columns
+- Exceptions and footnotes with regulatory impact
+
+Naive chunking that splits tables across chunks or linearizes them improperly leads to **semantic corruption**, where individual values lose their governing context. In regulated environments, this creates **material compliance risk**, not merely degraded answer quality.
+
+---
+
+#### Failure Modes Addressed
+
+This strategy directly mitigates the following failure modes identified in the RAG Failure Modes Checklist:
+
+- Table fragmentation
+- Semantic fragmentation
+- Chunk boundary violations
+- Context underfill
+- Citation hallucination
+
+---
+
+#### Chunking Strategy for Tables
+
+**Primary Rule:**  
+Tables are treated as **atomic semantic units** and must never be split across chunks.
+
+##### Approach
+
+- Detect tables during document ingestion (PDF parsing, HTML structure analysis, markdown detection).
+- Extract each table as a **single chunk**, regardless of token length (within operational limits).
+- Preserve:
+  - Row and column structure
+  - Column headers
+  - Footnotes and inline annotations
+- Attach surrounding context as **metadata**, not inline prose.
+
+---
+
+#### Example Metadata for Table Chunks
+
+```json
+{
+  "content_type": "table",
+  "doc_id": "POLICY-CC-001",
+  "version": "2025-08-01",
+  "section": "4.2.3",
+  "table_title": "Credit Limit Thresholds",
+  "applies_to": "Retail Brokerage Accounts",
+  "effective_date": "2025-08-01"
+}
+
+
+---
+
+### Policies & Regulatory Text
+
+(TBD – semantic + section-aware chunking)
+
+---
+
+### Procedures & Playbooks
+
+(TBD – recursive chunking with overlap)
+
+---
+
+### FAQs & Interpretive Guidance
+
+(TBD – fixed-size semantic chunking)
+
+---
+
+### Code, Rules & Logic
+
+(TBD – recursive chunking preserving logical blocks)
 
 ## Chunk Size & Overlap Guidelines
 
