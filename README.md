@@ -8,11 +8,8 @@ Rather than a collection of disconnected demos, this work is organized as a **fo
 
 > **How do you enable real business value from AI while enforcing governance, traceability, and risk controls across the full lifecycle?**
 
----
-
 The system below reflects how these constraints are operationalized in practice.
 
----
 
 ## Governance-by-Design Approach
 
