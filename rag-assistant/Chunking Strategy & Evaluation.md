@@ -102,7 +102,7 @@ Tables are treated as **atomic semantic units** and must never be split across c
   "applies_to": "Retail Brokerage Accounts",
   "effective_date": "2025-08-01"
 }
-
+```
 
 ---
 
