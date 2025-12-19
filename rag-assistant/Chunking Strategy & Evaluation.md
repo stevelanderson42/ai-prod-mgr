@@ -38,11 +38,11 @@ Chunking strategies are selected based on content structure, regulatory risk, an
 
 | Document Type | Examples | Chunking Strategy | Rationale |
 |--------------|----------|-------------------|-----------|
-| Tables | Limits, thresholds, matrices | Atomic chunks | Prevent semantic corruption |
-| Policies | Compliance manuals, regulatory guidance | Semantic + section-aware | Preserve rule boundaries |
-| Procedures | SOPs, operational playbooks | Recursive + overlap | Preserve step sequences |
-| FAQs | Interpretive guidance | Fixed-size semantic | Optimize retrieval precision |
-| Code / Logic | Pseudocode, rules engines | Recursive | Preserve logic blocks |
+| **Tables** | Limits, thresholds, matrices | Atomic chunks | Prevent semantic corruption |
+| **Policies** | Compliance manuals, regulatory guidance | Semantic + section-aware | Preserve rule boundaries |
+| **Procedures** | SOPs, operational playbooks | Recursive + overlap | Preserve step sequences |
+| **FAQs** | Interpretive guidance | Fixed-size semantic | Optimize retrieval precision |
+| **Code / Logic** | Pseudocode, rules engines | Recursive | Preserve logic blocks |
 
 
 
