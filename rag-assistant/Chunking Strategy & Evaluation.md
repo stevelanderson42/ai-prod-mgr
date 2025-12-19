@@ -48,4 +48,64 @@ This document operationalizes mitigation strategies for the following failure cl
 | Parameter | Guideline | Rationale |
 |---------|----------|-----------|
 | Target chunk size | TBD (e.g., 300–600 tokens) | Balance precision vs context |
-| Overl
+| Overlap | TBD (e.g., 10–20%) | Prevent rule fragmentation |
+| Max chunk size | TBD | Avoid retrieval overload |
+
+(Exact values validated through evaluation — see below)
+
+---
+
+## Index-Time Safeguards
+
+- Sentence-aware splitting
+- Section/header preservation
+- Table detection and isolation
+- Metadata enrichment (document ID, version, section)
+
+---
+
+## Evaluation Strategy
+
+### Retrieval Quality Metrics
+- Top-k recall
+- Precision@k
+- Fragmentation rate (answers spanning >1 chunk)
+- Context sufficiency score
+
+### Generation Risk Indicators
+- Citation coverage
+- Hallucination rate
+- NOT_IN_DOCUMENT fallback frequency
+
+---
+
+## Validation Approach
+
+- Golden set of compliance queries
+- Synthetic queries derived from real usage
+- Regression testing on chunking changes
+- Manual spot audits for high-risk queries
+
+---
+
+## Known Tradeoffs & Open Questions
+
+- Recall vs precision tension
+- Performance impact of overlap
+- Handling multi-table documents
+- Long-tail document formats
+
+---
+
+## Future Enhancements
+
+- Adaptive chunk sizing
+- Graph-based retrieval augmentation
+- Document-type–specific retrievers
+
+---
+
+## References
+
+- Databricks — *The Ultimate Guide to Chunking Strategies for RAG Applications*
+- Internal failure mode analysis
