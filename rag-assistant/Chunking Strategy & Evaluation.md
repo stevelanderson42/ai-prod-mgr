@@ -231,7 +231,129 @@ These tradeoffs are accepted because **policy misinterpretation carries high com
 
 ### Procedures & Playbooks
 
-(TBD – recursive chunking with overlap)
+#### Why Procedures Require a Different Chunking Approach
+
+Procedures and playbooks describe **how work is performed**, often as ordered steps, decision trees, or operational workflows. Unlike policies, correctness depends less on precise wording and more on **sequence, continuity, and completeness**.
+
+Common characteristics include:
+
+- Step-by-step instructions
+- Conditional branching (“if X, then do Y”)
+- Operational guardrails and escalation paths
+- Embedded references to systems, roles, or tools
+
+Naive chunking that breaks step sequences or separates conditionals from actions can lead to **operationally unsafe guidance**, even if individual chunks are factually correct.
+
+---
+
+#### Failure Modes Addressed
+
+This strategy mitigates the following failure modes from the RAG Failure Modes Checklist:
+
+- Semantic fragmentation
+- Chunk boundary violations
+- Context underfill
+- Multi-hop reasoning failure
+- Incomplete synthesis
+
+---
+
+#### Chunking Strategy for Procedures
+
+**Primary Strategy:**  
+**Recursive chunking with controlled overlap**, aligned to procedural boundaries.
+
+##### Approach
+
+- Identify natural procedural units:
+  - Numbered steps
+  - Sub-steps
+  - Decision blocks
+- Chunk along these boundaries rather than arbitrary token limits.
+- Apply **limited overlap** to:
+  - Preserve step transitions
+  - Maintain conditional context across steps
+- Avoid splitting:
+  - Conditional logic from the actions it governs
+  - Escalation criteria from escalation actions
+
+This approach favors **procedural continuity over strict chunk uniformity**.
+
+---
+
+#### Chunk Size & Overlap Guidance
+
+- Chunk sizes may be uneven, reflecting real procedural structure.
+- Overlap is used sparingly to preserve:
+  - “If / then” logic
+  - Multi-step dependencies
+- Excessive overlap is avoided to prevent retrieval noise and redundant context.
+
+Exact parameters are validated through retrieval and synthesis evaluation.
+
+---
+
+#### Metadata Enrichment for Procedural Chunks
+
+Each procedural chunk includes metadata to support correct application and traceability:
+
+- Document identifier and version
+- Procedure name and step range
+- Applicable role or function
+- Preconditions or assumptions (if defined)
+- Escalation or exception indicators
+
+This metadata helps ensure that retrieved guidance is **context-appropriate**, not just textually relevant.
+
+---
+
+#### Retrieval Considerations
+
+Procedural chunks are retrieved using **semantic-first search**, with keyword reinforcement for:
+
+- Step numbers
+- System names
+- Role identifiers
+
+During generation:
+- Retrieved chunks are ordered to preserve procedural flow.
+- The model is instructed to:
+  - Avoid skipping steps
+  - Flag missing or partial procedures
+  - Defer when insufficient context is retrieved
+
+---
+
+#### Evaluation Criteria for Procedural Chunking
+
+##### Retrieval Metrics
+- Step continuity rate (complete vs fragmented procedures)
+- Correct step ordering rate
+- Over-retrieval rate (irrelevant procedures retrieved)
+
+##### Generation Risk Indicators
+- Step omission rate
+- Step reordering errors
+- Conditional misapplication rate
+
+---
+
+#### Known Tradeoffs
+
+- Recursive chunking increases indexing complexity
+- Overlap increases token usage
+- Some procedures require manual boundary tuning
+
+These tradeoffs are accepted because **operational misuse carries real-world risk**, even when policies are technically correct.
+
+---
+
+#### Design Decision Summary (Procedures)
+
+> **Decision:** Use recursive chunking with controlled overlap for procedures and playbooks.  
+> **Rationale:** Preserve step order, conditional logic, and operational continuity.  
+> **Risk Mitigated:** Unsafe or incomplete operational guidance caused by fragmented procedural retrieval.
+
 
 ---
 
