@@ -108,7 +108,124 @@ Tables are treated as **atomic semantic units** and must never be split across c
 
 ### Policies & Regulatory Text
 
-(TBD – semantic + section-aware chunking)
+#### Why Policies Require Specialized Chunking
+
+Policy and regulatory documents encode **authoritative rules**, interpretations, and exceptions that must be applied consistently. Unlike tables, meaning is often distributed across:
+
+- Section headers and subheaders
+- Enumerated clauses
+- Cross-references and exceptions
+- Qualifying language (“unless,” “except,” “subject to”)
+
+Naive fixed-size chunking frequently separates these elements, resulting in **partial rule retrieval** and misleading answers.
+
+---
+
+#### Failure Modes Addressed
+
+This strategy mitigates the following failure modes from the RAG Failure Modes Checklist:
+
+- Semantic fragmentation
+- Chunk boundary violations
+- Section/header detachment
+- Context underfill
+- Citation hallucination
+
+---
+
+#### Chunking Strategy for Policies
+
+**Primary Strategy:**  
+**Semantic + section-aware chunking**, aligned to the document’s logical structure.
+
+##### Approach
+
+- Preserve section and subsection boundaries as natural chunk units.
+- Use semantic chunking *within* sections when length exceeds target limits.
+- Ensure that:
+  - Headers remain attached to governing text.
+  - Exceptions and qualifying clauses are not separated from primary rules.
+- Apply limited overlap when needed to preserve cross-sentence meaning.
+
+This approach prioritizes **rule completeness over uniform chunk size**.
+
+---
+
+#### Chunk Size & Overlap Guidance
+
+- Target chunk sizes may vary by document but generally fall within a moderate range (e.g., 400–800 tokens).
+- Overlap is applied selectively to:
+  - Preserve exception logic
+  - Maintain continuity across enumerated clauses
+- Excessive overlap is avoided to reduce retrieval noise.
+
+Exact parameters are validated empirically through retrieval evaluation.
+
+---
+
+#### Metadata Enrichment for Policy Chunks
+
+Each policy chunk is enriched with metadata to support traceability and audit reconstruction:
+
+- Document identifier
+- Version and effective date
+- Section and subsection identifiers
+- Jurisdiction or regulatory regime (if applicable)
+- Applicability scope (e.g., account type, customer segment)
+
+This metadata enables:
+- Accurate citation
+- Version-correct retrieval
+- Regulatory context awareness
+
+---
+
+#### Retrieval Considerations
+
+Policy chunks are retrieved using **hybrid search**:
+
+- Keyword matching for precise rule language
+- Semantic embeddings for interpretive queries
+
+During generation:
+- The system favors **fewer, higher-precision chunks**.
+- If multiple policy sections are retrieved, the model is instructed to:
+  - Identify conflicts or exceptions
+  - Explicitly cite all relied-upon sections
+
+---
+
+#### Evaluation Criteria for Policy Chunking
+
+Policy chunking effectiveness is evaluated using:
+
+##### Retrieval Metrics
+- Precision@k for authoritative policy sections
+- Rule completeness rate (single vs multi-chunk dependency)
+- Header retention accuracy
+
+##### Generation Risk Indicators
+- Partial rule hallucination rate
+- Exception omission rate
+- Citation completeness and accuracy
+
+---
+
+#### Known Tradeoffs
+
+- Semantic chunking increases indexing complexity
+- Section-aware chunking may produce uneven chunk sizes
+- Some regulatory documents require manual preprocessing
+
+These tradeoffs are accepted because **policy misinterpretation carries high compliance risk**.
+
+---
+
+#### Design Decision Summary (Policies)
+
+> **Decision:** Use semantic, section-aware chunking for policy and regulatory text.  
+> **Rationale:** Preserve rule integrity, exceptions, and interpretive context.  
+> **Risk Mitigated:** Incomplete or misleading compliance guidance caused by fragmented policy retrieval.
 
 ---
 
