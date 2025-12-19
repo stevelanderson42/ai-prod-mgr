@@ -1,101 +1,215 @@
-# RAG Failure Modes Checklist v0.1
+# RAG Failure Modes Checklist v0.2
 
 ## Purpose
 
-Pre-build checklist of failure modes to design against when constructing the Compliance Retrieval Assistant. This checklist was compiled from industry research on why RAG systems fail in production — particularly in regulated environments.
+This document is a **pre-build checklist of failure modes** to explicitly design against when constructing a **Compliance Retrieval Assistant** using Retrieval-Augmented Generation (RAG).
 
-**Key insight:** Up to 70% of RAG systems fail in production. The failures that matter most in regulated environments aren't just accuracy issues — they're **traceability issues**.
+It consolidates known failure patterns observed in production RAG systems — with particular emphasis on **regulated environments** (e.g., Financial Services), where correctness, traceability, and auditability matter more than raw fluency.
+
+**Key insight:**  
+Up to 70% of RAG systems fail in production. In regulated environments, the most damaging failures are not model hallucinations alone, but **retrieval and traceability failures** — often introduced upstream through poor document segmentation and chunking decisions.
 
 ---
 
 ## Retrieval Failures
 
 ### Content Selection Problems
-- [ ] **Wrong chunk retrieved** — Semantically similar but factually incorrect content returned
-- [ ] **Chunk boundary issues** — Answer split across chunks, incomplete information retrieved
-- [ ] **Retrieval decay** — System worked with small dataset but fails as corpus grows (can't find needle in haystack)
-- [ ] **Retrieval overload** — Too many documents retrieved, introducing noise that confuses generation
-- [ ] **Missing document** — Required policy/document not in corpus at all
-- [ ] **Cross-document contradictions** — Retrieved documents contain conflicting information, no resolution mechanism
+
+- [ ] **Wrong chunk retrieved**  
+  Semantically similar but factually incorrect content is returned.
+
+- [ ] **Chunk boundary violations**  
+  A complete answer spans multiple chunks due to improper segmentation, resulting in incomplete or misleading retrieval.
+
+- [ ] **Retrieval decay**  
+  The system performs well with a small corpus but degrades as content grows (needle-in-a-haystack problem).
+
+- [ ] **Retrieval overload**  
+  Too many documents or chunks are retrieved, introducing noise that confuses generation.
+
+- [ ] **Missing document**  
+  A required policy, procedure, or authoritative document is not present in the corpus.
+
+- [ ] **Cross-document contradictions**  
+  Retrieved documents conflict with one another and no resolution or prioritization mechanism exists.
+
+---
+
+### Chunking & Segmentation Failures (Retrieval-Critical)
+
+Chunking is an **index-time design decision** that directly determines retrieval quality. Poor chunking silently propagates downstream failures that appear to be “model issues” but are actually data pipeline defects.
+
+- [ ] **Semantic fragmentation**  
+  A single policy rule or regulatory concept is split across multiple chunks, preventing complete retrieval.
+
+- [ ] **Overly coarse chunks**  
+  Chunks are too large, causing retrieval to return excessive irrelevant context that dilutes signal.
+
+- [ ] **Overly fine chunks**  
+  Chunks are too small to preserve meaning, forcing multi-hop synthesis the model cannot reliably perform.
+
+- [ ] **Boundary violations**  
+  Chunking cuts through sentences, numbered rules, clauses, or exception blocks.
+
+- [ ] **Section / header detachment**  
+  Headings are separated from the content they govern, breaking interpretability and legal meaning.
+
+- [ ] **Table fragmentation**  
+  Tables are split across chunks, destroying row/column semantics and regulatory intent.
+
+- [ ] **Mixed-content chunking**  
+  Prose, tables, and code are chunked uniformly despite different structural requirements.
+
+- [ ] **Context window underfill**  
+  Retrieved chunks lack sufficient surrounding context to answer compliance-grade questions.
+
+- [ ] **Inconsistent chunking strategy**  
+  Different chunking approaches are applied across document sources, degrading retrieval consistency.
+
+---
 
 ### Staleness & Drift Problems
-- [ ] **Stale index** — Policy updated but embeddings not refreshed
-- [ ] **Knowledge drift** — Information was accurate when indexed but world has changed (e.g., interest rates, regulations)
-- [ ] **Temporal staleness without detection** — System confidently returns outdated information with no uncertainty indicator
-- [ ] **Embedding drift** — Embedding model updated but document index not re-synced, causing retrieval quality degradation
 
-### Technical/Architecture Problems
-- [ ] **Retrieval timing attacks** — Async retrieval completes after generation timeout, system generates without context
-- [ ] **Context position bias** — Model disproportionately weights content appearing early/late in context window
-- [ ] **Retrieval-generation model mismatch** — Different tokenization between embedding and generation models causes subtle quality issues
-- [ ] **Recursive retrieval loops** — Iterative retrieval repeatedly fetches same content without progress
+- [ ] **Stale index**  
+  Source documents change but embeddings are not refreshed.
+
+- [ ] **Knowledge drift**  
+  Information was accurate at indexing time, but regulations or business rules have changed.
+
+- [ ] **Temporal staleness without detection**  
+  The system confidently returns outdated information with no uncertainty signal.
+
+- [ ] **Embedding drift**  
+  Embedding models are updated without re-indexing documents, degrading retrieval quality.
+
+---
+
+### Technical / Architecture Problems
+
+- [ ] **Retrieval timing attacks**  
+  Asynchronous retrieval completes after generation timeout; the model responds without context.
+
+- [ ] **Context position bias**  
+  The model disproportionately weights content appearing early or late in the context window.
+
+- [ ] **Retrieval–generation model mismatch**  
+  Tokenization or representation differences between embedding and generation models cause subtle failures.
+
+- [ ] **Recursive retrieval loops**  
+  Iterative retrieval repeatedly fetches the same content without progress.
 
 ---
 
 ## Generation Failures
 
 ### Hallucination & Accuracy
-- [ ] **Hallucination despite retrieval** — Model ignores retrieved content and generates from training data
-- [ ] **Citation hallucination** — Model cites retrieved documents but attributes claims to wrong sources
-- [ ] **Overconfident tone** — Uncertain answers presented with inappropriate certainty
-- [ ] **Incomplete synthesis** — Model uses one chunk, ignores others that contain relevant information
+
+- [ ] **Hallucination despite retrieval**  
+  The model ignores retrieved content and generates from training data.
+
+- [ ] **Citation hallucination**  
+  The model cites documents but attributes claims to incorrect sources.
+
+- [ ] **Overconfident tone**  
+  Uncertain or partial answers are presented with inappropriate certainty.
+
+- [ ] **Incomplete synthesis**  
+  The model uses one retrieved chunk while ignoring others that contain required context.
+
+---
 
 ### Reasoning Failures
-- [ ] **Multi-hop reasoning failure** — Model retrieves all necessary facts but fails to connect them for complex queries
-- [ ] **Irrelevant chunk overload** — Too much context confuses model, leading to hallucination or wrong answers
+
+- [ ] **Multi-hop reasoning failure**  
+  All required facts are retrieved, but the model fails to connect them correctly.
+
+- [ ] **Irrelevant chunk overload**  
+  Excess context overwhelms the model, leading to incorrect synthesis or hallucination.
 
 ---
 
 ## Governance & Compliance Failures
 
 ### Auditability Problems
-- [ ] **No citations provided** — Answers generated without linking to source documents
-- [ ] **Unverifiable outputs** — No internal proof of where answer came from (no doc ID, no timestamp, no version)
-- [ ] **Audit/dispute blind spots** — Cannot reconstruct what the system saw and relied on 6 months later
-- [ ] **No audit trail** — Retrieved chunks and model decisions not logged
-- [ ] **Unclear source of truth** — Which document version was used? When was it last updated?
+
+- [ ] **No citations provided**  
+  Answers are generated without links to source documents.
+
+- [ ] **Unverifiable outputs**  
+  There is no internal proof of which documents or versions were used.
+
+- [ ] **Audit / dispute blind spots**  
+  The system’s behavior cannot be reconstructed months later.
+
+- [ ] **No audit trail**  
+  Retrieved chunks and model decisions are not logged.
+
+- [ ] **Unclear source of truth**  
+  Document authority, version, or timestamp is missing.
+
+---
 
 ### Regulatory & Access Problems
-- [ ] **Regulatory mismatch** — System fetches from stale guidance, gives correct answers for last year's regime
-- [ ] **Access control violations** — RAG system doesn't respect RBAC, could leak confidential content
-- [ ] **Data freshness gaps** — Document collections change but sync is infrequent, stale information served
+
+- [ ] **Regulatory mismatch**  
+  Guidance is retrieved from the wrong regulatory regime or time period.
+
+- [ ] **Access control violations**  
+  The RAG pipeline ignores RBAC and exposes restricted content.
+
+- [ ] **Data freshness gaps**  
+  Document updates occur faster than index refresh cycles.
+
+---
 
 ### Enterprise Data Problems
-- [ ] **Unstructured data handling failures** — PDFs with tables, multi-column layouts, images, graphs not parsed correctly
-- [ ] **Decentralized data gaps** — Content spread across SharePoint, Slack, Confluence, etc. — not all sources connected
-- [ ] **Format diversity** — Pipeline only handles "nice" text, misses knowledge in spreadsheets, slides, diagrams
+
+- [ ] **Unstructured data handling failures**  
+  PDFs with tables, images, or multi-column layouts are parsed incorrectly.
+
+- [ ] **Decentralized data gaps**  
+  Knowledge is spread across SharePoint, Confluence, Slack, etc., with partial coverage.
+
+- [ ] **Format diversity blind spots**  
+  The pipeline handles clean text but misses spreadsheets, slides, diagrams, or code blocks.
 
 ---
 
 ## Evaluation & Monitoring Failures
 
-- [ ] **The evaluation gap** — No feedback loop; system deteriorates without detection until users abandon it
-- [ ] **Flying blind on quality** — No systematic measurement of retrieval relevance, generation accuracy, or hallucination rate
-- [ ] **No baseline metrics** — Can't detect degradation because normal performance was never measured
+- [ ] **The evaluation gap**  
+  No feedback loop exists; quality degradation is unnoticed until user trust collapses.
+
+- [ ] **Flying blind on quality**  
+  Retrieval relevance and answer correctness are not systematically measured.
+
+- [ ] **No baseline metrics**  
+  Performance degradation cannot be detected due to lack of initial benchmarks.
 
 ---
 
-## Mitigations I'll Use in My Build
+## Mitigations I’ll Use in My Build
 
 | Failure Category | Failure Mode | Mitigation Strategy |
-|------------------|--------------|---------------------|
-| **Retrieval** | Wrong chunk | Top-k tuning, relevance threshold, hybrid search (semantic + keyword) |
-| **Retrieval** | Stale index | Document versioning, freshness metadata, scheduled re-indexing |
-| **Retrieval** | Retrieval overload | Adaptive context sizing based on query intent |
-| **Retrieval** | Position bias | Randomize/reorder retrieved docs, test for position sensitivity |
-| **Generation** | Hallucination | Strict grounding rules, citation requirement, "NOT_IN_DOCUMENT" fallback |
-| **Generation** | Citation errors | Span-level attribution validation (verify each citation against source) |
-| **Generation** | Multi-hop failure | Explicit reasoning steps in prompt, chain-of-thought for complex queries |
-| **Governance** | No audit trail | Log retrieved chunks + model response + timestamps per 17a-4 |
-| **Governance** | Unverifiable output | Evidence bundles with every response (see architecture below) |
-| **Governance** | Regulatory mismatch | Document version tracking, freshness thresholds, explicit staleness warnings |
-| **Evaluation** | No feedback loop | Automated evaluation using RAGAS or similar, synthetic test data from real queries |
+|-----------------|--------------|---------------------|
+| Retrieval | Wrong chunk | Top-k tuning, relevance thresholds, hybrid search |
+| Retrieval | Semantic fragmentation | Semantic or recursive chunking aligned to document structure |
+| Retrieval | Boundary violations | Sentence-aware and section-aware chunking |
+| Retrieval | Table fragmentation | Preserve tables as atomic chunks or structured embeddings |
+| Retrieval | Mixed-content chunking | Hybrid chunking (prose, tables, code) |
+| Retrieval | Stale index | Document versioning, freshness metadata, scheduled re-indexing |
+| Retrieval | Retrieval overload | Adaptive context sizing based on query intent |
+| Generation | Hallucination | Strict grounding rules, citation requirements, NOT_IN_DOCUMENT fallback |
+| Generation | Citation errors | Span-level attribution validation |
+| Governance | No audit trail | Log retrieved chunks, responses, timestamps (17a-4 compatible) |
+| Governance | Unverifiable output | Evidence bundles with every response |
+| Evaluation | No feedback loop | Automated evaluation (e.g., RAGAS), synthetic test queries |
 
 ---
 
 ## FinServ-Specific Design Pattern: Evidence Bundles
 
-Instead of returning just an answer, return an **evidence bundle** — a mini dossier that travels with every response:
+Instead of returning only an answer, return an **evidence bundle** — a structured dossier that travels with every response.
 
 ```json
 {
@@ -111,7 +225,7 @@ Instead of returning just an answer, return an **evidence bundle** — a mini do
       }
     ],
     "relied_on_evidence": [
-      {"doc_id": "POLICY-CC-001", "section": "4.2.3"}
+      { "doc_id": "POLICY-CC-001", "section": "4.2.3" }
     ],
     "model_trace": {
       "model": "model-version",
@@ -120,57 +234,3 @@ Instead of returning just an answer, return an **evidence bundle** — a mini do
     }
   }
 }
-```
-
-**Why this matters:** The customer sees the answer. The compliance officer sees the bundle. Six months later, when a dispute lands on someone's desk, you can reconstruct exactly what the system saw and relied on.
-
----
-
-## Questions to Answer Before Building
-
-### Chunking Strategy
-- What chunk size works best for compliance documents?
-- How do I handle documents with tables, multi-column layouts?
-- Should I use overlapping chunks to avoid boundary issues?
-
-### Freshness & Versioning
-- How often do source documents change?
-- How do I detect when a document has been updated?
-- How do I handle queries about "current" policy vs. "policy at time X"?
-
-### Retrieval Quality
-- What's the right balance between recall (find everything) and precision (find only relevant)?
-- How many documents should I retrieve? (Research shows diminishing returns beyond 5-10)
-- Should I use hybrid search (semantic + keyword)?
-
-### Evaluation
-- How will I measure retrieval relevance over time?
-- How will I detect hallucinations automatically?
-- What's my feedback loop for continuous improvement?
-
----
-
-## Sources Read
-
-1. **"Ten Failure Modes of RAG Nobody Talks About"** — Kuldeep Paul / Maxim AI
-   - Retrieval timing attacks, position bias, embedding drift, multi-hop failures, citation hallucination, model mismatch, temporal staleness, cross-document contradictions, recursive loops
-
-2. **"Why RAG Fails in Production (And How to Fix It)"** — Shubham Maurya, Mastercard
-   - Knowledge drift, retrieval decay, irrelevant chunks, evaluation gap
-   - Solutions: hybrid search, graph-based RAG, schema evolution tracking, adaptive context sizing
-
-3. **"RAG in Regulated Markets: Evidence Bundles and External Links"**
-   - Unverifiable outputs, regulatory mismatch, audit blind spots
-   - Evidence bundle pattern, structured citations, audit trail design
-
-4. **"Why GenAI Pilots Fail: Common Challenges with Enterprise RAG"** — Zeta Alpha
-   - Unstructured data, decentralized sources, RBAC requirements, data freshness
-   - "Enterprise search is never turnkey — it requires deep customization"
-
----
-
-## Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| v0.1 | Dec 2025 | Initial checklist compiled from 4 industry sources |
