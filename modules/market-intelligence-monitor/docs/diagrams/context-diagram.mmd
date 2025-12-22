@@ -1,0 +1,60 @@
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontSize": "18px",
+    "primaryColor": "#E8F0FE",
+    "primaryBorderColor": "#1A73E8",
+    "lineColor": "#1A73E8",
+    "secondaryColor": "#E6F4EA",
+    "tertiaryColor": "#FEF7E0"
+  }
+}}%%
+
+flowchart LR
+  %% External actors
+  A1[1. You and Reader]:::actor
+  A2[2. Scheduler and Automation Runner]:::actor
+  A3[3. External Sources\nNews • Company sites • Regulators\nArXiv • GitHub • Job boards]:::actor
+  A4[12. Distribution Channels\nEmail • Notion • Slack Teams\nMarkdown in GitHub]:::actor
+
+  %% System boundary
+  subgraph MI[Market-Intel Module - System]
+
+    P4[4. Ingestion\nfetch • rss • search • api]:::process
+    P5[5. Normalize\nclean • de-dupe • extract metadata]:::process
+
+    S6[(6. Evidence Store\nraw items and metadata)]:::store
+    S11[(11. Telemetry Store\nmetrics and eval outputs)]:::store
+
+    P7[7. Retriever\nquery and filters]:::process
+    P8[8. LLM Synthesizer\nsummarize • compare • cluster]:::process
+    P9[9. Scoring and Ranking\nimpact • credibility • relevance]:::process
+    G10[10. Guardrails\nPII • copyright • hallucination checks]:::guardrail
+    P13[13. Brief Composer\nexec summary • bullets • citations]:::process
+    P14[14. Alert Engine\nrules and thresholds]:::process
+
+  end
+
+  %% Flows
+  A2 --> P4
+  A3 --> P4
+  P4 --> P5 --> S6
+  A1 --> P7
+  S6 --> P7 --> P8 --> P9 --> G10 --> P13
+  P9 --> P14 --> G10
+  P13 --> A4 --> A1
+  P14 --> A4 --> A1
+  G10 --> S11
+  P9 --> S11
+  P4 --> S11
+
+  %% Styles
+  classDef actor fill:#FFFFFF,stroke:#202124,stroke-width:3px,color:#202124
+  classDef process fill:#E8F0FE,stroke:#1A73E8,stroke-width:3px,color:#174EA6
+  classDef store fill:#E6F4EA,stroke:#137333,stroke-width:3px,color:#0D652D
+  classDef guardrail fill:#FCE8E6,stroke:#C5221F,stroke-width:3px,color:#A50E0E
+
+  %% Thicker arrows
+  linkStyle default stroke-width:3px
+
+
