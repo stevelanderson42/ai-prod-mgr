@@ -1,0 +1,145 @@
+# config/sources.yaml
+# Purpose:
+# - Define WHAT we monitor (seed sources)
+# - Define HOW we treat sources (trust rules + boundaries)
+# - Keep LLM out of source authority; model consumes evidence, doesn't decide evidence
+
+version: "0.1"
+owner: "product"            # accountability: who curates policy (PM typically)
+last_updated: "2025-12-23"  # optional but useful for audit trails
+
+# -------------------------
+# Global boundaries / policy
+# -------------------------
+policy:
+  # "evidence" = allowed to be cited/quoted in briefs (with proper attribution)
+  # "discovery" = can be monitored, but NOT treated as evidence without corroboration
+  source_tiers:
+    tier_1_primary:          # highest trust: official, primary sources
+      can_cite: true
+      requires_corroboration: false
+    tier_2_reputable:        # reputable but secondary interpretation (major outlets, analyst notes)
+      can_cite: true
+      requires_corroboration: true
+    tier_3_discovery_only:   # social/forums/blogs; used only for discovery
+      can_cite: false
+      requires_corroboration: true
+
+  # Guardrail-style boundaries (PM-defined)
+  boundaries:
+    prefer_primary_over_commentary: true
+    no_social_as_evidence: true
+    max_quote_words_per_source: 25        # helps prevent accidental copyright violations
+    require_publication_date: true
+    require_source_attribution: true
+
+  # Default scoring priors by tier (used later in scoring stage)
+  scoring_priors:
+    tier_1_primary:
+      credibility_base: 0.90
+    tier_2_reputable:
+      credibility_base: 0.70
+    tier_3_discovery_only:
+      credibility_base: 0.40
+
+# -------------------------
+# Taxonomy: what "kinds" of sources we track
+# -------------------------
+taxonomy:
+  # Used for filtering, dashboards, and separating "regulatory vs competitor vs market"
+  source_classes:
+    - regulator
+    - standards_body
+    - competitor_official
+    - vendor_official
+    - research_primary
+    - media_secondary
+    - discovery
+
+# -------------------------
+# Seed sources (start small; scale only after pipeline proves value)
+# -------------------------
+sources:
+  # 1) U.S. regulator / policy body (primary)
+  - id: sec_press_releases
+    name: "U.S. SEC Press Releases"
+    class: regulator
+    tier: tier_1_primary
+    method: rss
+    url: "https://www.sec.gov/news/pressreleases.rss"
+    cadence: weekly
+    tags: ["sec", "enforcement", "disclosure", "ai-risk"]
+    notes: "Primary signal for enforcement posture and public messaging."
+
+  # 2) Financial regulator / self-regulatory organization (primary)
+  - id: finra_newsroom
+    name: "FINRA Newsroom"
+    class: regulator
+    tier: tier_1_primary
+    method: web
+    url: "https://www.finra.org/media-center/newsreleases"
+    cadence: weekly
+    tags: ["finra", "broker-dealer", "guidance", "enforcement"]
+    notes: "Often influences interpretation and operational expectations in FinServ."
+
+  # 3) U.S. government policy (primary-ish; official)
+  - id: whitehouse_briefing_room
+    name: "The White House Briefing Room"
+    class: regulator
+    tier: tier_1_primary
+    method: web
+    url: "https://www.whitehouse.gov/briefing-room/"
+    cadence: weekly
+    tags: ["policy", "ai", "executive-orders"]
+    notes: "High-level policy direction; not always operationally detailed."
+
+  # 4) Standards body / framework source (primary)
+  - id: nist_ai
+    name: "NIST AI (RMF + related updates)"
+    class: standards_body
+    tier: tier_1_primary
+    method: web
+    url: "https://www.nist.gov/artificial-intelligence"
+    cadence: monthly
+    tags: ["nist", "ai-rmf", "risk-management"]
+    notes: "Framework evolution signal; slower cadence but high durability."
+
+   # 5) Competitor official channel — Fidelity
+  - id: fidelity_press
+    name: "Fidelity Investments Press Releases"
+    class: competitor_official
+    tier: tier_1_primary
+    method: web
+    url: "https://newsroom.fidelity.com/pressreleases"
+    cadence: weekly
+    tags: ["fidelity", "competitor", "product", "digital", "ai"]
+    notes: >
+      Official public disclosures from Fidelity Investments.
+      Represents declared strategy and positioning.
+      Treat as claimed behavior until corroborated by adoption or regulatory signals.
+
+  # 6) Competitor official channel — Vanguard
+  - id: vanguard_press
+    name: "Vanguard Press Room"
+    class: competitor_official
+    tier: tier_1_primary
+    method: web
+    url: "https://corporate.vanguard.com/content/corporatesite/us/en/corp/who-we-are/pressroom/index.html"
+    cadence: weekly
+    tags: ["vanguard", "competitor", "product", "digital", "ai"]
+    notes: >
+      Official announcements from Vanguard.
+      Useful for understanding public positioning and strategic emphasis.
+      Not evidence of execution or adoption without corroboration.
+
+
+  # 7) Discovery-only channel (useful for early signals, not evidence)
+  - id: hn_ai_tag
+    name: "Hacker News — AI tag (discovery)"
+    class: discovery
+    tier: tier_3_discovery_only
+    method: rss
+    url: "https://hnrss.org/newest?q=AI"
+    cadence: weekly
+    tags: ["discovery", "trend", "early-signal"]
+    notes: "Discovery only. Never cite directly; use to find primary sources to add later."
