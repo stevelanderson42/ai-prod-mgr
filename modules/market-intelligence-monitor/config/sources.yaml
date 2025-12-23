@@ -33,7 +33,7 @@ policy:
     require_publication_date: true
     require_source_attribution: true
 
-  # Default scoring priors by tier (used later in scoring stage)
+  # Default scoring priors by tier (used later in the scoring stage)
   scoring_priors:
     tier_1_primary:
       credibility_base: 0.90
