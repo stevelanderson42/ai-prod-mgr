@@ -97,6 +97,30 @@ Engineering implementation is intentionally lightweight and incremental, reflect
 **Close-Out Statement:**
 > Fidelity ingestion meets MVP acceptance criteria for market-intel signal capture. Further robustness improvements are deferred pending demonstrated decision value and scale requirements.
 
+#### FINRA — Regulatory Signal Source
+
+**Decision:** Included in MVP (constrained scope)
+
+**Rationale:**
+- Authoritative regulatory body with direct influence on financial services behavior
+- High signal-to-noise for compliance posture, enforcement trends, and supervisory priorities
+- Provides necessary regulatory counterbalance to market-driven sources (e.g., Fidelity)
+
+**MVP Scope Constraints:**
+- Source treated as **low-frequency, high-impact**
+- Ingestion prioritized for **official notices, rule updates, and guidance**
+- Full historical backfill and deep semantic parsing explicitly deferred
+
+**MVP Acceptance Criteria:**
+- Reliable capture of published title, date, and canonical URL
+- Clear source attribution (FINRA)
+- Traceable raw evidence preserved
+- Normalized signals suitable for regulatory posture synthesis
+
+**MVP Scope Note:**
+> FINRA ingestion is intentionally constrained to authoritative updates sufficient for regulatory awareness and decision context. Expanded parsing and historical depth are deferred pending demonstrated decision impact.
+
+
 #### Deferred Sources
 
 Additional candidate sources were evaluated but intentionally deferred from the MVP due to ingestion complexity, low update cadence, or limited incremental decision value.
