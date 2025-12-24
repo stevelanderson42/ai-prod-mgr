@@ -57,6 +57,54 @@ This module includes a lightweight code scaffold to support repeatable signal in
 
 ---
 
+## Product Scope & PM Decisions (MVP)
+
+This module is intentionally scoped as a **decision-validation MVP**, not a comprehensive market data ingestion platform.
+
+The primary goal of the MVP is to demonstrate how a Product Manager:
+- evaluates external signal sources for decision usefulness,
+- defines and validates data acceptance criteria,
+- and makes explicit scope and investment tradeoffs before scaling ingestion breadth.
+
+Engineering implementation is intentionally lightweight and incremental, reflecting real-world PM constraints in regulated environments.
+
+### MVP Gating Decisions
+
+| Decision Area | Decision | Rationale |
+|--------------|----------|-----------|
+| Source Scope | Limit MVP to a small number of representative sources | Validates decision usefulness without incurring high ingestion complexity |
+| Source Mix | Include at least one market-driven source | Ensures competitive and industry pressure signals are represented |
+| Ingestion Depth | Prioritize listing-level ingestion over full detail hydration | Sufficient for market timing and trend detection in MVP |
+| Robustness Threshold | Defer hardening once acceptance criteria are met | Marginal robustness gains do not justify additional MVP cost |
+
+### Source Decisions (MVP)
+
+#### Fidelity Investments — Market Signal Source
+
+**Decision:** Included in MVP
+
+**Rationale:**
+- High credibility and frequent publication cadence
+- Representative example of a corporate newsroom source
+- Direct relevance to competitive and industry signaling in regulated financial services
+
+**MVP Acceptance Criteria (Met):**
+- Stable, deduplicated signal identifiers
+- Canonical publication dates captured
+- Traceable raw evidence preserved
+- Normalized signals suitable for downstream synthesis
+
+**Close-Out Statement:**
+> Fidelity ingestion meets MVP acceptance criteria for market-intel signal capture. Further robustness improvements are deferred pending demonstrated decision value and scale requirements.
+
+#### Deferred Sources
+
+Additional candidate sources were evaluated but intentionally deferred from the MVP due to ingestion complexity, low update cadence, or limited incremental decision value.
+
+These sources may be reconsidered in future iterations once MVP signal synthesis demonstrates clear downstream impact.
+
+---
+
 ## Entry Artifacts (Curated)
 
 This module intentionally separates **decision-facing artifacts** from raw research.

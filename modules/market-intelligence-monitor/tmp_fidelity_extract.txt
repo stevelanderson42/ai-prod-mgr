@@ -1,0 +1,723 @@
+﻿
+> data\evidence\raw\fidelity_press__20251224T172404Z.json:17:  "raw_content": "<!DOCTYPE html><html class=\"no-js language-en\" 
+lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" 
+content=\"width=device-width, minimal-ui, initial-scale=1, user-scalable=yes\"><base href=\"//newsroom.fidelity.com/\"><link 
+rel=\"shortcut icon\" href=\"dist/images/favicon.png\" sizes=\"16x16\" type=\"image/png\"><link rel=\"preconnect\" 
+href=\"https://www.googletagmanager.com\"><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}\ng
+tag(\"consent\",\"default\",{ad_storage:'denied',analytics_storage:'granted',functionality_storage:'granted',marketing_storage:'denied
+',wait_for_update:500});(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getEle
+mentsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=
+'+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PSJ6CZQ');</script><script 
+src=\"https://dmt.fidelity.com/prod/meas/\"></script><link rel=\"preload\" href=\"/dist/fonts/finp/fidelitysans-300.woff2\" 
+as=\"font\" type=\"font/woff2\" crossorigin><link rel=\"preload\" href=\"/dist/fonts/finp/fidelitysans-800.woff2\" as=\"font\" 
+type=\"font/woff2\" crossorigin><link rel=\"preload\" href=\"/dist/fonts/finp/fidelitysans-regular.woff2\" as=\"font\" 
+type=\"font/woff2\" crossorigin><link rel=\"preconnect\" href=\"https://preview.thenewsmarket.com\"><link rel=\"preconnect\" 
+href=\"https://cdnapisec.kaltura.com\"><link rel=\"apple-touch-icon\" sizes=\"180x180\" 
+href=\"/dist/images/apple-touch-icon.png\"><link href=\"/dist/styles/main.css?v=u1PeyKb1GncuNJiMgAPLRduGVYwPGnojB7McyPW38fc\" 
+rel=\"stylesheet\"><script src=\"/Scripts/vendors/jquery/jquery-3.6.0.min.js\"></script><title>Fidelity Newsroom</title><meta 
+property=\"og:title\" content=\"Fidelity Newsroom\"><meta name=\"description\" content=\"Stories from Fidelity Newsroom\"><meta 
+property=\"og:image\" content=\"https://newsroom.fidelity.com/dist/images/fidelity-meta-tag.png\"><body 
+data-parent=\"tnm-body\"><input type=\"hidden\" name=\"hdngtm\" data-key=\"GTM-PSJ6CZQ\"> <input type=\"hidden\" id=\"KalturalangID\" 
+value=\"en\"> <input type=\"hidden\" class=\"hdnDefaultOptFun\" data-enabled=\"true\" data-userconsent=\"granted\" 
+data-allow-functional-on-reject=\"0\"> <input type=\"hidden\" id=\"hdnViewMediaCart\" value=\"View media cart\"> <input 
+type=\"hidden\" id=\"hdnAddfiletocart\" value=\"Add file to media cart\"> <input type=\"hidden\" id=\"hdnAddAllfilescart\" 
+value=\"Add all to cart\"> <input type=\"hidden\" id=\"hdnnewslistingurl\"><div id=\"cookieConsent\" class=\"cookie-wrap bg-black 
+d-flex flex-column flex-sm-row active\"><div class=\"desc flex-grow-0 align-self-center\">We use cookies (and equivalent 
+technologies) to collect and analyse information on site&#x27;s performance and to enable the site to function. Some cookies allow 
+third parties to tailor the ads you see when you visit our site and other third party websites. By clicking &#x27;Agree&#x27;, you 
+agree to these uses of cookies.</div><div class=\"action flex-shrink-0 text-right align-self-center d-flex 
+flex-column-reverse\"><button type=\"button\" class=\"d-btn-block d-sm-btn-inline-block button-styled-white btn-no-radious 
+text-center dev-ga-agree dev-btn-accept-consent\" data-dismiss=\"alert\" aria-label=\"Agree\" 
+data-cookie-string=\".AspNet.Consent=yes; expires=Thu, 24 Dec 2026 17:24:04 GMT; path=/; secure; samesite=none\"> Agree </button><div 
+class=\"desc text-center mb-4\"><a href=\"cookiepreference\" class=\"text-underline manage-text dev-ga-manage-cookie-pref\">Manage 
+cookie preferences</a></div></div></div><a class=\"skip-to-content-link dev-anchor-link\" href=\"#maincontent\">Skip to content</a> 
+<input id=\"app_MediaRoomShortName\" name=\"app.MediaRoomShortName\" type=\"hidden\" value=\"FINP\"> <input 
+name=\"__RequestVerificationToken\" type=\"hidden\" value=\"CfDJ8GFrDlK67TZNp_2G-bCsDywnCcFjp7iCgCuOEwyT4l7trlKKQVhzPWkZmgqxTRMViB4MOw
+4jBzmz4VFWOzCVHtmTCD8Xaa70UM7eKmrDT8wb9s1Cjt5l6M87isTu8oOvHbl2UTwkQl3A0vSFxzkWjr0\"> <input name=\"__RequestVerificationToken\" 
+type=\"hidden\" value=\"CfDJ8GFrDlK67TZNp_2G-bCsDywnCcFjp7iCgCuOEwyT4l7trlKKQVhzPWkZmgqxTRMViB4MOw4jBzmz4VFWOzCVHtmTCD8Xaa70UM7eKmrDT8
+wb9s1Cjt5l6M87isTu8oOvHbl2UTwkQl3A0vSFxzkWjr0\"><header class=\"top-header horizontal-header d-none d-lg-block gateway-view\" 
+data-brand=\"\"><div class=\"container-fluid\"><div class=\"header-wrap justify-content-between header-1\"><div 
+class=\"align-self-center brand-wrap\"><a href=\"/\" target=\"_self\"> <img src=\"/dist/images/fidelity-logo.svg\" alt=\"Fidelity 
+Newsroom Home\" width=\"120\" height=\"28\"> </a></div><div class=\"align-self-center nav-wrap\"><nav class=\"nav-bar\" 
+aria-label=\"Secondary Navigation\"><ul class=\"nav\"><li class=\"nav-item\"><a class=\"nav-link\" 
+href=\"http://about.fidelity.com/\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Who we are (opens in a new tab)\">Who we 
+are</a><li class=\"nav-item\"><a class=\"nav-link\" href=\"https://about.fidelity.com/who-we-serve\" target=\"_blank\" 
+rel=\"nofollow\" aria-label=\"Who we serve (opens in a new tab)\">Who we serve</a><li class=\"nav-item\"><a class=\"nav-link\" 
+href=\"https://about.fidelity.com/data-and-insights\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Data and insights (opens in a 
+new tab)\">Data and insights</a><li class=\"nav-item\"><a class=\"nav-link\" href=\"https://newsroom.fidelity.com/\">News</a><li 
+class=\"nav-item\"><a class=\"nav-link\" href=\"https://about.fidelity.com/policy\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Policy (opens in a new tab)\">Policy</a><li class=\"nav-item link-border-bottom\"><a class=\"nav-link\" 
+href=\"https://jobs.fidelity.com/en/\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Careers (opens in a new tab)\">Careers</a><li 
+class=\"search-withmenu\"><div class=\"search-wrap\"><div class=\"search-box-wrap\"><div class=\"search-box dev-HeaderSearchEdit 
+autosuggest100\"><div class=\"searchInput__glow\"></div><label class=\"sr-only visually-hidden\" 
+for=\"txtSearch-mobileinput\">Search</label> <input type=\"search\" id=\"txtSearch-mobileinput\" class=\"search-textbox\" 
+placeholder=\"Search\" autocomplete=\"off\"> <button id=\"btnSearch\" aria-label=\"Search\" class=\"btn btn-inbox\"><i class=\"ic ic-s
+earch-header\"></i></button></div></div></div><script>$(document).on(\"click\",\"#btnSearch\",function(e){setSearchTextSearchIconPage(
+e);});function setSearchTextSearchIconPage(e){textQuery=encodeURIComponent($('#txtSearch').val());var 
+CultureInUrl=$('#hdnCultureEnabled').val()=='true'?('\\/'+$('#hdnCultureEnabled').data('seo-name')+'/'):'';var 
+url=CultureInUrl+\"search?searchtext=\"+textQuery;window.location=url;}</script></ul></nav></div></div><div class=\"header-wrap 
+justify-content-between header-2\"><div class=\"align-self-center nav-wrap\"><nav class=\"nav-bar\" aria-label=\"Primary 
+Navigation\"><ul class=\"nav\"><li class=\"nav-item has-child\"><a id=\"pressreleases\" aria-haspopup=\"true\" 
+aria-expanded=\"false\" class=\"nav-link has-child-toggle dev-menu-item-ga\" href=\"/pressreleases\" target=\"_self\"><span 
+class=\"lnktxt\">Press releases</span></a> <span class=\"show-child\" aria-hidden=\"true\"></span><ul class=\"submenu list-unstyled\" 
+aria-labelledby=\"pressreleases\"><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=company-news\" 
+target=\"_self\">Company news</a><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=products\" 
+target=\"_self\">Products</a><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=research\" 
+target=\"_self\">Research</a><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=recognition\" 
+target=\"_self\">Recognition</a><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=innovations\" 
+target=\"_self\">Innovations</a><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=citizenship\" 
+target=\"_self\">Citizenship</a><li><a class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=public-policy\" 
+target=\"_self\">Public policy</a></ul><li class=\"nav-item\"><a class=\"nav-link dev-menu-item-ga\" href=\"/digital-media\" 
+target=\"_self\"><span class=\"lnktxt\">Digital media</span></a><li class=\"nav-item\"><a class=\"nav-link dev-menu-item-ga\" 
+href=\"/social-media\" target=\"_self\"><span class=\"lnktxt\">Social media</span></a></ul></nav> <nav class=\"nav-bar\" 
+aria-label=\"Search Navigation\"><ul class=\"nav\"><li class=\"nav-item diff-style link-diff-sec\"><a class=\"nav-link\" 
+href=\"javascript:void(0)\" data-url=\"/Subscription?handler=SubscribeOnlyPartial\" data-toggle=\"ajax-subscribe-modal\" 
+target=\"_self\"><span>Subscribe</span></a><li class=\"nav-item media-cart-link dev-media-cart diff-style\"><a class=\"nav-link 
+media-cart-nav-link\" href=\"javascript:void(0)\" target=\"_self\" aria-label=\"Click here to View media cart\" role=\"button\"><span 
+class=\"dev-mc-link-title\">Media cart</span></a><input type=\"hidden\" name=\"dev-mc-link-title-format\" value=\"Media cart 
+(0)\"></ul></nav></div></div></div></header><header class=\"mobile-header d-lg-none gateway-view\"><div class=\"header-row\"><figure 
+class=\"mobile-logo\"><a href=\"/\" target=\"_self\"> <img src=\"/dist/images/fidelity-logo.svg\" alt=\"Fidelity Newsroom Home\" 
+width=\"120\" height=\"28\"> </a></figure><div class=\"head-m-right\"><button type=\"button\" aria-label=\"Menu\" 
+class=\"burger-menu-icon dev-mobile-menu\"><i></i></button></div></div><div class=\"mobile-nav dev-mobile-nav\" role=\"dialog\" 
+aria-modal=\"true\" data-modal=\"custom\" aria-labelledby=\"mobileNav\"><button type=\"button\" class=\"mobile-close-menu 
+dev-m-menu-close\" aria-label=\"Close\"><i class=\"ic ic-close-thick\"></i></button><div class=\"sr-only visually-hidden\" 
+id=\"mobileNav\">Navigation</div><div class=\"search-inside-menu dev-HeaderSearchEdit autosuggest100\"><div 
+class=\"searchInput__glow__m\"></div><label class=\"sr-only visually-hidden\" for=\"searchmobile\">Search</label> <input 
+type=\"search\" class=\"dev-txtSearch search-textboxnav\" placeholder=\"Search\" id=\"searchmobile\" autocomplete=\"off\"> <button 
+class=\"dev-btnSearch btn\" aria-label=\"Search\"><i class=\"ic ic-search-header\"></i></button></div><ul class=\"nav-m\"><li 
+class=\"nav-item\"><a class=\"nav-link\" href=\"http://about.fidelity.com/\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Who we 
+are (opens in a new tab)\">Who we are</a><li class=\"nav-item\"><a class=\"nav-link\" 
+href=\"https://about.fidelity.com/who-we-serve\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Who we serve (opens in a new 
+tab)\">Who we serve</a><li class=\"nav-item\"><a class=\"nav-link\" href=\"https://about.fidelity.com/data-and-insights\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Data and insights (opens in a new tab)\">Data and insights</a><li 
+class=\"nav-item\"><a class=\"nav-link\" href=\"https://newsroom.fidelity.com/\">News</a><li class=\"nav-item\"><a class=\"nav-link\" 
+href=\"https://about.fidelity.com/policy\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Policy (opens in a new 
+tab)\">Policy</a><li class=\"nav-item link-border-bottom\"><a class=\"nav-link\" href=\"https://jobs.fidelity.com/en/\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Careers (opens in a new tab)\">Careers</a><li class=\"nav-item has-child\"><a 
+id=\"mobile_pressreleases\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"nav-link has-child-toggle dev-menu-item-ga\" 
+href=\"/pressreleases\" target=\"_self\"><span class=\"lnktxt\">Press releases</span></a> <span class=\"show-child\" 
+aria-hidden=\"true\"></span><ul class=\"submenu list-unstyled\" aria-labelledby=\"mobile_pressreleases\"><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=company-news\" target=\"_self\">Company news</a><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=products\" target=\"_self\">Products</a><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=research\" target=\"_self\">Research</a><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=recognition\" target=\"_self\">Recognition</a><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=innovations\" target=\"_self\">Innovations</a><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=citizenship\" target=\"_self\">Citizenship</a><li><a 
+class=\"dev-menu-item-ga\" href=\"pressreleases?pressreleases=public-policy\" target=\"_self\">Public policy</a></ul><li 
+class=\"nav-item\"><a class=\"nav-link dev-menu-item-ga\" href=\"/digital-media\" target=\"_self\"><span class=\"lnktxt\">Digital 
+media</span></a><li class=\"nav-item\"><a class=\"nav-link dev-menu-item-ga\" href=\"/social-media\" target=\"_self\"><span 
+class=\"lnktxt\">Social media</span></a><li class=\"nav-item diff-style link-diff-sec\"><a class=\"nav-link\" 
+href=\"javascript:void(0)\" data-url=\"/Subscription?handler=SubscribeOnlyPartial\" data-toggle=\"ajax-subscribe-modal\" 
+target=\"_self\"><span>Subscribe</span></a><li class=\"nav-item media-cart-link dev-media-cart diff-style\"><a class=\"nav-link 
+media-cart-nav-link\" href=\"javascript:void(0)\" target=\"_self\" aria-label=\"Click here to View media cart\" role=\"button\"><span 
+class=\"dev-mc-link-title\">Media cart</span></a><input type=\"hidden\" name=\"dev-mc-link-title-format\" value=\"Media cart (0)\"></u
+l></div></header><script>$(document).on(\"click\",\".dev-btnSearch\",function(e){setSearchText(e);});$(document).on(\"click\",\".dev-h
+orizontal-search\",function(e){if(!$(\".dev-horizontal-search\").find(\".dev-search-box\").hasClass(\"show\")){$(\".dev-horizontal-sea
+rch\").find(\".dev-search-box\").addClass(\"show\");setTimeout(function(){$(\".dev-horizontal-search\").find(\".dev-search-box 
+.dev-txtSearch\").focus();},500);}});$(document).on(\"keydown\",\".dev-horizontal-search\",function(e){var keyCode=(e.keyCode?e.keyCod
+e:e.which);if(keyCode==13){$(\".dev-horizontal-search\").click();}});$(document).keydown(function(e){if(e.keyCode===27&&$(\".dev-searc
+h-box\").length&&$(\".dev-search-box\").is(\":visible\")){$(\".dev-search-box 
+.dev-search-close\").click();}});$(document).on(\"keydown\",'.dev-search-close',function(e){var $focusable=$(this);if($focusable.is(\"
+:focus\")&&!e.shiftKey&&e.key===\"Tab\"){e.preventDefault();$focusable.closest(\".dev-search-box\").find('input').focus();}});$(docume
+nt).on(\"click\",\".dev-search-close\",function(e){e.preventDefault();e.stopPropagation();$(\".dev-search-close\").closest(\".dev-sear
+ch-box\").removeClass(\"show\");});$(document).on(\"keydown\",\".dev-search-close\",function(e){e.preventDefault();e.stopPropagation()
+;if(e.keyCode===13){$(this).click();}});$(document).on('keydown',\".dev-search-box-mobile\",function(e){var 
+target=e.target;if(e.keyCode==9){var 
+focusable=$(target).parents('[data-modal=custom]').find('input,button,select,textarea');if(focusable.length){let 
+first=focusable[0];let last=focusable[focusable.length-1];let shift=e.shiftKey;if(shift){if(e.target===first){last.focus();e.preventDe
+fault();}}else{if(e.target===last){first.focus();e.preventDefault();}}}}\nreturn 
+true;});$(document).on('keydown',\".dev-mobile-nav\",function(e){var target=e.target;if(e.keyCode==9){var 
+focusable=$(target).parents('[data-modal=custom]').find('input,button,select,textarea,a');if(focusable.length){let 
+first=focusable[0];let last=focusable[focusable.length-1];let shift=e.shiftKey;if(shift){if(e.target===first){last.focus();e.preventDe
+fault();}}else{if(e.target===last){first.focus();e.preventDefault();}}}}\nreturn true;});$(document).on(\"click\",\".dev-mobile-search
+-click\",function(){$(\".dev-search-box-mobile\").addClass(\"show\");});$(document).on(\"click\",\".dev-mobile-search-close\",function
+(e){e.preventDefault();e.stopPropagation();$(\".dev-mobile-search-close\").closest(\".dev-search-box-mobile\").removeClass(\"show\");}
+);$(document).on(\"click\",\".dev-mobile-menu\",function(){$(\".dev-mobile-nav\").addClass(\"show\");});$(document).on(\"click\",\".de
+v-m-menu-close\",function(e){e.preventDefault();e.stopPropagation();$(\".dev-m-menu-close\").closest(\".dev-mobile-nav\").removeClass(
+\"show\");$(\".nav-m .has-child\").removeClass(\"active\");$(\".nav-m ul.submenu\").hide();});$(document).on(\"click\",\".has-child .s
+how-child\",function(e){e.preventDefault();e.stopPropagation();if($(this).closest(\".has-child\").hasClass(\"active\")){$(this).next(\
+"ul.submenu\").slideUp('fast');$(this).closest(\".has-child\").removeClass(\"active\");}else{$(this).next(\"ul.submenu\").slideDown('f
+ast');$(this).closest(\".has-child\").addClass(\"active\");$(this).closest(\".has-child\").find(\".lazy-onhover\").each(function(index
+){var getDataSRC=$(this).data(\"src\");$(this).attr(\"src\",getDataSRC);$(this).removeAttr(\"data-src\");});}});$(document).on(\"click
+\",\".has-child .dev-show-child\",function(e){e.preventDefault();e.stopPropagation();if($(this).closest(\".has-child\").hasClass(\"act
+ive\")){$(this).closest(\".has-child\").find(\"ul.submenu\").slideUp('fast');$(this).closest(\".has-child\").removeClass(\"active\");}
+else{$(this).closest(\".has-child\").find(\"ul.submenu\").slideDown('fast');$(this).closest(\".has-child\").addClass(\"active\");}});f
+unction setSearchText(e){var 
+CultureInUrl=$('#hdnCultureEnabled').val()=='true'?('\\/'+$('#hdnCultureEnabled').data('seo-name')+'/'):'';var searchText=$('.dev-sear
+ch-box-mobile').hasClass('show')?$(\".search-box-mobile\").find(\".dev-txtSearch\").val():$('.dev-txtSearch').val();textQuery=encodeUR
+IComponent(searchText);var url=CultureInUrl+\"search?searchtext=\"+textQuery;window.location=url;}\n$(document).ready(function(){$(doc
+ument).on(\"click\",\".desk_mega_link\",function(e){var 
+data_target=$(this).data(\"target\");$('.mega-menu-right').hide();$(data_target).show();var sliderSelector=$('.horizontal-header 
+'+data_target+' .menu-item-slider');$(\".mega_link\").removeClass(\"active\");$(this).addClass(\"active\");if($(window).width()>1200){
+destroyCarousel(data_target);slickCarousel(data_target);if(sliderSelector.find(\".lazy-onhover\").length){sliderSelector.find(\".lazy-
+onhover\").lazy({threshold:100,effect:'fadeIn',visibleOnly:true});}}\nreturn 
+false;})\nif($(window).width()>1200){if($(\".horizontal-header .menu_1\").length){slickCarousel(\".menu_1\");}}})\nfunction 
+slickCarousel(menu){var menu_item_slider=$('.horizontal-header '+menu+' .menu-item-slider');if(menu_item_slider){menu_item_slider.slic
+k({variableWidth:false,slidesToShow:5,slidesToScroll:5,swipe:\"\",easing:'swing',useCSS:false,speed:500,dots:true,rows:2,infinite:fals
+e,appendDots:$(\".horizontal-header .mega-menu-right\"+menu+\" .slide-m-dots\"),prevArrow:$(\".horizontal-header 
+.mega-menu-right\"+menu+\" .arrow-prev\"),nextArrow:$(\".horizontal-header .mega-menu-right\"+menu+\" .arrow-next\"),responsive:[{brea
+kpoint:2600,settings:{slidesToShow:5,slidesToScroll:5}},{breakpoint:1921,settings:{slidesToShow:4,slidesToScroll:4}},{breakpoint:1800,
+settings:{slidesToShow:4,slidesToScroll:4}},{breakpoint:1200,settings:{slidesToShow:3,slidesToScroll:3}},{breakpoint:900,settings:{sli
+desToShow:2,slidesToScroll:2}},{breakpoint:600,settings:{slidesToShow:1,slidesToScroll:1}}]});menu_item_slider.on('afterChange',functi
+on(event,slick,currentSlide,nextSlide){if(menu_item_slider.find(\".lazy-onhover\").length){menu_item_slider.find(\".lazy-onhover\").la
+zy({threshold:100,effect:'fadeIn',visibleOnly:true});}});}}\nfunction destroyCarousel(menu){var 
+menu_item_slider=$('.horizontal-header '+menu+\" .menu-item-slider\");if(menu_item_slider){if(menu_item_slider.hasClass('slick-initial
+ized')){menu_item_slider.slick('unslick');}};}</script><main class=\"hide-brand-name finp-main\" id=\"maincontent\"><input 
+name=\"__RequestVerificationToken\" type=\"hidden\" value=\"CfDJ8GFrDlK67TZNp_2G-bCsDywnCcFjp7iCgCuOEwyT4l7trlKKQVhzPWkZmgqxTRMViB4MOw
+4jBzmz4VFWOzCVHtmTCD8Xaa70UM7eKmrDT8wb9s1Cjt5l6M87isTu8oOvHbl2UTwkQl3A0vSFxzkWjr0\"><div class=\"data-container 
+dev-listingcontainer\" data-resolution=\"\"><input type=\"hidden\" id=\"hdnHeadingTextForCat\"> <input type=\"hidden\" 
+id=\"hdnCNHBrandName\"><div class=\"container-fluid main-title-row clsPressReleasesListing bg-purple\" id=\"divPressReleases\"><div 
+class=\"align-self-center\"><h1 class=\"title\">Press releases</h1></div></div><div class=\"section-wrap news-wrap news-wrap-inner 
+page-pressreleases\"><div class=\"d-flex content-row flex-column flex-sm-row\" id=\"divNewsListing\"><input 
+id=\"hdnShowNoticeForCategory\" value=\"&lt;p>&lt;strong>&lt;em>**Before investing in any mutual fund or exchange-traded fund, you 
+should consider its investment objectives, risks, charges, and expenses. Contact Fidelity for a prospectus, an offering circular, or, 
+if available, a summary prospectus containing this information. Read it carefully.**&lt;/em>&lt;/strong>&lt;br />\nPast performance 
+is no guarantee of future results.&lt;br />\nDiversification/asset allocation does not ensure a profit or guarantee against 
+loss.&lt;br />\nKeep in mind that investing involves risk. The value of your investment will fluctuate over time and you may gain or 
+lose money.&lt;br />\nStock markets are volatile and can decline significantly in response to adverse issuer, political, regulatory, 
+market, or economic developments.&lt;br />\nIn general the bond market is volatile, and fixed income securities carry interest rate 
+risk. (As interest rates rise, bond prices usually fall, and vice versa. This effect is usually more pronounced for longer-term 
+securities.) Fixed income securities also carry inflation risk, liquidity risk, call risk and credit and default risks for both 
+issuers and counterparties. Unlike individual bonds, most bond funds do not have a maturity date, so avoiding losses caused by price 
+volatility by holding them until maturity is not possible.&lt;br />\nETFs are subject to market fluctuation and the risks of their 
+underlying investments. ETFs are subject to management fees and other expenses. Unlike mutual funds, ETF shares are bought and sold 
+at market price, which may be higher or lower than their NAV, and are not individually redeemed from the fund.&lt;br />\nFidelity 
+does not provide legal or tax advice. The information herein is general in nature and should not be considered legal or tax advice. 
+Consult an attorney or tax professional regarding your specific situation.&lt;br />\n&lt;strong>Guarantees are subject to the 
+claims-paying ability of the issuing insurance company.&lt;/strong>&lt;br />\nFidelity 
+Crypto&lt;strong>\u00ae&lt;/strong>&amp;nbsp;is offered by Fidelity Digital Assets\u00ae.&amp;nbsp;&lt;br />\nInvesting involves 
+risk, including risk of total loss. &amp;nbsp;&lt;br />\nCrypto as an asset class is highly volatile,&amp;nbsp;and is for investors 
+with a high-risk tolerance.&amp;nbsp;Crypto is not insured by the Federal Deposit Insurance Corporation, the Securities Investor 
+Protection Corporation, or any other government agency, and is not an obligation of any bank. Investors in crypto do not benefit from 
+the same regulatory protections applicable to registered securities. &amp;nbsp;&lt;br />\nFidelity Crypto\u00ae accounts and custody 
+and trading of crypto in such accounts are provided by Fidelity Digital Assets, National Association, which is a national trust bank. 
+&amp;nbsp;&lt;br />\nBrokerage services in support of securities trading are provided by Fidelity Brokerage Services LLC 
+(\u201cFBS\u201d), and related custody services are provided by National Financial Services LLC (\u201cNFS\u201d), each a registered 
+broker-dealer and member NYSE and SIPC.&lt;br />\nNeither FBS nor NFS offer crypto nor provide trading or custody services for such 
+assets.&lt;br />\nFidelity Crypto and Fidelity Digital Assets are service marks of FMR LLC.&lt;br />\nFidelity does not have any kind 
+of affiliation, business partnerships or other official association with Decentraland\u00ae, the Decentraland\u00ae DAO or the 
+Decentraland\u00ae Foundation.&lt;br />\nThe trademarks and service marks appearing herein are the property of their respective 
+owners.&lt;br />\nThe statements and opinions expressed within are those of the authors. Fidelity Investments cannot guarantee the 
+accuracy or completeness of any statements or data.&lt;br />\nThe third parties mentioned herein and Fidelity Investments are 
+independent entities and are not legally affiliated.&lt;br />\nLinks to third-party web sites may be shared on this page. Those sites 
+are unaffiliated with Fidelity. Fidelity has not been involved in the preparation of the content supplied as the unaffiliated site 
+and does not guarantee or assume any responsibility for its content.&lt;br />\nFidelity Brokerage Services is not authorized to 
+solicit brokerage products and services outside the U.S. and our Twitter page is intended for U.S. persons only.&lt;br />\nFidelity 
+Brokerage Services LLC, Member NYSE, &lt;a href=&#34;https://www.sipc.org/&#34;>SIPC&lt;/a>, 900 Salem Street, Smithfield, RI 
+02917&lt;/p>\n\n&lt;p>1234068.2.0&lt;/p>\n\n&lt;p>&amp;nbsp;&lt;/p>\n\" type=\"hidden\"> <input data-val=\"true\" 
+data-val-required=\"The PageSize field is required.\" id=\"newslist_PageSize\" name=\"newslist.PageSize\" type=\"hidden\" 
+value=\"12\"> <input data-val=\"true\" data-val-required=\"The Page field is required.\" id=\"newslist_Page\" name=\"newslist.Page\" 
+type=\"hidden\" value=\"1\"> <input data-val=\"true\" data-val-required=\"The TotalCount field is required.\" 
+id=\"newslist_TotalCount\" name=\"newslist.TotalCount\" type=\"hidden\" value=\"172\"> <input type=\"hidden\" 
+name=\"assetCategoryId\" data-categoryid=\"-1\"><div class=\"sidebar-box-wrap flex-shrink-0\"><div id=\"refineModel\" 
+class=\"sidebar-box sidebar-box-header sidebar-button d-sm-none\"><button type=\"button\" class=\"btn d-btn-block 
+d-sm-btn-inline-block btn-outline-dark btn-xl btn-no-radious text-uppercase refine-click\"> Refine <span class=\"result-text\">(172 
+Results)</span> </button> <span class=\"sr-only\" aria-live=\"polite\">(172 Results)</span></div><div class=\"sidebar-wrap\"><div 
+class=\"sidebar-box-close d-md-none\"><button class=\"refine-click\" aria-label=\"Close\"><i class=\"ic 
+ic-close\"></i></button></div><div class=\"sidebar-box sidebar-box-header result-text\"><div class=\"row header 
+justify-content-between\"><div class=\"col-auto header-left\"><span class=\"title\">Refine</span></div><div class=\"col-auto 
+header-right text-right align-self-center\" aria-live=\"polite\">(172 Results)</div></div></div><div id=\"accordion\" 
+class=\"refineaccordion\"><div class=\"sidebar-box\"><a class=\"row header\" role=\"button\" data-header=\"Sort By\" 
+data-toggle=\"collapse\" id=\"filter-head-one\" href=\"#filter-one\" aria-expanded=\"true\" aria-controls=\"filter-one\"><div 
+class=\"col-lg-12\"><span class=\"title\">Sort by</span></div></a><div class=\"content collapse show\" id=\"filter-one\" 
+aria-labelledby=\"filter-head-one\"><div class=\"custom-scrollbar\"><ul class=\"select-list news-listing-sort\" id=\"sortul\"><li 
+data-categoryid=\"1\" data-id=\"sortli1\" id=\"sortli1\" data-categoryname=\"Newest\" data-selector=\"Newest\" data-type=\"sort 
+type\" data-subcategory-name=\"newest\" data-seo-name=\"newest\" data-displayname=\"Latest\" class=\"active\"><span id=\"1\" 
+tabindex=\"0\">Latest</span><li data-categoryid=\"2\" data-id=\"sortli2\" id=\"sortli2\" data-categoryname=\"Oldest\" 
+data-selector=\"Oldest\" data-type=\"sort type\" data-subcategory-name=\"oldest\" data-seo-name=\"oldest\" 
+data-displayname=\"Oldest\"><span id=\"2\" tabindex=\"0\">Oldest</span></ul></div></div></div><div class=\"sidebar-box\"><a 
+class=\"row header collapsed\" role=\"button\" data-header=\"Date Range\" data-toggle=\"collapse\" id=\"filter-head-two\" 
+href=\"#filter-two\" aria-expanded=\"false\" aria-controls=\"filter-two\"><div class=\"col-lg-12\"><span class=\"title\">Date 
+range</span></div></a><div class=\"content collapse\" id=\"filter-two\" aria-labelledby=\"filter-head-two\"><div 
+class=\"custom-scrollbar\"><ul class=\"select-list news-listing-filterDate\" data-categoryname=\"Date Range\" id=\"dateul\"><li 
+data-categoryid=\"1\" data-id=\"dateli1\" id=\"dateli11\" data-categoryname=\"Any Date\" data-selector=\"Any Date\" 
+data-type=\"date\" data-subcategory-name=\"any date\" data-seo-name=\"any date\" data-displayname=\"Any date\" class=\"active\"><span 
+id=\"5\" tabindex=\"0\">Any date</span><li data-categoryid=\"2\" data-id=\"dateli2\" id=\"dateli2\" data-categoryname=\"Last 24 
+hours\" data-selector=\"last 24 hours\" data-type=\"date\" data-subcategory-name=\"last 24 hours\" data-seo-name=\"last 24 hours\" 
+data-displayname=\"Last 24 hours\"><span id=\"11\" tabindex=\"0\">Last 24 hours</span><li data-categoryid=\"3\" data-id=\"dateli3\" 
+id=\"dateli3\" data-categoryname=\"Last Week\" data-selector=\"last week\" data-type=\"date\" data-subcategory-name=\"last week\" 
+data-seo-name=\"last week\" data-displayname=\"Last week\"><span id=\"6\" tabindex=\"0\">Last week</span><li data-categoryid=\"4\" 
+data-id=\"dateli4\" id=\"dateli4\" data-categoryname=\"Last Month\" data-selector=\"last month\" data-type=\"date\" 
+data-subcategory-name=\"last month\" data-seo-name=\"last month\" data-displayname=\"Last month\"><span id=\"7\" tabindex=\"0\">Last 
+month</span><li data-categoryid=\"5\" data-id=\"dateli5\" id=\"dateli5\" data-categoryname=\"Last Year\" data-selector=\"last year\" 
+data-type=\"date\" data-subcategory-name=\"last year\" data-seo-name=\"last year\" data-displayname=\"Last year\"><span id=\"8\" 
+tabindex=\"0\">Last year</span></ul></div></div></div><div class=\"sidebar-box\" data-categoryid=\"34835\"><a class=\"row header 
+collapsed\" role=\"button\" data-header=\"Press releases\" data-categoryid=\"34835\" id=\"heading_34835\" data-toggle=\"collapse\" 
+onclick=\"event.preventDefault()\" href=\"#collapse_34835\" aria-expanded=\"false\" aria-controls=\"collapse_34835\"><div 
+class=\"col-lg-12\"><span class=\"title\">Press releases</span></div></a><div class=\"content collapse subcategory-accordion\" 
+id=\"collapse_34835\" aria-labelledby=\"heading_34835\" data-parent=\"#accordion\"><div class=\"custom-scrollbar\"><ul 
+class=\"select-list d-none dev-no-scroll-ref\" data-categoryid=\"34835\"><li><div class=\"checkbox checkbox-dark subfilterCheckbox 
+category-34835\" id=\"category-panel-34835\"><input type=\"checkbox\" checked data-categoryid=\"34835\" data-categoryname=\"Press 
+releases\" data-subcategoryname=\"Press releases\" id=\"sub_34835\" class=\"subfilterCheckbox-input displaycatcheckbox\" 
+data-child=\"subCategory-34835\" data-selector=\"Press releases\" data-type=\"pressreleases\" data-subcategory-name=\"Press 
+releases\" data-seo-name=\"pressreleases\" data-displaycatname=\"1##\"> <label for=\"sub_34835\">Press releases 
+</label></div></ul><ul class=\"select-list\" id=\"category-34835\" data-categoryid=\"34835\"><li><div class=\"checkbox checkbox-dark 
+filterCheckbox category-34835\" id=\"category-panel-34841\"><input type=\"checkbox\" data-categoryid=\"34835\" 
+data-categoryname=\"Press releases\" id=\"sub_34841\" class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34841\" 
+data-selector=\"Company news\" data-type=\"pressreleases\" data-subcategory-name=\"Company news\" data-seo-name=\"company-news\" 
+data-displayname=\"Company news\" data-displaycatname=\"1##$21##\"> <label for=\"sub_34841\">Company news </label></div><ul 
+class=\"select-list mt-4 pl-5 dev-no-scroll-ref\" id=\"category-34841\" data-categoryid=\"34841\" 
+style=\"display:none\"></ul><li><div class=\"checkbox checkbox-dark filterCheckbox category-34835\" 
+id=\"category-panel-34842\"><input type=\"checkbox\" data-categoryid=\"34835\" data-categoryname=\"Press releases\" id=\"sub_34842\" 
+class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34842\" data-selector=\"Products\" 
+data-type=\"pressreleases\" data-subcategory-name=\"Products\" data-seo-name=\"products\" data-displayname=\"Products\" 
+data-displaycatname=\"1##$22##\"> <label for=\"sub_34842\">Products </label></div><ul class=\"select-list mt-4 pl-5 
+dev-no-scroll-ref\" id=\"category-34842\" data-categoryid=\"34842\" style=\"display:none\"></ul><li><div class=\"checkbox 
+checkbox-dark filterCheckbox category-34835\" id=\"category-panel-34843\"><input type=\"checkbox\" data-categoryid=\"34835\" 
+data-categoryname=\"Press releases\" id=\"sub_34843\" class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34843\" 
+data-selector=\"Research\" data-type=\"pressreleases\" data-subcategory-name=\"Research\" data-seo-name=\"research\" 
+data-displayname=\"Research\" data-displaycatname=\"1##$23##\"> <label for=\"sub_34843\">Research </label></div><ul 
+class=\"select-list mt-4 pl-5 dev-no-scroll-ref\" id=\"category-34843\" data-categoryid=\"34843\" 
+style=\"display:none\"></ul><li><div class=\"checkbox checkbox-dark filterCheckbox category-34835\" 
+id=\"category-panel-34844\"><input type=\"checkbox\" data-categoryid=\"34835\" data-categoryname=\"Press releases\" id=\"sub_34844\" 
+class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34844\" data-selector=\"Recognition\" 
+data-type=\"pressreleases\" data-subcategory-name=\"Recognition\" data-seo-name=\"recognition\" data-displayname=\"Recognition\" 
+data-displaycatname=\"1##$24##\"> <label for=\"sub_34844\">Recognition </label></div><ul class=\"select-list mt-4 pl-5 
+dev-no-scroll-ref\" id=\"category-34844\" data-categoryid=\"34844\" style=\"display:none\"></ul><li><div class=\"checkbox 
+checkbox-dark filterCheckbox category-34835\" id=\"category-panel-34845\"><input type=\"checkbox\" data-categoryid=\"34835\" 
+data-categoryname=\"Press releases\" id=\"sub_34845\" class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34845\" 
+data-selector=\"Innovations\" data-type=\"pressreleases\" data-subcategory-name=\"Innovations\" data-seo-name=\"innovations\" 
+data-displayname=\"Innovations\" data-displaycatname=\"1##$25##\"> <label for=\"sub_34845\">Innovations </label></div><ul 
+class=\"select-list mt-4 pl-5 dev-no-scroll-ref\" id=\"category-34845\" data-categoryid=\"34845\" 
+style=\"display:none\"></ul><li><div class=\"checkbox checkbox-dark filterCheckbox category-34835\" 
+id=\"category-panel-34846\"><input type=\"checkbox\" data-categoryid=\"34835\" data-categoryname=\"Press releases\" id=\"sub_34846\" 
+class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34846\" data-selector=\"Citizenship\" 
+data-type=\"pressreleases\" data-subcategory-name=\"Citizenship\" data-seo-name=\"citizenship\" data-displayname=\"Citizenship\" 
+data-displaycatname=\"1##$26##\"> <label for=\"sub_34846\">Citizenship </label></div><ul class=\"select-list mt-4 pl-5 
+dev-no-scroll-ref\" id=\"category-34846\" data-categoryid=\"34846\" style=\"display:none\"></ul><li><div class=\"checkbox 
+checkbox-dark filterCheckbox category-34835\" id=\"category-panel-34847\"><input type=\"checkbox\" data-categoryid=\"34835\" 
+data-categoryname=\"Press releases\" id=\"sub_34847\" class=\"filterCheckbox-input displaycatcheckbox\" data-child=\"category-34847\" 
+data-selector=\"Public policy\" data-type=\"pressreleases\" data-subcategory-name=\"Public policy\" data-seo-name=\"public-policy\" 
+data-displayname=\"Public policy\" data-displaycatname=\"1##$27##\"> <label for=\"sub_34847\">Public policy </label></div><ul 
+class=\"select-list mt-4 pl-5 dev-no-scroll-ref\" id=\"category-34847\" data-categoryid=\"34847\" 
+style=\"display:none\"></ul></ul></div><ul class=\"select-list dev-no-scroll-ref\" style=\"display:none\"><li>No Data 
+Found</ul></div></div></div><button id=\"btnFilter\" type=\"button\" class=\"btn d-btn-block d-sm-none btn-dark btn-xl btn-no-radious 
+text-uppercase d-md-none mt-5\">Apply filters</button></div></div><script type=\"text/template\" id=\"clearAllTemplate\">\r\n         
+   <div class=\"sidebar-box selection-panel\">\r\n                <div class=\"row header applied-filterHead no-gutters\">\r\n        
+            <div class=\"col-8 col-sm-8 col-lg-8 header-left\">\r\n                        <span class=\"title pr-1\">Applied 
+filters</span>\r\n                    </div>\r\n                    <div class=\"col-4 col-sm-4 col-lg-4 header-right text-right 
+align-self-center\">\r\n                        <span role=\"button\" class=\"action clear-All\" tabindex=\"0\">Clear all</span>\r\n  
+                  </div>\r\n                </div>\r\n                <div class=\"content applied-filterdiv 
+refine-category-show\"></div>\r\n            </div>\r\n        </script><script type=\"text/template\" id=\"filterTemplate\">\r\n     
+       <div class=\"filters-selected\">\r\n                <div class=\"filter-bg\">\r\n                    <span>$varData</span>\r\n 
+                   <i id=\"category-close\" data-id=\"$varId\"\r\n                       data-categoryId=\"$varCategoryId\"\r\n       
+                data-type=\"$varDataType\"\r\n                       data-seo-name=\"$varSeoName\" class=\"ic ic-close\" 
+role=\"button\" aria-label=\"Remove\" tabindex=\"0\"></i>\r\n                </div>\r\n            </div>\r\n        </script><input 
+type=\"hidden\" id=\"hdnHasRecord\" value=\"True\"><div id=\"divCategoryListing\" class=\"content-wrap listing-page-data 
+flex-grow-1\"><div id=\"catList\" class=\"row listing-row\" data-target=\"\" data-col-xs=\"\" data-col-sm=\"\" data-col-md=\"\" 
+data-col-lg=\"\" data-col-xl=\"\" data-col-xxl=\"\"><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item 
+news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" 
+height=\"225\"><img class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/645034.jpg\" alt=\"7 
+r \" width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity-s-17th-annual-resolutions-study--american
+s-preparing-for-a-year-of--planning-with-purpose-/s/fc3d5689-e2a4-433b-8048-d56053f283e0\" target=\"_self\" aria-label=\"Fidelity's 
+17th Annual Resolutions Study: Americans Preparing For a Year of 'Planning with Purpose'\"> <span class=\"news-action-icon\"><i 
+class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-add-story-to-mc\" data-guid=\"fc3d5689-e2a4-433b-8048-d56053f283e0\" data-addtomediacart=\"All files added to media 
+cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any multimedia assets to be added to the media cart.\" 
+role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all 
+to cart</span> </a><li><a href=\"javascript:void(0)\" class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" 
+data-assetguids=\"fc3d5689-e2a4-433b-8048-d56053f283e0\" data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" 
+data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span class=\"news-action-title\" data-colorscheme=\"\">Download all 
+files</span> </a></ul></div><div class=\"news-lock\"><span class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a 
+class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pressreleases/fidelity-s-17th-annual-resolutions-study--americans-
+preparing-for-a-year-of--planning-with-purpose-/s/fc3d5689-e2a4-433b-8048-d56053f283e0\" target=\"_self\" aria-label=\"View Story\" 
+tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" 
+class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/
+pressreleases/fidelity-s-17th-annual-resolutions-study--americans-preparing-for-a-year-of--planning-with-purpose-/s/fc3d5689-e2a4-433b
+-8048-d56053f283e0\" target=\"_self\">Fidelity's 17th Annual Resolutions Study: Americans Preparing For a Year of 'Planning with 
+Purpose'</a></div></div><div class=\"news-log\">December 11, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 
+col-xxl-3 listing-item news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 
+640px)\" width=\"400\" height=\"225\"><img class=\"img-view\" 
+src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/645021.jpg\" alt=\"10 f s r \" width=\"480\" height=\"270\" 
+loading=\"lazy\"> </picture> <img class=\"img-placeholder\" src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" 
+width=\"480\" height=\"270\" loading=\"lazy\"><div class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases
+/fidelity--introduces-new-retirement-solution-for-small-businesses/s/24d1dc54-7db3-4680-8737-d5d3984932fc\" target=\"_self\" 
+aria-label=\"Fidelity\u00ae Introduces New Retirement Solution for Small Businesses\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-add-story-to-mc\" data-guid=\"24d1dc54-7db3-4680-8737-d5d3984932fc\" data-addtomediacart=\"All files added to media 
+cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any multimedia assets to be added to the media cart.\" 
+role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all 
+to cart</span> </a><li><a href=\"javascript:void(0)\" class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" 
+data-assetguids=\"24d1dc54-7db3-4680-8737-d5d3984932fc\" data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" 
+data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span class=\"news-action-title\" data-colorscheme=\"\">Download all 
+files</span> </a></ul></div><div class=\"news-lock\"><span class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a 
+class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pressreleases/fidelity--introduces-new-retirement-solution-for-sma
+ll-businesses/s/24d1dc54-7db3-4680-8737-d5d3984932fc\" target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div 
+class=\"news-detail\"><div class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" 
+href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity--
+introduces-new-retirement-solution-for-small-businesses/s/24d1dc54-7db3-4680-8737-d5d3984932fc\" target=\"_self\">Fidelity\u00ae 
+Introduces New Retirement Solution for Small Businesses</a></div></div><div class=\"news-log\">December 03, 
+2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item news-list-item\"><div 
+class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" height=\"225\"><img 
+class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/645008.jpg\" alt=\"29 r r \" 
+width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity--q3-2025-retirement-analysis--retirement-
+account-balances-continue-to-climb--roth-savings-v/s/6bdc547b-b947-4d2c-b91a-f9d45f2b39c0\" target=\"_self\" 
+aria-label=\"Fidelity\u00ae Q3 2025 Retirement Analysis: Retirement Account Balances Continue to Climb, Roth Savings Vehicles Gain 
+Increasing Interest Among Young Savers\"> <span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span 
+class=\"news-action-title\">View Story</span> </a><li><a href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" 
+data-guid=\"6bdc547b-b947-4d2c-b91a-f9d45f2b39c0\" data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" 
+data-noasset=\"This story does not have any multimedia assets to be added to the media cart.\" role=\"button\"> <span 
+class=\"news-action-icon\"><i class=\"ic ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> 
+</a><li><a href=\"javascript:void(0)\" class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" 
+data-assetguids=\"6bdc547b-b947-4d2c-b91a-f9d45f2b39c0\" data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" 
+data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span class=\"news-action-title\" data-colorscheme=\"\">Download all 
+files</span> </a></ul></div><div class=\"news-lock\"><span class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a 
+class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pressreleases/fidelity--q3-2025-retirement-analysis--retirement-ac
+count-balances-continue-to-climb--roth-savings-v/s/6bdc547b-b947-4d2c-b91a-f9d45f2b39c0\" target=\"_self\" aria-label=\"View Story\" 
+tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" 
+class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/
+pressreleases/fidelity--q3-2025-retirement-analysis--retirement-account-balances-continue-to-climb--roth-savings-v/s/6bdc547b-b947-4d2
+c-b91a-f9d45f2b39c0\" target=\"_self\">Fidelity\u00ae Q3 2025 Retirement Analysis: Retirement Account Balances Continue to Climb, 
+Roth Savings Vehicles Gain Increasing Interest Among Young Savers</a></div></div><div class=\"news-log\">November 20, 
+2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item news-list-item\"><div 
+class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" height=\"225\"><img 
+class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/707856.jpg\" alt=\"Young man with arm 
+over shoulder of older man outdoors\" width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity--study-finds-the-great-wealth-transfer-le
+aves-families-poised-to-build-stronger-financial-f/s/3c72b6d3-9ab6-400a-95e7-f4b30e43db64\" target=\"_self\" 
+aria-label=\"Fidelity\u00ae Study Finds the Great Wealth Transfer Leaves Families Poised to Build Stronger Financial Futures - if 
+they Talk\"> <span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> 
+</a><li><a href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"3c72b6d3-9ab6-400a-95e7-f4b30e43db64\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"3c72b6d3-9ab6-400a-95e7-f4b30e43db64\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pre
+ssreleases/fidelity--study-finds-the-great-wealth-transfer-leaves-families-poised-to-build-stronger-financial-f/s/3c72b6d3-9ab6-400a-9
+5e7-f4b30e43db64\" target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div 
+class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" 
+href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity--
+study-finds-the-great-wealth-transfer-leaves-families-poised-to-build-stronger-financial-f/s/3c72b6d3-9ab6-400a-95e7-f4b30e43db64\" 
+target=\"_self\">Fidelity\u00ae Study Finds the Great Wealth Transfer Leaves Families Poised to Build Stronger Financial Futures - if 
+they Talk</a></div></div><div class=\"news-log\">November 13, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 
+col-xxl-3 listing-item news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 
+640px)\" width=\"400\" height=\"225\"><img class=\"img-view\" 
+src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/632706_v2.jpg\" alt=\"Company News: General\" width=\"480\" 
+height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" src=\"/dist/images/placeholders/placeholder-16x9.png\" 
+alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pres
+sreleases/boosting-productivity-through-financial-wellness--employers-invest-in-emergency-savings-benefits/s/49482457-77f1-4fbf-b0bc-7
+244b618d551\" target=\"_self\" aria-label=\"Boosting Productivity Through Financial Wellness: Employers Invest in Emergency Savings 
+Benefits\"> <span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> 
+</a><li><a href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"49482457-77f1-4fbf-b0bc-7244b618d551\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"49482457-77f1-4fbf-b0bc-7244b618d551\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pre
+ssreleases/boosting-productivity-through-financial-wellness--employers-invest-in-emergency-savings-benefits/s/49482457-77f1-4fbf-b0bc-
+7244b618d551\" target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div 
+class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" 
+href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/boosting-p
+roductivity-through-financial-wellness--employers-invest-in-emergency-savings-benefits/s/49482457-77f1-4fbf-b0bc-7244b618d551\" 
+target=\"_self\">Boosting Productivity Through Financial Wellness: Employers Invest in Emergency Savings Benefits</a></div></div><div 
+class=\"news-log\">November 05, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item 
+news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" 
+height=\"225\"><img class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/706161.jpg\" 
+alt=\"3Q 2025 Business Update\" width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity-investments-publishes-third-quarter-2025-
+business-update/s/a8a6e30e-4019-4dc4-8ba8-41ad25ec936a\" target=\"_self\" aria-label=\"Fidelity Investments Publishes Third Quarter 
+2025 Business Update\"> <span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View 
+Story</span> </a><li><a href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"a8a6e30e-4019-4dc4-8ba8-41ad25ec936a\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"a8a6e30e-4019-4dc4-8ba8-41ad25ec936a\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pre
+ssreleases/fidelity-investments-publishes-third-quarter-2025-business-update/s/a8a6e30e-4019-4dc4-8ba8-41ad25ec936a\" 
+target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div 
+class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div 
+class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity-investments-publishes-third-quarter-2025-busines
+s-update/s/a8a6e30e-4019-4dc4-8ba8-41ad25ec936a\" target=\"_self\">Fidelity Investments Publishes Third Quarter 2025 Business 
+Update</a></div></div><div class=\"news-log\">November 04, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 
+col-xxl-3 listing-item news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 
+640px)\" width=\"400\" height=\"225\"><img class=\"img-view\" 
+src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/706160.jpg\" alt=\"Women Money Study Image\" width=\"480\" 
+height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" src=\"/dist/images/placeholders/placeholder-16x9.png\" 
+alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div class=\"news-action\"><ul><li><a 
+href=\"https://newsroom.fidelity.com/pressreleases/fidelity-2025-women-and-money-study/s/21fa7fdd-6ee5-451b-b985-f75f51813642\" 
+target=\"_self\" aria-label=\"New Fidelity Research Shows Women Embracing Financial Frugality, Prioritizing Long-Term Savings\"> 
+<span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a 
+href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"21fa7fdd-6ee5-451b-b985-f75f51813642\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"21fa7fdd-6ee5-451b-b985-f75f51813642\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" 
+href=\"https://newsroom.fidelity.com/pressreleases/fidelity-2025-women-and-money-study/s/21fa7fdd-6ee5-451b-b985-f75f51813642\" 
+target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div 
+class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div 
+class=\"news-desc\"><p><a 
+href=\"https://newsroom.fidelity.com/pressreleases/fidelity-2025-women-and-money-study/s/21fa7fdd-6ee5-451b-b985-f75f51813642\" 
+target=\"_self\">New Fidelity Research Shows Women Embracing Financial Frugality, Prioritizing Long-Term Savings</a></div></div><div 
+class=\"news-log\">October 29, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item 
+news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" 
+height=\"225\"><img class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/705874_v4.jpg\" 
+alt=\"Fidelity s Invest in My EducationSM Initiative Now Active in 12 US States\" width=\"480\" height=\"270\" loading=\"lazy\"> 
+</picture> <img class=\"img-placeholder\" src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" 
+height=\"270\" loading=\"lazy\"><div class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity-s-in
+vest-in-my-education-initiative-now-active-in-12-us-states/s/250a2b74-5c09-4c02-808e-e1f4012159f4\" target=\"_self\" 
+aria-label=\"Fidelity\u2019s Invest in My Education Initiative Now Active in 12 US States\"> <span class=\"news-action-icon\"><i 
+class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-add-story-to-mc\" data-guid=\"250a2b74-5c09-4c02-808e-e1f4012159f4\" data-addtomediacart=\"All files added to media 
+cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any multimedia assets to be added to the media cart.\" 
+role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all 
+to cart</span> </a><li><a href=\"javascript:void(0)\" class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" 
+data-assetguids=\"250a2b74-5c09-4c02-808e-e1f4012159f4\" data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" 
+data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span class=\"news-action-title\" data-colorscheme=\"\">Download all 
+files</span> </a></ul></div><div class=\"news-lock\"><span class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a 
+class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pressreleases/fidelity-s-invest-in-my-education-initiative-now-act
+ive-in-12-us-states/s/250a2b74-5c09-4c02-808e-e1f4012159f4\" target=\"_self\" aria-label=\"View Story\" 
+tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" 
+class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/
+pressreleases/fidelity-s-invest-in-my-education-initiative-now-active-in-12-us-states/s/250a2b74-5c09-4c02-808e-e1f4012159f4\" 
+target=\"_self\">Fidelity\u2019s Invest in My Education Initiative Now Active in 12 US States</a></div></div><div 
+class=\"news-log\">October 28, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item 
+news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" 
+height=\"225\"><img class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/631553_v2.jpg\" 
+alt=\"Fidelity Logo\" width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity-investments-announces-liquidation-of-five
+-exchange-traded-funds/s/6ed59999-7cdb-43c0-9b65-6144b397a0ea\" target=\"_self\" aria-label=\"Fidelity Investments\u00ae Announces 
+Liquidation of Five Exchange-Traded Funds\"> <span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span 
+class=\"news-action-title\">View Story</span> </a><li><a href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" 
+data-guid=\"6ed59999-7cdb-43c0-9b65-6144b397a0ea\" data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" 
+data-noasset=\"This story does not have any multimedia assets to be added to the media cart.\" role=\"button\"> <span 
+class=\"news-action-icon\"><i class=\"ic ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> 
+</a><li><a href=\"javascript:void(0)\" class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" 
+data-assetguids=\"6ed59999-7cdb-43c0-9b65-6144b397a0ea\" data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" 
+data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span class=\"news-action-title\" data-colorscheme=\"\">Download all 
+files</span> </a></ul></div><div class=\"news-lock\"><span class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a 
+class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pressreleases/fidelity-investments-announces-liquidation-of-five-e
+xchange-traded-funds/s/6ed59999-7cdb-43c0-9b65-6144b397a0ea\" target=\"_self\" aria-label=\"View Story\" 
+tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" 
+class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/
+pressreleases/fidelity-investments-announces-liquidation-of-five-exchange-traded-funds/s/6ed59999-7cdb-43c0-9b65-6144b397a0ea\" 
+target=\"_self\">Fidelity Investments\u00ae Announces Liquidation of Five Exchange-Traded Funds</a></div></div><div 
+class=\"news-log\">October 16, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item 
+news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" 
+height=\"225\"><img class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/632798.jpg\" 
+alt=\"Company News: Financial\" width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/new-fidelity--report-helps-wealth-management-firms
+-tackle-top-organic-growth-barrier--time-managemen/s/3e3be1a8-011b-49e1-b6bb-ee02ae81172a\" target=\"_self\" aria-label=\"New 
+Fidelity\u00ae Report Helps Wealth Management Firms Tackle Top Organic Growth Barrier: Time Management\"> <span 
+class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a 
+href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"3e3be1a8-011b-49e1-b6bb-ee02ae81172a\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"3e3be1a8-011b-49e1-b6bb-ee02ae81172a\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pre
+ssreleases/new-fidelity--report-helps-wealth-management-firms-tackle-top-organic-growth-barrier--time-managemen/s/3e3be1a8-011b-49e1-b
+6bb-ee02ae81172a\" target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div 
+class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" 
+href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/new-fideli
+ty--report-helps-wealth-management-firms-tackle-top-organic-growth-barrier--time-managemen/s/3e3be1a8-011b-49e1-b6bb-ee02ae81172a\" 
+target=\"_self\">New Fidelity\u00ae Report Helps Wealth Management Firms Tackle Top Organic Growth Barrier: Time 
+Management</a></div></div><div class=\"news-log\">October 15, 2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 
+col-xxl-3 listing-item news-list-item\"><div class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 
+640px)\" width=\"400\" height=\"225\"><img class=\"img-view\" 
+src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/703641.jpg\" alt=\"Fidelity Trader Desktop\" width=\"480\" 
+height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" src=\"/dist/images/placeholders/placeholder-16x9.png\" 
+alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pres
+sreleases/fidelity-investments--introduces-fidelity-trader----powerful-advanced-trading-platform/s/a4f5cc08-fd1c-44dc-93df-41ca7e18e99
+1\" target=\"_self\" aria-label=\"Fidelity Investments\u00ae Introduces Fidelity Trader+\u2122, Powerful Advanced Trading Platform\"> 
+<span class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a 
+href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"a4f5cc08-fd1c-44dc-93df-41ca7e18e991\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"a4f5cc08-fd1c-44dc-93df-41ca7e18e991\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pre
+ssreleases/fidelity-investments--introduces-fidelity-trader----powerful-advanced-trading-platform/s/a4f5cc08-fd1c-44dc-93df-41ca7e18e9
+91\" target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div class=\"news-title\"><div 
+class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" href=\"fidelity\">Fidelity</a></div></div><div 
+class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/fidelity-investments--introduces-fidelity-trader----power
+ful-advanced-trading-platform/s/a4f5cc08-fd1c-44dc-93df-41ca7e18e991\" target=\"_self\">Fidelity Investments\u00ae Introduces 
+Fidelity Trader+\u2122, Powerful Advanced Trading Platform</a></div></div><div class=\"news-log\">September 25, 
+2025</div></div></div><div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 listing-item news-list-item\"><div 
+class=\"news-box\"><div class=\"news-image\"><picture><source media=\"(max-width: 640px)\" width=\"400\" height=\"225\"><img 
+class=\"img-view\" src=\"https://preview.thenewsmarket.com/Previews/FINP/StillAssets/480x270/632674_v2.jpg\" alt=\"Research: 
+Financial\" width=\"480\" height=\"270\" loading=\"lazy\"> </picture> <img class=\"img-placeholder\" 
+src=\"/dist/images/placeholders/placeholder-16x9.png\" alt=\"\" width=\"480\" height=\"270\" loading=\"lazy\"><div 
+class=\"news-action\"><ul><li><a href=\"https://newsroom.fidelity.com/pressreleases/advisor-insights-help-plan-sponsors-simplify-compl
+exity--according-to-16th-fidelity--plan-sponsor-at/s/cfb3bce2-b93b-42b5-bf99-47437354f75f\" target=\"_self\" aria-label=\"Advisor 
+Insights Help Plan Sponsors Simplify Complexity, According To 16th Fidelity\u00ae Plan Sponsor Attitudes Study\"> <span 
+class=\"news-action-icon\"><i class=\"ic ic-eye\"></i></span> <span class=\"news-action-title\">View Story</span> </a><li><a 
+href=\"javascript:void(0)\" class=\"dev-add-story-to-mc\" data-guid=\"cfb3bce2-b93b-42b5-bf99-47437354f75f\" 
+data-addtomediacart=\"All files added to media cart\" data-already-in-cart=\"\" data-noasset=\"This story does not have any 
+multimedia assets to be added to the media cart.\" role=\"button\"> <span class=\"news-action-icon\"><i class=\"ic 
+ic-media-cart\"></i></span> <span class=\"news-action-title\">Add all to cart</span> </a><li><a href=\"javascript:void(0)\" 
+class=\"dev-download-storyAsset\" data-bizdevcompanyid=\"13484\" data-assetguids=\"cfb3bce2-b93b-42b5-bf99-47437354f75f\" 
+data-iscontentarchived=\"0\"> <span class=\"news-action-icon\" data-colorscheme=\"\"><i class=\"ic ic-arrow-down\"></i></span> <span 
+class=\"news-action-title\" data-colorscheme=\"\">Download all files</span> </a></ul></div><div class=\"news-lock\"><span 
+class=\"btn-lock\"><i class=\"ic ic-lock\"></i></span></div><a class=\"story-detail-bglayer\" href=\"https://newsroom.fidelity.com/pre
+ssreleases/advisor-insights-help-plan-sponsors-simplify-complexity--according-to-16th-fidelity--plan-sponsor-at/s/cfb3bce2-b93b-42b5-b
+f99-47437354f75f\" target=\"_self\" aria-label=\"View Story\" tabindex=\"-1\"></a></div><div class=\"news-detail\"><div 
+class=\"news-title\"><div class=\"news-title-text\"><a title=\"Fidelity\" class=\"caption-title\" 
+href=\"fidelity\">Fidelity</a></div></div><div class=\"news-desc\"><p><a href=\"https://newsroom.fidelity.com/pressreleases/advisor-in
+sights-help-plan-sponsors-simplify-complexity--according-to-16th-fidelity--plan-sponsor-at/s/cfb3bce2-b93b-42b5-bf99-47437354f75f\" 
+target=\"_self\">Advisor Insights Help Plan Sponsors Simplify Complexity, According To 16th Fidelity\u00ae Plan Sponsor Attitudes 
+Study</a></div></div><div class=\"news-log\">September 15, 2025</div></div></div></div><div class=\"row pagging\"><div class=\"col 
+page-left text-left text-uppercase paginator-control-r\"></div><div class=\"col text-center\"><span class=\"page-active\">1</span> 
+<span class=\"m-2\">of</span> <span>15</span></div><div class=\"col page-right text-right text-uppercase paginator-control-r\"><a 
+href=\"javascript:void(0)\" data-page=\"2\">Next page </a></div></div></div></div></div></div><div class=\"section-wrap 
+subscribe-only-wrap\"><div class=\"subscribe-only-wrap-inner\"><h2 class=\"subscribe-only-text mb-0\"><span class=\"d-block 
+big-txt\">Subscribe to Fidelity news and insights alerts</span></h2><div class=\"subscribe-only-btn\"><button aria-label=\"Stay 
+informed\" class=\"btn d-btn-block d-sm-btn-inline-block btn-white btn-xl-56 btn-no-radious text-uppercase\" data-from=\"index\" 
+data-url=\"Subscription?handler=SubscribeOnlyPartial&amp;viewName=\" data-toggle=\"ajax-subscribe-modal\" data-page=\"0\">Stay 
+informed</button></div></div></div></main><footer class=\"custom-footer footer-loc\"><div class=\"footer-top\"><figure 
+class=\"footer-logo text-center text-sm-left text-sm-start\"><img src=\"/dist/images/fidelity-sm-logo-footer.svg\" loading=\"lazy\" 
+width=\"40\" height=\"40\" alt=\"Fidelity\"></figure><div class=\"footer-links-div\"><div class=\"d-flex flex-column flex-sm-row 
+flex-wrap flex-md-nowrap\"><div class=\"link-wrap\"><ul class=\"link-list\"><li><a 
+href=\"https://www.fidelity.com/mutual-funds/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Mutual Funds (opens in a new 
+tab)\"><span>Mutual Funds</span></a><li><a href=\"https://www.fidelity.com/etfs/overview\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"ETFs (opens in a new tab)\"><span>ETFs</span></a><li><a href=\"https://www.fidelity.com/fixed-income-bonds/overview\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Fixed Income (opens in a new tab)\"><span>Fixed Income</span></a><li><a 
+href=\"https://www.fidelity.com/fixed-income-bonds/individual-bonds/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Bonds 
+(opens in a new tab)\"><span>Bonds</span></a><li><a href=\"https://www.fidelity.com/fixed-income-bonds/cds\" target=\"_blank\" 
+rel=\"nofollow\" aria-label=\"CDs (opens in a new tab)\"><span>CDs</span></a><li><a 
+href=\"https://www.fidelity.com/options-trading/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Options (opens in a new 
+tab)\"><span>Options</span></a><li><a href=\"https://www.fidelity.com/crypto/overview\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Crypto (opens in a new tab)\"><span>Crypto</span></a><li><a href=\"https://www.fidelity.com/trading/trading-platforms\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Fidelity Trader+ (opens in a new tab)\"><span>Fidelity Trader+</span></a><li><a 
+href=\"https://www.fidelity.com/branches/branch-locations\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Investor Centers (opens 
+in a new tab)\"><span>Investor Centers</span></a></ul></div><div class=\"link-wrap\"><ul class=\"link-list\"><li><a 
+href=\"https://www.fidelity.com/stock-trading/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Stocks (opens in a new 
+tab)\"><span>Stocks</span></a><li><a href=\"https://www.fidelity.com/trading/overview\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Online Trading (opens in a new tab)\"><span>Online Trading</span></a><li><a 
+href=\"https://www.fidelity.com/direct-indexing/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Direct Indexing (opens in 
+a new tab)\"><span>Direct Indexing</span></a><li><a href=\"https://www.fidelity.com/sustainable/overview\" target=\"_blank\" 
+rel=\"nofollow\" aria-label=\"Sustainable Investing (opens in a new tab)\"><span>Sustainable Investing</span></a><li><a 
+href=\"https://www.fidelity.com/annuities/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Annuities (opens in a new 
+tab)\"><span>Annuities</span></a><li><a href=\"https://www.fidelity.com/life-insurance/term-life-insurance/overview\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Life Insurance (opens in a new tab)\"><span>Life Insurance</span></a><li><a 
+href=\"https://www.fidelity.com/life-insurance/long-term-care/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Long-Term 
+Care Planning (opens in a new tab)\"><span>Long-Term Care Planning</span></a><li><a 
+href=\"https://www.fidelity.com/529-plans/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"529 Plans (opens in a new 
+tab)\"><span>529 Plans</span></a><li><a href=\"https://www.fidelity.com/go/hsa/why-hsa\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Health Savings Account (opens in a new tab)\"><span>Health Savings Account</span></a></ul></div><div 
+class=\"link-wrap\"><ul class=\"link-list\"><li><a href=\"https://www.fidelity.com/retirement-ira/overview\" target=\"_blank\" 
+rel=\"nofollow\" aria-label=\"IRAs (opens in a new tab)\"><span>IRAs</span></a><li><a 
+href=\"https://www.fidelity.com/retirement-planning/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Retirement Planning 
+(opens in a new tab)\"><span>Retirement Planning</span></a><li><a 
+href=\"https://www.fidelity.com/retirement-ira/small-business/compare-retirement-plans\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Small Business Retirement Plans (opens in a new tab)\"><span>Small Business Retirement Plans</span></a><li><a 
+href=\"https://www.fidelity.com/building-savings/charity-and-philanthropy\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Charitable Giving (opens in a new tab)\"><span>Charitable Giving</span></a><li><a 
+href=\"https://www.fidelity.com/go/marketplace/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Marketplace Solutions 
+(opens in a new tab)\"><span>Marketplace Solutions</span></a><li><a href=\"https://brokercheck.finra.org/Firm/Summary/7784\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"FINRA's BrokerCheck (opens in a new tab)\"><span>FINRA's BrokerCheck</span></a><li><a 
+href=\"https://www.fidelity.com/why-fidelity/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Why Fidelity (opens in a new 
+tab)\"><span>Why Fidelity</span></a></ul></div><div class=\"footer-subscribe-lg link-wrap text-center text-md-left 
+text-md-start\"><div class=\"link-title pt-md-0\">Stay Connected</div><a class=\"btn btn-xl footer-button text-decoration-none mb-3\" 
+href=\"https://www.fidelity.com/branches/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Find Investor Center locations 
+(opens in a new tab)\">Find Investor Center locations</a><div class=\"footer-social-links-wrapper\"><ul class=\"footer-social-links 
+list-unstyled link-list justify-content-center justify-content-md-start\"><li><a aria-label=\"Instagram (opens in a new tab)\" 
+class=\"text-decoration-none pb-0\" href=\"https://www.instagram.com/fidelityinvestments/#\" target=\"_blank\" rel=\"nofollow\"><i 
+class=\"ic ic-footer-instagram\"></i></a><li><a aria-label=\"LinkedIn (opens in a new tab)\" class=\"text-decoration-none pb-0\" 
+href=\"https://www.linkedin.com/company/fidelity-investments\" target=\"_blank\" rel=\"nofollow\"><i class=\"ic 
+ic-footer-linkedin\"></i></a><li><a aria-label=\"YouTube (opens in a new tab)\" class=\"text-decoration-none pb-0\" 
+href=\"https://www.youtube.com/user/fidelityinvestments\" target=\"_blank\" rel=\"nofollow\"><i class=\"ic 
+ic-footer-youtube\"></i></a><li><a aria-label=\"Reddit (opens in a new tab)\" class=\"text-decoration-none pb-0\" 
+href=\"https://www.reddit.com/r/fidelityinvestments/\" target=\"_blank\" rel=\"nofollow\"><i class=\"ic 
+ic-footer-reddit\"></i></a><li><a aria-label=\"X (opens in a new tab)\" class=\"text-decoration-none pb-0\" 
+href=\"https://www.twitter.com/fidelity\" target=\"_blank\" rel=\"nofollow\"><i class=\"ic ic-footer-twitter\"></i></a><li><a 
+aria-label=\"Facebook (opens in a new tab)\" class=\"text-decoration-none pb-0\" 
+href=\"https://www.facebook.com/fidelityinvestments\" target=\"_blank\" rel=\"nofollow\"><i class=\"ic ic-footer-fb\"></i></a><li><a 
+aria-label=\"TikTok (opens in a new tab)\" class=\"text-decoration-none pb-0\" href=\"https://www.tiktok.com/@fidelityinvestments\" 
+target=\"_blank\" rel=\"nofollow\"><i class=\"ic ic-footer-tiktok\"></i></a><li class=\"pr-0\"><a aria-label=\"Discord (opens in a 
+new tab)\" class=\"text-decoration-none pb-0\" href=\"https://discord.gg/FidelityInvestments\" target=\"_blank\" rel=\"nofollow\"><i 
+class=\"ic ic-footer-discord\"></i></a></ul></div><div class=\"footer-apps-link d-flex flex-wrap align-items-center 
+justify-content-center justify-content-md-start\"><a class=\"d-flex flex-wrap align-items-center pr-4 pe-4\" 
+href=\"https://www.fidelity.com/mobile/overview\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Fidelity Apps (opens in a new 
+tab)\"><img class=\"mr-2 me-2\" src=\"/dist/images/svg/footer-fidelity-apps.svg\" width=\"24\" height=\"24\" alt=\"Fidelity Apps 
+icon\" loading=\"lazy\"> Fidelity Apps</a> <a class=\"d-flex flex-wrap align-items-center\" 
+href=\"https://www.fidelity.com/customer-service/friendsandfamily3a?ccsource=RAFFooterNav\" target=\"_blank\" rel=\"nofollow\" 
+aria-label=\"Refer a Friend (opens in a new tab)\"><img class=\"mr-2 me-2\" src=\"/dist/images/svg/footer-refer-a-friend.svg\" 
+width=\"22\" height=\"22\" alt=\"Refer a Friend icon\" loading=\"lazy\"> Refer a Friend</a></div></div></div></div><div 
+class=\"footer-bottom text-center text-md-left text-md-start\"><figure><img src=\"/dist/images/fidelity-investments-logo.svg\" 
+width=\"233\" height=\"56\" alt=\"Fidelity Investments\" loading=\"lazy\"></figure><div class=\"copy-right\">Copyright 1998-2025 FMR 
+LLC. All Rights Reserved.</div><div class=\"footer-links-wrapper\"><ul class=\"footer-links list-unstyled\"><li><a 
+href=\"https://jobs.fidelity.com/\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Careers (opens in a new 
+tab)\">Careers</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://newsroom.fidelity.com/\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"News Releases (opens in a new tab)\">News 
+Releases</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a 
+href=\"https://www.fidelity.com/about-fidelity/our-company\" target=\"_blank\" rel=\"nofollow\" aria-label=\"About Fidelity (opens in 
+a new tab)\">About Fidelity</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a 
+href=\"https://www.fidelityinternational.com/\" target=\"_blank\" rel=\"nofollow\" aria-label=\"International (opens in a new 
+tab)\">International</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/terms-of-use\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Terms of Use (opens in a new tab)\">Terms of 
+Use</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/privacy/overview\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Privacy (opens in a new 
+tab)\">Privacy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/security/overview\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Security (opens in a new 
+tab)\">Security</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/sitemap/overview\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Site Map (opens in a new tab)\">Site 
+Map</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/accessibility/overview\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Accessibility (opens in a new 
+tab)\">Accessibility</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a 
+href=\"https://www.fidelity.com/customer-service/contact-us\" target=\"_blank\" rel=\"nofollow\" aria-label=\"Contact Us (opens in a 
+new tab)\">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/#\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Share Your Screen (opens in a new tab)\">Share Your 
+Screen</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://communications.fidelity.com/information/crs/\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Disclosures (opens in a new 
+tab)\">Disclosures</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a href=\"https://www.fidelity.com/#\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"Manage My Targeting/Advertising Cookies (opens in a new tab)\">Manage My 
+Targeting/Advertising Cookies</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<li><a 
+href=\"/cookiepreference\">Cookies</a></ul></div><div class=\"footer-text\"><a href=\"https://www.fidelity.com/terms-of-use#For\" 
+target=\"_blank\" rel=\"nofollow\" aria-label=\"This is for persons in the US only. (opens in a new tab)\">This is for persons in the 
+US only.</a></div></div></div></footer><div id=\"modal-placeholder\"></div><div id=\"flyout-message-placeholder\"></div><div 
+id=\"subscription-placeholder\"></div><div class=\"page-overlay\" id=\"loading-overlay-spinner\"><div class=\"spinner\"><div 
+class=\"bounce1\"></div><div class=\"bounce2\"></div><div class=\"bounce3\"></div></div></div><div class=\"dev-mediacart-popup 
+media-cart-popup\"></div><div class=\"amp-popup media-cart-popup dev-media-cart-popup empty-media-cart dev-emptycart\"></div><div 
+id=\"sendmediacart-placeholder\"></div><div class=\"growls-msg\"><i class=\"ic ic-growls loader-animation\"></i> <span>adding all to 
+cart</span></div><div class=\"general-text dev-footer-notice-listing\"></div><div class=\"powered-newsmarket powered-newsmarket-hang 
+text-center\"><a class=\"d-block no-line-height\" 
+href=\"https://thenewsmarket.agency/products-and-services/newsrooms-digital-products/newsroom/\" target=\"_blank\" 
+aria-label=\"TheNewsMarket (opens in a new tab)\"> <img src=\"/dist/images/powered-newsmarket-white.svg\" alt=\"TheNewsMarket\" 
+width=\"238\" height=\"18\" loading=\"lazy\"> </a></div><form method=\"post\"><input type=\"hidden\" id=\"RequestVerificationToken\" 
+name=\"RequestVerificationToken\" value=\"CfDJ8GFrDlK67TZNp_2G-bCsDywnCcFjp7iCgCuOEwyT4l7trlKKQVhzPWkZmgqxTRMViB4MOw4jBzmz4VFWOzCVHtmT
+CD8Xaa70UM7eKmrDT8wb9s1Cjt5l6M87isTu8oOvHbl2UTwkQl3A0vSFxzkWjr0\"> <input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"
+CfDJ8GFrDlK67TZNp_2G-bCsDywnCcFjp7iCgCuOEwyT4l7trlKKQVhzPWkZmgqxTRMViB4MOw4jBzmz4VFWOzCVHtmTCD8Xaa70UM7eKmrDT8wb9s1Cjt5l6M87isTu8oOvHb
+l2UTwkQl3A0vSFxzkWjr0\"></form><div id=\"amp_dynamic\"></div><input type=\"hidden\" name=\"isUserAuthenticated\" value=\"False\" 
+data-restrictdownloadforcompanies=\"\" data-authmode=\"0\"> <input type=\"hidden\" name=\"AssetsInCartMessage\" value=\"Welcome back, 
+You have assets in your Media Cart.\"> <input type=\"hidden\" id=\"hdnGTMLoginStatus\" value=\"NonLoggedInUser\"> <input 
+type=\"hidden\" id=\"hdnCultureEnabled\" value=\"false\" data-seo-name=\"\"> <input type=\"hidden\" id=\"DownloadMode\" value=\"2\"> 
+<input type=\"hidden\" name=\"Asset.DownloadAllPreparingFile\" value=\"We are preparing your file now.\"> <input type=\"hidden\" 
+id=\"hdnsocialMediaEmail\"> <input type=\"hidden\" id=\"hdnsocialMediaName\"> <input type=\"hidden\" id=\"hdnsocialMediaId\" 
+value=\"0\"> <input type=\"hidden\" id=\"hdncs\"> <input type=\"hidden\" id=\"hdnConsumptionAndEmissionsNotice\"> <span 
+class=\"issuccess d-none\">False</span> <span class=\"redirecturl d-none\"></span> <span class=\"failreasonid d-none\">0</span> <span 
+class=\"hdnRestrictDownloadForCompanies d-none\"></span><div id=\"devAddFileToMediacatFlyout\" class=\"error-flyout-wrap 
+bg-light-black d-flex flex-column flex-sm-row\"><div class=\"desc flex-grow-0 align-self-center Download-msg-flyout\"><span 
+class=\"popupmessage\" role=\"alert\">File added to media cart.</span> <button aria-label=\"Close\" type=\"button\" class=\"btn-close 
+dev-PreviewPopupCloseOnclick\"><i class=\"ic ic-close\"></i></button></div></div><script 
+src=\"/Scripts/vendors/jquery/js.cookie.min.js?v=Obj-Y2RiFyX_kEMaNK8Ph5dtlcAMv9HQ83EaPx-hoHs\"></script><script 
+src=\"/Scripts/bundles/vendor-bundle.js?v=iO9OnP6CwhOiWRc3mGuW2zKzrF9Gc_O-1OX93j-_rmw\"></script><script 
+src=\"/Scripts/bundles/common-bundle.js?v=pHeJdFYILhg945f-l7Rb6Xe19GYuzDQcHN49xk2gwaE\"></script><script 
+src=\"https://cdnapisec.kaltura.com/p/2541982/embedPlaykitJs/uiconf_id/44376931\" 
+defer></script><script>$(document).ready(function(){setTimeout(function(){var 
+optMark='';if(window.clarity){if(optMark==\"true\"){window.clarity('consent');}}},100);});</script><input type=\"hidden\" 
+id=\"hdnVideoNotAvailable\" value=\"Video not available.\"> <input type=\"hidden\" id=\"hdnLinkCopiedToClipboardMsg\" value=\"Link 
+copied to clipboard.\">"
+  data\evidence\raw\fidelity_press__20251224T172404Z.json:18:}
+
+

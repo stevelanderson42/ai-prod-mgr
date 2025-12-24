@@ -1,0 +1,242 @@
+﻿[
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "3dd981f88af844b4644644f6f7847b1fd3315e09a6415eceb97d4b2dcfdc99c1",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity\u0027s 17th Annual Resolutions Study: Americans Preparing For a Year of \u0027Planning with Purpose\u0027",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity-s-17th-annual-resolutions-study--americans-preparing-for-a-year-of--planning-with-purpose-/s/fc3d5689-e2a4-433b-8048-d56053f283e0",
+        "published_date":  "2025-12-11",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "0a86db0675518d70cdc5559cbcb31979f52384e02746399f2f71158b8cee2d07",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity® Introduces New Retirement Solution for Small Businesses",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity--introduces-new-retirement-solution-for-small-businesses/s/24d1dc54-7db3-4680-8737-d5d3984932fc",
+        "published_date":  "2025-12-03",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "283e9810532f1d424433e587a5950ad4a985b5f1ee49b816c070d5db82b37f52",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity® Q3 2025 Retirement Analysis: Retirement Account Balances Continue to Climb, Roth Savings Vehicles Gain Increasing Interest Among Young Savers",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity--q3-2025-retirement-analysis--retirement-account-balances-continue-to-climb--roth-savings-v/s/6bdc547b-b947-4d2c-b91a-f9d45f2b39c0",
+        "published_date":  "2025-11-20",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "672421296cba03f75ee4101cf6aee8563203bbe28b1f82bc381a8f866ffc4cc3",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity® Study Finds the Great Wealth Transfer Leaves Families Poised to Build Stronger Financial Futures - if they Talk",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity--study-finds-the-great-wealth-transfer-leaves-families-poised-to-build-stronger-financial-f/s/3c72b6d3-9ab6-400a-95e7-f4b30e43db64",
+        "published_date":  "2025-11-13",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "b0a4220db0b13cf2d573e19bc725a5fe8a3715fc04b0197a9be0bcd24df3d2a1",
+        "source":  "fidelity_newsroom",
+        "title":  "Boosting Productivity Through Financial Wellness: Employers Invest in Emergency Savings Benefits",
+        "url":  "https://newsroom.fidelity.com/pressreleases/boosting-productivity-through-financial-wellness--employers-invest-in-emergency-savings-benefits/s/49482457-77f1-4fbf-b0bc-7244b618d551",
+        "published_date":  "2025-11-05",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "710b8617d664f61df7a4e30a2e4fdbc167bea0c7a635368e1ba2f293211b69d1",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity Investments Publishes Third Quarter 2025 Business Update",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity-investments-publishes-third-quarter-2025-business-update/s/a8a6e30e-4019-4dc4-8ba8-41ad25ec936a",
+        "published_date":  "2025-11-04",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "8cd97aaea6c63dd0ff17ef4d76feeec2a5e24c9c1504787a6a19be1b3ba26f76",
+        "source":  "fidelity_newsroom",
+        "title":  "New Fidelity Research Shows Women Embracing Financial Frugality, Prioritizing Long-Term Savings",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity-2025-women-and-money-study/s/21fa7fdd-6ee5-451b-b985-f75f51813642",
+        "published_date":  "2025-10-29",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "c93f0bc33249380c6bfab78e2405700a277189a0177f18f0cae968db16c39df7",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity’s Invest in My Education Initiative Now Active in 12 US States",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity-s-invest-in-my-education-initiative-now-active-in-12-us-states/s/250a2b74-5c09-4c02-808e-e1f4012159f4",
+        "published_date":  "2025-10-28",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "c64d91af520be458fd9871a3d97bfbd2d906b1e11961597e4d9787ac65208309",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity Investments® Announces Liquidation of Five Exchange-Traded Funds",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity-investments-announces-liquidation-of-five-exchange-traded-funds/s/6ed59999-7cdb-43c0-9b65-6144b397a0ea",
+        "published_date":  "2025-10-16",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "c3353c1d0599d5d4fc0b6b12d2b25aa028a6a0521dd5c1039fe78f24bdd0ee70",
+        "source":  "fidelity_newsroom",
+        "title":  "New Fidelity® Report Helps Wealth Management Firms Tackle Top Organic Growth Barrier: Time Management",
+        "url":  "https://newsroom.fidelity.com/pressreleases/new-fidelity--report-helps-wealth-management-firms-tackle-top-organic-growth-barrier--time-managemen/s/3e3be1a8-011b-49e1-b6bb-ee02ae81172a",
+        "published_date":  "2025-10-15",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "e233033e6f8a673f043d54e5de79678f07138b29d9cceebd672faf5d9a677c31",
+        "source":  "fidelity_newsroom",
+        "title":  "Fidelity Investments® Introduces Fidelity Trader+™, Powerful Advanced Trading Platform",
+        "url":  "https://newsroom.fidelity.com/pressreleases/fidelity-investments--introduces-fidelity-trader----powerful-advanced-trading-platform/s/a4f5cc08-fd1c-44dc-93df-41ca7e18e991",
+        "published_date":  "2025-09-25",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "run_id":  "20251224T174531Z",
+        "collected_at":  "2025-12-24T17:45:31.7261726Z",
+        "signal_id":  "93cdf2cc98de358e39506968db9c9c7f6c01c0d70eda474ec299344071f0844f",
+        "source":  "fidelity_newsroom",
+        "title":  "Advisor Insights Help Plan Sponsors Simplify Complexity, According To 16th Fidelity® Plan Sponsor Attitudes Study",
+        "url":  "https://newsroom.fidelity.com/pressreleases/advisor-insights-help-plan-sponsors-simplify-complexity--according-to-16th-fidelity--plan-sponsor-at/s/cfb3bce2-b93b-42b5-bf99-47437354f75f",
+        "published_date":  "2025-09-15",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/fidelity_press__20251224T172404Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/fidelity_press_list_with_ids.json"
+                         }
+                     ]
+    }
+]
