@@ -1,0 +1,192 @@
+﻿[
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "2b82dd34ef2327aef9e81fc33ca7a9e20a6d65dffa07200e42cf5388033df77e",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/report-finra-board-governors-meeting-december-2025",
+        "published_date":  "2025-12-22",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "c9b7143717e1198a06b4cde1f83839a9347911a6bb107b67ca77812b20db0247",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-publishes-2026-regulatory-oversight-report-empower-member-firm",
+        "published_date":  "2025-12-09",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "9f59205be6845ba22014b07bdd91d6fce704faf971375304e5ac69c636aa1ea6",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/new-finra-foundation-research-examines-shifting-investor-behaviors",
+        "published_date":  "2025-12-04",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "20061370ead73c08990dc82e4a77aa63ee9731261b6abffdabc05ebf07b455d2",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-orders-securities-america-pay-2-million-restitution-customers",
+        "published_date":  "2025-12-03",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "a87b50e884e5161fc33890f06346bec04ad306c941d92d42f8f626697f09ec13",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/first-trust-violations-fines",
+        "published_date":  "2025-11-03",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "17eade21d40cc6d6d9704889c720d21e92c12a17e441a11475d22afb093be1c5",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-foundation-and-afcper-present-2025-finra-foundation-military",
+        "published_date":  "2025-10-08",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "d477773cf9a4c352c6f71a86a29c43ee1691834dfd97f1cd2a71f68df194d805",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-foundation-releases-findings-fraud-awareness-among-investors",
+        "published_date":  "2025-10-07",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "2839f2151f4997fa858862fc414d1fae1f0ec1b5f362d2bcfbd78a503a1fa082",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/september-board-of-governors-meeting-report",
+        "published_date":  "2025-09-24",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "0bed989f50555e70684e7f59b7d51b97a5ab5135ed5e62b4d542b02f70e1eb97",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-announces-launch-crypto-and-blockchain-education-program",
+        "published_date":  "2025-09-16",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    },
+    {
+        "schema_version":  "normalized_signal.v1",
+        "collected_at":  "2025-12-25T15:58:30.8220517Z",
+        "signal_id":  "2d9a1a07b6fe191604de08babe06cb3e196fc68f3e05624d37f3781ae765bc79",
+        "source":  "finra_newsreleases_rss",
+        "title":  "System.Xml.XmlElement",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-announces-results-board-governors-elections",
+        "published_date":  "2025-08-19",
+        "evidence":  [
+                         {
+                             "kind":  "raw_snapshot",
+                             "path":  "data/evidence/raw/finra_newsreleases_rss__20251225T155830Z.json"
+                         },
+                         {
+                             "kind":  "parsed_list",
+                             "path":  "data/evidence/parsed/finra_newsreleases_rss_list__20251225T155830Z.json"
+                         }
+                     ]
+    }
+]
