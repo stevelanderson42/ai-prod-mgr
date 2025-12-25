@@ -126,6 +126,12 @@ The following gating decisions operationalize the approved MVP scope and source 
 - Normalized signals suitable for regulatory posture synthesis
 
 **MVP Scope Note:**
+> FINRA RSS ingestion meets MVP acceptance criteria (stable feed, parseable titles/dates/URLs, deterministic signal IDs, evidence traceability). Hydration of detail pages deferred until we confirm downstream decision value.
+
+**MID-004 Implementation Note:**
+> Initial hydration attempt produced zero extracted text due to an environment-dependent parsing assumption (`Invoke-WebRequest.ParsedHtml`). We replaced it with deterministic HTML title parsing and maintained evidence traceability.
+
+**MVP Scope Note:**
 > FINRA ingestion is intentionally constrained to authoritative updates sufficient for regulatory awareness and decision context. Expanded parsing and historical depth are deferred pending demonstrated decision impact.
 
 FINRA RSS ingestion meets MVP acceptance criteria, providing stable regulatory signals with deterministic identifiers and full evidence traceability. Hydration of detail pages deferred until we confirm downstream decision value.
@@ -136,6 +142,21 @@ FINRA RSS ingestion meets MVP acceptance criteria, providing stable regulatory s
 Additional candidate sources were evaluated but intentionally deferred from the MVP due to ingestion complexity, low update cadence, or limited incremental decision value.
 
 These sources may be reconsidered in future iterations once MVP signal synthesis demonstrates clear downstream impact.
+
+### Step 7 — Retrieval Criteria (MVP)
+
+**Use Case:** Weekly regulatory awareness brief for compliance teams
+
+**Retrieval Scope:**
+- Source: FINRA only (MVP)
+- Time window: Last 30 days
+- Filter: All hydrated signals (no keyword filtering in MVP)
+
+**Rationale:**
+MVP retrieval is intentionally broad to validate synthesis quality before investing in sophisticated filtering. Relevance scoring deferred to Step 9.
+
+**Scope Note:**
+> Fidelity signals are excluded from retrieval because MVP ingestion was list-level only (no detail-page hydration). Fidelity can inform signal awareness but not synthesis. Full Fidelity hydration deferred pending decision value from FINRA synthesis.
 
 ---
 
