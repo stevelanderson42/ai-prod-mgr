@@ -1,0 +1,92 @@
+﻿[
+    {
+        "schema_version":  "hydrated_signal.v1",
+        "collected_at":  "2025-12-25T16:34:27.8329799Z",
+        "signal_id":  "2b82dd34ef2327aef9e81fc33ca7a9e20a6d65dffa07200e42cf5388033df77e",
+        "source":  "finra_newsreleases_rss",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/report-finra-board-governors-meeting-december-2025",
+        "published_date":  "2025-12-22",
+        "title":  "Report From FINRA Board of Governors Meeting – December 2025 | FINRA.org",
+        "hydration":  {
+                          "status":  200,
+                          "evidence":  [
+                                           {
+                                               "kind":  "raw_detail",
+                                               "path":  "data/evidence/raw/finra_detail__2b82dd34ef2327aef9e81fc33ca7a9e20a6d65dffa07200e42cf5388033df77e__20251225T163427Z.json"
+                                           }
+                                       ]
+                      }
+    },
+    {
+        "schema_version":  "hydrated_signal.v1",
+        "collected_at":  "2025-12-25T16:34:27.8329799Z",
+        "signal_id":  "c9b7143717e1198a06b4cde1f83839a9347911a6bb107b67ca77812b20db0247",
+        "source":  "finra_newsreleases_rss",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-publishes-2026-regulatory-oversight-report-empower-member-firm",
+        "published_date":  "2025-12-09",
+        "title":  "FINRA Publishes 2026 Regulatory Oversight Report to Empower Member Firm Compliance | FINRA.org",
+        "hydration":  {
+                          "status":  200,
+                          "evidence":  [
+                                           {
+                                               "kind":  "raw_detail",
+                                               "path":  "data/evidence/raw/finra_detail__c9b7143717e1198a06b4cde1f83839a9347911a6bb107b67ca77812b20db0247__20251225T163427Z.json"
+                                           }
+                                       ]
+                      }
+    },
+    {
+        "schema_version":  "hydrated_signal.v1",
+        "collected_at":  "2025-12-25T16:34:27.8329799Z",
+        "signal_id":  "9f59205be6845ba22014b07bdd91d6fce704faf971375304e5ac69c636aa1ea6",
+        "source":  "finra_newsreleases_rss",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/new-finra-foundation-research-examines-shifting-investor-behaviors",
+        "published_date":  "2025-12-04",
+        "title":  "New FINRA Foundation Research Examines Shifting Investor Behaviors, Preferences and Attitudes | FINRA.org",
+        "hydration":  {
+                          "status":  200,
+                          "evidence":  [
+                                           {
+                                               "kind":  "raw_detail",
+                                               "path":  "data/evidence/raw/finra_detail__9f59205be6845ba22014b07bdd91d6fce704faf971375304e5ac69c636aa1ea6__20251225T163427Z.json"
+                                           }
+                                       ]
+                      }
+    },
+    {
+        "schema_version":  "hydrated_signal.v1",
+        "collected_at":  "2025-12-25T16:34:27.8329799Z",
+        "signal_id":  "20061370ead73c08990dc82e4a77aa63ee9731261b6abffdabc05ebf07b455d2",
+        "source":  "finra_newsreleases_rss",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/finra-orders-securities-america-pay-2-million-restitution-customers",
+        "published_date":  "2025-12-03",
+        "title":  "FINRA Orders Securities America to Pay $2 Million in Restitution to Customers, Fines Firm $1 Million for Mutual Fund Supervision Failures | FINRA.org",
+        "hydration":  {
+                          "status":  200,
+                          "evidence":  [
+                                           {
+                                               "kind":  "raw_detail",
+                                               "path":  "data/evidence/raw/finra_detail__20061370ead73c08990dc82e4a77aa63ee9731261b6abffdabc05ebf07b455d2__20251225T163427Z.json"
+                                           }
+                                       ]
+                      }
+    },
+    {
+        "schema_version":  "hydrated_signal.v1",
+        "collected_at":  "2025-12-25T16:34:27.8329799Z",
+        "signal_id":  "a87b50e884e5161fc33890f06346bec04ad306c941d92d42f8f626697f09ec13",
+        "source":  "finra_newsreleases_rss",
+        "url":  "https://www.finra.org/media-center/newsreleases/2025/first-trust-violations-fines",
+        "published_date":  "2025-11-03",
+        "title":  "FINRA Fines First Trust Portfolios $10 Million for Violations Relating to Gifts and Entertainment | FINRA.org",
+        "hydration":  {
+                          "status":  200,
+                          "evidence":  [
+                                           {
+                                               "kind":  "raw_detail",
+                                               "path":  "data/evidence/raw/finra_detail__a87b50e884e5161fc33890f06346bec04ad306c941d92d42f8f626697f09ec13__20251225T163427Z.json"
+                                           }
+                                       ]
+                      }
+    }
+]

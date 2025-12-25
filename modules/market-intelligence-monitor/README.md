@@ -69,8 +69,9 @@ Decisions are recorded to demonstrate scope control, trade-off reasoning, and ac
 | MID-001    | Scope       | Limit MVP to 2–3 representative signal sources       | Approved |
 | MID-002    | Sources     | Include Fidelity press releases (list-level only)    | Approved |
 | MID-003    | Sources     | Include FINRA RSS as regulatory signal source         | Approved |
-| MID-004    | Hydration   | Defer detail-page hydration pending decision value   | Approved |
+| MID-004    | Hydration   | Defer detail-page hydration pending demonstrated downstream decision value   | Approved |
 
+The following gating decisions operationalize the approved MVP scope and source choices listed in the Decision Index above.
 
 ### MVP Gating Decisions
 
@@ -124,7 +125,7 @@ Decisions are recorded to demonstrate scope control, trade-off reasoning, and ac
 **MVP Scope Note:**
 > FINRA ingestion is intentionally constrained to authoritative updates sufficient for regulatory awareness and decision context. Expanded parsing and historical depth are deferred pending demonstrated decision impact.
 
-FINRA RSS ingestion meets MVP acceptance criteria (stable feed, parseable titles/dates/URLs, deterministic signal IDs, evidence traceability). Hydration of detail pages deferred until we confirm downstream decision value.
+FINRA RSS ingestion meets MVP acceptance criteria, providing stable regulatory signals with deterministic identifiers and full evidence traceability. Hydration of detail pages deferred until we confirm downstream decision value.
 
 
 #### Deferred Sources
@@ -143,7 +144,7 @@ Primary artifacts include:
 
 - **Context Diagram**  
   High-level system flow showing how market signals enter the regulated AI workflow.  
-  → `docs/diagrams/context-diagram.mmd`
+  → ![Market Intelligence Monitor - Context Diagram](docs/diagrams/context-diagram.PNG)
 
 - **Configuration & Signal Definitions**  
   Source and categorization scaffolding used to structure incoming external signals.  
