@@ -69,7 +69,10 @@ Decisions are recorded to demonstrate scope control, trade-off reasoning, and ac
 | MID-001    | Scope       | Limit MVP to 2–3 representative signal sources       | Approved |
 | MID-002    | Sources     | Include Fidelity press releases (list-level only)    | Approved |
 | MID-003    | Sources     | Include FINRA RSS as regulatory signal source         | Approved |
-| MID-004    | Hydration   | Defer detail-page hydration pending demonstrated downstream decision value   | Approved |
+| MID-004    | Hydration   | Defer detail-page hydration pending decision value   | Approved |
+
+**MID-004 Implementation Note:**  
+Initial hydration attempt produced zero extracted text due to an environment-dependent parsing assumption (`Invoke-WebRequest.ParsedHtml`). Replaced with deterministic HTML title parsing while maintaining evidence traceability.
 
 The following gating decisions operationalize the approved MVP scope and source choices listed in the Decision Index above.
 
