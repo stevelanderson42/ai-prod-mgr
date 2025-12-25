@@ -140,19 +140,20 @@ These sources may be reconsidered in future iterations once MVP signal synthesis
 
 This module intentionally separates **decision-facing artifacts** from raw research.
 
-Primary artifacts include:
+### Context Diagram
 
-- **Context Diagram**  
-  High-level system flow showing how market signals enter the regulated AI workflow.  
-  → ![Market Intelligence Monitor - Context Diagram](docs/diagrams/context-diagram.PNG)
+High-level system flow showing how market signals enter the regulated AI workflow:
 
-- **Configuration & Signal Definitions**  
-  Source and categorization scaffolding used to structure incoming external signals.  
-  → `config/`
+![Market Intelligence Monitor - Context Diagram](docs/diagrams/context-diagram.PNG)
+
+### Configuration & Signal Definitions
+
+Source and categorization scaffolding used to structure incoming external signals.  
+→ [`config/`](config/)
 
 Additional working notes and evolving structures live in:
 
-- `../../market-intel/` — exploratory research, raw signal analysis, and drafts
+- [`../../market-intel/`](../../market-intel/) — exploratory research, raw signal analysis, and drafts
 
 ---
 
