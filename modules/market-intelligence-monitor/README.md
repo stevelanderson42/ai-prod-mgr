@@ -59,14 +59,18 @@ This module includes a lightweight code scaffold to support repeatable signal in
 
 ## Product Scope & PM Decisions (MVP)
 
-This module is intentionally scoped as a **decision-validation MVP**, not a comprehensive market data ingestion platform.
+This section documents explicit product decisions made during development of the Market Intelligence Monitor MVP.  
+Decisions are recorded to demonstrate scope control, trade-off reasoning, and acceptance criteria — not to drive runtime behavior.
 
-The primary goal of the MVP is to demonstrate how a Product Manager:
-- evaluates external signal sources for decision usefulness,
-- defines and validates data acceptance criteria,
-- and makes explicit scope and investment tradeoffs before scaling ingestion breadth.
+### Decision Index
 
-Engineering implementation is intentionally lightweight and incremental, reflecting real-world PM constraints in regulated environments.
+| Decision ID | Area        | Summary                                              | Status   |
+|------------|-------------|------------------------------------------------------|----------|
+| MID-001    | Scope       | Limit MVP to 2–3 representative signal sources       | Approved |
+| MID-002    | Sources     | Include Fidelity press releases (list-level only)    | Approved |
+| MID-003    | Sources     | Include FINRA RSS as regulatory signal source         | Approved |
+| MID-004    | Hydration   | Defer detail-page hydration pending decision value   | Approved |
+
 
 ### MVP Gating Decisions
 
@@ -119,6 +123,8 @@ Engineering implementation is intentionally lightweight and incremental, reflect
 
 **MVP Scope Note:**
 > FINRA ingestion is intentionally constrained to authoritative updates sufficient for regulatory awareness and decision context. Expanded parsing and historical depth are deferred pending demonstrated decision impact.
+
+FINRA RSS ingestion meets MVP acceptance criteria (stable feed, parseable titles/dates/URLs, deterministic signal IDs, evidence traceability). Hydration of detail pages deferred until we confirm downstream decision value.
 
 
 #### Deferred Sources
