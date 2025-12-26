@@ -8,7 +8,7 @@ Its purpose is to continuously track **external signals**—such as competitor A
 
 This module exists to answer a foundational question that many AI programs skip:
 
-> *“Why should we build this AI capability now?”*
+> *"Why should we build this AI capability now?"*
 
 ---
 
@@ -19,7 +19,7 @@ In regulated industries, AI initiatives carry **asymmetric risk**:
 - moving too slowly can erode competitive position
 - moving too quickly can trigger regulatory, legal, or reputational damage
 
-Unlike consumer tech, regulated organizations cannot afford to “ship and iterate” without context.
+Unlike consumer tech, regulated organizations cannot afford to "ship and iterate" without context.
 
 This module helps organizations:
 
@@ -55,6 +55,8 @@ By design, no AI initiative advances without first passing through this external
 
 This module includes a lightweight code scaffold to support repeatable signal ingestion, normalization, and synthesis over time; implementation is intentionally incremental.
 
+> **System-Level Standards:** This module follows the evidence traceability and schema versioning patterns defined in [`/architecture/decisions/`](../../architecture/decisions/).
+
 ---
 
 ## Product Scope & PM Decisions (MVP)
@@ -68,13 +70,8 @@ Decisions are recorded to demonstrate scope control, trade-off reasoning, and ac
 |------------|-------------|------------------------------------------------------|----------|
 | MID-001    | Scope       | Limit MVP to 2–3 representative signal sources       | Approved |
 | MID-002    | Sources     | Include Fidelity press releases (list-level only)    | Approved |
-| MID-003    | Sources     | Include FINRA RSS as regulatory signal source         | Approved |
+| MID-003    | Sources     | Include FINRA RSS as regulatory signal source        | Approved |
 | MID-004    | Hydration   | Defer detail-page hydration pending decision value   | Approved |
-
-**MID-004 Implementation Note:**  
-Initial hydration attempt produced zero extracted text due to an environment-dependent parsing assumption (`Invoke-WebRequest.ParsedHtml`). Replaced with deterministic HTML title parsing while maintaining evidence traceability.
-
-The following gating decisions operationalize the approved MVP scope and source choices listed in the Decision Index above.
 
 ### MVP Gating Decisions
 
@@ -84,6 +81,8 @@ The following gating decisions operationalize the approved MVP scope and source 
 | Source Mix | Include at least one market-driven source | Ensures competitive and industry pressure signals are represented |
 | Ingestion Depth | Prioritize listing-level ingestion over full detail hydration | Sufficient for market timing and trend detection in MVP |
 | Robustness Threshold | Defer hardening once acceptance criteria are met | Marginal robustness gains do not justify additional MVP cost |
+
+---
 
 ### Source Decisions (MVP)
 
@@ -105,6 +104,11 @@ The following gating decisions operationalize the approved MVP scope and source 
 **Close-Out Statement:**
 > Fidelity ingestion meets MVP acceptance criteria for market-intel signal capture. Further robustness improvements are deferred pending demonstrated decision value and scale requirements.
 
+**Scope Note:**
+> Fidelity signals are excluded from retrieval and synthesis because MVP ingestion was list-level only (no detail-page hydration). Fidelity can inform signal awareness but not synthesis. Full Fidelity hydration deferred pending decision value from FINRA synthesis.
+
+---
+
 #### FINRA — Regulatory Signal Source
 
 **Decision:** Included in MVP (constrained scope)
@@ -119,29 +123,29 @@ The following gating decisions operationalize the approved MVP scope and source 
 - Ingestion prioritized for **official notices, rule updates, and guidance**
 - Full historical backfill and deep semantic parsing explicitly deferred
 
-**MVP Acceptance Criteria:**
+**MVP Acceptance Criteria (Met):**
 - Reliable capture of published title, date, and canonical URL
 - Clear source attribution (FINRA)
 - Traceable raw evidence preserved
 - Normalized signals suitable for regulatory posture synthesis
+- Detail-page hydration with extracted article text
+- LLM-generated summaries for decision support
 
-**MVP Scope Note:**
-> FINRA RSS ingestion meets MVP acceptance criteria (stable feed, parseable titles/dates/URLs, deterministic signal IDs, evidence traceability). Hydration of detail pages deferred until we confirm downstream decision value.
+**Close-Out Statement:**
+> FINRA RSS ingestion meets MVP acceptance criteria (stable feed, parseable titles/dates/URLs, deterministic signal IDs, evidence traceability). Full pipeline validated through synthesis.
 
 **MID-004 Implementation Note:**
-> Initial hydration attempt produced zero extracted text due to an environment-dependent parsing assumption (`Invoke-WebRequest.ParsedHtml`). We replaced it with deterministic HTML title parsing and maintained evidence traceability.
+> Initial hydration attempt produced zero extracted text due to an environment-dependent parsing assumption (`Invoke-WebRequest.ParsedHtml`). Replaced with deterministic HTML title parsing while maintaining evidence traceability.
 
-**MVP Scope Note:**
-> FINRA ingestion is intentionally constrained to authoritative updates sufficient for regulatory awareness and decision context. Expanded parsing and historical depth are deferred pending demonstrated decision impact.
-
-FINRA RSS ingestion meets MVP acceptance criteria, providing stable regulatory signals with deterministic identifiers and full evidence traceability. Hydration of detail pages deferred until we confirm downstream decision value.
-
+---
 
 #### Deferred Sources
 
 Additional candidate sources were evaluated but intentionally deferred from the MVP due to ingestion complexity, low update cadence, or limited incremental decision value.
 
 These sources may be reconsidered in future iterations once MVP signal synthesis demonstrates clear downstream impact.
+
+---
 
 ### Step 7 — Retrieval Criteria (MVP)
 
@@ -155,8 +159,7 @@ These sources may be reconsidered in future iterations once MVP signal synthesis
 **Rationale:**
 MVP retrieval is intentionally broad to validate synthesis quality before investing in sophisticated filtering. Relevance scoring deferred to Step 9.
 
-**Scope Note:**
-> Fidelity signals are excluded from retrieval because MVP ingestion was list-level only (no detail-page hydration). Fidelity can inform signal awareness but not synthesis. Full Fidelity hydration deferred pending decision value from FINRA synthesis.
+---
 
 ### Step 8 — LLM Synthesis (MVP)
 
@@ -172,7 +175,7 @@ MVP retrieval is intentionally broad to validate synthesis quality before invest
 - Summaries are factual, concise, and compliance-focused
 - Full traceability from synthesis → retrieval → hydrated → normalized → raw evidence
 
-**MVP Scope Note:**
+**Close-Out Statement:**
 > Synthesis validates end-to-end pipeline from external source to decision-useful output. Advanced features (hallucination checks, citation grounding, comparative analysis) deferred to Steps 9-10.
 
 ---
@@ -187,10 +190,25 @@ High-level system flow showing how market signals enter the regulated AI workflo
 
 ![Market Intelligence Monitor - Context Diagram](docs/diagrams/context-diagram.PNG)
 
+### Data Pipeline Artifacts
+
+The MVP pipeline produces artifacts at each stage:
+
+| Stage | Location | Schema |
+|-------|----------|--------|
+| Raw Evidence | `data/evidence/raw/` | RSS snapshots, HTML detail pages |
+| Parsed Evidence | `data/evidence/parsed/` | Extracted/normalized records |
+| Normalized Signals | `data/signals/raw/` | `normalized_signal.v1` |
+| Hydrated Signals | `data/signals/hydrated/` | `hydrated_signal.v1` |
+| Retrieval Sets | `data/signals/retrieval/` | `retrieval_set.v1` |
+| Synthesis Output | `data/signals/synthesis/` | `synthesis_output.v1` |
+
 ### Configuration & Signal Definitions
 
 Source and categorization scaffolding used to structure incoming external signals.  
 → [`config/`](config/)
+
+### Working Notes
 
 Additional working notes and evolving structures live in:
 
@@ -215,14 +233,27 @@ Its role is to ensure those downstream decisions are informed by **external real
 
 For additional context and supporting material:
 
-- `../../market-intel/` — working notes, evolving structures, and raw signal analysis
+- [`../../market-intel/`](../../market-intel/) — working notes, evolving structures, and raw signal analysis
+- [`../../architecture/decisions/`](../../architecture/decisions/) — system-level ADRs and standards
 - Public Notion Portfolio — strategic framing and cross-module connections
 
 ---
 
 ## Status
 
-Architecture and decision framing are stable.  
-Code scaffolding is in place; implementation will evolve incrementally as signals, sources, and synthesis needs are formalized.
+**MVP Complete** (December 2025)
+
+The Market Intelligence Monitor MVP demonstrates a working end-to-end pipeline:
+
+✅ External source ingestion (Fidelity list-level, FINRA full hydration)  
+✅ Evidence traceability at every stage  
+✅ Retrieval filtering by source and time window  s
+✅ LLM-powered synthesis producing decision-useful summaries  
+
+Future iterations may add:
+- Additional sources (pending decision value validation)
+- Relevance scoring and ranking (Step 9)
+- Guardrails and hallucination checks (Step 10)
+- Brief composition and distribution (Steps 12-13)
 
 This module is intentionally lightweight, reflecting its role as a **strategic input** rather than a delivery engine.
