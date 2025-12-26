@@ -158,6 +158,23 @@ MVP retrieval is intentionally broad to validate synthesis quality before invest
 **Scope Note:**
 > Fidelity signals are excluded from retrieval because MVP ingestion was list-level only (no detail-page hydration). Fidelity can inform signal awareness but not synthesis. Full Fidelity hydration deferred pending decision value from FINRA synthesis.
 
+### Step 8 — LLM Synthesis (MVP)
+
+**Purpose:** Transform retrieved signals into decision-useful summaries for compliance teams.
+
+**Implementation:**
+- Model: GPT-3.5-turbo
+- Prompt: Regulatory intelligence analyst persona
+- Output: 2-3 sentence summary per signal (action taken, who affected, compliance relevance)
+
+**MVP Acceptance Criteria (Met):**
+- All retrieved signals successfully summarized
+- Summaries are factual, concise, and compliance-focused
+- Full traceability from synthesis → retrieval → hydrated → normalized → raw evidence
+
+**MVP Scope Note:**
+> Synthesis validates end-to-end pipeline from external source to decision-useful output. Advanced features (hallucination checks, citation grounding, comparative analysis) deferred to Steps 9-10.
+
 ---
 
 ## Entry Artifacts (Curated)
