@@ -178,6 +178,30 @@ MVP retrieval is intentionally broad to validate synthesis quality before invest
 **Close-Out Statement:**
 > Synthesis validates end-to-end pipeline from external source to decision-useful output. Advanced features (hallucination checks, citation grounding, comparative analysis) deferred to Steps 9-10.
 
+### Step 10 — Guardrails (MVP)
+
+**Purpose:** Validate synthesis quality before trusting LLM-generated output.
+
+**Checks Performed:**
+| Check | Purpose | Method |
+|-------|---------|--------|
+| Grounding | Is summary based on source text? | LLM verification |
+| Citation | Valid source URL? | Pattern match |
+| PII | Any personal info leaked? | Regex patterns |
+| Content | Appropriate length/format? | Heuristics |
+
+**MVP Acceptance Criteria (Met):**
+- All synthesized signals validated against source evidence
+- Grounding check confirms no hallucinated claims
+- No PII or content flag violations
+- Full report with per-signal pass/warn/fail status
+
+**Output Location:** `data/signals/guardrails/`
+
+**Close-Out Statement:**
+> Guardrails validate that LLM synthesis is trustworthy before stakeholder delivery. This addresses the core governance requirement in regulated AI: outputs must be auditable and grounded in source evidence.
+
+
 ### Step 13 — Brief Composer (MVP)
 
 **Purpose:** Transform synthesis output into a stakeholder-ready document for compliance teams.
@@ -222,7 +246,8 @@ The MVP pipeline produces artifacts at each stage:
 | Hydrated Signals | `data/signals/hydrated/` | `hydrated_signal.v1` |
 | Retrieval Sets | `data/signals/retrieval/` | `retrieval_set.v1` |
 | Synthesis Output | `data/signals/synthesis/` | `synthesis_output.v1` |
-| **Briefs** | `data/briefs/` | Markdown regulatory briefs |
+| **Guardrails** | `data/signals/guardrails/` | `guardrails_report.v1` |
+| Briefs | `data/briefs/` | Markdown regulatory briefs |
 
 ### Configuration & Signal Definitions
 

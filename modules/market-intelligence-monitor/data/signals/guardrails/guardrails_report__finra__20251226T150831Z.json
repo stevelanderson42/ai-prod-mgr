@@ -1,0 +1,109 @@
+﻿{
+    "schema_version":  "guardrails_report.v1",
+    "collected_at":  "2025-12-26T15:08:41.7139005Z",
+    "source_file":  "synthesis_output__finra__20251225T184430Z.json",
+    "total_signals":  4,
+    "summary":  {
+                    "pass":  4,
+                    "fail":  0,
+                    "warn":  0
+                },
+    "signals":  [
+                    {
+                        "signal_id":  "2b82dd34ef2327aef9e81fc33ca7a9e20a6d65dffa07200e42cf5388033df77e",
+                        "title":  "Report From FINRA Board of Governors Meeting – December 2025 | FINRA.org",
+                        "overall_status":  "PASS",
+                        "checks":  {
+                                       "pii":  {
+                                                   "status":  "PASS",
+                                                   "reason":  "No PII"
+                                               },
+                                       "citation":  {
+                                                        "status":  "PASS",
+                                                        "reason":  "Valid FINRA URL"
+                                                    },
+                                       "grounding":  {
+                                                         "status":  "PASS",
+                                                         "verdict":  "GROUNDED",
+                                                         "reason":  "The summary accurately reflects the key points from the source text, including the approval of three rule proposals by FINRA\u0027s Board of Governors and the details of each proposal."
+                                                     },
+                                       "content":  {
+                                                       "status":  "PASS",
+                                                       "reason":  "OK"
+                                                   }
+                                   }
+                    },
+                    {
+                        "signal_id":  "c9b7143717e1198a06b4cde1f83839a9347911a6bb107b67ca77812b20db0247",
+                        "title":  "FINRA Publishes 2026 Regulatory Oversight Report to Empower Member Firm Compliance | FINRA.org",
+                        "overall_status":  "PASS",
+                        "checks":  {
+                                       "pii":  {
+                                                   "status":  "PASS",
+                                                   "reason":  "No PII"
+                                               },
+                                       "citation":  {
+                                                        "status":  "PASS",
+                                                        "reason":  "Valid FINRA URL"
+                                                    },
+                                       "grounding":  {
+                                                         "status":  "PASS",
+                                                         "verdict":  "GROUNDED",
+                                                         "reason":  "The summary provides an accurate and concise representation of the key points discussed in the source text regarding the 2026 Regulatory Oversight Report published by FINRA."
+                                                     },
+                                       "content":  {
+                                                       "status":  "PASS",
+                                                       "reason":  "OK"
+                                                   }
+                                   }
+                    },
+                    {
+                        "signal_id":  "9f59205be6845ba22014b07bdd91d6fce704faf971375304e5ac69c636aa1ea6",
+                        "title":  "New FINRA Foundation Research Examines Shifting Investor Behaviors, Preferences and Attitudes | FINRA.org",
+                        "overall_status":  "PASS",
+                        "checks":  {
+                                       "pii":  {
+                                                   "status":  "PASS",
+                                                   "reason":  "No PII"
+                                               },
+                                       "citation":  {
+                                                        "status":  "PASS",
+                                                        "reason":  "Valid FINRA URL"
+                                                    },
+                                       "grounding":  {
+                                                         "status":  "PASS",
+                                                         "verdict":  "GROUNDED",
+                                                         "reason":  "The summary accurately captures the key points from the source text about the new research released by FINRA Foundation regarding shifting investor behaviors, preferences, and attitudes in the U.S., emphasizing the decline in new investors, decreased risk tolerance, and increased reliance on social media influencers among younger and less experienced investors."
+                                                     },
+                                       "content":  {
+                                                       "status":  "PASS",
+                                                       "reason":  "OK"
+                                                   }
+                                   }
+                    },
+                    {
+                        "signal_id":  "20061370ead73c08990dc82e4a77aa63ee9731261b6abffdabc05ebf07b455d2",
+                        "title":  "FINRA Orders Securities America to Pay $2 Million in Restitution to Customers, Fines Firm $1 Million for Mutual Fund Supervision Failures | FINRA.org",
+                        "overall_status":  "PASS",
+                        "checks":  {
+                                       "pii":  {
+                                                   "status":  "PASS",
+                                                   "reason":  "No PII"
+                                               },
+                                       "citation":  {
+                                                        "status":  "PASS",
+                                                        "reason":  "Valid FINRA URL"
+                                                    },
+                                       "grounding":  {
+                                                         "status":  "PASS",
+                                                         "verdict":  "GROUNDED",
+                                                         "reason":  "The summary provides an accurate and concise representation of the key details and findings from the source text."
+                                                     },
+                                       "content":  {
+                                                       "status":  "PASS",
+                                                       "reason":  "OK"
+                                                   }
+                                   }
+                    }
+                ]
+}
