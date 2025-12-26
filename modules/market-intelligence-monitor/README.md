@@ -178,6 +178,26 @@ MVP retrieval is intentionally broad to validate synthesis quality before invest
 **Close-Out Statement:**
 > Synthesis validates end-to-end pipeline from external source to decision-useful output. Advanced features (hallucination checks, citation grounding, comparative analysis) deferred to Steps 9-10.
 
+### Step 13 — Brief Composer (MVP)
+
+**Purpose:** Transform synthesis output into a stakeholder-ready document for compliance teams.
+
+**Output Format:** Markdown brief containing:
+- Executive summary with auto-detected themes
+- Individual signal summaries with source links
+- Traceability metadata (brief ID, source files, schema versions)
+
+**MVP Acceptance Criteria (Met):**
+- Brief generated from synthesis output
+- All signals included with summaries and citations
+- Themes automatically extracted from content
+- Full traceability to upstream artifacts
+
+**Output Location:** `data/briefs/`
+
+**Close-Out Statement:**
+> Brief Composer produces a tangible, stakeholder-ready deliverable that demonstrates end-to-end value from external source to decision-support document.
+
 ---
 
 ## Entry Artifacts (Curated)
@@ -202,6 +222,7 @@ The MVP pipeline produces artifacts at each stage:
 | Hydrated Signals | `data/signals/hydrated/` | `hydrated_signal.v1` |
 | Retrieval Sets | `data/signals/retrieval/` | `retrieval_set.v1` |
 | Synthesis Output | `data/signals/synthesis/` | `synthesis_output.v1` |
+| **Briefs** | `data/briefs/` | Markdown regulatory briefs |
 
 ### Configuration & Signal Definitions
 
