@@ -1,120 +1,88 @@
-# Regulated AI Workflow Toolkit (AI Product Manager Portfolio)
+# Regulated AI Workflow Toolkit
 
-This repository is a cohesive portfolio demonstrating how a Product Manager designs **safe, auditable AI workflows** for regulated environments such as financial services, healthcare, and insurance.
+A portfolio demonstrating how a Product Manager designs **safe, auditable AI workflows** for regulated environments such as financial services, healthcare, and insurance.
 
 *Designed as a portfolio artifact for senior AI Product Manager roles in regulated industries.*
 
-Rather than a collection of disconnected demos, this work is organized as a **four-module system** focused on the core product challenge in regulated AI:
+---
+
+## The Core Challenge
 
 > **How do you enable real business value from AI while enforcing governance, traceability, and risk controls across the full lifecycle?**
 
-The system below reflects how these constraints are operationalized in practice.
+Rather than a collection of disconnected demos, this repository is organized as a **four-module system** that addresses this question through product design decisions, not policy documents alone.
 
+---
+
+## The Four Modules
+
+| Module | Purpose | Status |
+|--------|---------|--------|
+| [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | Tracks competitor AI releases and regulatory signals to inform strategic prioritization | ✅ Complete |
+| [ROI Decision Engine](./modules/roi-engine/) | Structured, risk-aware scoring model for prioritizing AI opportunities | ✅ Complete |
+| [Requirements Guardrails](./modules/requirements-guardrails/) | Identifies ambiguity and compliance concerns before model invocation | 🔲 Planned |
+| [Compliance RAG Assistant](./modules/compliance-retrieval-assistant/) | Citation-first retrieval for high-risk workflows requiring traceability | 🔲 Planned |
+
+---
+
+## How the Modules Connect
+```
+Market Intelligence    →    ROI Engine    →    Guardrails    →    RAG Assistant
+ (surfaces opportunities)   (prioritizes)      (enforces safety)   (delivers outputs)
+```
+
+This structure mirrors how regulated organizations build AI-enabled products: with governance embedded across the **full lifecycle**, not bolted on after deployment.
+
+---
 
 ## Governance-by-Design Approach
 
 This portfolio applies a **governance-by-design** philosophy aligned with established AI frameworks (Microsoft AI-900, Google Responsible AI).
 
-Rather than treating governance as a post-deployment control, the system embeds responsible AI principles across the full lifecycle:
-- **Opportunity selection** (risk-aware prioritization)
-- **Requirements definition** (ambiguity and compliance detection)
-- **Model invocation** (routing, escalation, refusal)
-- **Output grounding** (citation-first retrieval and traceability)
+Rather than treating governance as a post-deployment control, the system embeds responsible AI principles across:
 
-This mirrors how regulated organizations operationalize responsible AI: through product design decisions, not policy documents alone.
-
----
-
-## The Four Modules (Start Here)
-
-The main narrative lives under:
-
-→ [`/modules/`](./modules)
-
-Each module has its own README with the “why,” scope, and entry artifacts:
-
-1. **Market Intelligence Monitor**  
-   Tracks competitor AI releases and regulatory signals to inform strategic prioritization.  
-   → `modules/market-intelligence-monitor/`
-
-2. **ROI Decision Engine**  
-   A structured, risk-aware scoring model for prioritizing AI opportunities based on value, feasibility, and regulatory complexity.  
-   → `modules/roi-decision-engine/`
-
-3. **Requirements Guardrails (Input Analyzer)**  
-   Identifies ambiguity, risk factors, and compliance concerns **before model invocation** to route, escalate, or block requests safely.  
-   → `modules/requirements-guardrails/`
-
-4. **Compliance Retrieval Assistant (RAG)**  
-   A citation-first assistant for high-risk workflows requiring grounding, traceability, and refusal behavior when evidence is missing.  
-   → `modules/compliance-retrieval-assistant/`
+- **Opportunity selection** — risk-aware prioritization (ROI Engine)
+- **Requirements definition** — ambiguity and compliance detection (Guardrails)
+- **Model invocation** — routing, escalation, refusal (Guardrails)
+- **Output grounding** — citation-first retrieval and traceability (RAG Assistant)
 
 ---
 
-## How the Modules Connect
+## Repository Structure
+```
+/modules/                  → The four-module system (start here)
+/architecture/             → System-level decisions and ADRs
+/evaluation/               → Shared evaluation framework
+/prompt-experiments/       → Structured experiments for testing behaviors
+```
 
-These modules form an integrated workflow:
-
-**Market Intelligence** surfaces opportunities → **ROI Engine** prioritizes them →  
-**Guardrails** enforce safe execution → **RAG Assistant** delivers compliant, grounded outputs.
-
-This structure is designed to mirror how regulated organizations build AI-enabled products: with governance embedded across the **model lifecycle**, not bolted on after deployment.
-
-
----
-
-## Repository Map (Narrative vs Supporting Artifacts)
-
-This repo separates **portfolio narrative** from **supporting depth**:
-
-### Narrative Layer (what most readers should start with)
-- `/modules/` — the four-module system, entry artifacts, and portfolio-ready explanations
-
-### Supporting Layers (depth for reviewers who want evidence)
-- `/evaluation/` — shared evaluation framework (datasets, rubrics, run logs, artifacts)
-- `/guardrails/` — design + implementation artifacts (heuristics, model card, privacy/security notes)
-- `/market-intel/` — working notes and raw signal analysis that inform the Market Intelligence module
-- `/prompt-experiments/` — structured experiments used to test behaviors and refine guardrail/eval approaches
-- `/architecture/` — system-level architecture context and decision records (ADRs)
-
----
-
-## Architecture & Diagrams (Optional)
-
-If you prefer a visual walkthrough, the system lifecycle and sequence diagrams are also documented in my public Notion workspace:
-
-- **FinServ AI Query Lifecycle (Notion)**  
-  https://www.notion.so/stevelanderson42/FinServ-AI-Query-Lifecycle-2bea7858746d809c86acdd89cd9f7e86
-
-This GitHub repository is the source of record for decisions and supporting artifacts; Notion provides annotated narrative context.
+Each module has its own README with scope, design rationale, and artifacts.
 
 ---
 
 ## Alignment with Responsible AI Frameworks
 
-The design choices in this repository reflect common responsible AI frameworks:
+**AI-900 Concepts:**
+- Responsible AI principles → implemented via guardrails, routing, and refusal logic
+- Model lifecycle → reflected across opportunity intake, evaluation, and deployment artifacts
 
-- **AI-900 Concepts**  
-  - Responsible AI principles → implemented via guardrails, routing, and refusal logic  
-  - Model lifecycle → reflected across opportunity intake, evaluation, deployment, and monitoring artifacts  
-  - Prebuilt vs custom models → explicitly accounted for in risk and governance decisions
-
-- **Google Responsible AI Framing**  
-  - Fairness, safety, and accountability are treated as *product constraints*, not model features  
-  - Human review and escalation paths are explicit for high-risk use cases
-
-This translation from principles to system design is intentional and central to the portfolio.
+**Google Responsible AI:**
+- Fairness, safety, and accountability treated as *product constraints*, not model features
+- Human review and escalation paths explicit for high-risk use cases
 
 ---
 
 ## Status
 
-This portfolio is actively evolving. The structure is intentionally designed to remain readable to first-time reviewers while still providing depth for technical, risk, and governance stakeholders.
+| Phase | Modules | Timeline |
+|-------|---------|----------|
+| ✅ Foundation | Market Intelligence, ROI Engine | Complete |
+| 🔲 Build | Guardrails, RAG Assistant | In Progress |
+| 🔲 Polish | Integration, case studies | Planned |
 
 ---
 
-## Notes on Local Setup (Minimal)
+## Local Setup
 
-- API keys are stored locally in `.env` and are not committed.
-- See `requirements.txt` for Python dependencies when relevant.
-
+- API keys stored in `.env` (not committed)
+- See `requirements.txt` for Python dependencies
