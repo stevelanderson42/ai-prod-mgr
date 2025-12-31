@@ -1,7 +1,7 @@
 # ADR-001: Deterministic Routing Logic
 
 **Status:** Accepted  
-**Date:** December 2024  
+**Date:** December 2025  
 **Module:** Requirements Guardrails (Module 3)
 
 ---
@@ -18,9 +18,11 @@ This is not a trivial choice. The routing layer sits at a critical control point
 
 ## Decision
 
-**Use deterministic, rule-based logic for all routing decisions.**
+**Use deterministic, rule-based logic as the primary routing mechanism.**
 
-No machine learning model, classifier, or LLM is invoked to make the routing decision itself. The routing logic consists of explicit, auditable rules that can be reviewed, validated, and approved by compliance teams.
+No general-purpose LLM is invoked to make routing decisions. Routing logic uses explicit rules and, where necessary, narrow validated classifiers that have been tested against compliance-approved datasets and produce deterministic outputs at inference (temperature=0).
+
+The key principle is not "no models anywhere" but **"no opaque, general-purpose inference at the control layer."**
 
 ---
 
@@ -40,7 +42,7 @@ This is auditable. This is defensible.
 
 ### 2. No Recursive Model Risk
 
-Using a model to decide whether to invoke a model creates recursive risk:
+Using a general-purpose model to decide whether to invoke a model creates recursive risk:
 - What if the routing model hallucinates?
 - What if the routing model is adversarially manipulated?
 - What if the routing model drifts over time?
@@ -50,7 +52,7 @@ Using a model to decide whether to invoke a model creates recursive risk:
 - Testing is straightforward
 - Validation is complete
 
-> **PM DECISION:** The routing layer must be the most stable part of the system. Introducing ML here would undermine the entire governance architecture.
+> **PM DECISION:** The routing layer must be the most stable part of the system. Introducing general-purpose ML here would undermine the entire governance architecture.
 
 ### 3. Compliance Team Reviewability
 
@@ -108,13 +110,36 @@ Deterministic rules execute in microseconds. ML inference adds latency:
 
 For a pre-invocation control layer that runs on every request, latency matters.
 
+### 8. Where Rules Have Limits
+
+Pure keyword matching catches explicit violations ("guaranteed returns") but may miss semantic equivalents ("this investment will definitely grow your wealth").
+
+For subjective checks—implied guarantees, tone violations, nuanced ambiguity—two approaches remain compliant with governance requirements:
+
+**Approach A: Exhaustive pattern lists**
+- Labor-intensive but fully auditable
+- Requires ongoing maintenance as new phrasings emerge
+- Works well for known violation patterns
+- Misses novel formulations
+
+**Approach B: Narrow validated classifiers**
+- Small models trained on specific tasks (e.g., "does this contain promissory language?")
+- These differ from general-purpose ML because they are:
+  - Narrow in scope (single task)
+  - Validated against compliance-approved test sets
+  - Deterministic at inference (temperature=0)
+  - Auditable via test coverage, not weight inspection
+  - Subject to the same change management as rules
+
+Both approaches preserve the core principle: **auditability and explainability at the control layer.**
+
 ---
 
 ## Alternatives Considered
 
-### Alternative A: ML Classifier for Routing
+### Alternative A: General-Purpose ML Classifier for Routing
 
-**Description:** Train a classifier (e.g., fine-tuned BERT, logistic regression on embeddings) to predict routing outcomes.
+**Description:** Train a classifier (e.g., fine-tuned BERT, logistic regression on embeddings) to predict routing outcomes across all categories.
 
 **Rejected because:**
 - Opaque decision logic
@@ -134,17 +159,23 @@ For a pre-invocation control layer that runs on every request, latency matters.
 - Expensive at scale
 - Hallucination risk at the control layer
 
-### Alternative C: Hybrid Approach (Rules + ML Fallback)
+### Alternative C: Hybrid Approach (Rules + Narrow Classifiers)
 
-**Description:** Use deterministic rules for clear cases; fall back to ML for ambiguous cases.
+**Description:** Use deterministic rules for clear cases; use narrow, validated classifiers for specific subjective checks.
 
-**Considered but deferred because:**
-- Adds complexity
-- "Ambiguous" cases are exactly where explainability matters most
-- Creates two systems to maintain and audit
-- May be revisited in future if rule coverage proves insufficient
+**Acceptable under constraints:**
 
-> **PM DECISION:** Start with pure deterministic routing. The hybrid approach remains an option if we encounter systematic gaps that rules cannot address—but that decision should be data-driven, not assumed.
+A hybrid approach is acceptable if narrow classifiers meet these criteria:
+- Single-purpose (one classification task per model)
+- Deterministic outputs (temperature=0, no sampling)
+- Validated against compliance-approved test corpus
+- Test coverage documented and version-controlled
+- Subject to same change review process as rules
+- Fail-safe: uncertain outputs default to ESCALATE
+
+This is not "ML fallback" in the general sense—it is scoped, validated classification that preserves auditability.
+
+> **PM DECISION:** Start with pure deterministic routing. Introduce narrow classifiers only where pattern matching proves systematically insufficient—and only with the constraints above. That decision should be data-driven, not assumed.
 
 ---
 
@@ -152,10 +183,10 @@ For a pre-invocation control layer that runs on every request, latency matters.
 
 ### Positive
 
-- **Full auditability:** Every decision traceable to specific rules
+- **Full auditability:** Every decision traceable to specific rules or validated classifiers
 - **Compliance reviewable:** Non-technical stakeholders can validate logic
-- **No drift:** Behavior is stable over time
-- **Fast execution:** Microsecond latency
+- **No drift:** Behavior is stable over time (classifiers are versioned and tested)
+- **Fast execution:** Microsecond latency for rules; bounded latency for narrow classifiers
 - **Simple testing:** Complete validation possible
 - **Clear incident response:** Root cause identification is straightforward
 
@@ -165,6 +196,7 @@ For a pre-invocation control layer that runs on every request, latency matters.
 - **Coverage gaps possible:** Novel inputs may not match existing rules
 - **Less adaptive:** Cannot learn from new patterns automatically
 - **Requires domain expertise:** Rule authors must understand regulatory requirements
+- **Classifier governance overhead:** If narrow classifiers are introduced, they require test corpus management
 
 ### Mitigations for Negative Consequences
 
@@ -174,6 +206,7 @@ For a pre-invocation control layer that runs on every request, latency matters.
 | Coverage gaps | Default to ESCALATE for unmatched cases; monitor escalation patterns |
 | Less adaptive | Quarterly rule review based on escalation analysis |
 | Requires domain expertise | Involve compliance SMEs in rule authoring |
+| Classifier governance | Same change management as rules; test corpus versioned alongside model |
 
 ---
 
@@ -189,6 +222,17 @@ Each rule should include:
 - **Rationale:** Why this rule exists
 - **Regulatory reference:** If applicable (e.g., FINRA 2210)
 
+### Narrow Classifier Structure (If Introduced)
+
+Each classifier should include:
+- **Classifier ID:** Unique identifier (e.g., CLS-01)
+- **Purpose:** Single task description (e.g., "Detect implied guarantees")
+- **Training corpus:** Version-controlled, compliance-approved
+- **Test corpus:** Separate from training; version-controlled
+- **Accuracy metrics:** Precision, recall, F1 against test corpus
+- **Fail-safe behavior:** What happens on low-confidence outputs
+- **Change log:** History of retraining and validation
+
 ### Rule Precedence
 
 When multiple rules match:
@@ -199,10 +243,10 @@ When multiple rules match:
 
 ### Change Management
 
-Rule changes require:
+Rule and classifier changes require:
 - Documentation of change rationale
 - Review by compliance stakeholder
-- Testing against sample inputs
+- Testing against sample inputs (rules) or test corpus (classifiers)
 - Version control commit with clear message
 
 ---
@@ -220,6 +264,6 @@ Rule changes require:
 
 | Role | Name | Date |
 |------|------|------|
-| Author | Steve | December 2024 |
+| Author | Steve | December 2025 |
 | Reviewer | — | — |
 | Approver | — | — |
