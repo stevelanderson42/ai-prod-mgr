@@ -1,115 +1,271 @@
 # Requirements Guardrails
 
-## What This Module Is
+**Pre-Invocation Risk & Ambiguity Detection for Regulated AI Workflows**
 
-The Requirements Guardrails module represents the **pre-execution control layer** of a regulated AI product system.
-
-Its purpose is to analyze user requests *before* any model invocation occurs and determine whether they are **clear, appropriate, compliant, and eligible** to proceed.
-
-This module exists to answer a question that many AI systems fail to ask early enough:
-
-> *“Should this request be handled by AI at all — and if so, under what constraints?”*
+**Status:** 🔲 In Progress  
+**Module:** 3 of 4 in the Regulated AI Workflow Toolkit
 
 ---
 
-## Why This Matters in Regulated Environments
+## Purpose
 
-In regulated industries, many AI failures occur **before** a model generates a response:
+This module acts as a **pre-invocation control layer** that evaluates whether an AI request can safely proceed in a regulated environment. It identifies ambiguity, risk factors, and compliance triggers *before* any model is invoked—ensuring that problematic inputs are caught, clarified, or escalated rather than processed blindly.
 
-- unclear or underspecified requests lead to incorrect assumptions
-- suitability-sensitive questions trigger unintentional advice
-- out-of-scope or compliance-sensitive queries are answered too confidently
-- risk is discovered *after* execution, when remediation is costly
-
-Relying solely on prompt instructions or post-response filtering is insufficient.
-
-This module enforces **deterministic, auditable controls upstream**, ensuring that unsafe or inappropriate requests are intercepted *before* execution paths are chosen.
+> **Core insight:** Guardrails are product decisions, not model features.
 
 ---
 
-## Key Decisions This Module Enables
+## The Problem This Solves
 
-This module supports decisions such as:
+Most AI failures in regulated industries don't stem from weak models—they stem from what happens *before* the model runs:
 
-- Whether a request is sufficiently clear to proceed
-- Whether a request triggers suitability or compliance concerns
-- Which execution path or agent (if any) is permitted
-- When to escalate to human review or require clarification
-- When to block or redirect requests entirely
+- **LLMs accept almost anything.** They'll generate responses to ambiguous, risky, or prohibited requests without hesitation.
+- **Regulated systems cannot.** Financial services, healthcare, and insurance operate under strict communication and suitability standards.
+- **Most failures originate before model invocation.** Garbage in, compliance violation out.
 
-These decisions are typically owned by **Product**, **Risk**, and **Compliance**, and must be explainable to auditors and governance stakeholders.
+Without guardrails at the input layer, organizations either:
+1. Deploy AI that produces risky outputs, or
+2. Refuse to deploy AI at all
 
----
+This module provides a **third path**: structured input analysis that enables safe AI deployment.
 
-## How This Module Fits Into the Overall System
-
-The Requirements Guardrails module sits **between prioritization and execution**.
-
-- It operates after an initiative has been approved by the **ROI Decision Engine**
-- It runs *before* any LLM, tool, or data access occurs
-- Its outputs directly control routing into downstream execution paths, including the **Compliance Retrieval Assistant**
-
-By design, this module ensures that **policy enforcement precedes intelligence**.
+> **PM DECISION:** In regulated environments, the cost of a bad model output far exceeds the cost of asking for clarification. This module treats input quality as a first-class product concern.
 
 ---
 
-## Guardrail Categories Enforced
+## Where It Sits in the Workflow
 
-This module applies multiple categories of guardrails at request time, including:
+```
+Market Intelligence    →    ROI Engine    →    [Guardrails]    →    RAG Assistant
+ (surfaces opportunities)   (prioritizes)      (enforces safety)   (delivers outputs)
+```
 
-- **Ambiguity detection**  
-  Identifies unclear or underspecified requests that require clarification before execution.
+**Upstream:** ROI Decision Engine determines *which* AI workflows to build  
+**This module:** Determines *whether* a specific request can safely proceed  
+**Downstream:** Compliant requests proceed to RAG Assistant for execution
 
-- **Suitability and advice risk detection**  
-  Flags requests that may constitute personalized or regulated advice.
+Inputs arrive from users, workflows, or upstream systems. Outputs are routing decisions:
+- **Proceed** — Safe for model invocation
+- **Clarify** — Request additional context
+- **Escalate** — Route to human review
+- **Block** — Refuse with explanation
 
-- **Compliance and scope checks**  
-  Identifies prohibited claims, guarantees, or out-of-scope topics.
-
-- **Routing and eligibility decisions**  
-  Determines whether a request may proceed, must be redirected, escalated, clarified, or blocked.
-
-Each guardrail produces **explicit, structured outputs** that can be logged, audited, and reasoned about downstream.
-
----
-
-## Entry Artifacts (Curated)
-
-The following artifacts represent the primary entry points for this module:
-
-- **Guardrails Overview**  
-  Defines the role of guardrails in the overall AI system and how they are enforced.  
-  → `../../guardrails/Guardrails.md`
-
-- **Heuristics & Routing Rules (v0.1)**  
-  Documents the deterministic logic used for topic classification, risk detection, and action selection.  
-  → `../../guardrails/heuristics_v0.1.md`
-
-- **Responsible AI & Guardrails Connection**  
-  Maps internal guardrails to external responsible AI principles.  
-  → `../../guardrails/Responsible_AI_&_Guardrails_Connection.md`
-
-- **Privacy, Security, and Data Boundaries**  
-  Defines what data is intentionally excluded at this stage.  
-  → `../../guardrails/Privacy_and_Security.md`
-
-These artifacts emphasize **explainability and control**, not model cleverness.
+> **PM DECISION:** Guardrails operate at request-time, not deployment-time. Every input is evaluated—this is runtime governance, not a one-time checklist.
 
 ---
 
-## Where to Go Deeper
+## Guardrail Categories
 
-For additional detail and supporting material:
+This is where product judgment meets regulatory reality. Each category represents a class of risk that must be detected before model invocation.
 
-- `../../guardrails/` — full guardrail documentation and rationale
-- Prompt Experiments — empirical exploration of guardrail patterns and failure modes
-- FinServ AI Query Lifecycle — sequence diagrams showing guardrail placement
-- Public Notion Portfolio — architectural context and design decisions
+### 1. Ambiguity
+
+**Why it matters:** Models interpret ambiguous inputs unpredictably. In regulated environments, unpredictable outputs create liability.
+
+**What triggers it:**
+- Missing context (e.g., "What should I invest in?" with no risk profile)
+- Underspecified intent (e.g., "Tell me about retirement" — advice? education? products?)
+- Pronouns without referents (e.g., "Is that a good idea?" — what idea?)
+
+**What happens:** Request routed to CLARIFY; user prompted for specifics.
 
 ---
 
-## Status
+### 2. Compliance Triggers
 
-Active development and refinement.
+**Why it matters:** Regulated communications must meet specific standards. Violations expose the firm to regulatory action.
 
-This module is central to the system and is intentionally iterated as new failure modes and regulatory considerations are identified.
+**What triggers it:**
+- Investment recommendations without suitability context
+- Guarantees or predictions ("This stock will double")
+- Unbalanced claims (benefits without risks)
+- Communications that could mislead retail investors
+
+**Regulatory anchor:** FINRA Rule 2210 — fair, balanced, not misleading.
+
+**What happens:** Request routed to ESCALATE for compliance review, or BLOCK if clearly prohibited.
+
+---
+
+### 3. Suitability & User Context Gaps
+
+**Why it matters:** Recommendations must be appropriate for the specific customer. Generic advice in a personalized context is a suitability failure.
+
+**What triggers it:**
+- Recommendation requests without risk tolerance
+- Product suggestions without account type context
+- Time horizon not established
+- Jurisdiction unknown (different rules apply)
+
+**Regulatory anchor:** SEC Regulation Best Interest (Reg BI).
+
+**What happens:** Request routed to CLARIFY with specific context requirements.
+
+---
+
+### 4. Prohibited or High-Risk Content
+
+**Why it matters:** Some requests should never reach a model, regardless of context.
+
+**What triggers it:**
+- Requests for specific security recommendations
+- Tax or legal advice beyond permitted scope
+- Content involving minors or vulnerable populations
+- Attempts to extract proprietary information
+
+**What happens:** Request routed to BLOCK; logged for audit; user receives explanation.
+
+---
+
+### 5. Escalation Required
+
+**Why it matters:** Some requests are legitimate but exceed automated handling capacity. Human judgment is the appropriate response.
+
+**What triggers it:**
+- Complex multi-part requests spanning compliance domains
+- Edge cases not covered by existing rules
+- Requests from flagged accounts or high-risk customer segments
+- Novel scenarios requiring precedent decisions
+
+**What happens:** Request routed to ESCALATE; queued for human review with full context.
+
+---
+
+## Output Contracts
+
+This module returns a structured decision, not a model response. The output contract ensures downstream systems (and audit logs) receive consistent, actionable information.
+
+```
+{
+  "request_id": "uuid",
+  "timestamp": "ISO-8601",
+  "classification": "PROCEED | CLARIFY | ESCALATE | BLOCK",
+  "category": "ambiguity | compliance | suitability | prohibited | escalation",
+  "confidence": "high | medium | low",  // Rule-based certainty (coverage strength)
+  "explanation": "Human-readable rationale for the decision",
+  "next_action": "Description of what happens next",
+  "missing_context": ["list", "of", "required", "fields"],  // if CLARIFY
+  "escalation_reason": "Why human review is required",       // if ESCALATE
+  "block_reason": "Why request was refused"                  // if BLOCK
+}
+```
+
+> **PM DECISION:** Thinking in interfaces, not scripts. This contract defines what the module *promises*, independent of how it's implemented.
+
+---
+
+## Design Principles
+
+These principles reflect a governance-first philosophy aligned with the portfolio's core thesis.
+
+| Principle | Rationale |
+|-----------|-----------|
+| **Fail early** | Catch problems before model invocation, not after |
+| **Be explainable** | Every decision must have auditable rationale |
+| **Prefer false positives over silent risk** | Better to ask for clarification than process bad input |
+| **Human-in-the-loop is a feature** | Escalation is a valid outcome, not a system failure |
+| **Deterministic routing** | No model decides routing; rules are auditable |
+| **Runtime governance** | Every request evaluated, not just at deployment |
+
+> **PM DECISION:** These aren't aspirational values—they're constraints that shape every design choice in this module.
+
+---
+
+## Regulatory Alignment
+
+This module explicitly addresses requirements from key regulatory frameworks:
+
+| Regulation | How It's Addressed |
+|------------|-------------------|
+| **FINRA 2210** | Communication standards checks (fair, balanced, not misleading) |
+| **Reg BI** | Suitability flags when recommendation context is missing |
+| **SR 11-7** | Auditable decision logic; documented classification rationale |
+| **17a-4** | All routing decisions logged with timestamps and reasoning |
+
+*These references are used as conceptual anchors for product design, not legal interpretations.*
+
+---
+
+## What This Module Does NOT Do
+
+Scope discipline is a senior PM signal. This module has clear boundaries:
+
+- ❌ **Does not generate responses** — That's Module 4 (RAG Assistant)
+- ❌ **Does not prioritize opportunities** — That's Module 2 (ROI Engine)
+- ❌ **Does not attempt semantic "truth"** — It classifies risk, not factual accuracy
+- ❌ **Does not replace compliance review** — Escalation routes to humans
+- ❌ **Does not guarantee model safety** — It reduces input risk; output risk is a separate concern
+- ❌ **Does not use ML for classification** — Deterministic rules ensure explainability
+
+> **PM DECISION:** Knowing what NOT to build is as important as knowing what to build. Every exclusion here is a deliberate choice.
+
+---
+
+## Relationship to Other Modules
+
+| Module | Relationship |
+|--------|--------------|
+| **Market Intelligence** (Module 1) | No direct dependency; operates on different timescales |
+| **ROI Decision Engine** (Module 2) | Consumes workflow context; knows which use cases are approved |
+| **Compliance RAG Assistant** (Module 4) | Feeds PROCEED requests downstream; defines handoff contract |
+| **Audit Infrastructure** | Emits structured logs for all routing decisions |
+
+---
+
+## Folder Structure
+
+```
+/modules/requirements-guardrails/
+├── README.md                    # This file
+├── /architecture/
+│   ├── ADR-001-routing-logic.md # Why deterministic routing
+│   ├── ADR-002-escalation-design.md
+│   └── context-diagram.mermaid
+├── /rules/
+│   ├── ambiguity-heuristics.md  # Classification criteria
+│   ├── compliance-triggers.md   # FINRA 2210 patterns
+│   └── prohibited-content.md    # Hard blocks
+├── /evidence/
+│   ├── sample-classifications/  # Input → Classification examples
+│   └── edge-cases/              # Documented boundary decisions
+├── /outputs/
+│   └── routing-decision-log.md  # Sample audit trail
+└── /experiments/
+    └── prompt-exp-06-*.md       # Guardrail prompt experiments
+```
+
+---
+
+## Success Criteria
+
+This module is complete when:
+
+- [ ] Guardrail categories documented with triggers and outcomes
+- [ ] Output contract defined and validated
+- [ ] FINRA 2210 compliance triggers codified with examples
+- [ ] At least 10 sample inputs with classifications
+- [ ] Edge cases documented with PM rationale
+- [ ] ADR explaining deterministic routing decision
+- [ ] Integration contract with RAG Assistant defined
+- [ ] Design principles reflected in all artifacts
+
+---
+
+## Key PM Decisions Documented
+
+| Decision | Rationale |
+|----------|-----------|
+| **Deterministic routing** | Auditable, explainable, no recursive model risk |
+| **Escalate vs. refuse distinction** | Escalation preserves user intent; refusal blocks harmful patterns |
+| **Rule-based over ML classification** | Regulatory requirements demand explainability |
+| **Clarify before processing** | Ambiguity is a product problem, not a model problem |
+| **Explicit output contract** | Interface-first design enables modular architecture |
+
+---
+
+## Related Artifacts
+
+- [ROI Decision Engine](../roi-engine/) — Upstream prioritization
+- [Compliance RAG Assistant](../compliance-retrieval-assistant/) — Downstream execution
+- [Prompt Experiments](../../prompt-experiments/) — Guardrail prompt testing
+- [Architecture Decision Records](../../architecture/) — System-level ADRs
