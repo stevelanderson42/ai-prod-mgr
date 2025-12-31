@@ -54,6 +54,21 @@ Inputs arrive from users, workflows, or upstream systems. Outputs are routing de
 
 ---
 
+## Architecture Overview
+
+![Module 3 Context Diagram](./architecture/Module%203%20-%20Requirements%20Guardrails%20-%20Context%20Diagram.PNG)
+
+**Key design choices reflected:**
+- Guardrails execute in **parallel**, not sequentially
+- Metadata (account type, jurisdiction, flags) informs suitability and compliance checks
+- "Human Review Trigger" (check) is distinct from "ESCALATE" (outcome)
+- Routing decision is **deterministic** — no model invocation
+
+For detailed architecture decisions, see [Architecture Decision Records](./architecture/).
+
+
+---
+
 ## Guardrail Categories
 
 This is where product judgment meets regulatory reality. Each category represents a class of risk that must be detected before model invocation.
@@ -117,7 +132,7 @@ This is where product judgment meets regulatory reality. Each category represent
 
 ---
 
-### 5. Escalation Required
+### 5. Human Review Trigger
 
 **Why it matters:** Some requests are legitimate but exceed automated handling capacity. Human judgment is the appropriate response.
 
