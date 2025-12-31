@@ -62,10 +62,9 @@ Inputs arrive from users, workflows, or upstream systems. Outputs are routing de
 - Guardrails execute in **parallel**, not sequentially
 - Metadata (account type, jurisdiction, flags) informs suitability and compliance checks
 - "Human Review Trigger" (check) is distinct from "ESCALATE" (outcome)
-- Routing decision is **deterministic** — no model invocation
+- Routing decision is **deterministic** — no general-purpose LLM invocation
 
 For detailed architecture decisions, see [Architecture Decision Records](./architecture/).
-
 
 ---
 
@@ -179,7 +178,7 @@ These principles reflect a governance-first philosophy aligned with the portfoli
 | **Be explainable** | Every decision must have auditable rationale |
 | **Prefer false positives over silent risk** | Better to ask for clarification than process bad input |
 | **Human-in-the-loop is a feature** | Escalation is a valid outcome, not a system failure |
-| **Deterministic routing** | No model decides routing; rules are auditable |
+| **No opaque inference at control layer** | Rules and narrow validated classifiers only; no general-purpose LLM |
 | **Runtime governance** | Every request evaluated, not just at deployment |
 
 > **PM DECISION:** These aren't aspirational values—they're constraints that shape every design choice in this module.
@@ -210,7 +209,7 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 - ❌ **Does not attempt semantic "truth"** — It classifies risk, not factual accuracy
 - ❌ **Does not replace compliance review** — Escalation routes to humans
 - ❌ **Does not guarantee model safety** — It reduces input risk; output risk is a separate concern
-- ❌ **Does not use ML for classification** — Deterministic rules ensure explainability
+- ❌ **Does not use general-purpose ML for routing** — Rules and narrow validated classifiers ensure explainability
 
 > **PM DECISION:** Knowing what NOT to build is as important as knowing what to build. Every exclusion here is a deliberate choice.
 
@@ -270,9 +269,9 @@ This module is complete when:
 
 | Decision | Rationale |
 |----------|-----------|
-| **Deterministic routing** | Auditable, explainable, no recursive model risk |
+| **No opaque inference at control layer** | Auditability requires explainable routing; general-purpose LLMs rejected |
+| **Narrow classifiers acceptable** | For subjective checks (implied guarantees, tone), validated single-task classifiers preserve auditability |
 | **Escalate vs. refuse distinction** | Escalation preserves user intent; refusal blocks harmful patterns |
-| **Rule-based over ML classification** | Regulatory requirements demand explainability |
 | **Clarify before processing** | Ambiguity is a product problem, not a model problem |
 | **Explicit output contract** | Interface-first design enables modular architecture |
 

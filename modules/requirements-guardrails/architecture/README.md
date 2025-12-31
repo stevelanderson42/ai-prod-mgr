@@ -38,8 +38,8 @@ Each ADR follows this structure:
 
 These principles guide all architectural decisions in this module:
 
-1. **Deterministic over probabilistic** — Routing decisions use rules, not models
-2. **Explainability first** — Every decision must be auditable
+1. **No opaque inference at control layer** — Routing uses rules and narrow validated classifiers, not general-purpose LLMs
+2. **Explainability first** — Every decision must have auditable rationale
 3. **Fail-safe defaults** — Unknown inputs escalate to humans
 4. **Interface-first design** — Define contracts before implementation
 5. **Compliance reviewable** — Non-technical stakeholders can validate logic
