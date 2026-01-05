@@ -59,7 +59,9 @@ A partial response indicates that some claims are grounded while others cannot b
 
 ## Architecture Overview
 
-![Context Diagram](./docs/diagrams/context-diagram.svg)
+### Context Diagram (System-in-the-World)
+
+![Context Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Context%20Diagram.PNG)
 
 **Key design choices reflected:**
 
@@ -71,6 +73,12 @@ A partial response indicates that some claims are grounded while others cannot b
 | **Grounding Status** | Categorical (Fully/Partially/Refused), not numeric confidence |
 | **Model Abstraction** | LLM provider is swappable; controls matter more than the model |
 | **Optional Escalation** | Human handoff is policy-controlled, not hardcoded |
+
+### Component Diagram (Internal Decomposition)
+
+![Component Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.PNG)
+
+*Status: Planned — will show internal pipeline: Preprocess → Retrieve → Ground → Decide → Assemble → Respond, with Trace Writer throughout.*
 
 For component-level design, see [architecture/component-design.md](./architecture/component-design.md).
 
@@ -214,7 +222,9 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | config/corpus-registry.yaml | Approved releases, `current_release_id`, point-in-time state |
 | config/refusal-taxonomy.yaml | Refusal codes, meanings, and user guidance |
 | 🟦 **docs/** | Human-readable specifications and governance design |
-| docs/diagrams/ | Context diagram (mermaid source + rendered SVG) |
+| docs/diagrams/ | Visual architecture artifacts |
+| docs/diagrams/Compliance-Retrieval-Assistant Context Diagram.PNG | System-in-the-world view — external actors and boundaries |
+| docs/diagrams/Compliance-Retrieval-Assistant Component Diagram.PNG | Internal decomposition — pipeline stages and data flow *(planned)* |
 | docs/response-contract.md | **User-facing contract** — grounding_status, citations, refusal shape |
 | docs/trace-schema.md | **Audit-facing contract** — trace fields, retention requirements |
 | docs/threat-model.md | Failure modes, attack vectors, mitigations |
