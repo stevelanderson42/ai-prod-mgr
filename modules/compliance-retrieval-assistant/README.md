@@ -69,7 +69,7 @@ The context diagram shows the CRA's position within the broader enterprise envir
 
 ### Component Diagram (Internal Structure)
 
-![Component Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.png)
+![Component Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.PNG)
 
 The CRA consists of 8 internal components organized as a pipeline:
 
