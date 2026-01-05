@@ -61,7 +61,7 @@ A partial response indicates that some claims are grounded while others cannot b
 
 ### Context Diagram (System-in-the-World)
 
-![Context Diagram](./docs/diagrams/Compliance-Retrieval-Assistant Context Diagram.PNG)
+![Context Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Context%20Diagram.PNG)
 
 **Key design choices reflected:**
 
