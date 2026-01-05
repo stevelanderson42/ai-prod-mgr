@@ -63,24 +63,46 @@ A partial response indicates that some claims are grounded while others cannot b
 
 ![Context Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Context%20Diagram.PNG)
 
-**Key design choices reflected:**
+The context diagram shows the CRA's position within the broader enterprise environment: upstream systems that feed it (Requirements Guardrails, Policy Store, Corpus Pipeline), downstream systems it serves (Users, Audit Log, Handoff Queue), and the governance boundaries it operates within.
 
-| Element | Design Choice |
-|---------|---------------|
-| **Corpus Pipeline** | Compliance approves releases; corpus is versioned and immutable |
-| **Policy Constraints** | Behavior controlled via config, not code |
-| **Dual Contracts** | Users see response-contract; auditors see trace-schema |
-| **Grounding Status** | Categorical (Fully/Partially/Refused), not numeric confidence |
-| **Model Abstraction** | LLM provider is swappable; controls matter more than the model |
-| **Optional Escalation** | Human handoff is policy-controlled, not hardcoded |
+---
 
+### Component Diagram (Internal Structure)
 
-### Component Diagram (Internal Decomposition)
+![Component Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.PNG)
 
-Status: Planned — will show internal pipeline: Preprocess → Retrieve → Ground → Decide → Assemble → Respond, with Trace Writer throughout.
+The CRA consists of 8 internal components organized as a pipeline:
 
-For component-level design, see [architecture/component-design.md](./architecture/component-design.md).
+| Component | Responsibility |
+|-----------|----------------|
+| **Query Preprocessor** | Normalize input, extract terms, detect injection patterns |
+| **Retrieval Client** | Hybrid search (vector + lexical), access control filtering |
+| **Grounding Checker** | Assess coverage, detect conflicts, determine grounding status |
+| **Prompt Builder** | Assemble instructions + context + retrieved passages |
+| **LLM Provider** | Model-agnostic interface (Anthropic, OpenAI, Azure) |
+| **Refusal Gate** | Final decision logic, post-generation validation |
+| **Response Assembler** | Package response per contract, build citations |
+| **Trace Writer** | Continuous audit logging throughout pipeline |
 
+See [architecture/component-design.md](./architecture/component-design.md) for detailed specifications.
+
+---
+
+### Sequence Diagram (Request Lifecycle)
+
+![Sequence Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Sequence%20Diagram.PNG)
+
+The sequence diagram shows how a query flows through the system:
+
+1. **Preprocess & validate** — Normalize query, check for injection patterns
+2. **Retrieve passages** — Fetch top-K from approved corpus
+3. **Check grounding** — Can retrieved content support an answer?
+4. **Generate (if grounded)** — LLM constrained by prompt + sources
+5. **Validate & assemble** — Verify citations, check policy compliance
+6. **Commit trace** — Write to audit log (blocking)
+7. **Return response** — Answer + citations OR Refusal + guidance
+
+> **Key pattern:** Trace is committed and confirmed *before* any response is returned to the user. This ensures audit integrity — no interaction exists without a record.
 
 ---
 
