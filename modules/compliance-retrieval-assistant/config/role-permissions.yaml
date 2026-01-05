@@ -1,0 +1,247 @@
+# Role Permissions
+# =================
+# Access control configuration for the Compliance Retrieval Assistant.
+# Defines which roles can query which corpora and topics.
+#
+# Governance note: Role definitions should align with enterprise IAM.
+# Changes require security review.
+#
+# Related artifacts:
+#   - config/policy-constraints.yaml (corpus.allowed_collections)
+#   - config/corpus-registry.yaml (collection definitions)
+#   - config/refusal-taxonomy.yaml (POLICY_BLOCKED code)
+
+# -----------------------------------------------------------------------------
+# Role Definitions
+# -----------------------------------------------------------------------------
+# Each role defines a set of permissions for corpus access.
+# Users are assigned roles by upstream identity systems (not managed here).
+
+roles:
+
+  analyst:
+    description: >
+      Standard business analyst access. Can query general compliance 
+      policies and public regulatory guidance. Intended for day-to-day
+      policy lookup and guidance questions.
+    allowed_collections:
+      - compliance-policies
+      - regulatory-guidance
+    restricted_collections: []
+    restricted_topics: []
+    permissions:
+      - read
+    max_queries_per_day: 100
+    
+  senior_analyst:
+    description: >
+      Elevated analyst access. Includes internal procedures and 
+      operational guidance not available to standard analysts.
+    allowed_collections:
+      - compliance-policies
+      - regulatory-guidance
+      - internal-procedures
+    restricted_collections: []
+    restricted_topics: []
+    permissions:
+      - read
+    max_queries_per_day: 200
+
+  compliance_officer:
+    description: >
+      Full access to compliance materials including enforcement actions
+      and sensitive regulatory correspondence. Intended for compliance
+      team members with need-to-know.
+    allowed_collections:
+      - compliance-policies
+      - regulatory-guidance
+      - internal-procedures
+      - enforcement-actions
+      - regulatory-correspondence
+    restricted_collections: []
+    restricted_topics: []
+    permissions:
+      - read
+      - export
+    max_queries_per_day: null  # unlimited
+
+  legal_counsel:
+    description: >
+      Legal team access. Includes investigation materials and 
+      privileged content. Subject to attorney-client privilege controls.
+    allowed_collections:
+      - compliance-policies
+      - regulatory-guidance
+      - internal-procedures
+      - enforcement-actions
+      - internal-investigations
+      - legal-memoranda
+    restricted_collections: []
+    restricted_topics: []
+    permissions:
+      - read
+      - export
+    max_queries_per_day: null  # unlimited
+    special_flags:
+      - privilege_aware  # responses flagged for privilege review
+
+  external_auditor:
+    description: >
+      Read-only access for external audit engagements. Limited to 
+      approved audit materials. Excludes ongoing investigations
+      and internal legal analysis.
+    allowed_collections:
+      - compliance-policies
+      - regulatory-guidance
+    restricted_collections:
+      - internal-investigations
+      - legal-memoranda
+      - enforcement-actions
+    restricted_topics:
+      - pending-litigation
+      - ongoing-investigations
+      - settlement-negotiations
+    permissions:
+      - read
+    max_queries_per_day: 50
+    special_flags:
+      - audit_logged  # all queries logged for audit trail
+      - no_export     # cannot export or download responses
+
+  system_admin:
+    description: >
+      Administrative access for system configuration and troubleshooting.
+      Not intended for content queries. Access logged and audited.
+    allowed_collections:
+      - compliance-policies  # limited content access for testing
+    restricted_collections:
+      - internal-investigations
+      - legal-memoranda
+    restricted_topics: []
+    permissions:
+      - read
+      - configure
+    max_queries_per_day: 20
+    special_flags:
+      - admin_audit_logged
+
+# -----------------------------------------------------------------------------
+# Default Role
+# -----------------------------------------------------------------------------
+# Applied when no role claim is present in the request.
+# Conservative default to prevent unauthorized access.
+
+default_role: analyst
+
+# Behavior when role claim is missing
+missing_role_behavior:
+  action: use_default  # Options: use_default, reject, escalate
+  log_event: true
+  alert: false
+
+# -----------------------------------------------------------------------------
+# Access Denied Behavior
+# -----------------------------------------------------------------------------
+# What happens when a user queries content outside their permissions.
+
+access_denied:
+  refusal_code: POLICY_BLOCKED
+  log_attempt: true
+  include_in_audit: true
+  
+  # User-facing message (generic to avoid information leakage)
+  user_message: >
+    You don't have access to materials needed to answer this question.
+    Contact your administrator if you believe this is an error.
+  
+  # Do NOT reveal which specific collection or topic was blocked
+  reveal_blocked_resource: false
+
+# -----------------------------------------------------------------------------
+# Topic Restrictions
+# -----------------------------------------------------------------------------
+# Cross-cutting topic restrictions that apply regardless of collection.
+# These represent sensitive subjects that require elevated access.
+
+global_topic_restrictions:
+
+  pending_litigation:
+    description: "Matters currently in litigation"
+    minimum_role: legal_counsel
+    
+  ongoing_investigations:
+    description: "Active internal or regulatory investigations"
+    minimum_role: compliance_officer
+    
+  settlement_negotiations:
+    description: "Active settlement discussions"
+    minimum_role: legal_counsel
+    
+  employee_disciplinary:
+    description: "Employee conduct and disciplinary matters"
+    minimum_role: compliance_officer
+    
+  whistleblower:
+    description: "Whistleblower reports and related materials"
+    minimum_role: legal_counsel
+
+# -----------------------------------------------------------------------------
+# Collection Sensitivity Levels
+# -----------------------------------------------------------------------------
+# Defines sensitivity tiers for collections. Higher tiers require
+# more restrictive access and enhanced logging.
+
+collection_sensitivity:
+
+  tier_1_public:
+    description: "Generally available compliance guidance"
+    collections:
+      - compliance-policies
+      - regulatory-guidance
+    logging: standard
+    
+  tier_2_internal:
+    description: "Internal operational content"
+    collections:
+      - internal-procedures
+    logging: enhanced
+    
+  tier_3_sensitive:
+    description: "Sensitive regulatory and enforcement content"
+    collections:
+      - enforcement-actions
+      - regulatory-correspondence
+    logging: full_audit
+    
+  tier_4_privileged:
+    description: "Legally privileged or investigation materials"
+    collections:
+      - internal-investigations
+      - legal-memoranda
+    logging: full_audit
+    special_handling:
+      - privilege_review_required
+      - no_bulk_export
+
+# -----------------------------------------------------------------------------
+# Audit Requirements
+# -----------------------------------------------------------------------------
+# Role-based access generates audit events per trace-schema.md.
+
+audit:
+  log_all_access_decisions: true
+  log_denied_attempts: true
+  
+  # Elevated logging for sensitive access
+  enhanced_logging_roles:
+    - legal_counsel
+    - external_auditor
+    - system_admin
+  
+  # Fields always included in access audit
+  required_audit_fields:
+    - user_role
+    - requested_collections
+    - access_decision
+    - timestamp
+    - trace_id

@@ -1,0 +1,141 @@
+# Refusal Taxonomy
+# =================
+# Defines when and why the Compliance Retrieval Assistant refuses to answer.
+# This is policy as data — changes require governance review, not code deployment.
+#
+# Related artifacts:
+#   - docs/response-contract.md (how refusals appear to users)
+#   - docs/trace-schema.md (how refusals are logged for audit)
+#   - evaluation/test-cases/refusal-*.md (validation scenarios)
+
+# -----------------------------------------------------------------------------
+# Refusal Codes
+# -----------------------------------------------------------------------------
+# Each code represents a distinct reason the system cannot provide a grounded
+# response. Codes are mutually exclusive — only one applies per refusal.
+
+refusal_codes:
+
+  NO_ELIGIBLE_DOCS:
+    description: >
+      Query falls outside the scope of the approved corpus. No documents
+      in the allowed collections address the topic.
+    severity: info
+    user_guidance: >
+      This topic isn't covered in approved sources. Consider narrowing 
+      your question or consulting a subject matter expert.
+    next_action: clarify_or_redirect
+    example_triggers:
+      - "Question about competitor products (not in corpus)"
+      - "Request for information from restricted collections"
+      - "Topic predates corpus coverage period"
+
+  INSUFFICIENT_GROUNDING:
+    description: >
+      Retrieved content exists but cannot substantiate a complete answer.
+      Passages are related but do not directly support the required claims.
+    severity: warning
+    user_guidance: >
+      Found related content but cannot fully answer your question. 
+      The following partial information may help: [partial_context]
+    next_action: offer_partial_or_clarify
+    example_triggers:
+      - "Passages mention topic but lack specific guidance"
+      - "Retrieved content is tangentially related"
+      - "Multiple passages needed but none individually sufficient"
+
+  POLICY_BLOCKED:
+    description: >
+      User role or permissions do not allow access to content required
+      to answer the query. Access control enforced at query time.
+    severity: warning
+    user_guidance: >
+      You don't have access to materials needed to answer this question.
+      Contact your administrator if you believe this is an error.
+    next_action: log_and_inform
+    example_triggers:
+      - "Analyst querying enforcement-actions collection"
+      - "External auditor requesting internal-investigations content"
+      - "Role lacks permission for requested corpus"
+
+  AMBIGUOUS_QUERY:
+    description: >
+      Query lacks sufficient specificity or contains unresolved intent.
+      Cannot determine what information would satisfy the request.
+    severity: info
+    user_guidance: >
+      Please clarify your question. Specifically: [clarification_needed]
+    next_action: request_clarification
+    example_triggers:
+      - "'What should I do?' without context"
+      - "Pronouns without referents ('Is that allowed?')"
+      - "Multiple interpretations with different answers"
+    clarification_prompts:
+      - "Which specific policy or regulation are you asking about?"
+      - "What is the account type or customer segment?"
+      - "What action are you considering taking?"
+
+  CONFLICTING_SOURCES:
+    description: >
+      Multiple authoritative sources in the approved corpus provide
+      contradictory guidance. System cannot arbitrarily select one.
+    severity: escalate
+    user_guidance: >
+      Approved sources contain conflicting information on this topic.
+      Human review is recommended before proceeding.
+    next_action: escalate_to_human
+    example_triggers:
+      - "Policy memo differs from regulatory guidance"
+      - "Two procedures specify different thresholds"
+      - "Internal interpretation conflicts with external rule"
+    resolution_guidance: >
+      Do not attempt to reconcile or synthesize conflicting sources.
+      Present the conflict transparently and route to human judgment.
+
+# -----------------------------------------------------------------------------
+# Severity Levels
+# -----------------------------------------------------------------------------
+# Severity determines logging priority and potential escalation behavior.
+
+severity_definitions:
+  info:
+    description: "Expected outcome; user can self-serve"
+    log_level: INFO
+    alert: false
+  warning:
+    description: "Unexpected but recoverable; may indicate user confusion"
+    log_level: WARN
+    alert: false
+  escalate:
+    description: "Requires human review; cannot be resolved automatically"
+    log_level: WARN
+    alert: true  # when escalation is enabled
+
+# -----------------------------------------------------------------------------
+# Escalation Configuration
+# -----------------------------------------------------------------------------
+# Controls which refusal codes trigger handoff to human review queue.
+# Escalation must also be enabled in policy-constraints.yaml.
+
+escalation:
+  always_escalate:
+    - CONFLICTING_SOURCES
+  optionally_escalate:  # configurable per deployment
+    - POLICY_BLOCKED
+    - INSUFFICIENT_GROUNDING
+  never_escalate:
+    - NO_ELIGIBLE_DOCS
+    - AMBIGUOUS_QUERY
+
+# -----------------------------------------------------------------------------
+# Audit Requirements
+# -----------------------------------------------------------------------------
+# Every refusal generates a trace record per trace-schema.md.
+
+audit:
+  required_fields:
+    - refusal_code
+    - user_guidance_shown
+    - retrieval_summary
+    - timestamp
+  retention: permanent  # refusals are audit-significant events

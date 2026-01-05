@@ -1,0 +1,168 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram name="Page-1" id="SfPb1NLhhss_5oEENUCB">
+    <mxGraphModel dx="2037" dy="1430" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="euW1HvtBvGOh1wIz3c75-1" value="Optional Escalation" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1611" y="337" width="310" height="148" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-2" value="Governance &amp; Audit" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1611" y="580" width="310" height="324" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-3" value="Approved Source Layer" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1076" y="20" width="845" height="206" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-4" value="Corpus Pipeline" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="516" y="20" width="310" height="148" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-5" value="User / Analyst" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="590" y="419" width="161" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-6" value="Compliance Retrieval Assistant" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1101" y="408" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-7" value="Upstream Controls: ROI Engine + Requirements Guardrails" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="541" y="245" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-8" value="Ingest + validate + publish release" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="541" y="55" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-9" value="Approved Corpus" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1163" y="55" width="136" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-10" value="Index: vector and lexical" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1669" y="69" width="193" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-11" value="Audit Log Store" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1703" y="632" width="125" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-12" value="Evidence Package: query + retrieval + output" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1658" y="759" width="215" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-13" value="Handoff Queue: human review" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1636" y="372" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-14" value="Compliance / Legal / Risk" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="20" y="531" width="246" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-15" value="Model-agnostic generation behind interface" style="whiteSpace=wrap;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="541" y="582" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-16" value="Query" style="curved=1;startArrow=none;endArrow=block;exitX=0.68;exitY=0;entryX=0.34;entryY=0;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-5" target="euW1HvtBvGOh1wIz3c75-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="826" y="297" />
+              <mxPoint x="1076" y="297" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-17" value="Answer + citations + grounding_status + refusal_code + trace_id" style="curved=1;startArrow=none;endArrow=block;exitX=0.22;exitY=1;entryX=0.81;entryY=1;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-6" target="euW1HvtBvGOh1wIz3c75-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1076" y="531" />
+              <mxPoint x="826" y="531" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-18" value="Policy constraints: allowed corpora, citation rules, refusal thresholds, role permissions, escalation on/off" style="curved=1;startArrow=none;endArrow=block;exitX=0.83;exitY=1;entryX=0.1;entryY=0;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-7" target="euW1HvtBvGOh1wIz3c75-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="826" y="389" />
+              <mxPoint x="1076" y="389" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-19" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.37;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-9" target="euW1HvtBvGOh1wIz3c75-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1611" y="94" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-20" value="Publish corpus_release_id" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-8" target="euW1HvtBvGOh1wIz3c75-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-21" value="Retrieve" style="curved=1;startArrow=none;endArrow=block;exitX=0.62;exitY=0;entryX=0;entryY=0.61;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-6" target="euW1HvtBvGOh1wIz3c75-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1486" y="126" />
+              <mxPoint x="1611" y="126" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-22" value="Top-K passages + source pointers" style="curved=1;startArrow=none;endArrow=block;exitX=0.02;exitY=1;entryX=0.64;entryY=0;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-10" target="euW1HvtBvGOh1wIz3c75-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1611" y="182" />
+              <mxPoint x="1486" y="182" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-23" value="Write trace: trace_id, corpus_release_id, retrieval set, status, rationale codes" style="curved=1;startArrow=none;endArrow=block;exitX=0.7;exitY=1;entryX=0;entryY=0.33;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-6" target="euW1HvtBvGOh1wIz3c75-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1486" y="637" />
+              <mxPoint x="1611" y="637" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-24" value="Persist evidence: sampling or all" style="curved=1;startArrow=none;endArrow=block;exitX=0.62;exitY=1;entryX=0;entryY=0.19;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-6" target="euW1HvtBvGOh1wIz3c75-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1486" y="764" />
+              <mxPoint x="1611" y="764" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-25" value="Handoff on refusal when enabled" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.26;entryX=0;entryY=0.5;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-6" target="euW1HvtBvGOh1wIz3c75-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1486" y="411" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-26" value="Policy updates: doc eligibility, redlines, interpretation prohibitions" style="curved=1;startArrow=none;endArrow=block;exitX=0.6;exitY=-0.01;entryX=0;entryY=0.5;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-14" target="euW1HvtBvGOh1wIz3c75-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="391" y="296" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-27" value="Approve releases" style="curved=1;startArrow=none;endArrow=block;exitX=0.56;exitY=-0.01;entryX=0;entryY=0.5;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-14" target="euW1HvtBvGOh1wIz3c75-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="391" y="94" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-28" value="Audit / review" style="curved=1;startArrow=none;endArrow=block;exitX=0.59;exitY=0.99;entryX=0;entryY=0.72;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-14" target="euW1HvtBvGOh1wIz3c75-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="391" y="849" />
+              <mxPoint x="1611" y="849" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-29" value="Audit / review" style="curved=1;startArrow=none;endArrow=block;exitX=0.67;exitY=0.99;entryX=0;entryY=0.77;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-14" target="euW1HvtBvGOh1wIz3c75-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="391" y="720" />
+              <mxPoint x="1611" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="euW1HvtBvGOh1wIz3c75-30" value="" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.66;exitY=0;entryX=0;entryY=0.8;rounded=0;fontStyle=1" parent="1" source="euW1HvtBvGOh1wIz3c75-15" target="euW1HvtBvGOh1wIz3c75-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="826" y="475" />
+              <mxPoint x="1076" y="475" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

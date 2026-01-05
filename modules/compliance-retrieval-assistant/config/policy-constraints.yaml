@@ -1,0 +1,261 @@
+# Policy Constraints
+# ==================
+# Runtime configuration for the Compliance Retrieval Assistant.
+# Changes to this file affect system behavior without code deployment.
+#
+# Governance note: Changes to this file should follow change control procedures.
+# All modifications are logged and auditable.
+#
+# Related artifacts:
+#   - config/refusal-taxonomy.yaml (refusal code definitions)
+#   - config/role-permissions.yaml (access control)
+#   - config/corpus-registry.yaml (corpus versioning)
+#   - docs/response-contract.md (how config affects user responses)
+
+# -----------------------------------------------------------------------------
+# Retrieval Configuration
+# -----------------------------------------------------------------------------
+# Controls how passages are retrieved from the approved corpus.
+
+retrieval:
+  # Number of passages to retrieve before filtering
+  top_k: 10
+  
+  # Number of passages to include in final context (after filtering)
+  max_passages_in_context: 5
+  
+  # Minimum similarity score for a passage to be considered relevant
+  # Range: 0.0 - 1.0 (higher = stricter)
+  similarity_threshold: 0.75
+  
+  # Hybrid search weighting: balance between vector and lexical search
+  # 1.0 = pure vector (semantic), 0.0 = pure lexical (keyword)
+  # Compliance contexts often benefit from lexical precision for terminology
+  hybrid_weight: 0.7
+  
+  # Maximum tokens of retrieved content to include in prompt
+  max_context_tokens: 2000
+  
+  # Require exact terminology matches for regulated terms
+  # When true, passages must contain key terms, not just semantic similarity
+  require_term_overlap: true
+  term_overlap_minimum: 0.3  # At least 30% of query terms in passage
+
+# -----------------------------------------------------------------------------
+# Grounding Configuration
+# -----------------------------------------------------------------------------
+# Controls how strictly answers must be supported by retrieved content.
+
+grounding:
+  # Minimum passages required to produce a FULLY_GROUNDED response
+  min_supporting_passages: 1
+  
+  # Allow PARTIALLY_GROUNDED responses (vs. refusing outright)
+  partial_grounding_allowed: true
+  
+  # Threshold for partial grounding: what portion of claims must be supported
+  # Range: 0.0 - 1.0
+  partial_grounding_threshold: 0.6
+  
+  # Strict mode: if true, only FULLY_GROUNDED responses are allowed
+  # Overrides partial_grounding_allowed when enabled
+  strict_mode: false
+  
+  # Maximum extrapolation distance: how far can reasoning extend beyond source
+  # "none" = verbatim only, "minimal" = light inference, "moderate" = synthesis
+  extrapolation_limit: minimal
+
+# -----------------------------------------------------------------------------
+# Citation Configuration
+# -----------------------------------------------------------------------------
+# Controls how sources are referenced in responses.
+
+citation:
+  # Require inline citations for every substantive claim
+  require_inline_citations: true
+  
+  # Citation format in response text
+  # Options: "bracketed" [1], "superscript" ¹, "named" (Policy 4.2)
+  citation_format: bracketed
+  
+  # Maximum distinct sources to cite per response
+  # Prevents source proliferation that undermines readability
+  max_sources_per_response: 5
+  
+  # Include passage excerpts in citation block
+  include_excerpts: true
+  max_excerpt_length: 150  # characters
+  
+  # Require document metadata in citations
+  required_citation_fields:
+    - source_id
+    - source_title
+    - effective_date
+
+# -----------------------------------------------------------------------------
+# Refusal Configuration
+# -----------------------------------------------------------------------------
+# Controls when and how the system declines to answer.
+
+refusal:
+  # Master switch for refusal behavior
+  enabled: true
+  
+  # Strict refusal mode: refuse on any uncertainty
+  # When false, system attempts partial grounding before refusing
+  strict_mode: false
+  
+  # Confidence threshold below which system refuses
+  # Applies to rule-based classification confidence, not model confidence
+  confidence_threshold: 0.7
+  
+  # Include retrieval summary in refusal response
+  # Helps users understand why refusal occurred
+  include_retrieval_summary: true
+  
+  # Suggest alternatives when refusing
+  suggest_alternatives: true
+  
+  # Log all refusals for audit review
+  log_all_refusals: true
+
+# -----------------------------------------------------------------------------
+# Escalation Configuration
+# -----------------------------------------------------------------------------
+# Controls routing to human review queue.
+
+escalation:
+  # Master switch for escalation capability
+  enabled: false
+  
+  # Endpoint for handoff queue (when enabled)
+  queue_endpoint: null  # e.g., "https://review-queue.internal/api/handoff"
+  
+  # Timeout for escalation acknowledgment (seconds)
+  acknowledgment_timeout: 30
+  
+  # Include full context in escalation package
+  include_full_context: true
+  
+  # Notify user that escalation occurred
+  notify_user: true
+  user_notification_message: >
+    Your question has been routed to a compliance specialist for review.
+    You will receive a response within [SLA_HOURS] hours.
+
+# -----------------------------------------------------------------------------
+# Corpus Constraints
+# -----------------------------------------------------------------------------
+# Controls which content can be queried.
+
+corpus:
+  # Collections available for retrieval
+  # Must match collections defined in corpus-registry.yaml
+  allowed_collections:
+    - compliance-policies
+    - regulatory-guidance
+    - internal-procedures
+  
+  # Restricted collections (require elevated permissions)
+  restricted_collections:
+    - enforcement-actions
+    - internal-investigations
+  
+  # Document age limits
+  # Ignore documents published after this date (null = no limit)
+  cutoff_date: null
+  
+  # Ignore documents older than this (null = no limit)
+  # Useful for ensuring currency of guidance
+  max_document_age_days: null
+  
+  # Require documents to have specific metadata
+  required_document_metadata:
+    - effective_date
+    - source
+    - collection
+
+# -----------------------------------------------------------------------------
+# Response Configuration
+# -----------------------------------------------------------------------------
+# Controls response formatting and content.
+
+response:
+  # Maximum response length (tokens)
+  max_response_tokens: 500
+  
+  # Tone and style constraints
+  tone: professional
+  
+  # Prohibited phrases in responses
+  prohibited_phrases:
+    - "I think"
+    - "probably"
+    - "might be"
+    - "guaranteed"
+    - "always"
+    - "never"
+  
+  # Required disclaimers (appended when applicable)
+  disclaimers:
+    investment_content: >
+      This information is for educational purposes only and does not 
+      constitute investment advice.
+    regulatory_content: >
+      This summary reflects current understanding and may not capture 
+      recent regulatory changes. Consult official sources for authoritative guidance.
+  
+  # Include grounding status in response metadata
+  include_grounding_status: true
+  
+  # Include trace_id in response (enables audit lookup)
+  include_trace_id: true
+
+# -----------------------------------------------------------------------------
+# Performance & Limits
+# -----------------------------------------------------------------------------
+# Operational constraints.
+
+limits:
+  # Maximum query length (characters)
+  max_query_length: 1000
+  
+  # Request timeout (seconds)
+  request_timeout: 30
+  
+  # Rate limiting (requests per minute per user)
+  rate_limit_rpm: 20
+  
+  # Maximum concurrent requests per user
+  max_concurrent_requests: 3
+
+# -----------------------------------------------------------------------------
+# Logging & Audit
+# -----------------------------------------------------------------------------
+# Controls what gets logged and how.
+
+logging:
+  # Log level for CRA operations
+  log_level: INFO
+  
+  # Always log these event types regardless of log level
+  always_log:
+    - refusal
+    - escalation
+    - policy_blocked
+    - grounding_failure
+  
+  # Include query text in logs (may have PII implications)
+  log_query_text: true
+  
+  # Include response text in logs
+  log_response_text: true
+  
+  # Sampling rate for full evidence packages (0.0 - 1.0)
+  evidence_sampling_rate: 0.1  # 10% random sample
+  
+  # Always create evidence package for these events
+  evidence_always_for:
+    - refusal
+    - escalation
+    - conflicting_sources

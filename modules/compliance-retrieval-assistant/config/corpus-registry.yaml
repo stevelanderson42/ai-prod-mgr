@@ -1,0 +1,268 @@
+# Corpus Registry
+# ================
+# Tracks approved corpus releases for the Compliance Retrieval Assistant.
+# Enables point-in-time auditability: "What did the system know when?"
+#
+# Governance note: Corpus releases require Compliance approval before publishing.
+# The CRA only queries the current_release_id — historical releases are for audit.
+#
+# Related artifacts:
+#   - config/policy-constraints.yaml (corpus.allowed_collections)
+#   - config/role-permissions.yaml (collection access controls)
+#   - docs/trace-schema.md (corpus_release_id in audit trail)
+
+# -----------------------------------------------------------------------------
+# Current Release
+# -----------------------------------------------------------------------------
+# The CRA queries ONLY this release. Changing this value switches the
+# active corpus (requires restart or cache refresh).
+
+current_release_id: "v2025.01.06"
+
+# -----------------------------------------------------------------------------
+# Release History
+# -----------------------------------------------------------------------------
+# Each release is an immutable snapshot. Once published, a release
+# cannot be modified — only superseded by a new release.
+
+releases:
+
+  v2025.01.06:
+    status: current
+    published_at: "2025-01-06T00:00:00Z"
+    approved_by: "compliance-review-board"
+    approval_ticket: "CRB-2025-001"
+    
+    summary: >
+      Initial production release with core compliance policies,
+      regulatory guidance, and internal procedures.
+    
+    document_count: 0  # Placeholder — sample corpus pending
+    
+    collections:
+      - name: compliance-policies
+        doc_count: 0
+        description: "Internal compliance policies and standards"
+        
+      - name: regulatory-guidance
+        doc_count: 0
+        description: "External regulatory rules and guidance documents"
+        
+      - name: internal-procedures
+        doc_count: 0
+        description: "Operational procedures and workflows"
+    
+    changes_from_previous: "Initial release"
+    
+    notes: >
+      Scaffolding release for portfolio demonstration.
+      Sample documents to be added during implementation phase.
+
+  # ---------------------------------------------------------------------------
+  # Example of a subsequent release (template for future use)
+  # ---------------------------------------------------------------------------
+  # v2025.02.01:
+  #   status: archived
+  #   published_at: "2025-02-01T00:00:00Z"
+  #   approved_by: "compliance-review-board"
+  #   approval_ticket: "CRB-2025-015"
+  #   
+  #   summary: >
+  #     February update incorporating Q4 2024 regulatory changes
+  #     and updated internal procedures.
+  #   
+  #   document_count: 47
+  #   
+  #   collections:
+  #     - name: compliance-policies
+  #       doc_count: 18
+  #       
+  #     - name: regulatory-guidance
+  #       doc_count: 22
+  #       
+  #     - name: internal-procedures
+  #       doc_count: 7
+  #   
+  #   changes_from_previous:
+  #     added:
+  #       - "SEC Reg BI FAQ Update (December 2024)"
+  #       - "Updated Wire Transfer Procedures v3.1"
+  #     removed:
+  #       - "Deprecated AML Checklist v2.0 (superseded)"
+  #     modified:
+  #       - "Customer Communication Standards (section 4.2 updated)"
+  #   
+  #   notes: >
+  #     Includes critical update to Reg BI guidance based on SEC
+  #     enforcement action precedent from Q4 2024.
+
+# -----------------------------------------------------------------------------
+# Collection Definitions
+# -----------------------------------------------------------------------------
+# Master list of all collections that can appear in releases.
+# Collections must be defined here before they can be used in releases.
+
+collections:
+
+  compliance-policies:
+    description: "Internal compliance policies and standards"
+    owner: "compliance-team"
+    sensitivity_tier: tier_1_public
+    refresh_cadence: quarterly
+    
+  regulatory-guidance:
+    description: "External regulatory rules, guidance, and FAQs"
+    owner: "regulatory-affairs"
+    sensitivity_tier: tier_1_public
+    refresh_cadence: as_published
+    sources:
+      - SEC
+      - FINRA
+      - OCC
+      - CFPB
+    
+  internal-procedures:
+    description: "Operational procedures and workflow documentation"
+    owner: "operations"
+    sensitivity_tier: tier_2_internal
+    refresh_cadence: quarterly
+    
+  enforcement-actions:
+    description: "Regulatory enforcement actions and consent orders"
+    owner: "legal"
+    sensitivity_tier: tier_3_sensitive
+    refresh_cadence: as_published
+    
+  regulatory-correspondence:
+    description: "Correspondence with regulators (exam letters, responses)"
+    owner: "regulatory-affairs"
+    sensitivity_tier: tier_3_sensitive
+    refresh_cadence: as_received
+    
+  internal-investigations:
+    description: "Internal investigation reports and findings"
+    owner: "legal"
+    sensitivity_tier: tier_4_privileged
+    refresh_cadence: as_completed
+    special_handling:
+      - privilege_review
+      - limited_distribution
+    
+  legal-memoranda:
+    description: "Legal analysis and opinion memoranda"
+    owner: "legal"
+    sensitivity_tier: tier_4_privileged
+    refresh_cadence: as_completed
+    special_handling:
+      - attorney_client_privilege
+      - work_product_protection
+
+# -----------------------------------------------------------------------------
+# Index Configuration
+# -----------------------------------------------------------------------------
+# Technical configuration for the retrieval index.
+# These settings apply to all releases.
+
+index:
+  # Vector store backend
+  vector_store: chromadb  # Options: chromadb, pinecone, qdrant, weaviate
+  
+  # Embedding model for vector search
+  embedding_model: text-embedding-3-small
+  embedding_dimensions: 1536
+  
+  # Chunking configuration
+  chunking:
+    strategy: semantic  # Options: fixed, semantic, paragraph
+    target_chunk_size: 512  # tokens
+    chunk_overlap: 50  # tokens
+    respect_boundaries: true  # Don't split mid-sentence
+    
+  # Metadata indexed for filtering
+  indexed_metadata:
+    - collection
+    - source_id
+    - effective_date
+    - document_type
+    - jurisdiction
+
+# -----------------------------------------------------------------------------
+# Document Requirements
+# -----------------------------------------------------------------------------
+# Every document in the corpus must meet these requirements.
+
+document_requirements:
+  
+  required_metadata:
+    - doc_id          # Unique identifier
+    - title           # Human-readable title
+    - source          # Origin (SEC, FINRA, internal)
+    - effective_date  # When document became effective
+    - collection      # Which collection it belongs to
+    
+  optional_metadata:
+    - supersedes      # List of doc_ids this replaces
+    - jurisdiction    # Geographic applicability
+    - document_type   # Policy, procedure, guidance, rule
+    - expiration_date # When document expires (if applicable)
+    - review_date     # Next scheduled review
+    
+  validation_rules:
+    - effective_date_not_future: true
+    - unique_doc_id: true
+    - collection_must_exist: true
+
+# -----------------------------------------------------------------------------
+# Corpus Pipeline
+# -----------------------------------------------------------------------------
+# Configuration for the corpus ingest and publish workflow.
+# (Referenced in context diagram as "Corpus Pipeline")
+
+pipeline:
+  
+  stages:
+    - name: ingest
+      description: "Document intake and initial processing"
+      
+    - name: validate
+      description: "Metadata validation and quality checks"
+      
+    - name: chunk
+      description: "Document chunking per index configuration"
+      
+    - name: embed
+      description: "Generate embeddings for vector search"
+      
+    - name: review
+      description: "Compliance review and approval gate"
+      
+    - name: publish
+      description: "Publish to production index"
+  
+  approval_required_at:
+    - review
+    - publish
+    
+  rollback_enabled: true
+  rollback_retention_days: 90
+
+# -----------------------------------------------------------------------------
+# Audit Requirements
+# -----------------------------------------------------------------------------
+# Corpus changes are audit-significant events.
+
+audit:
+  log_all_releases: true
+  log_document_changes: true
+  
+  # Retention for corpus audit trail
+  retention_days: 2555  # 7 years (regulatory requirement)
+  
+  # Required fields in corpus change log
+  change_log_fields:
+    - release_id
+    - action  # added, removed, modified
+    - doc_id
+    - timestamp
+    - approved_by
+    - approval_ticket

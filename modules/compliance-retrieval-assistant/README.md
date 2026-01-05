@@ -61,7 +61,7 @@ A partial response indicates that some claims are grounded while others cannot b
 
 ### Context Diagram (System-in-the-World)
 
-![Context Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Context%20Diagram.PNG)
+![Context Diagram](./docs/diagrams/Module 4 - compliance-reetrieval-assistant CONTEXT DIAGRAM- v1.1.drawio)
 
 **Key design choices reflected:**
 
@@ -74,13 +74,13 @@ A partial response indicates that some claims are grounded while others cannot b
 | **Model Abstraction** | LLM provider is swappable; controls matter more than the model |
 | **Optional Escalation** | Human handoff is policy-controlled, not hardcoded |
 
+
 ### Component Diagram (Internal Decomposition)
 
-![Component Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.PNG)
-
-*Status: Planned — will show internal pipeline: Preprocess → Retrieve → Ground → Decide → Assemble → Respond, with Trace Writer throughout.*
+Status: Planned — will show internal pipeline: Preprocess → Retrieve → Ground → Decide → Assemble → Respond, with Trace Writer throughout.
 
 For component-level design, see [architecture/component-design.md](./architecture/component-design.md).
+
 
 ---
 
