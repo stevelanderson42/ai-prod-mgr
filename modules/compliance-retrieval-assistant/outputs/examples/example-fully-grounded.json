@@ -1,0 +1,32 @@
+{
+  "trace_id": "550e8400-e29b-41d4-a716-446655440000",
+  "timestamp": "2025-01-06T14:30:00.000Z",
+  "query": "What are the FINRA 2210 requirements for retail communications?",
+  "grounding_status": "FULLY_GROUNDED",
+  "answer": "FINRA Rule 2210 requires that retail communications be fair, balanced, and not misleading [1]. All retail communications must be approved by a registered principal before use [1]. The rule prohibits exaggerated, unwarranted, or misleading statements and requires that claims be substantiated [2]. Retail communications must also include appropriate risk disclosures when discussing investment products [2].",
+  "citations": [
+    {
+      "citation_id": 1,
+      "source_id": "finra-2210-guidance-2024",
+      "source_title": "FINRA Rule 2210 Communications with the Public",
+      "effective_date": "2024-06-01",
+      "passage": "Retail communications must be fair, balanced, and not misleading. A registered principal must approve each retail communication before use.",
+      "collection": "regulatory-guidance"
+    },
+    {
+      "citation_id": 2,
+      "source_id": "finra-2210-guidance-2024",
+      "source_title": "FINRA Rule 2210 Communications with the Public",
+      "effective_date": "2024-06-01",
+      "passage": "No member may make any false, exaggerated, unwarranted, promissory, or misleading statement. Claims must be substantiated. Risk disclosures are required for investment product communications.",
+      "collection": "regulatory-guidance"
+    }
+  ],
+  "refusal": null,
+  "metadata": {
+    "corpus_release_id": "v2025.01.06",
+    "sources_consulted": 2,
+    "model_provider": "anthropic",
+    "processing_time_ms": 1247
+  }
+}

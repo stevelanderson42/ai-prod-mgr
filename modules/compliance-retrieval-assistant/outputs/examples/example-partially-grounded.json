@@ -1,0 +1,36 @@
+{
+  "trace_id": "660e8400-e29b-41d4-a716-446655440001",
+  "timestamp": "2025-01-06T14:45:00.000Z",
+  "query": "What are the documentation requirements and approval thresholds for expedited wire transfers?",
+  "grounding_status": "PARTIALLY_GROUNDED",
+  "answer": "Wire transfers require documentation including the sender and recipient account details, transfer amount, and purpose of the transfer [1]. All wire transfers must be logged in the transaction management system with a full audit trail [1]. Dual approval from authorized personnel is required for processing [2].\n\n⚠️ **Note:** The retrieved documents do not specify the dollar thresholds for expedited processing or the specific approval levels required. Please consult the Wire Operations team for threshold details.",
+  "citations": [
+    {
+      "citation_id": 1,
+      "source_id": "wire-transfer-procedures-v3",
+      "source_title": "Wire Transfer Procedures Manual",
+      "effective_date": "2024-09-15",
+      "passage": "All wire transfers must include complete sender and recipient account details, transfer amount, and stated purpose. Transactions must be logged in the transaction management system with full audit trail.",
+      "collection": "internal-procedures"
+    },
+    {
+      "citation_id": 2,
+      "source_id": "wire-transfer-procedures-v3",
+      "source_title": "Wire Transfer Procedures Manual",
+      "effective_date": "2024-09-15",
+      "passage": "Wire transfers require dual approval from authorized personnel. Expedited processing is available for time-sensitive transactions.",
+      "collection": "internal-procedures"
+    }
+  ],
+  "refusal": null,
+  "metadata": {
+    "corpus_release_id": "v2025.01.06",
+    "sources_consulted": 2,
+    "model_provider": "anthropic",
+    "processing_time_ms": 1456,
+    "grounding_warnings": [
+      "Specific dollar thresholds not found in retrieved content",
+      "Approval level hierarchy not specified in available documents"
+    ]
+  }
+}
