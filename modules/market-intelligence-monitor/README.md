@@ -68,18 +68,79 @@ This diagram shows how external signals enter the regulated AI workflow, the gov
 
 ---
 
-### Sequence Diagram (Signal Lifecycle)
+## Sequence Diagram (Signal Lifecycle)
 
-*Planned — to be added*
+![Market Intelligence Sequence Diagram](./docs/diagrams/market-intelligence-sequence-diagram.PNG)
 
-This diagram will show:
+*End-to-end flow showing how external market and regulatory signals move from ingestion to validated, stakeholder-ready intelligence.*
 
-1. External signal ingestion (RSS, APIs, public sources)  
-2. Normalization and evidence preservation  
-3. Retrieval for synthesis  
-4. LLM-based summarization  
-5. Guardrails and validation  
-6. Brief composition and delivery  
+### High-Level Flow
+
+1. **Scheduled Trigger**  
+   A scheduler or automation runner initiates a run based on a defined cadence (e.g., weekly).
+
+2. **Signal Ingestion**  
+   External sources (FINRA RSS, corporate newsrooms, industry feeds) are fetched.  
+   Raw evidence is captured and preserved exactly as published.
+
+3. **Normalization & De-duplication**  
+   Signals are parsed, canonicalized, and assigned stable identifiers.  
+   Duplicate or near-duplicate items are deterministically collapsed.
+
+4. **Evidence Persistence**  
+   Raw, parsed, and normalized artifacts are stored with schema and version metadata.  
+   This establishes a complete, auditable evidence chain.
+
+5. **Retrieval Set Construction**  
+   Signals are selected based on time window and source scope.  
+   MVP retrieval is intentionally broad to validate downstream synthesis value.
+
+6. **LLM Synthesis**  
+   Retrieved signals are summarized into decision-useful language.  
+   The model operates only on approved evidence — no open-web access.
+
+7. **Guardrails Validation**  
+   Generated summaries are checked for:
+   - Grounding against source text  
+   - Valid citations  
+   - PII leakage  
+   - Content and formatting constraints  
+
+8. **Brief Composition**  
+   Approved summaries are assembled into a stakeholder-ready brief.  
+   Themes are extracted; traceability metadata is embedded.
+
+9. **Distribution**  
+   Briefs are delivered to configured channels (e.g., Notion, email, Slack, GitHub).
+
+10. **Telemetry & Evaluation**  
+    Metrics are recorded across ingestion, synthesis, guardrails, and delivery.  
+    Outputs support quality review and future iteration decisions.
+
+> **Key Pattern:**  
+> Evidence is captured *before* synthesis, and synthesis is validated *before* stakeholder delivery.  
+> No insight enters decision workflows without a traceable lineage.
+
+---
+
+### Failure Paths (Out of Scope)
+
+The following scenarios are intentionally **out of scope** for this module:
+
+- Blocking AI initiatives based on signal content  
+- Making go/no-go investment decisions  
+- Interpreting regulatory intent beyond published guidance  
+- Escalating signals to legal, compliance, or executive approval  
+- Enforcing downstream execution constraints  
+
+These outcomes are handled by downstream modules (ROI Decision Engine and Requirements Guardrails).
+
+---
+
+> **PM DECISION:**  
+> Market Intelligence surfaces *external reality*, not decisions.  
+> Its role is to inform timing and context — not to approve, prioritize, or execute AI initiatives.
+
 
 ---
 
