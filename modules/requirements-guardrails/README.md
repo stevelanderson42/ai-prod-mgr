@@ -76,7 +76,17 @@ The context diagram shows how user requests and upstream metadata flow into the 
 
 *End-to-end flow showing how incoming requests are evaluated, classified, and routed.*
 
-*(Diagram in progress)*
+**High-level steps:**
+
+1. **Request Intake** — Capture raw input, assign request_id and timestamp
+2. **Metadata Enrichment** — Retrieve account type, jurisdiction, and user flags
+3. **Parallel Guardrail Checks** — All five categories evaluate simultaneously
+4. **Decision Aggregation** — Deterministic routing logic applies priority rules
+5. **Routing Decision** — BLOCK → ESCALATE → CLARIFY → PROCEED (priority order)
+6. **Audit Logging** — Trace confirmed before any response returned
+
+> **Key pattern:**  
+> Checks run in parallel, but routing follows strict priority: a BLOCK overrides everything, ESCALATE overrides CLARIFY, and PROCEED only happens when all checks pass.
 
 For detailed architecture decisions, see [Architecture Decision Records](./architecture/).
 
