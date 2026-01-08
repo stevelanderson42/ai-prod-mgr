@@ -60,7 +60,7 @@ Approved opportunities flow into Requirements Guardrails for input validation an
 
 ### Context Diagram (System-in-the-World)
 
-![ROI Decision Engine Context Diagram](docs/context-diagram.png)
+![ROI Decision Engine Context Diagram](docs/diagrams/ROI_Engine_Context_Diagram.PNG)
 
 The context diagram shows how opportunity inputs, governance perspectives, and scoring outputs interact — and how decision artifacts feed downstream controls.
 
@@ -68,7 +68,7 @@ The context diagram shows how opportunity inputs, governance perspectives, and s
 
 ### Sequence Diagram (Decision Lifecycle)
 
-![ROI Decision Engine Sequence Diagram](docs/diagrams/roi-engine-sequence-diagram.PNG)
+![ROI Decision Engine Sequence Diagram](docs/diagrams/ROI_Engine_Sequence_Diagram.PNG)
 
 *End-to-end flow showing how AI opportunities move from intake to a defensible decision memo.*
 
@@ -177,16 +177,17 @@ See `docs/scope.md` for detailed boundaries.
 
 | Artifact / Path | Purpose |
 |-----------------|---------|
-| 🟦 **config/** | Scoring weights and evaluation parameters |
-| `config/scoring-weights.yaml` | Dimension weights, thresholds, recommendation logic |
-| 🟦 **docs/** | Human-readable specifications |
+| 🟦 **docs/** | Specifications and architecture visualizations |
+| `docs/diagrams/` | Visual architecture artifacts |
+| `docs/diagrams/ROI_Engine_Context_Diagram.PNG` | System-in-the-world view — external actors and boundaries |
+| `docs/diagrams/ROI_Engine_Sequence_Diagram.PNG` | Decision lifecycle flow |
 | `docs/scope.md` | MVP boundaries and deferred scope |
-| `docs/diagrams/` | Architecture visualizations |
-| 🟦 **samples/** | Example decision memos |
-| `samples/ai-assisted-customer-routing/` | Complete worked example |
-| 🟦 **architecture/** | Design decisions |
-| `architecture/ADR-0003-evidence-traceability.md` | Evidence standards |
-| `architecture/ADR-0004-scoring-model-design.md` | Scoring rationale |
+| 🟦 **evidence/** | Evidence collection artifacts and traceability |
+| 🟦 **intake/** | Opportunity intake templates and captured inputs |
+| 🟦 **outputs/** | Generated decision memos |
+| 🟦 **samples/** | Worked examples |
+| `samples/ai-assisted-customer-routing/` | Complete decision memo example |
+| 🟦 **scoring/** | Scoring logic, weights, and rationale |
 
 ---
 
