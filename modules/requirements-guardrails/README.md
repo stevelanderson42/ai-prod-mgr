@@ -2,7 +2,7 @@
 
 **Pre-Invocation Risk & Ambiguity Detection for Regulated AI Workflows**
 
-**Status:** 🔲 In Progress  
+**Status:** 🟡 In Progress  
 **Module:** 3 of 4 in the Regulated AI Workflow Toolkit
 
 ---
@@ -56,13 +56,27 @@ Inputs arrive from users, workflows, or upstream systems. Outputs are routing de
 
 ## Architecture Overview
 
-![Module 3 Context Diagram](./architecture/Module%203%20-%20Requirements%20Guardrails%20-%20Context%20Diagram.PNG)
+### Context Diagram (System-in-the-World)
+
+![Requirements Guardrails Context Diagram](docs/diagrams/requirements_guardrails_Context_Diagram.PNG)
+
+The context diagram shows how user requests and upstream metadata flow into the guardrails layer, how parallel checks evaluate risk across multiple dimensions, and how routing decisions feed downstream execution or human review queues.
 
 **Key design choices reflected:**
 - Guardrails execute in **parallel**, not sequentially
 - Metadata (account type, jurisdiction, flags) informs suitability and compliance checks
 - "Human Review Trigger" (check) is distinct from "ESCALATE" (outcome)
 - Routing decision is **deterministic** — no general-purpose LLM invocation
+
+---
+
+### Sequence Diagram (Request Evaluation Flow)
+
+![Requirements Guardrails Sequence Diagram](docs/diagrams/requirements_guardrails_Sequence_Diagram.PNG)
+
+*End-to-end flow showing how incoming requests are evaluated, classified, and routed.*
+
+*(Diagram in progress)*
 
 For detailed architecture decisions, see [Architecture Decision Records](./architecture/).
 
@@ -149,18 +163,18 @@ This is where product judgment meets regulatory reality. Each category represent
 
 This module returns a structured decision, not a model response. The output contract ensures downstream systems (and audit logs) receive consistent, actionable information.
 
-```
+```json
 {
   "request_id": "uuid",
   "timestamp": "ISO-8601",
   "classification": "PROCEED | CLARIFY | ESCALATE | BLOCK",
   "category": "ambiguity | compliance | suitability | prohibited | escalation",
-  "confidence": "high | medium | low",  // Rule-based certainty (coverage strength)
+  "confidence": "high | medium | low",
   "explanation": "Human-readable rationale for the decision",
   "next_action": "Description of what happens next",
-  "missing_context": ["list", "of", "required", "fields"],  // if CLARIFY
-  "escalation_reason": "Why human review is required",       // if ESCALATE
-  "block_reason": "Why request was refused"                  // if BLOCK
+  "missing_context": ["list", "of", "required", "fields"],
+  "escalation_reason": "Why human review is required",
+  "block_reason": "Why request was refused"
 }
 ```
 
@@ -215,38 +229,28 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 
 ---
 
-## Relationship to Other Modules
+## Repository Map
 
-| Module | Relationship |
-|--------|--------------|
-| **Market Intelligence** (Module 1) | No direct dependency; operates on different timescales |
-| **ROI Decision Engine** (Module 2) | Consumes workflow context; knows which use cases are approved |
-| **Compliance RAG Assistant** (Module 4) | Feeds PROCEED requests downstream; defines handoff contract |
-| **Audit Infrastructure** | Emits structured logs for all routing decisions |
-
----
-
-## Folder Structure
-
-```
-/modules/requirements-guardrails/
-├── README.md                    # This file
-├── /architecture/
-│   ├── ADR-001-routing-logic.md # Why deterministic routing
-│   ├── ADR-002-escalation-design.md
-│   └── context-diagram.mermaid
-├── /rules/
-│   ├── ambiguity-heuristics.md  # Classification criteria
-│   ├── compliance-triggers.md   # FINRA 2210 patterns
-│   └── prohibited-content.md    # Hard blocks
-├── /evidence/
-│   ├── sample-classifications/  # Input → Classification examples
-│   └── edge-cases/              # Documented boundary decisions
-├── /outputs/
-│   └── routing-decision-log.md  # Sample audit trail
-└── /experiments/
-    └── prompt-exp-06-*.md       # Guardrail prompt experiments
-```
+| Artifact / Path | Purpose |
+|-----------------|---------|
+| 🟦 **architecture/** | Design decisions and ADRs |
+| `architecture/ADR-001-routing-logic.md` | Why deterministic routing |
+| `architecture/ADR-002-escalation-design.md` | Escalation vs. refusal design |
+| 🟦 **docs/** | Specifications and architecture visualizations |
+| `docs/diagrams/` | Visual architecture artifacts |
+| `docs/diagrams/requirements_guardrails_Context_Diagram.PNG` | System-in-the-world view |
+| `docs/diagrams/requirements_guardrails_Sequence_Diagram.PNG` | Request evaluation flow *(planned)* |
+| 🟦 **rules/** | Classification criteria and triggers |
+| `rules/ambiguity-heuristics.md` | Ambiguity detection patterns |
+| `rules/compliance-triggers.md` | FINRA 2210 patterns |
+| `rules/prohibited-content.md` | Hard block definitions |
+| 🟦 **evidence/** | Sample classifications and edge cases |
+| `evidence/sample-classifications/` | Input → Classification examples |
+| `evidence/edge-cases/` | Documented boundary decisions |
+| 🟦 **outputs/** | Sample audit artifacts |
+| `outputs/routing-decision-log.md` | Sample audit trail |
+| 🟦 **experiments/** | Guardrail prompt testing |
+| `experiments/prompt-exp-06-*.md` | Guardrail prompt experiments |
 
 ---
 
@@ -254,14 +258,15 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 
 This module is complete when:
 
-- [ ] Guardrail categories documented with triggers and outcomes
-- [ ] Output contract defined and validated
-- [ ] FINRA 2210 compliance triggers codified with examples
+- [x] Guardrail categories documented with triggers and outcomes
+- [x] Output contract defined and validated
+- [x] FINRA 2210 compliance triggers codified with examples
 - [ ] At least 10 sample inputs with classifications
 - [ ] Edge cases documented with PM rationale
 - [ ] ADR explaining deterministic routing decision
 - [ ] Integration contract with RAG Assistant defined
 - [ ] Design principles reflected in all artifacts
+- [ ] Sequence diagram showing request evaluation flow
 
 ---
 
@@ -277,9 +282,25 @@ This module is complete when:
 
 ---
 
-## Related Artifacts
+## Relationship to Other Modules
 
-- [ROI Decision Engine](../roi-engine/) — Upstream prioritization
-- [Compliance RAG Assistant](../compliance-retrieval-assistant/) — Downstream execution
-- [Prompt Experiments](../../prompt-experiments/) — Guardrail prompt testing
-- [Architecture Decision Records](../../architecture/) — System-level ADRs
+| Module | Relationship |
+|--------|--------------|
+| **Market Intelligence** (Module 1) | No direct dependency; operates on different timescales |
+| **ROI Decision Engine** (Module 2) | Consumes workflow context; knows which use cases are approved |
+| **Compliance RAG Assistant** (Module 4) | Feeds PROCEED requests downstream; defines handoff contract |
+| **Audit Infrastructure** | Emits structured logs for all routing decisions |
+
+---
+
+## Closing Note
+
+The Requirements Guardrails module is intentionally **conservative**.
+
+Its value is not in enabling more AI — it's in enabling *safer* AI. By catching ambiguity, risk, and compliance triggers before model invocation, this module transforms guardrails from a compliance checkbox into a product capability.
+
+In regulated environments, the question isn't "can the model handle this?" — it's "should we let it try?" This module ensures that question gets answered explicitly, every time.
+
+---
+
+*Part of the Regulated AI Workflow Toolkit — demonstrating governance-first AI product design for regulated industries.*
