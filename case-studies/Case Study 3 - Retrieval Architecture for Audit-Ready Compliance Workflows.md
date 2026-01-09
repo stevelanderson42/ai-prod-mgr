@@ -40,11 +40,11 @@ What mattered most in this context — explicitly ranked:
 |----------|-----------|-----------|
 | **1** | Audit defensibility | If we can't explain a decision to an examiner, it doesn't ship |
 | **2** | Deterministic behavior | Reviewers need consistent interpretation across interactions |
-
-> *Deterministic behavior means: the same question, asked under the same conditions, should produce the same grounding status and refusal outcome — even if the generated text varies slightly.*
 | **3** | Refusal over guessing | A "no answer" is better than a wrong answer in compliance contexts |
 | **4** | Operational governance | Rules must be changeable without code deployments |
 | **5** | User experience | Important, but not at the expense of criteria 1-4 |
+
+> *Deterministic behavior means: the same question, asked under the same conditions, should produce the same grounding status and refusal outcome — even if the generated text varies slightly.*
 
 This ranking drove every downstream decision. When tradeoffs arose, we optimized up the stack.
 
