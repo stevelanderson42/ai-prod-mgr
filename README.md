@@ -54,18 +54,18 @@ Rather than treating governance as a post-deployment control, responsible AI pri
 
 ---
 
-## Regulatory Context
+## Regulatory Governance
 
 AI products in regulated industries are constrained by external obligations long before models are selected.
 
-The [/regulatory-context/](./regulatory-context/) folder documents the **specific regulations that shaped system design decisions**:
+The [/regulatory-governance/](./regulatory-governance/) folder documents the **specific regulations that shaped system design decisions**:
 
 | Regulation | What It Governs | Design Implications |
 |------------|-----------------|---------------------|
-| [SR 11-7](./regulatory-context/finserv/sr-11-7-model-risk.md) | Model risk management | Documentation standards, validation artifacts |
-| [FINRA 2210](./regulatory-context/finserv/finra-2210-communications.md) | Communications with the public | Fair-and-balanced language checks in Guardrails |
-| [SEC 17a-4](./regulatory-context/finserv/sec-17a-4-books-records.md) | Books and records | Trace schema, immutable audit trails |
-| [Reg BI](./regulatory-context/finserv/reg-bi-suitability.md) | Suitability requirements | Mandatory clarification or refusal paths |
+| [SR 11-7](./regulatory-governance/finserv/sr-11-7-model-risk.md) | Model risk management | Documentation standards, validation artifacts |
+| [FINRA 2210](./regulatory-governance/finserv/finra-2210-communications.md) | Communications with the public | Fair-and-balanced language checks in Guardrails |
+| [SEC 17a-4](./regulatory-governance/finserv/sec-17a-4-books-records.md) | Books and records | Trace schema, immutable audit trails |
+| [Reg BI](./regulatory-governance/finserv/reg-bi-suitability.md) | Suitability requirements | Mandatory clarification or refusal paths |
 
 These constraints are treated as **product inputs**, not after-the-fact compliance checks.
 
@@ -75,7 +75,7 @@ These constraints are treated as **product inputs**, not after-the-fact complian
 
 ```
 /modules/                  → The four-module system (start here)
-/regulatory-context/       → Regulations informing design decisions
+/regulatory-governance/    → Regulations informing design decisions
 /architecture/             → System-level decisions and ADRs
 /evaluation/               → Shared evaluation framework
 /case-studies/             → Decision narratives from module development
