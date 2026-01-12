@@ -205,6 +205,9 @@ These principles reflect a governance-first philosophy aligned with the portfoli
 | **No opaque inference at control layer** | Rules and narrow validated classifiers only; no general-purpose LLM |
 | **Runtime governance** | Every request evaluated, not just at deployment |
 
+These guardrail principles are derived from shared regulatory expectations documented in the central [Regulatory Context](../../regulatory-governance/), which this module references to drive consistent, explainable routing decisions without embedding jurisdiction-specific rules.
+
+
 > **PM DECISION:** These aren't aspirational values—they're constraints that shape every design choice in this module.
 
 ---

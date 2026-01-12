@@ -54,11 +54,11 @@ Rather than treating governance as a post-deployment control, responsible AI pri
 
 ---
 
-## Regulatory Governance
+## Regulatory Context
 
-AI products in regulated industries are constrained by external obligations long before models are selected.
+AI products in regulated industries operate within external constraints long before models are selected or features are shipped. This portfolio treats regulation as shared context that informs product design decisions such as auditability, traceability, escalation paths, and defensible outputs. To avoid duplicating legal text across modules, regulatory considerations are maintained centrally and referenced where relevant.
 
-The [/regulatory-governance/](./regulatory-governance/) folder documents the **specific regulations that shaped system design decisions**:
+The [/regulatory-governance/](./regulatory-governance/) folder documents representative regulations that influenced system design decisions across modules:
 
 | Regulation | What It Governs | Design Implications |
 |------------|-----------------|---------------------|
@@ -67,7 +67,6 @@ The [/regulatory-governance/](./regulatory-governance/) folder documents the **s
 | [SEC 17a-4](./regulatory-governance/finserv/sec-17a-4-books-records.md) | Books and records | Trace schema, immutable audit trails |
 | [Reg BI](./regulatory-governance/finserv/reg-bi-suitability.md) | Suitability requirements | Mandatory clarification or refusal paths |
 
-These constraints are treated as **product inputs**, not after-the-fact compliance checks.
 
 ---
 

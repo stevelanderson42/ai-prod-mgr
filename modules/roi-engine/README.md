@@ -99,6 +99,9 @@ The context diagram shows how opportunity inputs, governance perspectives, and s
 | **Implementation Feasibility** | Data readiness, technical complexity, effort | Higher = more feasible |
 | **Regulatory Complexity** | Compliance burden, data sensitivity, approval requirements | Higher = more complex |
 
+The regulatory complexity dimension is calibrated using shared regulatory expectations documented in the central [Regulatory Context](../../regulatory-governance/), allowing this module to remain jurisdiction-agnostic while still producing defensible prioritization outcomes.
+
+
 > **PM DECISION:**  
 > Regulatory complexity is scored *alongside* value and feasibility, not as an afterthought. This prevents the "we'll figure out compliance later" failure mode.
 

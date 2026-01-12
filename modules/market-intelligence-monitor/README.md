@@ -66,6 +66,10 @@ No AI initiative advances into prioritization without first passing through this
 
 This diagram shows how external signals enter the regulated AI workflow, the governance boundaries applied during ingestion and synthesis, and how outputs feed downstream decision-making.
 
+Design constraints applied during signal ingestion and synthesis are informed by shared regulatory expectations documented in the central [Regulatory Context](../../regulatory-governance/); this module references that context to preserve traceability without embedding legal interpretation.
+
+
+
 ---
 
 ## Sequence Diagram (Signal Lifecycle)

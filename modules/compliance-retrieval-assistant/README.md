@@ -120,6 +120,9 @@ These principles are non-negotiable constraints, not aspirational values:
 | **Policy as data** | Behavior changes via config files, not code deployment |
 | **Trace before respond** | A trace record is committed before any user-visible response is returned |
 
+These execution constraints are informed by shared regulatory expectations documented in the central [Regulatory Context](../../regulatory-governance/), which this module references without embedding jurisdiction-specific rules.
+
+
 > **PM DECISION:** These constraints exist because responses may be reviewed by regulators, auditors, or legal teams. "The model said so" is not a defensible answer.
 
 ---
