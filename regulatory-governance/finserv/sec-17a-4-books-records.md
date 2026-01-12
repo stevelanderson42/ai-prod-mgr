@@ -207,6 +207,10 @@ A compliant system must satisfy all layers simultaneously.
 - [FINRA Interpretations of SEA Rule 17a-4](https://www.finra.org/rules-guidance/guidance/interpretations-financial-operational-rules/sea-rule-17a-4-and-related-interpretations)
 - [SEC Recordkeeping Requirements FAQ](https://www.sec.gov/divisions/marketreg/recordkeeping.htm)
 
+
+
+See the [Regulatory Context README](../README.md) for scope and interpretation notes.
+
 ---
 
-*Part of the [Regulatory Governance Context](../README.md) — documenting the external constraints that shape AI product design.*
+*Part of the Regulatory Governance Context*

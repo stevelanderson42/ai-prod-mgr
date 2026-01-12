@@ -201,6 +201,10 @@ These regulations work together. A communication can be:
 - [FINRA Advertising Regulation FAQ](https://www.finra.org/rules-guidance/guidance/faqs/advertising-regulation)
 - [FINRA Communications with the Public Resource Page](https://www.finra.org/rules-guidance/key-topics/communications-public)
 
+
+
+See the [Regulatory Context README](../README.md) for scope and interpretation notes.
+
 ---
 
-*Part of the [Regulatory Governance Context](../README.md) — documenting the external constraints that shape AI product design.*
+*Part of the Regulatory Governance Context*

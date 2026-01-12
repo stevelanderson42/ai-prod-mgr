@@ -1,9 +1,11 @@
 # SEC Regulation Best Interest (Reg BI)
 
 **Regulatory Citation:** 17 C.F.R. § 240.15l-1  
+**Authority:** Securities Exchange Act of 1934  
 **Effective Date:** June 30, 2020  
 **Regulator:** U.S. Securities and Exchange Commission (SEC)  
 **Type:** Federal Regulation — legally binding, examiner-enforced
+
 
 ---
 
@@ -168,7 +170,7 @@ For purposes of this portfolio, the system is designed to meet Reg BI requiremen
 
 ---
 
-## Key Distinction: Education vs. Recommendation
+## Distinction: Education vs. Recommendation
 
 Not every AI response triggers Reg BI. The regulation applies to **recommendations**, not all communications.
 
@@ -213,6 +215,10 @@ A compliant AI recommendation system must satisfy all four simultaneously.
 - [SEC Reg BI FAQ](https://www.sec.gov/tm/faq-regulation-best-interest)
 - [SEC Reg BI Small Entity Compliance Guide](https://www.sec.gov/info/smallbus/secg/regulation-best-interest)
 
+
+
+See the [Regulatory Context README](../README.md) for scope and interpretation notes.
+
 ---
 
-*Part of the [Regulatory Governance Context](../README.md) — documenting the external constraints that shape AI product design.*
+*Part of the Regulatory Governance Context*

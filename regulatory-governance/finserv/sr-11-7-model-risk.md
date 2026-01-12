@@ -167,6 +167,10 @@ For portfolio purposes, treat SR 11-7 as: **the documentation and governance bar
 - [SR 11-7 Attachment: Guidance on Model Risk Management (PDF)](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf)
 - [OCC 2011-12 (Companion Guidance)](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)
 
+
+
+See the [Regulatory Context README](../README.md) for scope and interpretation notes.
+
 ---
 
-*Part of the [Regulatory Governance Context](../README.md) — documenting the external constraints that shape AI product design.*
+*Part of the Regulatory Governance Context*
