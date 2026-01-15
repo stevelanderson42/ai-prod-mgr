@@ -252,7 +252,7 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | 🟦 **docs/** | Specifications and architecture visualizations |
 | `docs/diagrams/` | Visual architecture artifacts |
 | `docs/diagrams/requirements_guardrails_Context_Diagram.PNG` | System-in-the-world view |
-| `docs/diagrams/requirements_guardrails_Sequence_Diagram.PNG` | Request evaluation flow *(planned)* |
+| `docs/diagrams/requirements_guardrails_Sequence_Diagram.PNG` | Request evaluation flow |
 | 🟦 **rules/** | Classification criteria and triggers |
 | `rules/ambiguity-heuristics.md` | Ambiguity detection patterns |
 | `rules/compliance-triggers.md` | FINRA 2210 patterns |
@@ -279,7 +279,7 @@ This module is complete when:
 - [ ] ADR explaining deterministic routing decision
 - [ ] Integration contract with RAG Assistant defined
 - [ ] Design principles reflected in all artifacts
-- [ ] Sequence diagram showing request evaluation flow
+- [x] Sequence diagram showing request evaluation flow
 
 ---
 
