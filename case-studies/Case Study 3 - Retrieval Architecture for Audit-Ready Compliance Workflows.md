@@ -44,7 +44,7 @@ What mattered most in this context — explicitly ranked:
 | **4** | Operational governance | Rules must be changeable without code deployments |
 | **5** | User experience | Important, but not at the expense of criteria 1-4 |
 
-> *Deterministic behavior means: the same question, asked under the same conditions, should produce the same grounding status and refusal outcome — even if the generated text varies slightly.*
+> *Deterministic behavior means: the same question, asked under the same conditions, should produce the same grounding status and refusal outcome — even if the generated text varies slightly. This distinction matters: determinism applies to governance decisions, not generated language.*
 
 This ranking drove every downstream decision. When tradeoffs arose, we optimized up the stack.
 
@@ -53,6 +53,7 @@ This ranking drove every downstream decision. When tradeoffs arose, we optimized
 ## Options Considered
 
 ### Option A: Standard RAG Implementation
+
 - Retrieve chunks, pass to LLM, return response
 - Confidence scores on outputs
 - Minimal guardrails
@@ -60,13 +61,17 @@ This ranking drove every downstream decision. When tradeoffs arose, we optimized
 **Rejected because:** No audit trail. Confidence scores are meaningless to compliance reviewers. No mechanism to refuse when grounding is insufficient.
 
 ### Option B: RAG + Post-Hoc Filtering
+
 - Standard RAG pipeline
 - Add output filters for prohibited content
 - Log responses for audit
 
 **Rejected because:** Filtering happens after generation — the model still produces problematic content, we just hide it. Doesn't address grounding quality. Audit trail shows what was blocked, not why the system was confident in what it returned.
 
+This approach conflicts with emerging best practices for AI safety, which emphasize blocking unsafe requests *prior to generation* rather than filtering outputs after the fact. (See [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) for detailed treatment of why post-hoc filtering is insufficient.)
+
 ### Option C: Governance-First Architecture (Selected)
+
 - Pre-invocation control layer (decide whether to call the LLM at all)
 - Categorical grounding status (not confidence scores)
 - Dual response contracts (user-facing + auditor-facing)
@@ -86,21 +91,24 @@ This ranking drove every downstream decision. When tradeoffs arose, we optimized
 **Why this matters:** Confidence scores (e.g., "82% confident") are intuitive for ML engineers but meaningless for compliance reviewers. What does 82% mean? Is 78% acceptable? Where's the threshold?
 
 Categorical status forces binary clarity:
+
 - `FULLY_GROUNDED` = every claim traces to retrieved content
 - `REFUSED` = system declined to answer (with a specific reason code)
 
-**Regulatory connection:** SR 11-7 principles emphasize that model outputs should be interpretable by reviewers who are accountable for decisions but not responsible for model design. Categorical status achieves this; confidence scores don't.
+**Regulatory connection:** [SR 11-7](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm) (Guidance on Model Risk Management) emphasizes that model outputs should be interpretable by reviewers who are accountable for decisions but not responsible for model design. Categorical status achieves this; confidence scores don't.
 
 ### Decision 2: Dual Response Contracts (User + Auditor)
 
 **The choice:** Design two response schemas — one optimized for the end user, one optimized for audit/compliance review.
 
 **User contract includes:**
+
 - Answer text with inline citations
 - Grounding status
 - Suggested follow-up actions (if refused or partial)
 
 **Auditor contract includes:**
+
 - Everything in user contract
 - Full retrieval trace (query → chunks → ranking → selection)
 - Policy rules evaluated
@@ -109,13 +117,14 @@ Categorical status forces binary clarity:
 
 **Why this matters:** Users need usable answers. Auditors need reconstructable decision trails. Optimizing for one audience degrades the other. Dual contracts serve both without compromise.
 
-**Regulatory connection:** SEC 17a-4 requires that records be "readily accessible" and "reproducible." The auditor contract is designed so that any interaction can be reconstructed months later.
+**Regulatory connection:** [SEC Rule 17a-4](https://www.sec.gov/rules/final/34-38245.txt) requires that records be "readily accessible" and "reproducible." The auditor contract is designed so that any interaction can be reconstructed months later.
 
 ### Decision 3: Policy-as-Data (Externalized Configuration)
 
 **The choice:** Define all policy rules, refusal conditions, and access controls in YAML configuration files — not hardcoded in application logic.
 
 **Configuration files created:**
+
 - `refusal-taxonomy.yaml` — When and why the system refuses
 - `policy-constraints.yaml` — Prohibited phrases, required disclaimers, topic restrictions
 - `role-permissions.yaml` — Who can access which content tiers
@@ -125,11 +134,14 @@ Categorical status forces binary clarity:
 
 **Operational benefit:** Separating policy from code also clarifies accountability. Engineering owns the system; compliance owns the rules.
 
+This pattern aligns with how [NVIDIA's NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) implements "rails" — externalized configurations that define permitted and prohibited behaviors without modifying application code.
+
 ### Decision 4: Structured Refusal as First-Class Outcome
 
 **The choice:** Treat refusal as a designed behavior, not an error state. Create a taxonomy of refusal reasons with severity levels and user guidance.
 
 **Refusal codes include:**
+
 - `NO_ELIGIBLE_DOCS` — Query outside corpus scope
 - `INSUFFICIENT_GROUNDING` — Found content, but not enough to answer reliably
 - `POLICY_BLOCKED` — User lacks access or query violates constraints
@@ -137,171 +149,133 @@ Categorical status forces binary clarity:
 - `CONFLICTING_SOURCES` — Sources disagree; escalation required
 
 **Why this matters:** Most RAG implementations treat "I don't know" as a failure. In compliance contexts, refusing to answer is often the *correct* behavior. A structured taxonomy makes refusals:
+
 - Predictable (same conditions → same refusal)
 - Actionable (user knows what to do next)
 - Auditable (reviewer knows why the system declined)
 
 ---
 
-Scaling Pre-Invocation Decisions at Enterprise Scale
-
-(How this works beyond static documents)
+## Scaling Pre-Invocation Decisions at Enterprise Scale
 
 A common question raised when reviewing this architecture is how pre-invocation governance scales beyond a portfolio setting. In a large financial institution, compliance decisions cannot rely on humans manually checking documents before every model invocation, nor can they depend on static prompt engineering alone.
 
-At enterprise scale, pre-invocation governance is implemented as a control plane: a set of automated, auditable decision mechanisms that determine whether an LLM should be invoked at all, and under what constraints.
+At enterprise scale, pre-invocation governance is implemented as a **control plane**: a set of automated, auditable decision mechanisms that determine whether an LLM should be invoked at all, and under what constraints.
 
 The goal of this control plane is not to generate answers, but to make deterministic governance decisions — consistently, repeatably, and explainably — before any generative model is allowed to operate.
 
-The Pre-Invocation Control Plane
+### The Pre-Invocation Control Plane
 
 In this design, every user request passes through a Pre-Invocation Gateway that evaluates risk, context completeness, and policy constraints prior to retrieval or generation. This gateway combines three classes of mechanisms:
 
-1. Deterministic Rule Evaluation (Fail-Closed)
+#### Layer 1: Deterministic Rule Evaluation (Fail-Closed)
 
 The first layer consists of non-probabilistic checks that must behave identically under the same conditions.
 
 Examples include:
 
-Schema and context completeness
-
-Required attributes such as jurisdiction, policy domain, or business line
-
-Role-based access control
-
-User entitlements evaluated against content sensitivity tiers
-
-Hard policy constraints
-
-Prohibited phrases, disallowed topics, mandatory disclosures
-
-Known unsafe patterns
-
-Prompt-injection heuristics or attempts to bypass system constraints
+- **Schema and context completeness** — Required attributes such as jurisdiction, policy domain, or business line
+- **Role-based access control** — User entitlements evaluated against content sensitivity tiers
+- **Hard policy constraints** — Prohibited phrases, disallowed topics, mandatory disclosures
+- **Known unsafe patterns** — Prompt-injection heuristics or attempts to bypass system constraints
 
 These rules are defined entirely through policy-as-data configuration, not application code. When a rule fails, the request is immediately refused or routed to clarification without invoking any model.
 
 This ensures that clearly non-compliant or malformed requests never reach a generative system.
 
-2. Specialized Classifiers for Ambiguity, Risk, and Intent
+#### Layer 2: Specialized Classifiers for Ambiguity, Risk, and Intent
 
 Not all governance decisions can be expressed as static rules. At scale, the system uses specialized classifiers — typically smaller, purpose-built models — to label requests along dimensions that require interpretation rather than pattern matching.
 
 Classifier outputs include:
 
-Ambiguity detection
+- **Ambiguity detection** — Underspecified intent, missing referents, unclear scope
+- **Compliance intent classification** — Educational vs. advisory vs. promotional language
+- **Suitability and context gaps** — Requests implying recommendations without required user context
+- **High-risk or prohibited intent** — Advice boundaries, regulatory violations, sensitive subject matter
 
-Underspecified intent, missing referents, unclear scope
+These classifiers do not generate responses. They produce structured labels and reason codes that map directly to governance outcomes such as `CLARIFY`, `BLOCK`, `ESCALATE`, or `ALLOW`.
 
-Compliance intent classification
+This pattern is increasingly standard in production AI systems. Examples include:
 
-Educational vs. advisory vs. promotional language
-
-Suitability and context gaps
-
-Requests implying recommendations without required user context
-
-High-risk or prohibited intent
-
-Advice boundaries, regulatory violations, sensitive subject matter
-
-These classifiers do not generate responses. They produce structured labels and reason codes that map directly to governance outcomes such as CLARIFY, BLOCK, ESCALATE, or ALLOW.
+- [Microsoft Azure AI Content Safety](https://azure.microsoft.com/en-us/products/ai-services/ai-content-safety) — Pre-generation detection for prompt attacks and jailbreak attempts
+- [Meta Llama Guard](https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/) — Input/output safety classification using specialized models
+- [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) — Lightweight prompt attack detection
+- [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation) — Pre-check classification for user inputs
 
 Crucially, classifier decisions are:
 
-Versioned
-
-Logged
-
-Independently testable
-
-Replaceable without changing downstream response contracts
+- Versioned
+- Logged
+- Independently testable
+- Replaceable without changing downstream response contracts
 
 This allows governance behavior to remain stable even as underlying LLMs evolve.
 
-3. Invocation Routing (Deciding Which Model, If Any)
+#### Layer 3: Invocation Routing (Deciding Which Model, If Any)
 
 Only after passing rule evaluation and classifier gating does the system determine whether to invoke a model — and which one.
 
 Possible routing outcomes include:
 
-No model invocation
-
-Return static policy excerpts or refusal guidance
-
-Retrieval-only
-
-Surface approved documents without generation
-
-Constrained RAG
-
-Retrieval with strict grounding requirements
-
-Agentic LLM
-
-Multi-step reasoning with tools and citations
+| Route | When Used |
+|-------|-----------|
+| **No model invocation** | Return static policy excerpts or refusal guidance |
+| **Retrieval-only** | Surface approved documents without generation |
+| **Constrained RAG** | Retrieval with strict grounding requirements |
+| **Agentic LLM** | Multi-step reasoning with tools and citations |
 
 This routing layer minimizes cost and risk by ensuring that expensive or powerful models are only used when appropriate and permitted.
 
-Determinism, Explicitly Scoped
+Routing strategies are emerging in both research and production systems. [OpenAI's guide to building agents](https://platform.openai.com/docs/guides/agents) explicitly recommends layered guardrails and escalation patterns, while managed platforms like AWS Bedrock are introducing [prompt routing](https://aws.amazon.com/bedrock/prompt-routing/) capabilities.
+
+### Determinism, Explicitly Scoped
 
 Determinism in this system applies to governance decisions, not to generated language.
 
 Under the same conditions:
 
-The same rules fire
+- The same rules fire
+- The same classifiers produce the same labels
+- The same grounding status and refusal outcome are returned
 
-The same classifiers produce the same labels
+The exact wording of generated text may vary, but the system's decision to answer, refuse, escalate, or require clarification does not. This distinction is critical for auditability and regulatory review.
 
-The same grounding status and refusal outcome are returned
+### Latency and Cost Tradeoffs
 
-The exact wording of generated text may vary, but the system’s decision to answer, refuse, escalate, or require clarification does not. This distinction is critical for auditability and regulatory review.
-
-Latency and Cost Tradeoffs
-
-Introducing classifier-based gating adds measurable latency and incremental inference cost — typically tens to low hundreds of milliseconds per request. This is an intentional tradeoff.
+Introducing classifier-based gating adds measurable latency and incremental inference cost — typically 50-200 milliseconds per request. This is an intentional tradeoff.
 
 In regulated environments, the cost of a slightly slower response is negligible compared to the downstream risk of:
 
-Providing ungrounded or inappropriate guidance
-
-Failing to explain why a response was allowed
-
-Eroding examiner trust during audits or enforcement actions
+- Providing ungrounded or inappropriate guidance
+- Failing to explain why a response was allowed
+- Eroding examiner trust during audits or enforcement actions
 
 The control plane exists to reduce risk exposure, not to optimize raw throughput.
 
-Audit Implications
+### Audit Implications
 
 Every pre-invocation decision is logged with:
 
-Rule IDs evaluated
+- Rule IDs evaluated
+- Classifier versions and outputs
+- Routing decision
+- Applicable policy and corpus release identifiers
+- Timestamps and session metadata
 
-Classifier versions and outputs
+This creates an audit trail explaining *why the system was allowed to answer at all*, not just what it ultimately returned. For compliance reviewers, this distinction is often more important than the answer itself.
 
-Routing decision
-
-Applicable policy and corpus release identifiers
-
-Timestamps and session metadata
-
-This creates an audit trail explaining why the system was allowed to answer at all, not just what it ultimately returned. For compliance reviewers, this distinction is often more important than the answer itself.
-
-Why This Matters
+### Why This Matters
 
 The key insight is that governance does not live inside the LLM.
 
 It lives in:
 
-Deterministic rules
-
-Interpretable classifiers
-
-Explicit routing decisions
-
-Policy-as-data configuration
-
-Immutable decision logs
+- Deterministic rules
+- Interpretable classifiers
+- Explicit routing decisions
+- Policy-as-data configuration
+- Immutable decision logs
 
 The LLM becomes one component in a larger, auditable decision system — not the arbiter of compliance.
 
@@ -373,6 +347,32 @@ Decisions I'd want to revisit with more data or stakeholder input:
 3. **Multi-turn context** — Current design is single-turn. How would grounding status work across a conversation where context accumulates?
 
 4. **Human-in-the-loop escalation** — When `CONFLICTING_SOURCES` fires, what's the actual escalation workflow? Design assumes someone receives it — but who, and how?
+
+---
+
+## References
+
+### Regulatory Guidance
+
+- [SR 11-7: Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm) — Federal Reserve guidance on model validation, documentation, and governance
+- [SEC Rule 17a-4](https://www.sec.gov/rules/final/34-38245.txt) — Books and records retention requirements
+
+### Industry Frameworks
+
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — Security risks and mitigations for LLM-based systems
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) — Federal guidance on AI governance and risk
+
+### Implementation Patterns
+
+- [NVIDIA NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) — Open-source framework for programmable guardrails
+- [OpenAI: A Practical Guide to Building Agents](https://platform.openai.com/docs/guides/agents) — Guidance on layered guardrails and safety patterns
+- [Microsoft Azure AI Content Safety](https://azure.microsoft.com/en-us/products/ai-services/ai-content-safety) — Pre-generation content classification
+
+### Safety Classifiers
+
+- [Meta Llama Guard](https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/) — Input/output safety classification
+- [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) — Prompt injection detection
+- [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation) — Content moderation endpoint
 
 ---
 
