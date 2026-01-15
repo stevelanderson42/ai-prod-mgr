@@ -160,13 +160,13 @@ This pattern aligns with how [NVIDIA's NeMo Guardrails](https://github.com/NVIDI
 
 A common question raised when reviewing this architecture is how pre-invocation governance scales beyond a portfolio setting. In a large financial institution, compliance decisions cannot rely on humans manually checking documents before every model invocation, nor can they depend on static prompt engineering alone.
 
-At enterprise scale, pre-invocation governance is implemented as a **control plane**: a set of automated, auditable decision mechanisms that determine whether an LLM should be invoked at all, and under what constraints.
+At enterprise scale, pre-invocation governance is implemented as a **control plane** (sometimes called an AI gateway or LLM gateway in vendor terminology): a set of automated, auditable decision mechanisms that determine whether an LLM should be invoked at all, and under what constraints.
 
 The goal of this control plane is not to generate answers, but to make deterministic governance decisions — consistently, repeatably, and explainably — before any generative model is allowed to operate.
 
 ### The Pre-Invocation Control Plane
 
-In this design, every user request passes through a Pre-Invocation Gateway that evaluates risk, context completeness, and policy constraints prior to retrieval or generation. This gateway combines three classes of mechanisms:
+In this design, every user request passes through a pre-invocation control plane that evaluates risk, context completeness, and policy constraints prior to retrieval or generation. This control plane combines three classes of mechanisms:
 
 #### Layer 1: Deterministic Rule Evaluation (Fail-Closed)
 
@@ -185,7 +185,7 @@ This ensures that clearly non-compliant or malformed requests never reach a gene
 
 #### Layer 2: Specialized Classifiers for Ambiguity, Risk, and Intent
 
-Not all governance decisions can be expressed as static rules. At scale, the system uses specialized classifiers — typically smaller, purpose-built models — to label requests along dimensions that require interpretation rather than pattern matching.
+Not all governance decisions can be expressed as static rules. At scale, the system uses specialized classifiers — typically smaller, purpose-built models optimized for low latency and high interpretability — to label requests along dimensions that require interpretation rather than pattern matching.
 
 Classifier outputs include:
 
@@ -225,7 +225,7 @@ Possible routing outcomes include:
 | **Constrained RAG** | Retrieval with strict grounding requirements |
 | **Agentic LLM** | Multi-step reasoning with tools and citations |
 
-This routing layer minimizes cost and risk by ensuring that expensive or powerful models are only used when appropriate and permitted.
+This routing layer minimizes cost and risk by ensuring that expensive or powerful models are only used when appropriate and permitted. Routing decisions are logged alongside rule and classifier outputs, allowing auditors to reconstruct not only what answer was given, but why a specific model path was chosen.
 
 Routing strategies are emerging in both research and production systems. [OpenAI's guide to building agents](https://platform.openai.com/docs/guides/agents) explicitly recommends layered guardrails and escalation patterns, while managed platforms like AWS Bedrock are introducing [prompt routing](https://aws.amazon.com/bedrock/prompt-routing/) capabilities.
 
