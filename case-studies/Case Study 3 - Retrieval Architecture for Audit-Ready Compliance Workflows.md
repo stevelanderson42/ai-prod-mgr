@@ -198,7 +198,7 @@ These classifiers do not generate responses. They produce structured labels and 
 
 This pattern is increasingly standard in production AI systems. Examples include:
 
-- [Microsoft Azure AI Content Safety](https://azure.microsoft.com/en-us/products/ai-services/ai-content-safety) — Pre-generation detection for prompt attacks and jailbreak attempts
+- [Microsoft Prompt Shields](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection) — Pre-generation detection for prompt attacks and jailbreak attempts
 - [Meta Llama Guard](https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/) — Input/output safety classification using specialized models
 - [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) — Lightweight prompt attack detection
 - [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation) — Pre-check classification for user inputs
@@ -227,7 +227,7 @@ Possible routing outcomes include:
 
 This routing layer minimizes cost and risk by ensuring that expensive or powerful models are only used when appropriate and permitted. Routing decisions are logged alongside rule and classifier outputs, allowing auditors to reconstruct not only what answer was given, but why a specific model path was chosen.
 
-Routing strategies are emerging in both research and production systems. [OpenAI's guide to building agents](https://platform.openai.com/docs/guides/agents) explicitly recommends layered guardrails and escalation patterns, while managed platforms like AWS Bedrock are introducing [prompt routing](https://aws.amazon.com/bedrock/prompt-routing/) capabilities.
+Routing strategies are emerging in both research and production systems. [OpenAI's guide to building agents](https://platform.openai.com/docs/guides/agents) explicitly recommends layered guardrails and escalation patterns, while managed platforms like AWS Bedrock are introducing [Intelligent Prompt Routing](https://aws.amazon.com/bedrock/prompt-routing/) capabilities.
 
 ### Determinism, Explicitly Scoped
 
@@ -243,7 +243,7 @@ The exact wording of generated text may vary, but the system's decision to answe
 
 ### Latency and Cost Tradeoffs
 
-Introducing classifier-based gating adds measurable latency and incremental inference cost — typically 50-200 milliseconds per request. This is an intentional tradeoff.
+Introducing classifier-based gating adds measurable latency and incremental inference cost — often on the order of tens to low hundreds of milliseconds per request. This is an intentional tradeoff.
 
 In regulated environments, the cost of a slightly slower response is negligible compared to the downstream risk of:
 
