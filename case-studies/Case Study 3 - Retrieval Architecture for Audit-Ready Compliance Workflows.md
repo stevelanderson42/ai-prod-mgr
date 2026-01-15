@@ -143,6 +143,170 @@ Categorical status forces binary clarity:
 
 ---
 
+Scaling Pre-Invocation Decisions at Enterprise Scale
+
+(How this works beyond static documents)
+
+A common question raised when reviewing this architecture is how pre-invocation governance scales beyond a portfolio setting. In a large financial institution, compliance decisions cannot rely on humans manually checking documents before every model invocation, nor can they depend on static prompt engineering alone.
+
+At enterprise scale, pre-invocation governance is implemented as a control plane: a set of automated, auditable decision mechanisms that determine whether an LLM should be invoked at all, and under what constraints.
+
+The goal of this control plane is not to generate answers, but to make deterministic governance decisions — consistently, repeatably, and explainably — before any generative model is allowed to operate.
+
+The Pre-Invocation Control Plane
+
+In this design, every user request passes through a Pre-Invocation Gateway that evaluates risk, context completeness, and policy constraints prior to retrieval or generation. This gateway combines three classes of mechanisms:
+
+1. Deterministic Rule Evaluation (Fail-Closed)
+
+The first layer consists of non-probabilistic checks that must behave identically under the same conditions.
+
+Examples include:
+
+Schema and context completeness
+
+Required attributes such as jurisdiction, policy domain, or business line
+
+Role-based access control
+
+User entitlements evaluated against content sensitivity tiers
+
+Hard policy constraints
+
+Prohibited phrases, disallowed topics, mandatory disclosures
+
+Known unsafe patterns
+
+Prompt-injection heuristics or attempts to bypass system constraints
+
+These rules are defined entirely through policy-as-data configuration, not application code. When a rule fails, the request is immediately refused or routed to clarification without invoking any model.
+
+This ensures that clearly non-compliant or malformed requests never reach a generative system.
+
+2. Specialized Classifiers for Ambiguity, Risk, and Intent
+
+Not all governance decisions can be expressed as static rules. At scale, the system uses specialized classifiers — typically smaller, purpose-built models — to label requests along dimensions that require interpretation rather than pattern matching.
+
+Classifier outputs include:
+
+Ambiguity detection
+
+Underspecified intent, missing referents, unclear scope
+
+Compliance intent classification
+
+Educational vs. advisory vs. promotional language
+
+Suitability and context gaps
+
+Requests implying recommendations without required user context
+
+High-risk or prohibited intent
+
+Advice boundaries, regulatory violations, sensitive subject matter
+
+These classifiers do not generate responses. They produce structured labels and reason codes that map directly to governance outcomes such as CLARIFY, BLOCK, ESCALATE, or ALLOW.
+
+Crucially, classifier decisions are:
+
+Versioned
+
+Logged
+
+Independently testable
+
+Replaceable without changing downstream response contracts
+
+This allows governance behavior to remain stable even as underlying LLMs evolve.
+
+3. Invocation Routing (Deciding Which Model, If Any)
+
+Only after passing rule evaluation and classifier gating does the system determine whether to invoke a model — and which one.
+
+Possible routing outcomes include:
+
+No model invocation
+
+Return static policy excerpts or refusal guidance
+
+Retrieval-only
+
+Surface approved documents without generation
+
+Constrained RAG
+
+Retrieval with strict grounding requirements
+
+Agentic LLM
+
+Multi-step reasoning with tools and citations
+
+This routing layer minimizes cost and risk by ensuring that expensive or powerful models are only used when appropriate and permitted.
+
+Determinism, Explicitly Scoped
+
+Determinism in this system applies to governance decisions, not to generated language.
+
+Under the same conditions:
+
+The same rules fire
+
+The same classifiers produce the same labels
+
+The same grounding status and refusal outcome are returned
+
+The exact wording of generated text may vary, but the system’s decision to answer, refuse, escalate, or require clarification does not. This distinction is critical for auditability and regulatory review.
+
+Latency and Cost Tradeoffs
+
+Introducing classifier-based gating adds measurable latency and incremental inference cost — typically tens to low hundreds of milliseconds per request. This is an intentional tradeoff.
+
+In regulated environments, the cost of a slightly slower response is negligible compared to the downstream risk of:
+
+Providing ungrounded or inappropriate guidance
+
+Failing to explain why a response was allowed
+
+Eroding examiner trust during audits or enforcement actions
+
+The control plane exists to reduce risk exposure, not to optimize raw throughput.
+
+Audit Implications
+
+Every pre-invocation decision is logged with:
+
+Rule IDs evaluated
+
+Classifier versions and outputs
+
+Routing decision
+
+Applicable policy and corpus release identifiers
+
+Timestamps and session metadata
+
+This creates an audit trail explaining why the system was allowed to answer at all, not just what it ultimately returned. For compliance reviewers, this distinction is often more important than the answer itself.
+
+Why This Matters
+
+The key insight is that governance does not live inside the LLM.
+
+It lives in:
+
+Deterministic rules
+
+Interpretable classifiers
+
+Explicit routing decisions
+
+Policy-as-data configuration
+
+Immutable decision logs
+
+The LLM becomes one component in a larger, auditable decision system — not the arbiter of compliance.
+
+---
+
 ## Tradeoffs Acknowledged
 
 | We Gained | We Gave Up |
