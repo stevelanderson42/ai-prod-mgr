@@ -9,3 +9,8 @@ __pycache__/
 
 # system
 .DS_Store
+
+# Google Credentials (KEEP PRIVATE)
+credentials.json
+token.json
+client_secret*.json
