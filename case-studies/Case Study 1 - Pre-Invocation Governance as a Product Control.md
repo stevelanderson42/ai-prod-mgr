@@ -461,7 +461,8 @@ Decisions I'd want to revisit with more data or stakeholder input:
 - [Config: Refusal Taxonomy](../modules/guardrails/config/refusal-taxonomy.yaml)
 - [Docs: Decision Logging Schema](../modules/guardrails/docs/decision-log-schema.md)
 - [Evaluation: Test Cases](../modules/guardrails/evaluation/test-cases/)
-- [Case Study #3: Retrieval Architecture](./case-study-3-retrieval-architecture.md)
+- [Case Study #3: Retrieval Architecture](./Case%20Study%203%20-%20Retrieval%20Architecture%20for%20Audit-Ready%20Compliance%20Workflows.md)
+- [Regulatory Reference: OWASP Top 10 for LLM Applications](../regulatory-governance/ai-governance/owasp-llm-top-10.md)
 
 ---
 
