@@ -297,8 +297,6 @@ If allowed, the request may route into compliance retrieval ([Case Study #3](./c
 
 ![Decision Flow](./docs/diagrams/Case_Study_1_Routing_Decisions.PNG)
 
-```
-
 ### Latency Considerations
 
 Pre-invocation evaluation adds overhead. Design targets:
