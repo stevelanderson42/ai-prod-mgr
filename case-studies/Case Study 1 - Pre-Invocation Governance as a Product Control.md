@@ -291,12 +291,12 @@ If allowed, the request may route into compliance retrieval ([Case Study #3](./c
 
 ### Control Plane Overview
 
-![Control Plane Overview](./docs/diagrams/Case-Study-1-%20Control%20Plane%20Diagram.PNG)
+![Control Plane Overview](./docs/diagrams/Case_Study_1_Control_Plane_Diagram.PNG)
 
 ```
 ### Decision Flow
 
-![Decision Flow](./docs/diagrams/Case%20Study%201%20-%20Routing%20Decisions.PNG)
+![Decision Flow](./docs/diagrams/Case_Study_1_Routing_Decisions.PNG)
 
 ```
 
