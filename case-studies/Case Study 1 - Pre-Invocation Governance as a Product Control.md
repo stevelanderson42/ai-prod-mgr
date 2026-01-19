@@ -291,90 +291,13 @@ If allowed, the request may route into compliance retrieval ([Case Study #3](./c
 
 ### Control Plane Overview
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                     PRE-INVOCATION CONTROL PLANE                     │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐           │
-│  │   Request    │───▶│    Rules     │───▶│  Classifiers │           │
-│  │   Intake     │    │   Engine     │    │   (Ensemble) │           │
-│  └──────────────┘    └──────────────┘    └──────────────┘           │
-│         │                   │                   │                    │
-│         │                   ▼                   ▼                    │
-│         │           ┌──────────────┐    ┌──────────────┐            │
-│         │           │   Policy     │    │   Decision   │            │
-│         │           │   Store      │    │   Logger     │            │
-│         │           │   (YAML)     │    │              │            │
-│         │           └──────────────┘    └──────────────┘            │
-│         │                                      │                     │
-│         ▼                                      ▼                     │
-│  ┌─────────────────────────────────────────────────────────────┐    │
-│  │                     ROUTING DECISION                         │    │
-│  │  ┌─────────┐ ┌───────────┐ ┌─────────┐ ┌────────┐ ┌───────┐ │    │
-│  │  │ ALLOW   │ │ CONSTRAIN │ │ CLARIFY │ │ESCALATE│ │REFUSE │ │    │
-│  │  └────┬────┘ └─────┬─────┘ └────┬────┘ └───┬────┘ └───┬───┘ │    │
-│  └───────┼────────────┼────────────┼──────────┼──────────┼─────┘    │
-│          │            │            │          │          │          │
-└──────────┼────────────┼────────────┼──────────┼──────────┼──────────┘
-           │            │            │          │          │
-           ▼            ▼            ▼          ▼          ▼
-    ┌──────────┐  ┌──────────┐  ┌─────────┐ ┌───────┐ ┌─────────┐
-    │  Full    │  │Constrained│  │Guidance │ │ Queue │ │Structured│
-    │  LLM     │  │   LLM     │  │Response │ │  for  │ │ Refusal │
-    │Invocation│  │Invocation │  │  Only   │ │Review │ │ Response│
-    └──────────┘  └──────────┘  └─────────┘ └───────┘ └─────────┘
-```
+![Control Plane Overview](./docs/diagrams/Case-Study-1-%20Control%20Plane%20Diagram.PNG)
 
+```
 ### Decision Flow
 
-```
-                    ┌─────────────────┐
-                    │  User Request   │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │  Hard Rules     │──────▶ REFUSE (if triggered)
-                    │  Evaluation     │
-                    └────────┬────────┘
-                             │ (pass)
-                             ▼
-                    ┌─────────────────┐
-                    │  Ambiguity      │──────▶ CLARIFY (if ambiguous)
-                    │  Detection      │
-                    └────────┬────────┘
-                             │ (clear)
-                             ▼
-                    ┌─────────────────┐
-                    │  Intent         │──────▶ REFUSE (if adversarial)
-                    │  Classification │
-                    └────────┬────────┘
-                             │ (benign)
-                             ▼
-                    ┌─────────────────┐
-                    │  Scope          │──────▶ REFUSE (if out of scope)
-                    │  Verification   │
-                    └────────┬────────┘
-                             │ (in scope)
-                             ▼
-                    ┌─────────────────┐
-                    │  Risk           │──────▶ ESCALATE (if high risk)
-                    │  Assessment     │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │  Routing        │
-                    │  Decision       │
-                    └────────┬────────┘
-                             │
-              ┌──────────────┼──────────────┐
-              ▼              ▼              ▼
-        ┌──────────┐  ┌───────────┐  ┌───────────┐
-        │  ALLOW   │  │ CONSTRAIN │  │ RETRIEVAL │
-        │  FULL    │  │           │  │   ONLY    │
-        └──────────┘  └───────────┘  └───────────┘
+![Decision Flow](./docs/diagrams/Case%20Study%201%20-%20Routing%20Decisions.PNG)
+
 ```
 
 ### Latency Considerations
