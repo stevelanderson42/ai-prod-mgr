@@ -71,7 +71,7 @@ This separation reflects a core governance principle:
 
 > **The most effective control is preventing unsafe execution, not cleaning up after it.**
 
-See [`m4-control-plane-demo/`](./m4-control-plane-demo/) for a working demonstration of this pattern.
+See [`control-plane-demo/`](./control-plane-demo/) for a working demonstration of this pattern.
 
 
 ---
