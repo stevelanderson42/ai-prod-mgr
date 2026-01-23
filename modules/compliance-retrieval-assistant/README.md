@@ -57,6 +57,25 @@ A partial response indicates that some claims are grounded while others cannot b
 
 ---
 
+## Pre-Invocation Control Plane (Upstream)
+
+Before any retrieval or generation occurs, requests are evaluated by a **pre-invocation control plane** that determines whether execution is permitted at all.
+
+The control plane classifies requests against deterministic policy rules and decides `ALLOW`, `ESCALATE`, or `BLOCK` before any model invocation occurs. Every decision — including blocked queries — emits an audit record.
+
+**Separation of concerns:**
+- **Control Plane** → *Should this request execute at all?*
+- **Compliance Retrieval Assistant (this module)** → *If execution is allowed, can we answer safely, grounded, and auditably?*
+
+This separation reflects a core governance principle:
+
+> **The most effective control is preventing unsafe execution, not cleaning up after it.**
+
+See [`m4-control-plane-demo/`](./m4-control-plane-demo/) for a working demonstration of this pattern.
+
+
+---
+
 ## Architecture Overview
 
 ### Context Diagram (System-in-the-World)
