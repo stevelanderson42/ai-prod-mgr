@@ -239,7 +239,7 @@ hard_blocks:
 
 **Why this matters:** Routing is not a hidden implementation detail — it's a product decision that gets logged, reviewed, and optimized. Different request types receive appropriate handling rather than all-or-nothing access.
 
-If allowed, the request may route into compliance retrieval ([Case Study #3](./case-study-3-retrieval-architecture.md)) or other governed workflows. The control plane established here provides the authorization gate for all downstream AI capabilities.
+If allowed, the request may route into compliance retrieval ([Case Study #3](./Case%20Study%203%20-%20Retrieval%20Architecture%20for%20Audit-Ready%20Compliance%20Workflows.md)) or other governed workflows. The control plane established here provides the authorization gate for all downstream AI capabilities.
 
 **Regulatory connection:** This pattern mirrors how financial institutions handle transaction authorization — different risk levels receive different controls, all auditable.
 
@@ -455,12 +455,13 @@ Decisions I'd want to revisit with more data or stakeholder input:
 
 ## Related Artifacts
 
-- [Architecture: Control Plane Design](../modules/requirements-guardrails/architecture/control-plane-design.md)
-- [Config: Policy Rules](../modules/requirements-guardrails/config/policy-rules.yaml)
-- [Config: Routing Matrix](../modules/requirements-guardrails/config/routing-matrix.yaml)
-- [Config: Refusal Taxonomy](../modules/requirements-guardrails/config/refusal-taxonomy.yaml)
-- [Docs: Decision Logging Schema](../modules/requirements-guardrails/docs/decision-log-schema.md)
-- [Evaluation: Test Cases](../modules/requirements-guardrails/evaluation/test-cases/)
+- [Architecture: Routing Logic](../modules/requirements-guardrails/architecture/ADR-001-routing-logic.md)
+- [Architecture: Escalation Design](../modules/requirements-guardrails/architecture/ADR-002-escalation-design.md)
+- [Rules: Compliance Triggers](../modules/requirements-guardrails/rules/compliance-triggers.md)
+- [Rules: Prohibited Content](../modules/requirements-guardrails/rules/prohibited-content.md)
+- [Rules: Ambiguity Heuristics](../modules/requirements-guardrails/rules/ambiguity-heuristics.md)
+- [Outputs: Routing Decision Log](../modules/requirements-guardrails/outputs/routing-decision-log.md)
+- [Evidence: Sample Classifications](../modules/requirements-guardrails/evidence/sample-classifications.md)
 - [Case Study #3: Retrieval Architecture](./Case%20Study%203%20-%20Retrieval%20Architecture%20for%20Audit-Ready%20Compliance%20Workflows.md)
 - [Regulatory Reference: OWASP Top 10 for LLM Applications](../regulatory-governance/ai-governance/owasp-llm-top-10.md)
 

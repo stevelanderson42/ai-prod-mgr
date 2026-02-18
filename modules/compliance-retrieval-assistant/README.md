@@ -268,7 +268,7 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | 🟦 **docs/** | Human-readable specifications and governance design |
 | docs/diagrams/ | Visual architecture artifacts |
 | docs/diagrams/Compliance-Retrieval-Assistant Context Diagram.PNG | System-in-the-world view — external actors and boundaries |
-| docs/diagrams/Compliance-Retrieval-Assistant Component Diagram.PNG | Internal decomposition — pipeline stages and data flow *(planned)* |
+| docs/diagrams/Compliance-Retrieval-Assistant Component Diagram.PNG | Internal decomposition — pipeline stages and data flow |
 | docs/response-contract.md | **User-facing contract** — grounding_status, citations, refusal shape |
 | docs/trace-schema.md | **Audit-facing contract** — trace fields, retention requirements |
 | docs/threat-model.md | Failure modes, attack vectors, mitigations |

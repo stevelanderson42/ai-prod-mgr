@@ -53,7 +53,7 @@ The intent is to show judgment, not just outcomes.
 | # | Title | Module | Focus |
 |---|-------|--------|-------|
 | 01 | [Pre-Invocation Governance as a Product Control](Case%20Study%201%20-%20Pre-Invocation%20Governance%20as%20a%20Product%20Control.md) | Requirements Guardrails | Audit defensibility, controlled model access, pre-generation risk |
-| 02 | [Output Governance for Regulated AI](Case%20Study%202%20-%20Output%20Governance%20for%20Regulated%20AI.md) | ROI Decision Engine | Prioritization, stakeholder tradeoffs |
+| 02 | [Output Governance for Regulated AI](Case%20Study%202%20-%20Output%20Governance%20for%20Regulated%20AI.md) | Output Governance | Post-generation controls, supervisory review, compliance validation |
 | 03 | [Retrieval Architecture for Audit-Ready Compliance Workflows](Case%20Study%203%20-%20Retrieval%20Architecture%20for%20Audit-Ready%20Compliance%20Workflows.md) | Compliance Retrieval Assistant | Governance-first RAG design, auditability |
 
 ### How They Connect

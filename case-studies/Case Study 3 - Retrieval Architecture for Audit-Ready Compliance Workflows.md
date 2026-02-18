@@ -311,7 +311,7 @@ This is portfolio work, not a production deployment. However, the design enables
 
 **Test cases created:** Five structured scenarios validating each refusal code path (see `/evaluation/test-cases/`).
 
-**Evaluation scorecard:** Six-dimension rubric for assessing output quality (see `/evaluation/scorecard.md`).
+**Evaluation scorecard:** Six-dimension rubric for assessing output quality (see [evaluation/scorecard.md](../modules/compliance-retrieval-assistant/evaluation/scorecard.md)).
 
 ---
 
@@ -383,7 +383,7 @@ Decisions I'd want to revisit with more data or stakeholder input:
 - [Config: Policy Constraints](../modules/compliance-retrieval-assistant/config/policy-constraints.yaml)
 - [Docs: Response Contract](../modules/compliance-retrieval-assistant/docs/response-contract.md)
 - [Docs: Trace Schema](../modules/compliance-retrieval-assistant/docs/trace-schema.md)
-- [Evaluation: Scorecard](../evaluation/scorecard.md)
+- [Evaluation: Scorecard](../modules/compliance-retrieval-assistant/evaluation/scorecard.md)
 - [Evaluation: Test Cases](../modules/compliance-retrieval-assistant/evaluation/test-cases/)
 
 ---

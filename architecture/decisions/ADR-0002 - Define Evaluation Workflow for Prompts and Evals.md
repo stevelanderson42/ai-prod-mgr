@@ -29,7 +29,7 @@ This approach enables both automation and human reasoning to coexist — a key r
 ⚠️ Requires discipline in logging after each iteration  
 
 ## Links
-- Related ADR: [ADR-0001 – Verification-First Scaffold](ADR-0001-first-decision.md)  
+- Related ADR: [ADR-0001 – Verification-First Scaffold](ADR-0001%20-%20first%20decision.md)  
 - Example schema: [`../evals/schema/metrics.json`](../evals/schema/metrics.json)  
 - Eval log: [`../evals/EVAL_LOG.md`](../evals/EVAL_LOG.md)  
 
