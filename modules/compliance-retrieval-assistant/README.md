@@ -332,7 +332,7 @@ This module is complete when:
 
 - [Requirements Guardrails](../requirements-guardrails/) — Upstream input validation
 - [ROI Decision Engine](../roi-engine/) — Upstream prioritization
-- [Market Intelligence](../market-intel/) — Strategic context
+- [Market Intelligence](../market-intelligence-monitor/) — Strategic context
 - [Architecture Decisions](../../architecture/) — System-level ADRs
 
 ---

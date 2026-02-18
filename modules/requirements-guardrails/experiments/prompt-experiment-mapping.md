@@ -27,7 +27,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 01: Suitability Classification
 
-**Location:** `/prompt-experiments/PromptExperiments_01_*.py`
+**Location:** `/prompt-experiments/PromptExperiments_01_Suitability_Classification.md`
 
 **Guardrail application:** Classifies incoming queries as suitability-relevant or not. Feeds into compliance trigger detection.
 
@@ -44,7 +44,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 02: Compliance Rewrite
 
-**Location:** `/prompt-experiments/PromptExperiments_02_*.py`
+**Location:** `/prompt-experiments/PromptExperiments_02_Compliance_Rewrite.md`
 
 **Guardrail application:** Transforms advisor language to remove prohibited patterns (guarantees, predictions).
 
@@ -61,7 +61,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 03: Transcript Extraction
 
-**Location:** `/prompt-experiments/PromptExperiments_03_*.py`
+**Location:** `/prompt-experiments/PromptExperiments_03_Transcript_Extraction.md`
 
 **Guardrail application:** Extracts structured data from unstructured input.
 
@@ -78,7 +78,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 04: Ambiguity Detection
 
-**Location:** `/prompt-experiments/PromptExperiments_04_*.py`
+**Location:** `/prompt-experiments/PromptExperiments_04_Ambiguity_Detection.md`
 
 **Guardrail application:** Identifies requests with unclear intent.
 
@@ -95,7 +95,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 05: Risk Disclosure
 
-**Location:** `/prompt-experiments/PromptExperiments_05_*.py`
+**Location:** `/prompt-experiments/PromptExperiments_05_Grounded_Citation.md`
 
 **Guardrail application:** Detects when investment content lacks required risk disclosures.
 

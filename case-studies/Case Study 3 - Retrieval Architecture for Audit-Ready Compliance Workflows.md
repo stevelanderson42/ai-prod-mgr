@@ -378,13 +378,13 @@ Decisions I'd want to revisit with more data or stakeholder input:
 
 ## Related Artifacts
 
-- [Architecture: Component Design](../modules/rag-assistant/architecture/component-design.md)
-- [Config: Refusal Taxonomy](../modules/rag-assistant/config/refusal-taxonomy.yaml)
-- [Config: Policy Constraints](../modules/rag-assistant/config/policy-constraints.yaml)
-- [Docs: Response Contract](../modules/rag-assistant/docs/response-contract.md)
-- [Docs: Trace Schema](../modules/rag-assistant/docs/trace-schema.md)
+- [Architecture: Component Design](../modules/compliance-retrieval-assistant/architecture/component-design.md)
+- [Config: Refusal Taxonomy](../modules/compliance-retrieval-assistant/config/refusal-taxonomy.yaml)
+- [Config: Policy Constraints](../modules/compliance-retrieval-assistant/config/policy-constraints.yaml)
+- [Docs: Response Contract](../modules/compliance-retrieval-assistant/docs/response-contract.md)
+- [Docs: Trace Schema](../modules/compliance-retrieval-assistant/docs/trace-schema.md)
 - [Evaluation: Scorecard](../evaluation/scorecard.md)
-- [Evaluation: Test Cases](../modules/rag-assistant/evaluation/test-cases/)
+- [Evaluation: Test Cases](../modules/compliance-retrieval-assistant/evaluation/test-cases/)
 
 ---
 

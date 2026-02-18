@@ -28,7 +28,7 @@ This document maps portfolio claims to supporting artifacts, enabling verificati
 | Claim | Evidence |
 |-------|----------|
 | Governance-first RAG architecture | [README.md](./modules/compliance-retrieval-assistant/README.md), [Context Diagram](./modules/compliance-retrieval-assistant/docs/diagrams/Compliance-Retrieval-Assistant%20Context%20Diagram.PNG) |
-| 8-component pipeline design | [component-design.md](./modules/compliance-retrieval-assistant/architecture/component-design.md), [Component Diagram](./modules/compliance-retrieval-assistant/docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.png) |
+| 8-component pipeline design | [component-design.md](./modules/compliance-retrieval-assistant/architecture/component-design.md), [Component Diagram](./modules/compliance-retrieval-assistant/docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.PNG) |
 | Policy-as-data pattern | [config/](./modules/compliance-retrieval-assistant/config/) directory, [ADR-002](./modules/compliance-retrieval-assistant/architecture/decisions/ADR-002-refusal-taxonomy-as-configuration.md) |
 | Dual contract design (user + auditor) | [response-contract.md](./modules/compliance-retrieval-assistant/docs/response-contract.md), [trace-schema.md](./modules/compliance-retrieval-assistant/docs/trace-schema.md) |
 | Grounding over confidence scores | [ADR-001](./modules/compliance-retrieval-assistant/architecture/decisions/ADR-001-grounding-status-over-confidence-scores.md) |
@@ -52,7 +52,7 @@ This document maps portfolio claims to supporting artifacts, enabling verificati
 | Claim | Evidence |
 |-------|----------|
 | Pre-flight validation for AI workflows | [README.md](./modules/requirements-guardrails/README.md) |
-| Risk classification system | [config/](./modules/requirements-guardrails/config/) |
+| Risk classification system | [rules/](./modules/requirements-guardrails/rules/) |
 | FINRA 2210 alignment | Regulatory references in documentation |
 | Deterministic routing before model invocation | Architecture documentation |
 
@@ -64,7 +64,7 @@ This document maps portfolio claims to supporting artifacts, enabling verificati
 
 | Claim | Evidence |
 |-------|----------|
-| Risk-weighted scoring framework | [README.md](./modules/roi-decision-engine/README.md) |
+| Risk-weighted scoring framework | [README.md](./modules/roi-engine/README.md) |
 | Multi-factor prioritization | Scoring logic and weights documentation |
 | Enterprise constraint modeling | Regulatory and operational factors |
 

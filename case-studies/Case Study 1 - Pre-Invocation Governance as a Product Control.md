@@ -455,12 +455,12 @@ Decisions I'd want to revisit with more data or stakeholder input:
 
 ## Related Artifacts
 
-- [Architecture: Control Plane Design](../modules/guardrails/architecture/control-plane-design.md)
-- [Config: Policy Rules](../modules/guardrails/config/policy-rules.yaml)
-- [Config: Routing Matrix](../modules/guardrails/config/routing-matrix.yaml)
-- [Config: Refusal Taxonomy](../modules/guardrails/config/refusal-taxonomy.yaml)
-- [Docs: Decision Logging Schema](../modules/guardrails/docs/decision-log-schema.md)
-- [Evaluation: Test Cases](../modules/guardrails/evaluation/test-cases/)
+- [Architecture: Control Plane Design](../modules/requirements-guardrails/architecture/control-plane-design.md)
+- [Config: Policy Rules](../modules/requirements-guardrails/config/policy-rules.yaml)
+- [Config: Routing Matrix](../modules/requirements-guardrails/config/routing-matrix.yaml)
+- [Config: Refusal Taxonomy](../modules/requirements-guardrails/config/refusal-taxonomy.yaml)
+- [Docs: Decision Logging Schema](../modules/requirements-guardrails/docs/decision-log-schema.md)
+- [Evaluation: Test Cases](../modules/requirements-guardrails/evaluation/test-cases/)
 - [Case Study #3: Retrieval Architecture](./Case%20Study%203%20-%20Retrieval%20Architecture%20for%20Audit-Ready%20Compliance%20Workflows.md)
 - [Regulatory Reference: OWASP Top 10 for LLM Applications](../regulatory-governance/ai-governance/owasp-llm-top-10.md)
 

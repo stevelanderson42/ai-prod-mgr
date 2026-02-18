@@ -53,7 +53,7 @@ The intent is to show judgment, not just outcomes.
 | # | Title | Module | Focus |
 |---|-------|--------|-------|
 | 01 | [Pre-Invocation Governance as a Product Control](Case%20Study%201%20-%20Pre-Invocation%20Governance%20as%20a%20Product%20Control.md) | Requirements Guardrails | Audit defensibility, controlled model access, pre-generation risk |
-| 02 | *In Progress* | ROI Decision Engine | Prioritization, stakeholder tradeoffs |
+| 02 | [Output Governance for Regulated AI](Case%20Study%202%20-%20Output%20Governance%20for%20Regulated%20AI.md) | ROI Decision Engine | Prioritization, stakeholder tradeoffs |
 | 03 | [Retrieval Architecture for Audit-Ready Compliance Workflows](Case%20Study%203%20-%20Retrieval%20Architecture%20for%20Audit-Ready%20Compliance%20Workflows.md) | Compliance Retrieval Assistant | Governance-first RAG design, auditability |
 
 ### How They Connect
@@ -100,8 +100,8 @@ Architecture diagrams are located in [docs/diagrams/](./docs/diagrams/) and embe
 
 Each case study links to concrete artifacts elsewhere in this repository:
 
-- [/modules/rag-assistant/](../modules/rag-assistant/) — Compliance Retrieval Assistant
-- [/modules/guardrails/](../modules/guardrails/) — Requirements Guardrails (Input Analyzer)
+- [/modules/compliance-retrieval-assistant/](../modules/compliance-retrieval-assistant/) — Compliance Retrieval Assistant
+- [/modules/requirements-guardrails/](../modules/requirements-guardrails/) — Requirements Guardrails (Input Analyzer)
 - [/modules/roi-engine/](../modules/roi-engine/) — ROI Decision Engine
 - [/architecture/](../architecture/) — Cross-cutting architectural decisions
 - [/evaluation/](../evaluation/) — Scorecards and test cases
