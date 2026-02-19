@@ -58,7 +58,9 @@ The intent is to show judgment, not just outcomes.
 
 ### How They Connect
 
-Case Study #1 establishes the **pre-invocation control plane** — the authorization gate that determines whether a request should reach an LLM at all. If allowed, the request may route into the **compliance retrieval system** documented in Case Study #3. Together, they demonstrate end-to-end governance: from "should we answer?" to "how do we answer safely?"
+Case Study #1 establishes the **pre-invocation control plane** — the authorization gate that determines whether a request should reach an LLM at all. If allowed, the request may route into the **compliance retrieval system** documented in Case Study #3. Case Study #2 addresses what happens *after* generation — the supervisory controls required before AI output becomes a regulated communication. Together, the three case studies demonstrate end-to-end governance: from "should we answer?" (#1) to "how do we answer safely?" (#3) to "can we deliver this response?" (#2).
+
+> **Note on Case Study #2:** Output Governance is not a standalone module in this repository. It represents a governance layer that sits between the retrieval assistant and the end user — a design decision documented as a case study because the supervisory review pattern is where most regulated AI deployments face their hardest product tradeoffs. The architecture and decision logic are fully specified in CS#2; implementation artifacts live in the modules it connects (Compliance Retrieval Assistant for trace contracts, Requirements Guardrails for routing).
 
 ---
 

@@ -23,6 +23,8 @@ This ordering guarantee ensures:
 
 > **PM DECISION:** This is non-negotiable. "We don't have a record of that interaction" is not an acceptable answer to a regulator.
 
+*Implementation note: The `minirag.py` demo writes all output files (trace, response, evidence package) in a single batch without enforcing write-then-acknowledge ordering. In a production system, the trace record would be committed and confirmed via a blocking write before any response is returned to the caller. The demo validates output shape and contract compliance; the ordering guarantee is an architectural requirement for production deployment.*
+
 ---
 
 ## Trace Record Shape
