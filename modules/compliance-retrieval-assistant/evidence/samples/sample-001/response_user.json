@@ -1,0 +1,24 @@
+{
+  "trace_id": "d9f14395-0eb0-4993-a7ab-403a0f2e9ebf",
+  "query": "What were the findings from the Q3 internal investigation into the trading desk?",
+  "grounding_status": "FULLY_GROUNDED",
+  "answer": "1. **Client complaints** \u2014 Any written or verbal complaint from a client about investment advice, account handling, or advisor conduct.\n2. **Regulatory inquiries** \u2014 Any communication from FINRA, the SEC, or state regulators.\n3. **Suspicious activity** \u2014 Transactions or patterns that may indicate\u2026 # Internal Compliance FAQ This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.",
+  "citations": [
+    {
+      "source_id": "doc-004-supervisory-escalation",
+      "source_title": "doc-004-supervisory-escalation.md",
+      "passage": "1. **Client complaints** \u2014 Any written or verbal complaint from a client about investment advice, account handling, or advisor conduct.\n2. **Regulatory inquiries** \u2014 Any communication from FINRA, the SEC, or state regulators.\n3. **Suspicious activity** \u2014 Transactions or patterns that may indicate\u2026"
+    },
+    {
+      "source_id": "doc-010-internal-compliance-faq",
+      "source_title": "doc-010-internal-compliance-faq.md",
+      "passage": "# Internal Compliance FAQ"
+    },
+    {
+      "source_id": "doc-002-prohibited-phrases",
+      "source_title": "doc-002-prohibited-phrases.md",
+      "passage": "This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy."
+    }
+  ],
+  "refusal": null
+}

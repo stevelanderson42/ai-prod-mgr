@@ -1,0 +1,33 @@
+{
+  "trace_id": "d9f14395-0eb0-4993-a7ab-403a0f2e9ebf",
+  "timestamp": "2026-02-19T14:13:54.585715+00:00",
+  "corpus_release_id": "sample-docs-v1",
+  "retrieval": {
+    "total_documents": 10,
+    "passages_retrieved": 3,
+    "passages_above_threshold": 10,
+    "top_scores": [
+      {
+        "doc_id": "doc-004-supervisory-escalation",
+        "score": 0.3636
+      },
+      {
+        "doc_id": "doc-010-internal-compliance-faq",
+        "score": 0.3636
+      },
+      {
+        "doc_id": "doc-002-prohibited-phrases",
+        "score": 0.2727
+      }
+    ]
+  },
+  "decision": {
+    "grounding_status": "FULLY_GROUNDED",
+    "refusal_code": null,
+    "rationale_codes": [
+      "GROUNDED_BY_DOC-004-SUPERVISORY-ESCALATION",
+      "GROUNDED_BY_DOC-010-INTERNAL-COMPLIANCE-FAQ",
+      "GROUNDED_BY_DOC-002-PROHIBITED-PHRASES"
+    ]
+  }
+}

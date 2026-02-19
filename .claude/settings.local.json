@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__gmail__search_emails",
+      "mcp__gmail__read_email",
+      "Bash(test:*)",
+      "Bash(python control_plane.py:*)",
+      "Bash(python:*)",
+      "Bash(wc:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git reset:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

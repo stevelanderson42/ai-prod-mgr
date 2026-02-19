@@ -17,7 +17,7 @@
 # The CRA queries ONLY this release. Changing this value switches the
 # active corpus (requires restart or cache refresh).
 
-current_release_id: "v2025.01.06"
+current_release_id: "sample-docs-v1"
 
 # -----------------------------------------------------------------------------
 # Release History
@@ -37,7 +37,7 @@ releases:
       Initial production release with core compliance policies,
       regulatory guidance, and internal procedures.
     
-    document_count: 0  # Placeholder — sample corpus pending
+    document_count: 10
     
     collections:
       - name: compliance-policies

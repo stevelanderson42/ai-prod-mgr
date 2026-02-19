@@ -1,0 +1,96 @@
+{
+  "trace_id": "d9f14395-0eb0-4993-a7ab-403a0f2e9ebf",
+  "run_timestamp": "2026-02-19T14:13:54.585738+00:00",
+  "query": "What were the findings from the Q3 internal investigation into the trading desk?",
+  "corpus_dir": "C:\\Users\\Steve\\Documents\\GitHub\\ai-prod-mgr\\modules\\compliance-retrieval-assistant\\corpus\\sample-documents",
+  "total_documents_loaded": 10,
+  "scores": [
+    {
+      "doc_id": "doc-004-supervisory-escalation",
+      "score": 0.3636,
+      "matched_tokens": [
+        "from",
+        "internal",
+        "the",
+        "trading"
+      ]
+    },
+    {
+      "doc_id": "doc-010-internal-compliance-faq",
+      "score": 0.3636,
+      "matched_tokens": [
+        "from",
+        "internal",
+        "the",
+        "what"
+      ]
+    },
+    {
+      "doc_id": "doc-002-prohibited-phrases",
+      "score": 0.2727,
+      "matched_tokens": [
+        "from",
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-003-retention-policy",
+      "score": 0.2727,
+      "matched_tokens": [
+        "from",
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-006-advisor-guidance",
+      "score": 0.2727,
+      "matched_tokens": [
+        "from",
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-009-client-communication-standards",
+      "score": 0.2727,
+      "matched_tokens": [
+        "from",
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-005-risk-disclosure-template",
+      "score": 0.1818,
+      "matched_tokens": [
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-007-model-governance-notes",
+      "score": 0.1818,
+      "matched_tokens": [
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-008-books-records-policy",
+      "score": 0.1818,
+      "matched_tokens": [
+        "internal",
+        "the"
+      ]
+    },
+    {
+      "doc_id": "doc-001-finra-2210-summary",
+      "score": 0.0909,
+      "matched_tokens": [
+        "the"
+      ]
+    }
+  ]
+}

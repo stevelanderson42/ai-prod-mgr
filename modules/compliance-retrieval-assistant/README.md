@@ -337,4 +337,31 @@ This module is complete when:
 
 ---
 
+## Minimal Runnable Demo
+
+A deterministic lexical RAG demo that requires **no embeddings, no vector DB, no external APIs, and no LLM calls**. It loads the sample corpus, scores documents via token overlap, and produces a full evidence package.
+
+### Run
+
+```bash
+python modules/compliance-retrieval-assistant/src/minirag.py \
+  --query "Is it permissible to guarantee investment returns?"
+```
+
+### What It Produces
+
+All outputs are written to `evidence/samples/sample-001/`:
+
+| File | Purpose |
+|------|---------|
+| `query.txt` | The original query text |
+| `response_user.json` | User-facing response with grounding status, answer, and citations |
+| `response_auditor.json` | Audit-facing trace with retrieval details and decision rationale |
+| `trace.json` | Full execution trace (timestamps, scores, document list) |
+| `evidence_package.md` | Human-readable evidence bundle combining all of the above |
+
+This demo exercises the same output contracts defined in [docs/response-contract.md](./docs/response-contract.md) and [docs/trace-schema.md](./docs/trace-schema.md), using purely deterministic retrieval.
+
+---
+
 *Part of the [Regulated AI Workflow Toolkit](../../README.md) — demonstrating governance-first AI product design for financial services and other regulated industries.*
