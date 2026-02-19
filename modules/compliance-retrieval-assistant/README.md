@@ -2,8 +2,8 @@
 
 **Governance-First Retrieval for Regulated AI Workflows**
 
-**Status:** 🟡 In Progress — Context architecture and governance scaffolding complete  
-**Module:** 4 of 4 in the Regulated AI Workflow Toolkit
+**Status:** 🟢 Architecture complete · Minimal retrieval demo operational · Refusal/grounding layers designed, not yet implemented
+**Module:** 4 of 4 in the [Regulated AI Workflow Architecture & Demos](../../README.md)
 
 ---
 
@@ -12,6 +12,19 @@
 This module acts as the **execution layer** for AI-assisted responses in regulated environments. It delivers retrieval-augmented generation (RAG) with strict requirements for **grounding, citation, traceability, and auditability**.
 
 > **Core insight:** In regulated industries, the question isn't "Can the model answer?" — it's "Can we defend the answer?"
+
+---
+
+## Start Here
+
+1. **Run the demo:**
+   ```bash
+   python modules/compliance-retrieval-assistant/src/minirag.py --query "Is it permissible to guarantee investment returns?"
+   ```
+2. **Read the output:** [`evidence/samples/sample-001/evidence_package.md`](./evidence/samples/sample-001/evidence_package.md)
+3. **Review the contracts:** [Response contract](./docs/response-contract.md) · [Trace schema](./docs/trace-schema.md)
+
+**What you'll see:** a user-facing JSON response + an auditor-facing trace + a combined evidence markdown bundle, all linked by `trace_id`.
 
 ---
 
@@ -37,12 +50,12 @@ This module provides a **third path**: constrained execution that enables AI ass
 ## Where It Sits in the Workflow
 
 ```
-Market Intelligence    →    ROI Engine    →    Guardrails    →    [RAG Assistant]
+Market Intelligence    →    ROI Engine    →    Guardrails    →    Compliance Retrieval Assistant
  (surfaces opportunities)   (prioritizes)      (validates input)   (executes safely)
 ```
 
-**Upstream:** Requirements Guardrails determines *whether* a request can safely proceed  
-**This module:** Executes the request with grounding, citation, and audit guarantees  
+**Upstream:** Requirements Guardrails determines *whether* a request can safely proceed
+**This module:** Executes the request with grounding, citation, and audit guarantees
 **Downstream:** Users receive answers; auditors receive traces
 
 Inputs arrive only after passing upstream controls. Outputs are either:
@@ -54,6 +67,37 @@ Inputs arrive only after passing upstream controls. Outputs are either:
 A partial response indicates that some claims are grounded while others cannot be fully substantiated; unsupported portions are explicitly marked.
 
 > **PM DECISION:** This module does not override upstream decisions. If Guardrails says proceed, we execute. If execution can't meet grounding standards, we refuse — we don't silently degrade.
+
+---
+
+## Current Status: What Works Today
+
+This module contains a mix of complete architecture and working code. Being explicit:
+
+| Layer | Status |
+|-------|--------|
+| Architecture, contracts, and config | ✅ Complete — 8-component pipeline design, response contracts, trace schema, refusal taxonomy |
+| Control plane demo | ✅ Runnable — deterministic policy classification with audit output |
+| Minimal retrieval demo (`minirag.py`) | ✅ Runnable — lexical retrieval over 10-doc sample corpus, writes a full evidence package to `evidence/samples/sample-001/` |
+| Evaluation scorecard | 🟡 Applied ad-hoc — 6 test case results pending formal run log |
+| Grounding checker, refusal gate, access control | 🧩 Designed and specified, not yet implemented |
+| Full RAG pipeline (embeddings, vector search, LLM) | 🧩 Architecture defined, src/ directories are scaffolding |
+| Cross-module integration with Guardrails | 🔄 Not yet wired |
+
+The retrieval demo intentionally omits grounding thresholds and refusal logic. When evaluated against the module's own scorecard, it scores strong on the happy path but correctly fails all five refusal test cases — surfacing exactly where the grounding checker, refusal gate, and access control layers are needed. These gaps are by design: the demo proves the retrieval layer works so the next iteration can focus on the decision layers.
+
+---
+
+## Known Gaps / Next Build
+
+| Gap | What's Needed | Priority |
+|-----|---------------|----------|
+| Stopword handling + ambiguity detection | Query preprocessor that flags vague queries before retrieval | High |
+| Grounding threshold | Minimum retrieval score cutoff; refuse when below threshold | High |
+| Refusal gate | Decision logic that maps low scores / out-of-scope queries to refusal codes | High |
+| Role-permission enforcement | Access control filtering based on role-permissions.yaml | Medium |
+| Unique evidence output per trace_id | Each run writes to its own directory instead of overwriting sample-001 | Medium |
+| Formal evaluation run log | Persist scorecard results to evaluation/EVAL_LOG.md | Next |
 
 ---
 
@@ -73,7 +117,6 @@ This separation reflects a core governance principle:
 
 See [`control-plane-demo/`](./control-plane-demo/) for a working demonstration of this pattern.
 
-
 ---
 
 ## Architecture Overview
@@ -82,7 +125,7 @@ See [`control-plane-demo/`](./control-plane-demo/) for a working demonstration o
 
 ![Context Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Context%20Diagram.PNG)
 
-The context diagram shows the CRA's position within the broader enterprise environment: upstream systems that feed it (Requirements Guardrails, Policy Store, Corpus Pipeline), downstream systems it serves (Users, Audit Log, Handoff Queue), and the governance boundaries it operates within.
+The context diagram shows the Compliance Retrieval Assistant's position within the broader enterprise environment: upstream systems that feed it (Requirements Guardrails, Policy Store, Corpus Pipeline), downstream systems it serves (Users, Audit Log, Handoff Queue), and the governance boundaries it operates within.
 
 ---
 
@@ -90,18 +133,18 @@ The context diagram shows the CRA's position within the broader enterprise envir
 
 ![Component Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Component%20Diagram.PNG)
 
-The CRA consists of 8 internal components organized as a pipeline:
+The Compliance Retrieval Assistant is designed as 8 internal components organized as a pipeline:
 
-| Component | Responsibility |
-|-----------|----------------|
-| **Query Preprocessor** | Normalize input, extract terms, detect injection patterns |
-| **Retrieval Client** | Hybrid search (vector + lexical), access control filtering |
-| **Grounding Checker** | Assess coverage, detect conflicts, determine grounding status |
-| **Prompt Builder** | Assemble instructions + context + retrieved passages |
-| **LLM Provider** | Model-agnostic interface (Anthropic, OpenAI, Azure) |
-| **Refusal Gate** | Final decision logic, post-generation validation |
-| **Response Assembler** | Package response per contract, build citations |
-| **Trace Writer** | Continuous audit logging throughout pipeline |
+| Component | Responsibility | Implementation Status |
+|-----------|----------------|----------------------|
+| **Query Preprocessor** | Normalize input, extract terms, detect injection patterns | 🧩 Designed |
+| **Retrieval Client** | Hybrid search (vector + lexical), access control filtering | ✅ Minimal lexical version in `minirag.py` |
+| **Grounding Checker** | Assess coverage, detect conflicts, determine grounding status | 🧩 Designed |
+| **Prompt Builder** | Assemble instructions + context + retrieved passages | 🧩 Designed |
+| **LLM Provider** | Model-agnostic interface (Anthropic, OpenAI, Azure) | 🧩 Designed |
+| **Refusal Gate** | Final decision logic, post-generation validation | 🧩 Designed |
+| **Response Assembler** | Package response per contract, build citations | ✅ Minimal version in `minirag.py` |
+| **Trace Writer** | Continuous audit logging throughout pipeline | ✅ Minimal version in `minirag.py` |
 
 See [architecture/component-design.md](./architecture/component-design.md) for detailed specifications.
 
@@ -111,7 +154,7 @@ See [architecture/component-design.md](./architecture/component-design.md) for d
 
 ![Sequence Diagram](./docs/diagrams/Compliance-Retrieval-Assistant%20Sequence%20Diagram.PNG)
 
-The sequence diagram shows how a query flows through the system:
+The sequence diagram shows how a query flows through the designed system:
 
 1. **Preprocess & validate** — Normalize query, check for injection patterns
 2. **Retrieve passages** — Fetch top-K from approved corpus
@@ -139,8 +182,9 @@ These principles are non-negotiable constraints, not aspirational values:
 | **Policy as data** | Behavior changes via config files, not code deployment |
 | **Trace before respond** | A trace record is committed before any user-visible response is returned |
 
-These execution constraints are informed by shared regulatory expectations documented in the central [Regulatory Context](../../regulatory-governance/), which this module references without embedding jurisdiction-specific rules.
+*Note: `minirag.py` demonstrates retrieval + evidence packaging. The refusal/grounding decision layers and "commit trace before respond" guarantee are defined in the architecture, but not enforced by the demo runner yet.*
 
+These execution constraints are informed by shared regulatory expectations documented in the central [Regulatory Context](../../regulatory-governance/), which this module references without embedding jurisdiction-specific rules.
 
 > **PM DECISION:** These constraints exist because responses may be reviewed by regulators, auditors, or legal teams. "The model said so" is not a defensible answer.
 
@@ -148,7 +192,7 @@ These execution constraints are informed by shared regulatory expectations docum
 
 ## Refusal Taxonomy
 
-The system knows when it *cannot* answer safely and communicates why. Refusal is a governed capability, not an error state.
+The system defines when it *cannot* answer safely and communicates why. Refusal is a governed capability, not an error state.
 
 | Code | Trigger | User Guidance |
 |------|---------|---------------|
@@ -276,23 +320,24 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | architecture/README.md | Architecture overview and ADR links |
 | architecture/component-design.md | Internal decomposition — 8 components with responsibilities |
 | 🟦 **corpus/** | Sample content for development and evaluation |
-| corpus/sample-documents/ | Representative compliance documents |
+| corpus/sample-documents/ | 10 representative compliance documents (synthetic, for demo use) |
 | 🟦 **evaluation/** | Quality validation framework |
 | evaluation/scorecard.md | One-page rubric: attribution, relevance, hallucination risk |
-| evaluation/test-cases/ | Structured scenarios for refusal and grounding behavior |
+| evaluation/test-cases/ | 5 structured scenarios for refusal and grounding behavior |
 | 🟦 **evidence/** | Audit trail artifacts and samples |
-| evidence/samples/ | Example trace packages for portfolio demonstration |
+| evidence/samples/ | Evidence packages generated by minirag.py demo runs |
 | 🟦 **outputs/** | User-facing response examples |
 | outputs/examples/ | Sample responses showing grounding, citations, refusals |
-| 🟦 **src/** | Implementation scaffolding |
-| src/preprocess/ | Query normalization, intent extraction |
-| src/retrieval/ | Index client, hybrid vector + lexical search |
-| src/grounding/ | Passage support validation |
-| src/prompt/ | Prompt assembly with retrieved context |
-| src/llm/ | Model-agnostic provider interface |
-| src/decision/ | Refusal gate, grounding status selection |
-| src/response/ | Response assembly per contract |
-| src/logging/ | Trace writer for audit log |
+| 🟦 **src/** | Implementation (minimal demo + scaffolding for full pipeline) |
+| src/minirag.py | **Runnable** — Deterministic lexical retrieval demo |
+| src/preprocess/ | Query normalization, intent extraction (scaffolding) |
+| src/retrieval/ | Index client, hybrid vector + lexical search (scaffolding) |
+| src/grounding/ | Passage support validation (scaffolding) |
+| src/prompt/ | Prompt assembly with retrieved context (scaffolding) |
+| src/llm/ | Model-agnostic provider interface (scaffolding) |
+| src/decision/ | Refusal gate, grounding status selection (scaffolding) |
+| src/response/ | Response assembly per contract (scaffolding) |
+| src/logging/ | Trace writer for audit log (scaffolding) |
 
 ---
 
@@ -305,12 +350,12 @@ This module is complete when:
 - [x] Refusal taxonomy with 5 codes and user guidance
 - [x] Response contract (user-facing) defined
 - [x] Trace schema (audit-facing) defined
+- [x] Sample corpus documents for testing
+- [x] Evidence package example (sample-001)
+- [ ] Evaluation scorecard results persisted as formal run log
 - [ ] Threat model with mitigations
 - [ ] Component design with interface contracts
-- [ ] Sample corpus documents for testing
-- [ ] Evaluation scorecard applied to test cases
 - [ ] At least 5 sample outputs (grounded + refusals)
-- [ ] Evidence package examples
 - [ ] Integration contract with Requirements Guardrails
 
 ---
@@ -364,4 +409,4 @@ This demo exercises the same output contracts defined in [docs/response-contract
 
 ---
 
-*Part of the [Regulated AI Workflow Toolkit](../../README.md) — demonstrating governance-first AI product design for financial services and other regulated industries.*
+*Part of the [Regulated AI Workflow Architecture & Demos](../../README.md) — demonstrating governance-first AI product design for financial services and other regulated industries.*
