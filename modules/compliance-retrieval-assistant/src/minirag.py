@@ -15,13 +15,25 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
+import yaml
+
 # ---------------------------------------------------------------------------
 # Paths (relative to this script)
 # ---------------------------------------------------------------------------
 SCRIPT_DIR = Path(__file__).resolve().parent
 MODULE_DIR = SCRIPT_DIR.parent
 CORPUS_DIR = MODULE_DIR / "corpus" / "sample-documents"
+CONFIG_DIR = MODULE_DIR / "config"
 OUTPUT_DIR = MODULE_DIR / "evidence" / "samples" / "sample-001"
+
+# ---------------------------------------------------------------------------
+# Config loader — reads policy-constraints.yaml for retrieval/grounding params
+# ---------------------------------------------------------------------------
+
+def load_config(config_dir: Path) -> dict:
+    cfg_path = config_dir / "policy-constraints.yaml"
+    with open(cfg_path, encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 # ---------------------------------------------------------------------------
 # Tokeniser (deliberately simple — lowercase + split on non-alpha)
@@ -40,7 +52,7 @@ def unique_tokens(text: str) -> set[str]:
 
 def load_corpus(corpus_dir: Path) -> list[dict]:
     docs = []
-    for fp in sorted(corpus_dir.glob("*.md")):
+    for fp in sorted(corpus_dir.glob("doc-*.md")):
         content = fp.read_text(encoding="utf-8")
         docs.append({
             "doc_id": fp.stem,
@@ -85,32 +97,77 @@ def extract_snippet(content: str, query_tokens: set[str], max_len: int = 300) ->
 # Response builders
 # ---------------------------------------------------------------------------
 
+def determine_grounding(docs_above_threshold: list[dict],
+                        min_supporting: int) -> str:
+    """Determine grounding status based on how many docs meet the threshold."""
+    if len(docs_above_threshold) >= min_supporting + 1:
+        return "FULLY_GROUNDED"
+    elif len(docs_above_threshold) >= 1:
+        return "PARTIALLY_GROUNDED"
+    else:
+        return "REFUSED"
+
+
 def build_user_response(trace_id: str, query: str, top_docs: list[dict],
-                        query_tokens: set[str]) -> dict:
+                        query_tokens: set[str], grounding_status: str) -> dict:
     citations = []
     answer_parts = []
-    for doc in top_docs:
+
+    if grounding_status == "REFUSED":
+        return {
+            "trace_id": trace_id,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "query": query,
+            "grounding_status": "REFUSED",
+            "answer": None,
+            "citations": [],
+            "refusal": {
+                "code": "INSUFFICIENT_GROUNDING",
+                "reason": "No documents scored above the similarity threshold",
+                "user_guidance": "Found related content but cannot fully answer "
+                                 "your question. Try narrowing your query or "
+                                 "consulting a subject matter expert.",
+            },
+            "metadata": {
+                "corpus_release_id": "sample-docs-v1",
+                "sources_consulted": len(top_docs),
+                "model_provider": "deterministic_lexical",
+            },
+        }
+
+    for idx, doc in enumerate(top_docs, start=1):
         snippet = extract_snippet(doc["content"], query_tokens)
         citations.append({
+            "citation_id": idx,
             "source_id": doc["doc_id"],
             "source_title": doc["filename"],
+            "effective_date": None,
             "passage": snippet,
+            "collection": "compliance-policies",
         })
         answer_parts.append(snippet)
 
-    grounding = "FULLY_GROUNDED" if len(top_docs) >= 2 else "PARTIALLY_GROUNDED"
     return {
         "trace_id": trace_id,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "query": query,
-        "grounding_status": grounding,
+        "grounding_status": grounding_status,
         "answer": " ".join(answer_parts),
         "citations": citations,
         "refusal": None,
+        "metadata": {
+            "corpus_release_id": "sample-docs-v1",
+            "sources_consulted": len(top_docs),
+            "model_provider": "deterministic_lexical",
+        },
     }
 
 
 def build_auditor_response(trace_id: str, query: str, scored: list[dict],
-                           top_k: int) -> dict:
+                           top_k: int, similarity_threshold: float,
+                           grounding_status: str) -> dict:
+    above = [d for d in scored if d["score"] >= similarity_threshold]
+    refusal_code = "INSUFFICIENT_GROUNDING" if grounding_status == "REFUSED" else None
     return {
         "trace_id": trace_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -118,18 +175,19 @@ def build_auditor_response(trace_id: str, query: str, scored: list[dict],
         "retrieval": {
             "total_documents": len(scored),
             "passages_retrieved": top_k,
-            "passages_above_threshold": sum(1 for d in scored if d["score"] > 0),
+            "passages_above_threshold": len(above),
+            "similarity_threshold": similarity_threshold,
             "top_scores": [
                 {"doc_id": d["doc_id"], "score": d["score"]}
                 for d in scored[:top_k]
             ],
         },
         "decision": {
-            "grounding_status": "FULLY_GROUNDED" if top_k >= 2 else "PARTIALLY_GROUNDED",
-            "refusal_code": None,
+            "grounding_status": grounding_status,
+            "refusal_code": refusal_code,
             "rationale_codes": [
-                f"GROUNDED_BY_{d['doc_id'].upper()}" for d in scored[:top_k]
-            ],
+                f"GROUNDED_BY_{d['doc_id'].upper()}" for d in above[:top_k]
+            ] if grounding_status != "REFUSED" else ["BELOW_GROUNDING_THRESHOLD"],
         },
     }
 
@@ -203,9 +261,16 @@ def build_evidence_md(query: str, user_resp: dict, auditor_resp: dict,
 # ---------------------------------------------------------------------------
 
 def main():
+    # Load config for retrieval and grounding parameters
+    config = load_config(CONFIG_DIR)
+    config_top_k = config.get("retrieval", {}).get("top_k", 10)
+    similarity_threshold = config.get("retrieval", {}).get("similarity_threshold", 0.75)
+    min_supporting = config.get("grounding", {}).get("min_supporting_passages", 1)
+
     parser = argparse.ArgumentParser(description="Minimal lexical RAG demo")
     parser.add_argument("--query", required=True, help="Query string")
-    parser.add_argument("--top-k", type=int, default=3, help="Number of top docs")
+    parser.add_argument("--top-k", type=int, default=config_top_k,
+                        help=f"Number of top docs (default: {config_top_k} from config)")
     args = parser.parse_args()
 
     trace_id = str(uuid.uuid4())
@@ -216,9 +281,16 @@ def main():
     scored = score_documents(args.query, docs)
     top_docs = scored[: args.top_k]
 
+    # Filter by similarity threshold and determine grounding
+    docs_above_threshold = [d for d in top_docs if d["score"] >= similarity_threshold]
+    grounding_status = determine_grounding(docs_above_threshold, min_supporting)
+
     # Build responses
-    user_resp = build_user_response(trace_id, args.query, top_docs, query_tokens)
-    auditor_resp = build_auditor_response(trace_id, args.query, scored, args.top_k)
+    user_resp = build_user_response(trace_id, args.query, top_docs,
+                                    query_tokens, grounding_status)
+    auditor_resp = build_auditor_response(trace_id, args.query, scored,
+                                          args.top_k, similarity_threshold,
+                                          grounding_status)
     trace = build_trace(trace_id, args.query, scored)
     evidence_md = build_evidence_md(args.query, user_resp, auditor_resp, trace)
 
@@ -237,10 +309,13 @@ def main():
     print(f"Trace ID:  {trace_id}")
     print(f"Query:     {args.query}")
     print(f"Corpus:    {len(docs)} documents loaded")
+    print(f"Config:    top_k={args.top_k}, threshold={similarity_threshold}")
     print(f"Top {args.top_k}:")
     for d in top_docs:
-        print(f"  {d['doc_id']:40s}  score={d['score']}")
-    print(f"\nGrounding: {user_resp['grounding_status']}")
+        marker = " [above]" if d["score"] >= similarity_threshold else " [below]"
+        print(f"  {d['doc_id']:40s}  score={d['score']}{marker}")
+    print(f"\nAbove threshold: {len(docs_above_threshold)}/{len(top_docs)}")
+    print(f"Grounding: {user_resp['grounding_status']}")
     print(f"Output:    {OUTPUT_DIR}/")
     print("Files:     query.txt, response_user.json, response_auditor.json, "
           "trace.json, evidence_package.md")

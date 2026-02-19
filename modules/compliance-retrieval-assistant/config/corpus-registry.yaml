@@ -27,36 +27,63 @@ current_release_id: "sample-docs-v1"
 
 releases:
 
-  v2025.01.06:
+  sample-docs-v1:
     status: current
+    published_at: "2026-02-19T00:00:00Z"
+    approved_by: "portfolio-author"
+    approval_ticket: null
+
+    summary: >
+      10 synthetic compliance documents for portfolio demo and evaluation.
+      Used by minirag.py and referenced in EVAL_LOG.md test runs.
+
+    document_count: 10
+
+    collections:
+      - name: compliance-policies
+        doc_count: 9
+        description: "Internal compliance policies and standards (docs 002–010)"
+
+      - name: regulatory-guidance
+        doc_count: 1
+        description: "External regulatory rules and guidance documents (doc-001, FINRA 2210 summary)"
+
+    changes_from_previous: "Initial sample corpus for portfolio demo"
+
+    notes: >
+      Synthetic documents for development, evaluation, and interview
+      demonstration. Not derived from real firm content.
+
+  v2025.01.06:
+    status: template
     published_at: "2025-01-06T00:00:00Z"
     approved_by: "compliance-review-board"
     approval_ticket: "CRB-2025-001"
-    
+
     summary: >
-      Initial production release with core compliance policies,
+      Template for a production release with core compliance policies,
       regulatory guidance, and internal procedures.
-    
-    document_count: 10
-    
+
+    document_count: 0
+
     collections:
       - name: compliance-policies
         doc_count: 0
         description: "Internal compliance policies and standards"
-        
+
       - name: regulatory-guidance
         doc_count: 0
         description: "External regulatory rules and guidance documents"
-        
+
       - name: internal-procedures
         doc_count: 0
         description: "Operational procedures and workflows"
-    
-    changes_from_previous: "Initial release"
-    
+
+    changes_from_previous: "N/A — template entry"
+
     notes: >
-      Scaffolding release for portfolio demonstration.
-      Sample documents to be added during implementation phase.
+      Scaffolding entry showing the intended release structure for
+      production use. No documents populated.
 
   # ---------------------------------------------------------------------------
   # Example of a subsequent release (template for future use)

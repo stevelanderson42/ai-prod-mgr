@@ -353,8 +353,8 @@ This module is complete when:
 - [x] Sample corpus documents for testing
 - [x] Evidence package example (sample-001)
 - [ ] Evaluation scorecard results persisted as formal run log
-- [ ] Threat model with mitigations
-- [ ] Component design with interface contracts
+- [x] Threat model with mitigations
+- [x] Component design with interface contracts
 - [ ] At least 5 sample outputs (grounded + refusals)
 - [ ] Integration contract with Requirements Guardrails
 

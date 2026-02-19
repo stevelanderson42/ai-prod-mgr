@@ -8,7 +8,7 @@ Evaluation runs for the Regulated AI Workflow Architecture & Demos portfolio. Ea
 
 | Date | Module | Runner | Test Cases | Summary |
 |------|--------|--------|------------|---------|
-| 2025-10-23 | Compliance Retrieval Assistant | baseline (external) | 1 | Initial metrics run (EM 0.38, P@5 0.62, Latency p95 5.2s). Not directly comparable to later runs. See `/evals/runs/2025-10-23_baseline.csv` |
+| 2025-10-23 | Compliance Retrieval Assistant | baseline (external) | 1 | Initial metrics run (EM 0.38, P@5 0.62, Latency p95 5.2s). Not directly comparable to later runs. See `evaluation/runs/2025-10-23_baseline.csv` |
 | 2026-02-19 | Compliance Retrieval Assistant | minirag.py (lexical) | 6 | Retrieval-only evaluation against module scorecard. Details below. |
 
 ---
@@ -85,5 +85,5 @@ These results validate the retrieval foundation and define the build sequence fo
 
 **Runner:** External baseline evaluation
 **Metrics:** EM 0.38, P@5 0.62, Latency p95 5.2s
-**Artifact:** `/evals/runs/2025-10-23_baseline.csv`
+**Artifact:** `evaluation/runs/2025-10-23_baseline.csv`
 **Notes:** Initial metrics run prior to architecture redesign. Predates current scorecard dimensions and refusal taxonomy. Not directly comparable to 2026-02-19 run.
