@@ -1,6 +1,6 @@
 {
-  "trace_id": "46be99de-789c-4e88-af13-3ee6ee2271bf",
-  "run_timestamp": "2026-02-19T16:42:45.314874+00:00",
+  "trace_id": "2f092f56-827d-464b-a912-4acf8992b541",
+  "run_timestamp": "2026-02-19T16:47:47.189629+00:00",
   "query": "Is it permissible to guarantee investment returns?",
   "corpus_dir": "C:\\Users\\Steve\\Documents\\GitHub\\ai-prod-mgr\\modules\\compliance-retrieval-assistant\\corpus\\sample-documents",
   "total_documents_loaded": 10,

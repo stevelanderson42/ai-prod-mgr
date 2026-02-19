@@ -1,12 +1,12 @@
 {
-  "trace_id": "46be99de-789c-4e88-af13-3ee6ee2271bf",
-  "timestamp": "2026-02-19T16:42:45.314862+00:00",
+  "trace_id": "2f092f56-827d-464b-a912-4acf8992b541",
+  "timestamp": "2026-02-19T16:47:47.189619+00:00",
   "corpus_release_id": "sample-docs-v1",
   "retrieval": {
     "total_documents": 10,
     "passages_retrieved": 10,
-    "passages_above_threshold": 1,
-    "similarity_threshold": 0.75,
+    "passages_above_threshold": 4,
+    "similarity_threshold": 0.7,
     "top_scores": [
       {
         "doc_id": "doc-002-prohibited-phrases",
@@ -51,10 +51,13 @@
     ]
   },
   "decision": {
-    "grounding_status": "PARTIALLY_GROUNDED",
+    "grounding_status": "FULLY_GROUNDED",
     "refusal_code": null,
     "rationale_codes": [
-      "GROUNDED_BY_DOC-002-PROHIBITED-PHRASES"
+      "GROUNDED_BY_DOC-002-PROHIBITED-PHRASES",
+      "GROUNDED_BY_DOC-005-RISK-DISCLOSURE-TEMPLATE",
+      "GROUNDED_BY_DOC-009-CLIENT-COMMUNICATION-STANDARDS",
+      "GROUNDED_BY_DOC-010-INTERNAL-COMPLIANCE-FAQ"
     ]
   }
 }

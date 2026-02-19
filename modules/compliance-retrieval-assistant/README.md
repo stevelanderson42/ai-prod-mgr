@@ -93,7 +93,7 @@ The retrieval demo intentionally omits grounding thresholds and refusal logic. W
 | Gap | What's Needed | Priority |
 |-----|---------------|----------|
 | Stopword handling + ambiguity detection | Query preprocessor that flags vague queries before retrieval | High |
-| Grounding threshold | Minimum retrieval score cutoff; refuse when below threshold | High |
+| Grounding threshold | ✅ Partially implemented — `minirag.py` reads `similarity_threshold` from `config/policy-constraints.yaml` and uses it as a score cutoff. Full grounding checker (passage-level support validation) not yet built. | Done (partial) |
 | Refusal gate | Decision logic that maps low scores / out-of-scope queries to refusal codes | High |
 | Role-permission enforcement | Access control filtering based on role-permissions.yaml | Medium |
 | Unique evidence output per trace_id | Each run writes to its own directory instead of overwriting sample-001 | Medium |

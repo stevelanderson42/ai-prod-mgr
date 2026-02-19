@@ -263,7 +263,7 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | 🟦 **outputs/** | Sample audit artifacts |
 | `outputs/routing-decision-log.md` | Sample audit trail |
 | 🟦 **experiments/** | Guardrail prompt testing |
-| `experiments/prompt-exp-06-*.md` | Guardrail prompt experiments |
+| `experiments/prompt-experiment-mapping.md` | Maps prompt experiments 01–05 to guardrail concepts |
 
 ---
 

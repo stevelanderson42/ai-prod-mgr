@@ -26,7 +26,7 @@ retrieval:
   
   # Minimum similarity score for a passage to be considered relevant
   # Range: 0.0 - 1.0 (higher = stricter)
-  similarity_threshold: 0.75
+  similarity_threshold: 0.70
   
   # Hybrid search weighting: balance between vector and lexical search
   # 1.0 = pure vector (semantic), 0.0 = pure lexical (keyword)

@@ -2,9 +2,9 @@
 """
 minirag.py — Minimal deterministic lexical RAG demo.
 
-Loads .md files from corpus/sample-documents/, scores them by token overlap
-with the query, selects top 3, extracts snippets, and writes a full evidence
-package. No embeddings, no vector DB, no external APIs, no LLM calls.
+Loads doc-*.md files from corpus/sample-documents/, scores them by token overlap
+with the query, selects top-k (from config), extracts snippets, and writes a
+full evidence package. No embeddings, no vector DB, no external APIs, no LLM calls.
 """
 
 import argparse

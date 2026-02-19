@@ -1,7 +1,7 @@
 # Evidence Package — sample-001
 
-**Generated:** 2026-02-19T16:42:45.314874+00:00
-**Trace ID:** 46be99de-789c-4e88-af13-3ee6ee2271bf
+**Generated:** 2026-02-19T16:47:47.189629+00:00
+**Trace ID:** 2f092f56-827d-464b-a912-4acf8992b541
 
 ## Query
 
@@ -9,7 +9,7 @@
 
 ## Grounding Status
 
-`PARTIALLY_GROUNDED`
+`FULLY_GROUNDED`
 
 ## Citations
 
@@ -71,7 +71,7 @@
 
 - Documents loaded: 10
 - Passages retrieved: 10
-- Above threshold: 1
+- Above threshold: 4
 
 ## Top Scores
 
