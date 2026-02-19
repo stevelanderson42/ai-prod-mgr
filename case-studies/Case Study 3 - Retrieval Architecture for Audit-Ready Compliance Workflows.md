@@ -80,6 +80,8 @@ This approach conflicts with emerging best practices for AI safety, which emphas
 
 **Selected because:** Audit defensibility is built in, not bolted on. Every decision point is logged. Refusal is a first-class outcome. Configuration changes don't require code deployments.
 
+**Current implementation status:** The architecture is fully specified. A minimal retrieval demo ([`minirag.py`](../modules/compliance-retrieval-assistant/src/minirag.py)) validates the lexical retrieval and evidence packaging layers using a 10-document synthetic corpus. Grounding thresholds, refusal gate, and access control are designed but not yet implemented in the demo runner. See the module's [Current Status](../modules/compliance-retrieval-assistant/README.md#current-status-what-works-today) for details.
+
 ---
 
 ## Key Decisions
@@ -309,9 +311,9 @@ This is portfolio work, not a production deployment. However, the design enables
 | **Policy compliance** | Zero prohibited phrases in outputs; required disclaimers present |
 | **Reviewer trust** | Qualitative: Would a compliance officer trust this output? |
 
-**Test cases created:** Five structured scenarios validating each refusal code path (see `/evaluation/test-cases/`).
+**Test cases created:** Five refusal scenarios plus one happy-path query, validating each refusal code path and grounded retrieval (see `/evaluation/test-cases/`).
 
-**Evaluation scorecard:** Six-dimension rubric for assessing output quality (see [evaluation/scorecard.md](../modules/compliance-retrieval-assistant/evaluation/scorecard.md)).
+**Evaluation scorecard:** Six-dimension weighted rubric applied to all six test cases via `minirag.py` demo runner. Results documented in [EVAL_LOG.md](../EVAL_LOG.md). Happy path scored 3.85/4.0 (weighted composite); all five refusal cases correctly failed, surfacing the need for grounding threshold, refusal gate, and access control layers not yet implemented.
 
 ---
 
@@ -321,7 +323,7 @@ What changes when this isn't a portfolio project but a production system at a Fo
 
 | Dimension | Portfolio Version | Enterprise Version |
 |-----------|-------------------|-------------------|
-| **Corpus size** | Sample documents | 10,000+ policy documents across business lines |
+| **Corpus size** | 10 synthetic documents (`sample-docs-v1`) | 10,000+ policy documents across business lines |
 | **User base** | Single user | 5,000+ compliance staff across regions |
 | **Access control** | Simple role tiers | Integration with enterprise IAM (Active Directory, Okta) |
 | **Audit retention** | Local logs | 7-year retention in immutable audit store |
