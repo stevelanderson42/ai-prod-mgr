@@ -1,0 +1,115 @@
+Before responding, read the following files in order:
+
+- README.md (top-level)
+- modules/compliance-retrieval-assistant/README.md
+- modules/compliance-retrieval-assistant/src/minirag.py
+- EVAL_LOG.md
+- case-studies/ (all files)
+- modules/compliance-retrieval-assistant/config/ (all YAML files)
+- modules/compliance-retrieval-assistant/docs/response-contract.md
+- modules/compliance-retrieval-assistant/docs/trace-schema.md
+
+Then scan the remaining module READMEs and folder structures.
+
+---
+
+This repo is not a production system. It is a governance-by-design AI workflow architecture with a minimal runnable demo intended for senior AI PM roles in regulated industries (financial services, healthcare, insurance).
+
+Several files were updated tonight and may not yet be committed. Audit what's on disk, not what's in git history.
+
+Your task is NOT to rewrite for style. Your task is to find:
+
+1. Overclaims
+2. Internal inconsistencies
+3. Architectural contradictions
+4. Governance gaps
+5. Documentation vs implementation mismatches
+6. Anything that would weaken credibility in an interview
+
+Context:
+
+The repository is structured as a four-module system:
+
+- Market Intelligence Monitor
+- ROI Decision Engine
+- Requirements Guardrails
+- Compliance Retrieval Assistant (contains runnable minirag demo)
+
+The Compliance Retrieval Assistant:
+
+- Has full architecture defined
+- Has a minimal lexical retrieval demo (minirag.py)
+- Does NOT implement refusal gate, grounding threshold, or access control
+- Explicitly documents those gaps
+
+An evaluation log exists (EVAL_LOG.md) that:
+
+- Separates retrieval performance from decision-layer gaps
+- Shows happy-path success
+- Shows refusal failure (by design)
+- Defines next iteration roadmap
+
+Your Review Should Focus On:
+
+1. Architecture Integrity
+
+- Are the defined components logically coherent?
+- Do control plane and execution layer separation make sense?
+- Are contracts consistent across README, trace schema, and response contract?
+
+2. Governance Claims
+
+- Does the repo ever imply more safety or enforcement than actually implemented?
+- Are "trace before respond" and "refusal over speculation" clearly marked as design vs demo?
+- Any regulatory alignment claims that are overstated?
+
+3. Documentation vs Code Consistency
+
+- Does minirag.py behavior match the documentation?
+- Are file paths accurate?
+- Do any internal links (README cross-references, Related Artifacts sections) point to files that don't exist?
+- Are evaluation claims supported by artifacts?
+- Are status tables truthful?
+
+4. Interview Risk Areas
+
+If you were a skeptical staff engineer or head of AI governance reviewing this:
+
+- What questions would you ask?
+- Where would you push back?
+- What might feel hand-wavy?
+- What might feel overdesigned?
+- What might feel underbuilt?
+- What's the strongest single artifact in this repo?
+- What's the weakest?
+
+5. Structural Improvements
+
+Suggest improvements only if they:
+
+- Increase credibility
+- Improve scannability
+- Reduce ambiguity
+- Tighten architectural clarity
+
+Do NOT:
+
+- Suggest cosmetic language edits
+- Suggest adding random features
+- Suggest expanding scope
+- Suggest model tuning improvements
+- Suggest adding embeddings unless relevant to architecture coherence
+- Audit based on the context description above -- read the actual files
+
+Output Format:
+
+Provide your findings in four sections:
+
+1. Critical Issues (must fix)
+2. Credibility Risks (would trigger tough interview questions)
+3. Minor Improvements (optional tightening)
+4. Overall Assessment (brutally honest)
+
+Be skeptical. Be precise. Avoid flattery.
+
+Assume this repo will be reviewed by a Head of AI Governance at a major financial institution. Be as strict as they would be.
