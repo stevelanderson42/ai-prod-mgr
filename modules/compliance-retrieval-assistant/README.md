@@ -2,29 +2,47 @@
 
 **Governance-First Retrieval for Regulated AI Workflows**
 
-**Status:** 🟢 Architecture complete · Minimal retrieval demo operational · Refusal/grounding layers designed, not yet implemented
+A retrieval module designed for environments where AI answers need to be defensible, not just helpful. This module enforces grounding, citation, traceability, and structured refusal as core platform behaviors — not afterthoughts.
+
 **Module:** 4 of 4 in the [Regulated AI Workflow Architecture & Demos](../../README.md)
 
 ---
 
-## Purpose
+## Decision Flow
 
-This module acts as the **execution layer** for AI-assisted responses in regulated environments. It delivers retrieval-augmented generation (RAG) with strict requirements for **grounding, citation, traceability, and auditability**.
+![Enterprise AI Control Layer — Decision Flow](./docs/images/control-layer-decision-flow.png)
 
-> **Core insight:** In regulated industries, the question isn't "Can the model answer?" — it's "Can we defend the answer?"
+Every query follows a controlled execution path: control plane evaluation → retrieval from approved documents only → grounding validation → one of three explicit outcomes. Every path — including refusal — generates a complete audit trace.
 
 ---
 
-## Start Here
+## Current Status: What's Built vs. What's Designed
 
-1. **Run the demo:**
-   ```bash
-   python modules/compliance-retrieval-assistant/src/minirag.py --query "Is it permissible to guarantee investment returns?"
-   ```
-2. **Read the output:** [`evidence/samples/sample-001/evidence_package.md`](./evidence/samples/sample-001/evidence_package.md)
-3. **Review the contracts:** [Response contract](./docs/response-contract.md) · [Trace schema](./docs/trace-schema.md)
+| Layer | Status |
+|-------|--------|
+| Architecture, contracts, and config | ✅ Complete — 8-component pipeline design, response contracts, trace schema, refusal taxonomy |
+| Control plane demo | ✅ Runnable — deterministic policy classification with audit output |
+| Minimal retrieval demo (`minirag.py`) | ✅ Runnable — lexical retrieval over 10-doc sample corpus, writes a full evidence package |
+| Evaluation scorecard | 🟡 Applied ad-hoc — 6 test case results pending formal run log |
+| Grounding checker, refusal gate, access control | 🧩 Designed and specified, not yet implemented |
+| Full RAG pipeline (embeddings, vector search, LLM) | 🧩 Architecture defined, src/ directories are scaffolding |
+| Cross-module integration with Guardrails | 🔄 Not yet wired |
+
+The retrieval demo reads a similarity threshold from config and uses it as a score cutoff, but the full grounding checker (passage-level support validation) and refusal gate are not yet wired. When evaluated against the module's own scorecard, the demo scores strong on the happy path but correctly fails all five refusal test cases — surfacing exactly where those decision layers are needed. These gaps are by design: the demo proves the retrieval layer works so the next iteration can focus on enforcement.
+
+---
+
+## Run the Demo
+
+```bash
+python modules/compliance-retrieval-assistant/src/minirag.py \
+  --query "Is it permissible to guarantee investment returns?"
+```
 
 **What you'll see:** a user-facing JSON response + an auditor-facing trace + a combined evidence markdown bundle, all linked by `trace_id`.
+
+**Review the output:** [`evidence/samples/sample-001/evidence_package.md`](./evidence/samples/sample-001/evidence_package.md)
+**Review the contracts:** [Response contract](./docs/response-contract.md) · [Trace schema](./docs/trace-schema.md)
 
 ---
 
@@ -37,13 +55,7 @@ Most RAG implementations fail in regulated environments not because of weak retr
 - **Refusal isn't designed in.** Systems answer when they shouldn't, rather than declining gracefully.
 - **Corpus versioning is ignored.** "What did the system know when?" becomes unanswerable.
 
-Without governance at the execution layer, organizations either:
-1. Deploy AI that creates compliance risk, or
-2. Block AI from the workflows where it could add the most value
-
-This module provides a **third path**: constrained execution that enables AI assistance in high-risk contexts without sacrificing trust or accountability.
-
-> **PM DECISION:** In regulated environments, a well-reasoned refusal is more valuable than a confident but ungrounded answer. This module treats refusal as a feature, not a failure.
+Without governance at the execution layer, organizations either deploy AI that creates compliance risk, or block AI from the workflows where it could add the most value. This module provides a third path: constrained execution that enables AI assistance in high-risk contexts without sacrificing trust or accountability.
 
 ---
 
@@ -70,30 +82,12 @@ A partial response indicates that some claims are grounded while others cannot b
 
 ---
 
-## Current Status: What Works Today
-
-This module contains a mix of complete architecture and working code. Being explicit:
-
-| Layer | Status |
-|-------|--------|
-| Architecture, contracts, and config | ✅ Complete — 8-component pipeline design, response contracts, trace schema, refusal taxonomy |
-| Control plane demo | ✅ Runnable — deterministic policy classification with audit output |
-| Minimal retrieval demo (`minirag.py`) | ✅ Runnable — lexical retrieval over 10-doc sample corpus, writes a full evidence package to `evidence/samples/sample-001/` |
-| Evaluation scorecard | 🟡 Applied ad-hoc — 6 test case results pending formal run log |
-| Grounding checker, refusal gate, access control | 🧩 Designed and specified, not yet implemented |
-| Full RAG pipeline (embeddings, vector search, LLM) | 🧩 Architecture defined, src/ directories are scaffolding |
-| Cross-module integration with Guardrails | 🔄 Not yet wired |
-
-The retrieval demo intentionally omits grounding thresholds and refusal logic. When evaluated against the module's own scorecard, it scores strong on the happy path but correctly fails all five refusal test cases — surfacing exactly where the grounding checker, refusal gate, and access control layers are needed. These gaps are by design: the demo proves the retrieval layer works so the next iteration can focus on the decision layers.
-
----
-
 ## Known Gaps / Next Build
 
 | Gap | What's Needed | Priority |
 |-----|---------------|----------|
 | Stopword handling + ambiguity detection | Query preprocessor that flags vague queries before retrieval | High |
-| Grounding threshold | ✅ Partially implemented — `minirag.py` reads `similarity_threshold` from `config/policy-constraints.yaml` and uses it as a score cutoff. Full grounding checker (passage-level support validation) not yet built. | Done (partial) |
+| Grounding threshold enforcement | Partially implemented — `minirag.py` reads `similarity_threshold` from `config/policy-constraints.yaml` as a score cutoff. Full grounding checker (passage-level support validation) not yet built. | Done (partial) |
 | Refusal gate | Decision logic that maps low scores / out-of-scope queries to refusal codes | High |
 | Role-permission enforcement | Access control filtering based on role-permissions.yaml | Medium |
 | Unique evidence output per trace_id | Each run writes to its own directory instead of overwriting sample-001 | Medium |
@@ -165,6 +159,8 @@ The sequence diagram shows how a query flows through the designed system:
 7. **Return response** — Answer + citations OR Refusal + guidance
 
 > **Key pattern:** Trace is committed and confirmed *before* any response is returned to the user. This ensures audit integrity — no interaction exists without a record.
+
+*In the full architecture; the current demo produces traces but does not enforce commit-before-respond semantics.*
 
 ---
 
@@ -313,6 +309,7 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | docs/diagrams/ | Visual architecture artifacts |
 | docs/diagrams/Compliance-Retrieval-Assistant Context Diagram.PNG | System-in-the-world view — external actors and boundaries |
 | docs/diagrams/Compliance-Retrieval-Assistant Component Diagram.PNG | Internal decomposition — pipeline stages and data flow |
+| docs/images/control-layer-decision-flow.png | Decision flow diagram — query to outcome with grounding states |
 | docs/response-contract.md | **User-facing contract** — grounding_status, citations, refusal shape |
 | docs/trace-schema.md | **Audit-facing contract** — trace fields, retention requirements |
 | docs/threat-model.md | Failure modes, attack vectors, mitigations |
@@ -382,20 +379,9 @@ This module is complete when:
 
 ---
 
-## Minimal Runnable Demo
+## Demo Output Details
 
-A deterministic lexical RAG demo that requires **no embeddings, no vector DB, no external APIs, and no LLM calls**. It loads the sample corpus, scores documents via token overlap, and produces a full evidence package.
-
-### Run
-
-```bash
-python modules/compliance-retrieval-assistant/src/minirag.py \
-  --query "Is it permissible to guarantee investment returns?"
-```
-
-### What It Produces
-
-All outputs are written to `evidence/samples/sample-001/`:
+The demo (see [Run the Demo](#run-the-demo) above) uses deterministic lexical retrieval — no embeddings, no vector DB, no external APIs, no LLM calls. It loads the sample corpus, scores documents via token overlap, and writes a full evidence package to `evidence/samples/sample-001/`:
 
 | File | Purpose |
 |------|---------|
@@ -405,7 +391,7 @@ All outputs are written to `evidence/samples/sample-001/`:
 | `trace.json` | Full execution trace (timestamps, scores, document list) |
 | `evidence_package.md` | Human-readable evidence bundle combining all of the above |
 
-This demo exercises the same output contracts defined in [docs/response-contract.md](./docs/response-contract.md) and [docs/trace-schema.md](./docs/trace-schema.md), using purely deterministic retrieval.
+These outputs exercise the same contracts defined in [docs/response-contract.md](./docs/response-contract.md) and [docs/trace-schema.md](./docs/trace-schema.md).
 
 ---
 
