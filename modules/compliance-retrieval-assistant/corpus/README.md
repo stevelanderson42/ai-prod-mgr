@@ -17,7 +17,17 @@ This folder contains the approved corpus that the CRA retrieves from. In a produ
 ```
 corpus/
 ├── README.md              # This file
-└── sample-documents/      # Example documents for testing
+└── sample-documents/      # 10 example documents for testing
+    ├── doc-001-finra-2210-summary.md
+    ├── doc-002-prohibited-phrases.md
+    ├── doc-003-retention-policy.md
+    ├── doc-004-supervisory-escalation.md
+    ├── doc-005-risk-disclosure-template.md
+    ├── doc-006-advisor-guidance.md
+    ├── doc-007-model-governance-notes.md
+    ├── doc-008-books-records-policy.md
+    ├── doc-009-client-communication-standards.md
+    └── doc-010-internal-compliance-faq.md
 ```
 
 ---
@@ -126,7 +136,16 @@ The `sample-documents/` folder contains example documents for testing and demons
 
 | Document | Collection | Purpose |
 |----------|------------|---------|
-| *(To be added)* | | |
+| doc-001-finra-2210-summary.md | regulatory-guidance | FINRA Rule 2210 — Communications with the Public (Summary) |
+| doc-002-prohibited-phrases.md | compliance-policies | Prohibited Phrases in Client Communications |
+| doc-003-retention-policy.md | internal-procedures | Records Retention Policy |
+| doc-004-supervisory-escalation.md | — | Supervisory Escalation Guide |
+| doc-005-risk-disclosure-template.md | compliance-policies | Risk Disclosure Template |
+| doc-006-advisor-guidance.md | compliance-policies | Advisor Guidance — Suitability and Best Interest |
+| doc-007-model-governance-notes.md | compliance-policies | Model Governance Notes — AI in Compliance Workflows |
+| doc-008-books-records-policy.md | — | Books & Records Policy (Simplified) |
+| doc-009-client-communication-standards.md | compliance-policies | Client Communication Standards |
+| doc-010-internal-compliance-faq.md | compliance-policies | Internal Compliance FAQ |
 
 ### Sample Document Format
 
