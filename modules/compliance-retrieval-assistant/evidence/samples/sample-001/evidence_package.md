@@ -1,17 +1,47 @@
 # Evidence Package — sample-001
 
-**Generated:** 2026-02-20T16:11:03.229190+00:00
-**Trace ID:** 8d276799-c5b5-47b5-a226-1268b76892bb
+**Generated:** 2026-02-20T16:13:00.888961+00:00
+**Trace ID:** 9e66b68c-2d23-4953-b489-9a041bae982a
 
 ## Query
 
-> When should I escalate to a supervisor or compliance team if a client communication contains performance guarantees or promissory language or prohibited phrases or misleading claims and what is the expected workflow for pause response capture context route to compliance queue document reason for escalation and holding response
+> What is our books and records policy for maintaining required records of communications and approvals including capture store archive index retrieval retention and prohibited behavior such as conducting business via unapproved channels or deleting altering records and supervisory review documented approvals for retail communications
 
 ## Grounding Status
 
 `PARTIALLY_GROUNDED`
 
 ## Citations
+
+### doc-008 — doc-008-books-records-policy.md
+
+> Prohibited behavior:
+- Conducting business via unapproved channels.
+- Deleting or altering records subject to retention requirements.
+
+### doc-010 — doc-010-internal-compliance-faq.md
+
+> A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains…
+
+### doc-009 — doc-009-client-communication-standards.md
+
+> This document establishes standards for all client-facing communications to ensure consistency, accuracy, and regulatory compliance across channels including email, letters, presentations, and social media.
+
+### doc-002 — doc-002-prohibited-phrases.md
+
+> Advisors must not use language that constitutes a promise or guarantee of future investment performance. Statements such as "this investment will return 10%" or "you are guaranteed to double your money" are strictly prohibited.
+
+### doc-003 — doc-003-retention-policy.md
+
+> This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511.
+
+### doc-007 — doc-007-model-governance-notes.md
+
+> AI systems that generate text for compliance or client-facing purposes must ground their outputs in approved source material. Ungrounded generation — where the model relies on training data rather than retrieved documents — is not permitted for regulated communications.
+
+### doc-001 — doc-001-finra-2210-summary.md
+
+> All communications must be fair and balanced. They must provide a sound basis for evaluating the facts regarding any particular security or type of security, industry, or service. No member may make any false, exaggerated, unwarranted, promissory, or misleading statement or claim in any…
 
 ### doc-004 — doc-004-supervisory-escalation.md
 
@@ -21,52 +51,13 @@
 - The message contains prohibited language or misleading claims.
 - The user is upset and threatens…
 
-### doc-010 — doc-010-internal-compliance-faq.md
-
-> A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains…
-
-### doc-002 — doc-002-prohibited-phrases.md
-
-> This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.
-
-### doc-009 — doc-009-client-communication-standards.md
-
-> 1. **Accuracy** — All statements must be accurate and not misleading. Claims about products, services, or performance must be substantiated.
-2. **Balance** — Communications discussing benefits must give equal prominence to associated risks and limitations.
-3. **Clarity** — Language must be clear…
-
 ### doc-005 — doc-005-risk-disclosure-template.md
 
-> Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance…
-
-### doc-007 — doc-007-model-governance-notes.md
-
-> Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness.
-
-### doc-001 — doc-001-finra-2210-summary.md
-
-> All communications must be fair and balanced. They must provide a sound basis for evaluating the facts regarding any particular security or type of security, industry, or service. No member may make any false, exaggerated, unwarranted, promissory, or misleading statement or claim in any…
+> > Investing involves risk, including the possible loss of principal. Past performance is not indicative of future results. There is no guarantee that any investment strategy will achieve its objectives. The value of investments may fluctuate, and investors may receive back less than they invested.
 
 ### doc-006 — doc-006-advisor-guidance.md
 
 > Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including:
-
-### doc-008 — doc-008-books-records-policy.md
-
-> Key practices:
-- Capture communications that relate to business activities.
-- Store records in compliant archival systems.
-- Maintain indexes and retrieval capabilities.
-
-### doc-003 — doc-003-retention-policy.md
-
-> | Record Type | Minimum Retention | Regulatory Basis |
-|---|---|---|
-| Client communications | 3 years | SEC 17a-4(b) |
-| Trade confirmations | 3 years | SEC 17a-4(b) |
-| Account records | 6 years | SEC 17a-4(a) |
-| Written complaints | 4 years | FINRA 4513 |
-| Supervisory procedures | 3 years…
 
 ## Retrieval Summary
 
@@ -78,16 +69,16 @@
 
 | Doc ID | Score |
 |--------|-------|
-| doc-004 | 0.8974 |
-| doc-010 | 0.4872 |
-| doc-002 | 0.4359 |
-| doc-009 | 0.4103 |
-| doc-005 | 0.359 |
-| doc-007 | 0.359 |
-| doc-001 | 0.3333 |
-| doc-006 | 0.2564 |
-| doc-008 | 0.1795 |
-| doc-003 | 0.1538 |
+| doc-008 | 0.75 |
+| doc-010 | 0.4167 |
+| doc-009 | 0.3611 |
+| doc-002 | 0.2778 |
+| doc-003 | 0.2778 |
+| doc-007 | 0.25 |
+| doc-001 | 0.2222 |
+| doc-004 | 0.2222 |
+| doc-005 | 0.2222 |
+| doc-006 | 0.2222 |
 
 ---
 *Generated by minirag.py — deterministic lexical RAG demo*

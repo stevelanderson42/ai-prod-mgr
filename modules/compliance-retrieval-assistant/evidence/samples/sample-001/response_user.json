@@ -1,16 +1,16 @@
 {
-  "trace_id": "8d276799-c5b5-47b5-a226-1268b76892bb",
-  "timestamp": "2026-02-20T16:11:03.229155+00:00",
-  "query": "When should I escalate to a supervisor or compliance team if a client communication contains performance guarantees or promissory language or prohibited phrases or misleading claims and what is the expected workflow for pause response capture context route to compliance queue document reason for escalation and holding response",
+  "trace_id": "9e66b68c-2d23-4953-b489-9a041bae982a",
+  "timestamp": "2026-02-20T16:13:00.888933+00:00",
+  "query": "What is our books and records policy for maintaining required records of communications and approvals including capture store archive index retrieval retention and prohibited behavior such as conducting business via unapproved channels or deleting altering records and supervisory review documented approvals for retail communications",
   "grounding_status": "PARTIALLY_GROUNDED",
-  "answer": "Escalate to a supervisor/compliance when:\n- The communication includes performance guarantees or promissory language.\n- The user requests personalized investment advice without suitability context.\n- The message contains prohibited language or misleading claims.\n- The user is upset and threatens\u2026 A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains\u2026 This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy. 1. **Accuracy** \u2014 All statements must be accurate and not misleading. Claims about products, services, or performance must be substantiated.\n2. **Balance** \u2014 Communications discussing benefits must give equal prominence to associated risks and limitations.\n3. **Clarity** \u2014 Language must be clear\u2026 Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance\u2026 Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness. All communications must be fair and balanced. They must provide a sound basis for evaluating the facts regarding any particular security or type of security, industry, or service. No member may make any false, exaggerated, unwarranted, promissory, or misleading statement or claim in any\u2026 Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including: Key practices:\n- Capture communications that relate to business activities.\n- Store records in compliant archival systems.\n- Maintain indexes and retrieval capabilities. | Record Type | Minimum Retention | Regulatory Basis |\n|---|---|---|\n| Client communications | 3 years | SEC 17a-4(b) |\n| Trade confirmations | 3 years | SEC 17a-4(b) |\n| Account records | 6 years | SEC 17a-4(a) |\n| Written complaints | 4 years | FINRA 4513 |\n| Supervisory procedures | 3 years\u2026",
+  "answer": "Prohibited behavior:\n- Conducting business via unapproved channels.\n- Deleting or altering records subject to retention requirements. A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains\u2026 This document establishes standards for all client-facing communications to ensure consistency, accuracy, and regulatory compliance across channels including email, letters, presentations, and social media. Advisors must not use language that constitutes a promise or guarantee of future investment performance. Statements such as \"this investment will return 10%\" or \"you are guaranteed to double your money\" are strictly prohibited. This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511. AI systems that generate text for compliance or client-facing purposes must ground their outputs in approved source material. Ungrounded generation \u2014 where the model relies on training data rather than retrieved documents \u2014 is not permitted for regulated communications. All communications must be fair and balanced. They must provide a sound basis for evaluating the facts regarding any particular security or type of security, industry, or service. No member may make any false, exaggerated, unwarranted, promissory, or misleading statement or claim in any\u2026 Escalate to a supervisor/compliance when:\n- The communication includes performance guarantees or promissory language.\n- The user requests personalized investment advice without suitability context.\n- The message contains prohibited language or misleading claims.\n- The user is upset and threatens\u2026 > Investing involves risk, including the possible loss of principal. Past performance is not indicative of future results. There is no guarantee that any investment strategy will achieve its objectives. The value of investments may fluctuate, and investors may receive back less than they invested. Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including:",
   "citations": [
     {
       "citation_id": 1,
-      "source_id": "doc-004",
-      "source_title": "doc-004-supervisory-escalation.md",
+      "source_id": "doc-008",
+      "source_title": "doc-008-books-records-policy.md",
       "effective_date": "2025-01-01",
-      "passage": "Escalate to a supervisor/compliance when:\n- The communication includes performance guarantees or promissory language.\n- The user requests personalized investment advice without suitability context.\n- The message contains prohibited language or misleading claims.\n- The user is upset and threatens\u2026",
+      "passage": "Prohibited behavior:\n- Conducting business via unapproved channels.\n- Deleting or altering records subject to retention requirements.",
       "collection": "internal-procedures"
     },
     {
@@ -23,34 +23,34 @@
     },
     {
       "citation_id": 3,
-      "source_id": "doc-002",
-      "source_title": "doc-002-prohibited-phrases.md",
-      "effective_date": "2024-03-15",
-      "passage": "This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.",
+      "source_id": "doc-009",
+      "source_title": "doc-009-client-communication-standards.md",
+      "effective_date": "2024-03-01",
+      "passage": "This document establishes standards for all client-facing communications to ensure consistency, accuracy, and regulatory compliance across channels including email, letters, presentations, and social media.",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 4,
-      "source_id": "doc-009",
-      "source_title": "doc-009-client-communication-standards.md",
-      "effective_date": "2024-03-01",
-      "passage": "1. **Accuracy** \u2014 All statements must be accurate and not misleading. Claims about products, services, or performance must be substantiated.\n2. **Balance** \u2014 Communications discussing benefits must give equal prominence to associated risks and limitations.\n3. **Clarity** \u2014 Language must be clear\u2026",
+      "source_id": "doc-002",
+      "source_title": "doc-002-prohibited-phrases.md",
+      "effective_date": "2024-03-15",
+      "passage": "Advisors must not use language that constitutes a promise or guarantee of future investment performance. Statements such as \"this investment will return 10%\" or \"you are guaranteed to double your money\" are strictly prohibited.",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 5,
-      "source_id": "doc-005",
-      "source_title": "doc-005-risk-disclosure-template.md",
-      "effective_date": "2024-01-15",
-      "passage": "Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance\u2026",
-      "collection": "compliance-policies"
+      "source_id": "doc-003",
+      "source_title": "doc-003-retention-policy.md",
+      "effective_date": "2024-01-01",
+      "passage": "This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511.",
+      "collection": "internal-procedures"
     },
     {
       "citation_id": 6,
       "source_id": "doc-007",
       "source_title": "doc-007-model-governance-notes.md",
       "effective_date": "2024-05-01",
-      "passage": "Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness.",
+      "passage": "AI systems that generate text for compliance or client-facing purposes must ground their outputs in approved source material. Ungrounded generation \u2014 where the model relies on training data rather than retrieved documents \u2014 is not permitted for regulated communications.",
       "collection": "compliance-policies"
     },
     {
@@ -63,27 +63,27 @@
     },
     {
       "citation_id": 8,
+      "source_id": "doc-004",
+      "source_title": "doc-004-supervisory-escalation.md",
+      "effective_date": "2025-01-01",
+      "passage": "Escalate to a supervisor/compliance when:\n- The communication includes performance guarantees or promissory language.\n- The user requests personalized investment advice without suitability context.\n- The message contains prohibited language or misleading claims.\n- The user is upset and threatens\u2026",
+      "collection": "internal-procedures"
+    },
+    {
+      "citation_id": 9,
+      "source_id": "doc-005",
+      "source_title": "doc-005-risk-disclosure-template.md",
+      "effective_date": "2024-01-15",
+      "passage": "> Investing involves risk, including the possible loss of principal. Past performance is not indicative of future results. There is no guarantee that any investment strategy will achieve its objectives. The value of investments may fluctuate, and investors may receive back less than they invested.",
+      "collection": "compliance-policies"
+    },
+    {
+      "citation_id": 10,
       "source_id": "doc-006",
       "source_title": "doc-006-advisor-guidance.md",
       "effective_date": "2024-04-01",
       "passage": "Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including:",
       "collection": "compliance-policies"
-    },
-    {
-      "citation_id": 9,
-      "source_id": "doc-008",
-      "source_title": "doc-008-books-records-policy.md",
-      "effective_date": "2025-01-01",
-      "passage": "Key practices:\n- Capture communications that relate to business activities.\n- Store records in compliant archival systems.\n- Maintain indexes and retrieval capabilities.",
-      "collection": "internal-procedures"
-    },
-    {
-      "citation_id": 10,
-      "source_id": "doc-003",
-      "source_title": "doc-003-retention-policy.md",
-      "effective_date": "2024-01-01",
-      "passage": "| Record Type | Minimum Retention | Regulatory Basis |\n|---|---|---|\n| Client communications | 3 years | SEC 17a-4(b) |\n| Trade confirmations | 3 years | SEC 17a-4(b) |\n| Account records | 6 years | SEC 17a-4(a) |\n| Written complaints | 4 years | FINRA 4513 |\n| Supervisory procedures | 3 years\u2026",
-      "collection": "internal-procedures"
     }
   ],
   "refusal": null,
