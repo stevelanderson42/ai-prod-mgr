@@ -1,92 +1,86 @@
 # Evidence Package — sample-001
 
-**Generated:** 2026-02-19T16:47:47.189629+00:00
-**Trace ID:** 2f092f56-827d-464b-a912-4acf8992b541
+**Generated:** 2026-02-20T16:10:19.953075+00:00
+**Trace ID:** e4a70ede-d674-475b-a596-4fdd7c4cacba
 
 ## Query
 
-> Is it permissible to guarantee investment returns?
+> What are the rules for communications with the public under FINRA rule 2210 regarding fair and balanced content standards for retail communications correspondence and institutional communications with prohibited phrases and supervisory review approval requirements and filing obligations
 
 ## Grounding Status
 
-`FULLY_GROUNDED`
+`PARTIALLY_GROUNDED`
 
 ## Citations
 
-### doc-002-prohibited-phrases — doc-002-prohibited-phrases.md
+### doc-001 — doc-001-finra-2210-summary.md
 
-> - "guaranteed returns"
-- "risk-free investment"
-- "you will earn"
-- "guaranteed to increase"
-- "no possibility of loss"
-- "safe investment" (when referring to securities)
-- "guaranteed profit"
-- "promise you will make money"
-- "cannot lose"
-- "assured income"
+> FINRA Rule 2210 governs communications by member firms with the public. It establishes content standards, approval requirements, and filing obligations for retail communications, correspondence, and institutional communications.
 
-### doc-005-risk-disclosure-template — doc-005-risk-disclosure-template.md
+### doc-010 — doc-010-internal-compliance-faq.md
 
-> > Alternative investments involve a high degree of risk and are suitable only for sophisticated investors. These investments are illiquid, may have limited transparency, and there is no guarantee of returns. Investors may lose their entire investment.
+> A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains…
 
-### doc-009-client-communication-standards — doc-009-client-communication-standards.md
+### doc-009 — doc-009-client-communication-standards.md
 
-> When discussing investment performance:
-- Always include appropriate time periods
-- Use standardized calculation methods
-- Include "Past performance is not indicative of future results" disclosure
-- Never guarantee or promise future investment returns or outcomes
-- Do not cherry-pick favorable time…
+> Social media posts are subject to the same standards as all other communications. Informal tone does not exempt content from compliance requirements. All social media used for business purposes must be archived.
 
-### doc-010-internal-compliance-faq — doc-010-internal-compliance-faq.md
+### doc-003 — doc-003-retention-policy.md
 
-> A: No. You may not describe any security or investment strategy as safe, guaranteed, or risk-free. All investments carry risk, and representing otherwise violates FINRA Rule 2210 and firm policy. Even government bonds carry interest rate risk and inflation risk. Use factual language about…
+> This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511.
 
-### doc-001-finra-2210-summary — doc-001-finra-2210-summary.md
+### doc-006 — doc-006-advisor-guidance.md
 
-> FINRA has brought numerous enforcement actions for violations of Rule 2210, including cases involving promissory statements about investment returns, misleading social media posts, and failure to disclose material risks.
+> This guidance outlines advisor obligations under Regulation Best Interest (Reg BI) and FINRA suitability requirements when making investment recommendations.
 
-### doc-006-advisor-guidance — doc-006-advisor-guidance.md
+### doc-002 — doc-002-prohibited-phrases.md
 
-> Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including:
+> This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.
 
-### doc-004-supervisory-escalation — doc-004-supervisory-escalation.md
+### doc-005 — doc-005-risk-disclosure-template.md
 
-> This document defines when and how compliance matters must be escalated to supervisory personnel. Prompt escalation is essential for regulatory compliance and risk management.
+> Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance…
 
-### doc-008-books-records-policy — doc-008-books-records-policy.md
+### doc-007 — doc-007-model-governance-notes.md
 
-> This policy ensures the firm meets its obligations under SEC Rule 17a-3 (records to be made) and Rule 17a-4 (records to be preserved) for maintaining accurate and complete books and records.
+> 1. **Validation before deployment** — All models must undergo independent validation before production use.
+2. **Ongoing monitoring** — Model performance must be monitored continuously with defined escalation thresholds.
+3. **Documentation** — Model purpose, methodology, limitations, and…
 
-### doc-007-model-governance-notes — doc-007-model-governance-notes.md
+### doc-008 — doc-008-books-records-policy.md
 
-> Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness.
+> Supervision:
+- Supervisory review must be documented.
+- Approvals for retail communications must be recorded when required.
 
-### doc-003-retention-policy — doc-003-retention-policy.md
+### doc-004 — doc-004-supervisory-escalation.md
 
-> 
+> Escalate to a supervisor/compliance when:
+- The communication includes performance guarantees or promissory language.
+- The user requests personalized investment advice without suitability context.
+- The message contains prohibited language or misleading claims.
+- The user is upset and threatens…
 
 ## Retrieval Summary
 
 - Documents loaded: 10
 - Passages retrieved: 10
-- Above threshold: 4
+- Above threshold: 1
 
 ## Top Scores
 
 | Doc ID | Score |
 |--------|-------|
-| doc-002-prohibited-phrases | 0.8571 |
-| doc-005-risk-disclosure-template | 0.7143 |
-| doc-009-client-communication-standards | 0.7143 |
-| doc-010-internal-compliance-faq | 0.7143 |
-| doc-001-finra-2210-summary | 0.5714 |
-| doc-006-advisor-guidance | 0.5714 |
-| doc-004-supervisory-escalation | 0.4286 |
-| doc-008-books-records-policy | 0.4286 |
-| doc-007-model-governance-notes | 0.2857 |
-| doc-003-retention-policy | 0.0 |
+| doc-001 | 0.7931 |
+| doc-010 | 0.5862 |
+| doc-009 | 0.4138 |
+| doc-003 | 0.3793 |
+| doc-006 | 0.3448 |
+| doc-002 | 0.3103 |
+| doc-005 | 0.3103 |
+| doc-007 | 0.3103 |
+| doc-008 | 0.2759 |
+| doc-004 | 0.1724 |
 
 ---
 *Generated by minirag.py — deterministic lexical RAG demo*

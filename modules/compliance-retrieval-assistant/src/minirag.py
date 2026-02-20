@@ -50,13 +50,24 @@ def unique_tokens(text: str) -> set[str]:
 # Corpus loader
 # ---------------------------------------------------------------------------
 
+def parse_metadata(content: str) -> dict:
+    """Extract **key:** value metadata fields from document content."""
+    meta = {}
+    for match in re.finditer(r"\*\*(\w+):\*\*\s*(.+)", content):
+        meta[match.group(1).strip()] = match.group(2).strip()
+    return meta
+
+
 def load_corpus(corpus_dir: Path) -> list[dict]:
     docs = []
     for fp in sorted(corpus_dir.glob("doc-*.md")):
         content = fp.read_text(encoding="utf-8")
+        meta = parse_metadata(content)
         docs.append({
-            "doc_id": fp.stem,
+            "doc_id": meta.get("doc_id", fp.stem),
             "filename": fp.name,
+            "collection": meta.get("collection"),
+            "effective_date": meta.get("effective_date"),
             "content": content,
         })
     return docs
@@ -141,9 +152,9 @@ def build_user_response(trace_id: str, query: str, top_docs: list[dict],
             "citation_id": idx,
             "source_id": doc["doc_id"],
             "source_title": doc["filename"],
-            "effective_date": None,
+            "effective_date": doc.get("effective_date"),
             "passage": snippet,
-            "collection": "compliance-policies",
+            "collection": doc.get("collection", "unknown"),
         })
         answer_parts.append(snippet)
 

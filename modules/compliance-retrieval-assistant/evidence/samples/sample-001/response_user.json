@@ -1,89 +1,89 @@
 {
-  "trace_id": "2f092f56-827d-464b-a912-4acf8992b541",
-  "timestamp": "2026-02-19T16:47:47.189602+00:00",
-  "query": "Is it permissible to guarantee investment returns?",
-  "grounding_status": "FULLY_GROUNDED",
-  "answer": "- \"guaranteed returns\"\n- \"risk-free investment\"\n- \"you will earn\"\n- \"guaranteed to increase\"\n- \"no possibility of loss\"\n- \"safe investment\" (when referring to securities)\n- \"guaranteed profit\"\n- \"promise you will make money\"\n- \"cannot lose\"\n- \"assured income\" > Alternative investments involve a high degree of risk and are suitable only for sophisticated investors. These investments are illiquid, may have limited transparency, and there is no guarantee of returns. Investors may lose their entire investment. When discussing investment performance:\n- Always include appropriate time periods\n- Use standardized calculation methods\n- Include \"Past performance is not indicative of future results\" disclosure\n- Never guarantee or promise future investment returns or outcomes\n- Do not cherry-pick favorable time\u2026 A: No. You may not describe any security or investment strategy as safe, guaranteed, or risk-free. All investments carry risk, and representing otherwise violates FINRA Rule 2210 and firm policy. Even government bonds carry interest rate risk and inflation risk. Use factual language about\u2026 FINRA has brought numerous enforcement actions for violations of Rule 2210, including cases involving promissory statements about investment returns, misleading social media posts, and failure to disclose material risks. Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including: This document defines when and how compliance matters must be escalated to supervisory personnel. Prompt escalation is essential for regulatory compliance and risk management. This policy ensures the firm meets its obligations under SEC Rule 17a-3 (records to be made) and Rule 17a-4 (records to be preserved) for maintaining accurate and complete books and records. Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness. ",
+  "trace_id": "e4a70ede-d674-475b-a596-4fdd7c4cacba",
+  "timestamp": "2026-02-20T16:10:19.953033+00:00",
+  "query": "What are the rules for communications with the public under FINRA rule 2210 regarding fair and balanced content standards for retail communications correspondence and institutional communications with prohibited phrases and supervisory review approval requirements and filing obligations",
+  "grounding_status": "PARTIALLY_GROUNDED",
+  "answer": "FINRA Rule 2210 governs communications by member firms with the public. It establishes content standards, approval requirements, and filing obligations for retail communications, correspondence, and institutional communications. A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains\u2026 Social media posts are subject to the same standards as all other communications. Informal tone does not exempt content from compliance requirements. All social media used for business purposes must be archived. This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511. This guidance outlines advisor obligations under Regulation Best Interest (Reg BI) and FINRA suitability requirements when making investment recommendations. This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy. Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance\u2026 1. **Validation before deployment** \u2014 All models must undergo independent validation before production use.\n2. **Ongoing monitoring** \u2014 Model performance must be monitored continuously with defined escalation thresholds.\n3. **Documentation** \u2014 Model purpose, methodology, limitations, and\u2026 Supervision:\n- Supervisory review must be documented.\n- Approvals for retail communications must be recorded when required. Escalate to a supervisor/compliance when:\n- The communication includes performance guarantees or promissory language.\n- The user requests personalized investment advice without suitability context.\n- The message contains prohibited language or misleading claims.\n- The user is upset and threatens\u2026",
   "citations": [
     {
       "citation_id": 1,
-      "source_id": "doc-002-prohibited-phrases",
-      "source_title": "doc-002-prohibited-phrases.md",
-      "effective_date": null,
-      "passage": "- \"guaranteed returns\"\n- \"risk-free investment\"\n- \"you will earn\"\n- \"guaranteed to increase\"\n- \"no possibility of loss\"\n- \"safe investment\" (when referring to securities)\n- \"guaranteed profit\"\n- \"promise you will make money\"\n- \"cannot lose\"\n- \"assured income\"",
-      "collection": "compliance-policies"
+      "source_id": "doc-001",
+      "source_title": "doc-001-finra-2210-summary.md",
+      "effective_date": "2023-06-01",
+      "passage": "FINRA Rule 2210 governs communications by member firms with the public. It establishes content standards, approval requirements, and filing obligations for retail communications, correspondence, and institutional communications.",
+      "collection": "regulatory-guidance"
     },
     {
       "citation_id": 2,
-      "source_id": "doc-005-risk-disclosure-template",
-      "source_title": "doc-005-risk-disclosure-template.md",
-      "effective_date": null,
-      "passage": "> Alternative investments involve a high degree of risk and are suitable only for sophisticated investors. These investments are illiquid, may have limited transparency, and there is no guarantee of returns. Investors may lose their entire investment.",
+      "source_id": "doc-010",
+      "source_title": "doc-010-internal-compliance-faq.md",
+      "effective_date": "2024-06-01",
+      "passage": "A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains\u2026",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 3,
-      "source_id": "doc-009-client-communication-standards",
+      "source_id": "doc-009",
       "source_title": "doc-009-client-communication-standards.md",
-      "effective_date": null,
-      "passage": "When discussing investment performance:\n- Always include appropriate time periods\n- Use standardized calculation methods\n- Include \"Past performance is not indicative of future results\" disclosure\n- Never guarantee or promise future investment returns or outcomes\n- Do not cherry-pick favorable time\u2026",
+      "effective_date": "2024-03-01",
+      "passage": "Social media posts are subject to the same standards as all other communications. Informal tone does not exempt content from compliance requirements. All social media used for business purposes must be archived.",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 4,
-      "source_id": "doc-010-internal-compliance-faq",
-      "source_title": "doc-010-internal-compliance-faq.md",
-      "effective_date": null,
-      "passage": "A: No. You may not describe any security or investment strategy as safe, guaranteed, or risk-free. All investments carry risk, and representing otherwise violates FINRA Rule 2210 and firm policy. Even government bonds carry interest rate risk and inflation risk. Use factual language about\u2026",
-      "collection": "compliance-policies"
+      "source_id": "doc-003",
+      "source_title": "doc-003-retention-policy.md",
+      "effective_date": "2024-01-01",
+      "passage": "This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511.",
+      "collection": "internal-procedures"
     },
     {
       "citation_id": 5,
-      "source_id": "doc-001-finra-2210-summary",
-      "source_title": "doc-001-finra-2210-summary.md",
-      "effective_date": null,
-      "passage": "FINRA has brought numerous enforcement actions for violations of Rule 2210, including cases involving promissory statements about investment returns, misleading social media posts, and failure to disclose material risks.",
+      "source_id": "doc-006",
+      "source_title": "doc-006-advisor-guidance.md",
+      "effective_date": "2024-04-01",
+      "passage": "This guidance outlines advisor obligations under Regulation Best Interest (Reg BI) and FINRA suitability requirements when making investment recommendations.",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 6,
-      "source_id": "doc-006-advisor-guidance",
-      "source_title": "doc-006-advisor-guidance.md",
-      "effective_date": null,
-      "passage": "Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including:",
+      "source_id": "doc-002",
+      "source_title": "doc-002-prohibited-phrases.md",
+      "effective_date": "2024-03-15",
+      "passage": "This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 7,
-      "source_id": "doc-004-supervisory-escalation",
-      "source_title": "doc-004-supervisory-escalation.md",
-      "effective_date": null,
-      "passage": "This document defines when and how compliance matters must be escalated to supervisory personnel. Prompt escalation is essential for regulatory compliance and risk management.",
+      "source_id": "doc-005",
+      "source_title": "doc-005-risk-disclosure-template.md",
+      "effective_date": "2024-01-15",
+      "passage": "Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance\u2026",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 8,
-      "source_id": "doc-008-books-records-policy",
-      "source_title": "doc-008-books-records-policy.md",
-      "effective_date": null,
-      "passage": "This policy ensures the firm meets its obligations under SEC Rule 17a-3 (records to be made) and Rule 17a-4 (records to be preserved) for maintaining accurate and complete books and records.",
+      "source_id": "doc-007",
+      "source_title": "doc-007-model-governance-notes.md",
+      "effective_date": "2024-05-01",
+      "passage": "1. **Validation before deployment** \u2014 All models must undergo independent validation before production use.\n2. **Ongoing monitoring** \u2014 Model performance must be monitored continuously with defined escalation thresholds.\n3. **Documentation** \u2014 Model purpose, methodology, limitations, and\u2026",
       "collection": "compliance-policies"
     },
     {
       "citation_id": 9,
-      "source_id": "doc-007-model-governance-notes",
-      "source_title": "doc-007-model-governance-notes.md",
-      "effective_date": null,
-      "passage": "Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness.",
-      "collection": "compliance-policies"
+      "source_id": "doc-008",
+      "source_title": "doc-008-books-records-policy.md",
+      "effective_date": "2025-01-01",
+      "passage": "Supervision:\n- Supervisory review must be documented.\n- Approvals for retail communications must be recorded when required.",
+      "collection": "internal-procedures"
     },
     {
       "citation_id": 10,
-      "source_id": "doc-003-retention-policy",
-      "source_title": "doc-003-retention-policy.md",
-      "effective_date": null,
-      "passage": "",
-      "collection": "compliance-policies"
+      "source_id": "doc-004",
+      "source_title": "doc-004-supervisory-escalation.md",
+      "effective_date": "2025-01-01",
+      "passage": "Escalate to a supervisor/compliance when:\n- The communication includes performance guarantees or promissory language.\n- The user requests personalized investment advice without suitability context.\n- The message contains prohibited language or misleading claims.\n- The user is upset and threatens\u2026",
+      "collection": "internal-procedures"
     }
   ],
   "refusal": null,

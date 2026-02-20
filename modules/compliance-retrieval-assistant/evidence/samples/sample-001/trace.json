@@ -1,105 +1,182 @@
 {
-  "trace_id": "2f092f56-827d-464b-a912-4acf8992b541",
-  "run_timestamp": "2026-02-19T16:47:47.189629+00:00",
-  "query": "Is it permissible to guarantee investment returns?",
+  "trace_id": "e4a70ede-d674-475b-a596-4fdd7c4cacba",
+  "run_timestamp": "2026-02-20T16:10:19.953075+00:00",
+  "query": "What are the rules for communications with the public under FINRA rule 2210 regarding fair and balanced content standards for retail communications correspondence and institutional communications with prohibited phrases and supervisory review approval requirements and filing obligations",
   "corpus_dir": "C:\\Users\\Steve\\Documents\\GitHub\\ai-prod-mgr\\modules\\compliance-retrieval-assistant\\corpus\\sample-documents",
   "total_documents_loaded": 10,
   "scores": [
     {
-      "doc_id": "doc-002-prohibited-phrases",
-      "score": 0.8571,
+      "doc_id": "doc-001",
+      "score": 0.7931,
       "matched_tokens": [
-        "guarantee",
-        "investment",
-        "is",
-        "permissible",
-        "returns",
-        "to"
+        "2210",
+        "and",
+        "approval",
+        "are",
+        "balanced",
+        "communications",
+        "content",
+        "correspondence",
+        "fair",
+        "filing",
+        "finra",
+        "for",
+        "institutional",
+        "obligations",
+        "prohibited",
+        "public",
+        "regarding",
+        "requirements",
+        "retail",
+        "rule",
+        "standards",
+        "the",
+        "with"
       ]
     },
     {
-      "doc_id": "doc-005-risk-disclosure-template",
-      "score": 0.7143,
+      "doc_id": "doc-010",
+      "score": 0.5862,
       "matched_tokens": [
-        "guarantee",
-        "investment",
-        "is",
-        "returns",
-        "to"
+        "2210",
+        "and",
+        "approval",
+        "are",
+        "communications",
+        "content",
+        "correspondence",
+        "finra",
+        "for",
+        "prohibited",
+        "regarding",
+        "retail",
+        "review",
+        "rule",
+        "the",
+        "what",
+        "with"
       ]
     },
     {
-      "doc_id": "doc-009-client-communication-standards",
-      "score": 0.7143,
+      "doc_id": "doc-009",
+      "score": 0.4138,
       "matched_tokens": [
-        "guarantee",
-        "investment",
-        "is",
-        "returns",
-        "to"
+        "and",
+        "approval",
+        "are",
+        "communications",
+        "content",
+        "for",
+        "institutional",
+        "requirements",
+        "retail",
+        "review",
+        "standards",
+        "the"
       ]
     },
     {
-      "doc_id": "doc-010-internal-compliance-faq",
-      "score": 0.7143,
+      "doc_id": "doc-003",
+      "score": 0.3793,
       "matched_tokens": [
-        "investment",
-        "is",
-        "it",
-        "returns",
-        "to"
+        "2210",
+        "and",
+        "approval",
+        "communications",
+        "finra",
+        "for",
+        "requirements",
+        "rule",
+        "supervisory",
+        "the",
+        "with"
       ]
     },
     {
-      "doc_id": "doc-001-finra-2210-summary",
-      "score": 0.5714,
+      "doc_id": "doc-006",
+      "score": 0.3448,
       "matched_tokens": [
-        "investment",
-        "it",
-        "returns",
-        "to"
+        "and",
+        "fair",
+        "finra",
+        "for",
+        "obligations",
+        "prohibited",
+        "requirements",
+        "retail",
+        "the",
+        "under"
       ]
     },
     {
-      "doc_id": "doc-006-advisor-guidance",
-      "score": 0.5714,
+      "doc_id": "doc-002",
+      "score": 0.3103,
       "matched_tokens": [
-        "investment",
-        "is",
-        "returns",
-        "to"
+        "2210",
+        "and",
+        "are",
+        "communications",
+        "finra",
+        "phrases",
+        "prohibited",
+        "rule",
+        "the"
       ]
     },
     {
-      "doc_id": "doc-004-supervisory-escalation",
-      "score": 0.4286,
+      "doc_id": "doc-005",
+      "score": 0.3103,
       "matched_tokens": [
-        "investment",
-        "is",
-        "to"
+        "2210",
+        "and",
+        "are",
+        "communications",
+        "finra",
+        "for",
+        "rule",
+        "the",
+        "under"
       ]
     },
     {
-      "doc_id": "doc-008-books-records-policy",
-      "score": 0.4286,
+      "doc_id": "doc-007",
+      "score": 0.3103,
       "matched_tokens": [
-        "investment",
-        "is",
-        "to"
+        "and",
+        "approval",
+        "communications",
+        "content",
+        "for",
+        "requirements",
+        "review",
+        "the",
+        "with"
       ]
     },
     {
-      "doc_id": "doc-007-model-governance-notes",
-      "score": 0.2857,
+      "doc_id": "doc-008",
+      "score": 0.2759,
       "matched_tokens": [
-        "is",
-        "to"
+        "and",
+        "communications",
+        "for",
+        "prohibited",
+        "requirements",
+        "retail",
+        "review",
+        "supervisory"
       ]
     },
     {
-      "doc_id": "doc-003-retention-policy",
-      "score": 0.0,
-      "matched_tokens": []
+      "doc_id": "doc-004",
+      "score": 0.1724,
+      "matched_tokens": [
+        "and",
+        "for",
+        "prohibited",
+        "supervisory",
+        "the"
+      ]
     }
   ]
 }

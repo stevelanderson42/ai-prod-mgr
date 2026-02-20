@@ -1,63 +1,60 @@
 {
-  "trace_id": "2f092f56-827d-464b-a912-4acf8992b541",
-  "timestamp": "2026-02-19T16:47:47.189619+00:00",
+  "trace_id": "e4a70ede-d674-475b-a596-4fdd7c4cacba",
+  "timestamp": "2026-02-20T16:10:19.953063+00:00",
   "corpus_release_id": "sample-docs-v1",
   "retrieval": {
     "total_documents": 10,
     "passages_retrieved": 10,
-    "passages_above_threshold": 4,
+    "passages_above_threshold": 1,
     "similarity_threshold": 0.7,
     "top_scores": [
       {
-        "doc_id": "doc-002-prohibited-phrases",
-        "score": 0.8571
+        "doc_id": "doc-001",
+        "score": 0.7931
       },
       {
-        "doc_id": "doc-005-risk-disclosure-template",
-        "score": 0.7143
+        "doc_id": "doc-010",
+        "score": 0.5862
       },
       {
-        "doc_id": "doc-009-client-communication-standards",
-        "score": 0.7143
+        "doc_id": "doc-009",
+        "score": 0.4138
       },
       {
-        "doc_id": "doc-010-internal-compliance-faq",
-        "score": 0.7143
+        "doc_id": "doc-003",
+        "score": 0.3793
       },
       {
-        "doc_id": "doc-001-finra-2210-summary",
-        "score": 0.5714
+        "doc_id": "doc-006",
+        "score": 0.3448
       },
       {
-        "doc_id": "doc-006-advisor-guidance",
-        "score": 0.5714
+        "doc_id": "doc-002",
+        "score": 0.3103
       },
       {
-        "doc_id": "doc-004-supervisory-escalation",
-        "score": 0.4286
+        "doc_id": "doc-005",
+        "score": 0.3103
       },
       {
-        "doc_id": "doc-008-books-records-policy",
-        "score": 0.4286
+        "doc_id": "doc-007",
+        "score": 0.3103
       },
       {
-        "doc_id": "doc-007-model-governance-notes",
-        "score": 0.2857
+        "doc_id": "doc-008",
+        "score": 0.2759
       },
       {
-        "doc_id": "doc-003-retention-policy",
-        "score": 0.0
+        "doc_id": "doc-004",
+        "score": 0.1724
       }
     ]
   },
   "decision": {
-    "grounding_status": "FULLY_GROUNDED",
+    "grounding_status": "PARTIALLY_GROUNDED",
     "refusal_code": null,
     "rationale_codes": [
-      "GROUNDED_BY_DOC-002-PROHIBITED-PHRASES",
-      "GROUNDED_BY_DOC-005-RISK-DISCLOSURE-TEMPLATE",
-      "GROUNDED_BY_DOC-009-CLIENT-COMMUNICATION-STANDARDS",
-      "GROUNDED_BY_DOC-010-INTERNAL-COMPLIANCE-FAQ"
+      "GROUNDED_BY_DOC-001"
     ]
   }
 }
