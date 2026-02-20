@@ -34,15 +34,15 @@ The retrieval demo reads a similarity threshold from config and uses it as a sco
 
 ## Run the Demo
 
+**See the output:** [`evidence/samples/sample-001/evidence_package.md`](./evidence/samples/sample-001/evidence_package.md) — a complete evidence bundle showing the user response, auditor trace, and retrieval scores for a sample compliance query.
+
+**Review the contracts it implements:** [Response contract](./docs/response-contract.md) · [Trace schema](./docs/trace-schema.md)
+
+To run it yourself:
 ```bash
 python modules/compliance-retrieval-assistant/src/minirag.py \
   --query "Is it permissible to guarantee investment returns?"
 ```
-
-**What you'll see:** a user-facing JSON response + an auditor-facing trace + a combined evidence markdown bundle, all linked by `trace_id`.
-
-**Review the output:** [`evidence/samples/sample-001/evidence_package.md`](./evidence/samples/sample-001/evidence_package.md)
-**Review the contracts:** [Response contract](./docs/response-contract.md) · [Trace schema](./docs/trace-schema.md)
 
 ---
 
