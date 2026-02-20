@@ -1,6 +1,6 @@
 {
-  "trace_id": "e4a70ede-d674-475b-a596-4fdd7c4cacba",
-  "timestamp": "2026-02-20T16:10:19.953063+00:00",
+  "trace_id": "8d276799-c5b5-47b5-a226-1268b76892bb",
+  "timestamp": "2026-02-20T16:11:03.229180+00:00",
   "corpus_release_id": "sample-docs-v1",
   "retrieval": {
     "total_documents": 10,
@@ -9,44 +9,44 @@
     "similarity_threshold": 0.7,
     "top_scores": [
       {
-        "doc_id": "doc-001",
-        "score": 0.7931
+        "doc_id": "doc-004",
+        "score": 0.8974
       },
       {
         "doc_id": "doc-010",
-        "score": 0.5862
-      },
-      {
-        "doc_id": "doc-009",
-        "score": 0.4138
-      },
-      {
-        "doc_id": "doc-003",
-        "score": 0.3793
-      },
-      {
-        "doc_id": "doc-006",
-        "score": 0.3448
+        "score": 0.4872
       },
       {
         "doc_id": "doc-002",
-        "score": 0.3103
+        "score": 0.4359
+      },
+      {
+        "doc_id": "doc-009",
+        "score": 0.4103
       },
       {
         "doc_id": "doc-005",
-        "score": 0.3103
+        "score": 0.359
       },
       {
         "doc_id": "doc-007",
-        "score": 0.3103
+        "score": 0.359
+      },
+      {
+        "doc_id": "doc-001",
+        "score": 0.3333
+      },
+      {
+        "doc_id": "doc-006",
+        "score": 0.2564
       },
       {
         "doc_id": "doc-008",
-        "score": 0.2759
+        "score": 0.1795
       },
       {
-        "doc_id": "doc-004",
-        "score": 0.1724
+        "doc_id": "doc-003",
+        "score": 0.1538
       }
     ]
   },
@@ -54,7 +54,7 @@
     "grounding_status": "PARTIALLY_GROUNDED",
     "refusal_code": null,
     "rationale_codes": [
-      "GROUNDED_BY_DOC-001"
+      "GROUNDED_BY_DOC-004"
     ]
   }
 }

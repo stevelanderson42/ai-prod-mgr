@@ -1,57 +1,17 @@
 # Evidence Package — sample-001
 
-**Generated:** 2026-02-20T16:10:19.953075+00:00
-**Trace ID:** e4a70ede-d674-475b-a596-4fdd7c4cacba
+**Generated:** 2026-02-20T16:11:03.229190+00:00
+**Trace ID:** 8d276799-c5b5-47b5-a226-1268b76892bb
 
 ## Query
 
-> What are the rules for communications with the public under FINRA rule 2210 regarding fair and balanced content standards for retail communications correspondence and institutional communications with prohibited phrases and supervisory review approval requirements and filing obligations
+> When should I escalate to a supervisor or compliance team if a client communication contains performance guarantees or promissory language or prohibited phrases or misleading claims and what is the expected workflow for pause response capture context route to compliance queue document reason for escalation and holding response
 
 ## Grounding Status
 
 `PARTIALLY_GROUNDED`
 
 ## Citations
-
-### doc-001 — doc-001-finra-2210-summary.md
-
-> FINRA Rule 2210 governs communications by member firms with the public. It establishes content standards, approval requirements, and filing obligations for retail communications, correspondence, and institutional communications.
-
-### doc-010 — doc-010-internal-compliance-faq.md
-
-> A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains…
-
-### doc-009 — doc-009-client-communication-standards.md
-
-> Social media posts are subject to the same standards as all other communications. Informal tone does not exempt content from compliance requirements. All social media used for business purposes must be archived.
-
-### doc-003 — doc-003-retention-policy.md
-
-> This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511.
-
-### doc-006 — doc-006-advisor-guidance.md
-
-> This guidance outlines advisor obligations under Regulation Best Interest (Reg BI) and FINRA suitability requirements when making investment recommendations.
-
-### doc-002 — doc-002-prohibited-phrases.md
-
-> This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.
-
-### doc-005 — doc-005-risk-disclosure-template.md
-
-> Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance…
-
-### doc-007 — doc-007-model-governance-notes.md
-
-> 1. **Validation before deployment** — All models must undergo independent validation before production use.
-2. **Ongoing monitoring** — Model performance must be monitored continuously with defined escalation thresholds.
-3. **Documentation** — Model purpose, methodology, limitations, and…
-
-### doc-008 — doc-008-books-records-policy.md
-
-> Supervision:
-- Supervisory review must be documented.
-- Approvals for retail communications must be recorded when required.
 
 ### doc-004 — doc-004-supervisory-escalation.md
 
@@ -60,6 +20,53 @@
 - The user requests personalized investment advice without suitability context.
 - The message contains prohibited language or misleading claims.
 - The user is upset and threatens…
+
+### doc-010 — doc-010-internal-compliance-faq.md
+
+> A: AI-generated content for client communications must go through the same compliance review process as any other communication. AI outputs must be reviewed for accuracy, grounded in approved sources, and must not contain prohibited language or unsubstantiated claims. The advisor remains…
+
+### doc-002 — doc-002-prohibited-phrases.md
+
+> This document lists phrases and language patterns that must not appear in client-facing communications. These restrictions are derived from FINRA Rule 2210, SEC guidance, and internal compliance policy.
+
+### doc-009 — doc-009-client-communication-standards.md
+
+> 1. **Accuracy** — All statements must be accurate and not misleading. Claims about products, services, or performance must be substantiated.
+2. **Balance** — Communications discussing benefits must give equal prominence to associated risks and limitations.
+3. **Clarity** — Language must be clear…
+
+### doc-005 — doc-005-risk-disclosure-template.md
+
+> Under no circumstances should any advisor or representative guarantee investment returns or promise specific performance outcomes to clients. Guaranteeing returns violates FINRA Rule 2210 and firm policy. Any communication that implies guaranteed performance must be reported to the compliance…
+
+### doc-007 — doc-007-model-governance-notes.md
+
+> Every AI-generated output must have a traceable audit trail linking the output to its input, retrieved context, and decision logic. This is required for regulatory examination readiness.
+
+### doc-001 — doc-001-finra-2210-summary.md
+
+> All communications must be fair and balanced. They must provide a sound basis for evaluating the facts regarding any particular security or type of security, industry, or service. No member may make any false, exaggerated, unwarranted, promissory, or misleading statement or claim in any…
+
+### doc-006 — doc-006-advisor-guidance.md
+
+> Advisors must have a reasonable basis to believe that a recommended transaction or investment strategy is suitable for the customer based on their investment profile, including:
+
+### doc-008 — doc-008-books-records-policy.md
+
+> Key practices:
+- Capture communications that relate to business activities.
+- Store records in compliant archival systems.
+- Maintain indexes and retrieval capabilities.
+
+### doc-003 — doc-003-retention-policy.md
+
+> | Record Type | Minimum Retention | Regulatory Basis |
+|---|---|---|
+| Client communications | 3 years | SEC 17a-4(b) |
+| Trade confirmations | 3 years | SEC 17a-4(b) |
+| Account records | 6 years | SEC 17a-4(a) |
+| Written complaints | 4 years | FINRA 4513 |
+| Supervisory procedures | 3 years…
 
 ## Retrieval Summary
 
@@ -71,16 +78,16 @@
 
 | Doc ID | Score |
 |--------|-------|
-| doc-001 | 0.7931 |
-| doc-010 | 0.5862 |
-| doc-009 | 0.4138 |
-| doc-003 | 0.3793 |
-| doc-006 | 0.3448 |
-| doc-002 | 0.3103 |
-| doc-005 | 0.3103 |
-| doc-007 | 0.3103 |
-| doc-008 | 0.2759 |
-| doc-004 | 0.1724 |
+| doc-004 | 0.8974 |
+| doc-010 | 0.4872 |
+| doc-002 | 0.4359 |
+| doc-009 | 0.4103 |
+| doc-005 | 0.359 |
+| doc-007 | 0.359 |
+| doc-001 | 0.3333 |
+| doc-006 | 0.2564 |
+| doc-008 | 0.1795 |
+| doc-003 | 0.1538 |
 
 ---
 *Generated by minirag.py — deterministic lexical RAG demo*
