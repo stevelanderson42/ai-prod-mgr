@@ -1,5 +1,10 @@
 # Books & Records Policy (Simplified)
 
+**doc_id:** doc-008
+**source:** internal
+**effective_date:** 2025-01-01
+**collection:** internal-procedures
+
 Purpose:
 Maintain required records of communications and approvals.
 

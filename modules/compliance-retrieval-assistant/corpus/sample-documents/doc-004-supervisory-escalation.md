@@ -1,5 +1,10 @@
 # Supervisory Escalation Guide
 
+**doc_id:** doc-004
+**source:** internal
+**effective_date:** 2025-01-01
+**collection:** internal-procedures
+
 Escalate to a supervisor/compliance when:
 - The communication includes performance guarantees or promissory language.
 - The user requests personalized investment advice without suitability context.
