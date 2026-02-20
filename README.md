@@ -41,7 +41,7 @@ This portfolio contains both architecture documentation and working code. Being 
 | Grounding thresholds, refusal logic, access control | 🧩 Designed + evaluated, not implemented in the demo runner yet |
 | Cross-module integration | 🔄 In progress |
 
-The compliance-retrieval-assistant module includes a [minimal runnable demo](./modules/compliance-retrieval-assistant/README.md#minimal-runnable-demo) that loads a 10-document sample corpus, performs deterministic lexical retrieval, and writes a full evidence package (user response, auditor response, trace, and a human-readable bundle). Six evaluation test cases were executed against the demo runner to surface ambiguity, insufficient grounding, scope gaps, and policy-blocked scenarios. The same module's evaluation scorecard is used to document where retrieval alone is insufficient.
+The compliance-retrieval-assistant module includes a [minimal runnable demo](./modules/compliance-retrieval-assistant/README.md#run-the-demo) that loads a 10-document sample corpus, performs deterministic lexical retrieval, and writes a full evidence package (user response, auditor response, trace, and a human-readable bundle). Six evaluation test cases were executed against the demo runner to surface ambiguity, insufficient grounding, scope gaps, and policy-blocked scenarios. The same module's evaluation scorecard is used to document where retrieval alone is insufficient.
 
 ---
 

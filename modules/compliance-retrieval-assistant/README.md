@@ -309,6 +309,7 @@ Scope discipline is a senior PM signal. This module has clear boundaries:
 | docs/diagrams/ | Visual architecture artifacts |
 | docs/diagrams/Compliance-Retrieval-Assistant Context Diagram.PNG | System-in-the-world view — external actors and boundaries |
 | docs/diagrams/Compliance-Retrieval-Assistant Component Diagram.PNG | Internal decomposition — pipeline stages and data flow |
+| docs/diagrams/Compliance-Retrieval-Assistant Sequence Diagram.PNG | End-to-end request lifecycle — query through grounding to response |
 | docs/images/control-layer-decision-flow.png | Decision flow diagram — query to outcome with grounding states |
 | docs/response-contract.md | **User-facing contract** — grounding_status, citations, refusal shape |
 | docs/trace-schema.md | **Audit-facing contract** — trace fields, retention requirements |
