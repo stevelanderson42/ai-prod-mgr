@@ -17,12 +17,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from embeddings import OpenAIEmbeddingProvider         # noqa: E402
 from retrieval import retrieve, build_index, delete_index  # noqa: E402
+from reflection import reformulate_query                # noqa: E402
 
 # --- Configuration -----------------------------------------------------------
 
 DEFAULT_QUERY = "Can a client trade options without a signed options agreement?"
 TOP_K = 3
 GROUNDING_THRESHOLD = float(os.environ.get("GROUNDING_THRESHOLD", "0.45"))
+REFLECTION_ENABLED = os.environ.get("REFLECTION_ENABLED", "true").lower() == "true"
 
 
 def require_openai_key() -> None:
@@ -87,6 +89,10 @@ def main() -> None:
         "--reindex", action="store_true",
         help="Delete and rebuild the vector index before running.",
     )
+    parser.add_argument(
+        "--no-reflection", action="store_true",
+        help="Disable the agentic reflection loop.",
+    )
     args = parser.parse_args()
 
     require_openai_key()
@@ -96,13 +102,27 @@ def main() -> None:
         delete_index()
     build_index(provider)
 
+    reflection_on = REFLECTION_ENABLED and not args.no_reflection
+
     if args.evaluate:
         from evaluation import run_evaluation  # noqa: E402
-        run_evaluation(provider)
+        run_evaluation(provider, reflection_enabled=reflection_on)
         return
 
     chunks = retrieve(args.query, provider, top_k=TOP_K)
     classification = classify_result(chunks)
+    reflection_used = False
+    reformulated_query = None
+    retry_chunks = None
+
+    if classification["grounding_status"] == "REFUSED" and reflection_on:
+        reformulated_query = reformulate_query(args.query, chunks)
+        retry_chunks = retrieve(reformulated_query, provider, top_k=TOP_K)
+        retry_class = classify_result(retry_chunks)
+        if retry_class["grounding_status"] == "GROUNDED":
+            classification = retry_class
+            chunks = retry_chunks
+        reflection_used = True
 
     if args.json:
         result = {
@@ -110,10 +130,20 @@ def main() -> None:
             "grounding_status": classification["grounding_status"],
             "refusal_code": classification["refusal_code"],
             "retrieved_chunks": chunks,
+            "reflection": {
+                "triggered": reflection_used,
+                "reformulated_query": reformulated_query,
+                "retry_chunks": retry_chunks,
+            } if reflection_used else {"triggered": False},
         }
         print(json.dumps(result, indent=2))
     else:
         print(format_output(args.query, chunks, classification))
+        if reflection_used:
+            print(f"\n[Reflection] Triggered — reformulated query: \"{reformulated_query}\"")
+            if retry_chunks:
+                print(f"[Reflection] Retry top score: {retry_chunks[0]['score']:.2f}")
+            print(f"[Reflection] Final decision: {classification['grounding_status']}")
 
 
 if __name__ == "__main__":

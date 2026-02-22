@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from retrieval import retrieve
+from reflection import reformulate_query
 from embeddings import OpenAIEmbeddingProvider
 
 MODULE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +42,7 @@ def classify(chunks: list[dict]) -> dict:
     return {"grounding_status": "REFUSED", "refusal_code": "INSUFFICIENT_EVIDENCE"}
 
 
-def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
+def run_evaluation(provider: OpenAIEmbeddingProvider, reflection_enabled: bool = True) -> dict:
     """Run all test queries, compute metrics, save report, and print summary."""
     queries = load_test_queries()
     expected = load_expected_outcomes()
@@ -52,11 +53,25 @@ def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
     refuse_correct = 0
     refuse_total = 0
     top_scores = []
+    reflection_count = 0
 
     for q in queries:
         qid = q["id"]
         chunks = retrieve(q["query"], provider, top_k=3)
         decision = classify(chunks)
+        reflected = False
+
+        # Reflection loop: retry once if below threshold
+        if decision["grounding_status"] == "REFUSED" and reflection_enabled:
+            reflected = True
+            reflection_count += 1
+            reformulated = reformulate_query(q["query"], chunks)
+            retry_chunks = retrieve(reformulated, provider, top_k=3)
+            retry_decision = classify(retry_chunks)
+            if retry_decision["grounding_status"] == "GROUNDED":
+                decision = retry_decision
+                chunks = retry_chunks
+
         exp = expected.get(qid, {})
 
         top_score = chunks[0]["score"] if chunks else 0.0
@@ -84,6 +99,7 @@ def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
             "top_source": chunks[0]["source"] if chunks else None,
             "grounding_status": decision["grounding_status"],
             "refusal_code": decision["refusal_code"],
+            "reflection_triggered": reflected,
         })
 
     gar = (ground_correct / ground_total * 100) if ground_total else 0.0
@@ -93,6 +109,7 @@ def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
     report = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "threshold": GROUNDING_THRESHOLD,
+        "reflection_enabled": reflection_enabled,
         "metrics": {
             "GAR": round(gar, 1),
             "RCR": round(rcr, 1),
@@ -103,6 +120,8 @@ def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
             "ground_total": ground_total,
             "refuse_correct": refuse_correct,
             "refuse_total": refuse_total,
+            "reflection_triggered": reflection_count,
+            "total_queries": len(queries),
         },
         "details": results,
     }
@@ -119,6 +138,8 @@ def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
     print("RAG Knowledge Pilot — Evaluation Summary")
     print("=" * 50)
     print(f"Threshold:              {GROUNDING_THRESHOLD}")
+    print(f"Reflection:             {'ON' if reflection_enabled else 'OFF'}")
+    print(f"Reflection triggered:   {reflection_count}/{len(queries)} queries")
     print(f"Grounded Answer Rate:   {gar:.1f}%  ({ground_correct}/{ground_total})")
     print(f"Refusal Correctness:    {rcr:.1f}%  ({refuse_correct}/{refuse_total})")
     print(f"Avg Top-Chunk Score:    {avg_top:.4f}")
