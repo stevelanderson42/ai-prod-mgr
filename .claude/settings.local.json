@@ -13,7 +13,12 @@
       "Bash(git reset:*)",
       "Bash(git push:*)",
       "Bash(find:*)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(for dir in decision grounding llm logging preprocess prompt response retrieval:*)",
+      "Bash(do test:*)",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(for file in policy-constraints.yaml role-permissions.yaml corpus-registry.yaml refusal-taxonomy.yaml)"
     ]
   }
 }
