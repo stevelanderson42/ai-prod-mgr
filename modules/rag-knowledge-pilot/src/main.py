@@ -15,14 +15,24 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from embeddings import OpenAIEmbeddingProvider  # noqa: E402
-from retrieval import retrieve, build_index      # noqa: E402
+from embeddings import OpenAIEmbeddingProvider         # noqa: E402
+from retrieval import retrieve, build_index, delete_index  # noqa: E402
 
 # --- Configuration -----------------------------------------------------------
 
 DEFAULT_QUERY = "Can a client trade options without a signed options agreement?"
 TOP_K = 3
 GROUNDING_THRESHOLD = float(os.environ.get("GROUNDING_THRESHOLD", "0.45"))
+
+
+def require_openai_key() -> None:
+    """Exit gracefully if OPENAI_API_KEY is not set."""
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("Error: OPENAI_API_KEY is not set.\n")
+        print("Set it before running:\n")
+        print('  PowerShell:  $env:OPENAI_API_KEY="sk-..."')
+        print("  Bash:        export OPENAI_API_KEY=sk-...")
+        raise SystemExit(2)
 
 
 # --- Classification ----------------------------------------------------------
@@ -73,9 +83,17 @@ def main() -> None:
         "--json", action="store_true",
         help="Output results as JSON.",
     )
+    parser.add_argument(
+        "--reindex", action="store_true",
+        help="Delete and rebuild the vector index before running.",
+    )
     args = parser.parse_args()
 
+    require_openai_key()
     provider = OpenAIEmbeddingProvider()
+
+    if args.reindex:
+        delete_index()
     build_index(provider)
 
     if args.evaluate:

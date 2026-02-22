@@ -100,6 +100,12 @@ def build_index(provider: OpenAIEmbeddingProvider) -> None:
         json.dump(index_data, f)
 
 
+def delete_index() -> None:
+    """Remove the persisted vector index if it exists."""
+    if INDEX_PATH.exists():
+        INDEX_PATH.unlink()
+
+
 def load_index() -> list[dict]:
     """Load the persisted vector index from disk."""
     with open(INDEX_PATH, encoding="utf-8") as f:
@@ -126,7 +132,7 @@ def retrieve(query: str, provider: OpenAIEmbeddingProvider, top_k: int = 3) -> l
         scored.append({
             "score": round(sim, 4),
             "source": entry["source_file"],
-            "text": entry["text"][:200],
+            "text": entry["text"],
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
