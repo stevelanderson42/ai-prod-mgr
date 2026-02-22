@@ -1,0 +1,94 @@
+[
+  {
+    "id": "q-01",
+    "expected_action": "ground",
+    "expected_source": "policy_margin.md",
+    "rationale": "Directly answered by the Initial Margin section — $2,000 or 100% of purchase price."
+  },
+  {
+    "id": "q-02",
+    "expected_action": "ground",
+    "expected_source": "policy_margin.md",
+    "rationale": "Maintenance Margin section describes margin call process and liquidation rules."
+  },
+  {
+    "id": "q-03",
+    "expected_action": "ground",
+    "expected_source": "policy_margin.md",
+    "rationale": "Restricted Securities section enumerates ineligible categories."
+  },
+  {
+    "id": "q-04",
+    "expected_action": "ground",
+    "expected_source": "policy_options_approval.md",
+    "rationale": "Approval Levels section lists Level 1, 2, and 3 with permitted strategies."
+  },
+  {
+    "id": "q-05",
+    "expected_action": "ground",
+    "expected_source": "policy_options_approval.md",
+    "rationale": "Options Agreement section states no order may be entered before signed agreement is returned."
+  },
+  {
+    "id": "q-06",
+    "expected_action": "ground",
+    "expected_source": "policy_suitability.md",
+    "rationale": "Know Your Customer section lists required profile elements."
+  },
+  {
+    "id": "q-07",
+    "expected_action": "ground",
+    "expected_source": "policy_suitability.md",
+    "rationale": "Heightened Suitability for Complex Products section covers enhanced review requirements."
+  },
+  {
+    "id": "q-08",
+    "expected_action": "ground",
+    "expected_source": "policy_comms_standard.md",
+    "rationale": "Prohibited Content section explicitly bars performance projections and promissory statements."
+  },
+  {
+    "id": "q-09",
+    "expected_action": "ground",
+    "expected_source": "policy_comms_standard.md",
+    "rationale": "Recordkeeping section specifies three-year retention minimum."
+  },
+  {
+    "id": "q-10",
+    "expected_action": "refuse",
+    "reason_code": "OUT_OF_SCOPE",
+    "rationale": "Cryptocurrency custody is not covered by any document in the corpus."
+  },
+  {
+    "id": "q-11",
+    "expected_action": "refuse",
+    "reason_code": "OUT_OF_SCOPE",
+    "rationale": "External SEC enforcement actions are outside the scope of internal policy documents."
+  },
+  {
+    "id": "q-12",
+    "expected_action": "refuse",
+    "reason_code": "OUT_OF_SCOPE",
+    "rationale": "Compensation and bonus structures are not addressed in the compliance policy corpus."
+  },
+  {
+    "id": "q-13",
+    "expected_action": "refuse",
+    "reason_code": "OUT_OF_SCOPE",
+    "rationale": "Business continuity planning is not covered by any document in the corpus."
+  },
+  {
+    "id": "q-14",
+    "expected_action": "ground",
+    "expected_source": "policy_suitability.md",
+    "reason_code": "INSUFFICIENT_EVIDENCE",
+    "rationale": "Corpus describes suitability for recommendations but does not explicitly address the unsolicited trade distinction — partial grounding at best."
+  },
+  {
+    "id": "q-15",
+    "expected_action": "ground",
+    "expected_source": "policy_options_approval.md",
+    "reason_code": "INSUFFICIENT_EVIDENCE",
+    "rationale": "Ongoing Review section mentions quarterly review and reassessment on material changes, but specific procedures for net-worth declines are not detailed."
+  }
+]

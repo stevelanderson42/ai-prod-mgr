@@ -1,0 +1,77 @@
+[
+  {
+    "id": "q-01",
+    "query": "What is the minimum initial deposit required to open a margin account?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-02",
+    "query": "What happens if a customer's margin equity falls below the maintenance threshold?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-03",
+    "query": "Which securities are ineligible for margin lending?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-04",
+    "query": "What are the approval levels for options trading and what does each level permit?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-05",
+    "query": "Can a customer trade options before returning the signed Options Agreement?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-06",
+    "query": "What customer profile information must be collected before making an investment recommendation?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-07",
+    "query": "What additional requirements apply to recommending structured products or leveraged ETFs?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-08",
+    "query": "Are we allowed to include performance projections in a retail communication piece?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-09",
+    "query": "How long must we retain copies of customer communications under our recordkeeping policy?",
+    "category": "should_ground"
+  },
+  {
+    "id": "q-10",
+    "query": "What is our firm's policy on cryptocurrency custody and staking services?",
+    "category": "should_refuse"
+  },
+  {
+    "id": "q-11",
+    "query": "Can you summarize the latest SEC enforcement action against our competitor?",
+    "category": "should_refuse"
+  },
+  {
+    "id": "q-12",
+    "query": "What bonus structure applies to registered representatives who exceed their sales targets?",
+    "category": "should_refuse"
+  },
+  {
+    "id": "q-13",
+    "query": "What is the firm's disaster recovery and business continuity plan?",
+    "category": "should_refuse"
+  },
+  {
+    "id": "q-14",
+    "query": "Does the suitability standard apply differently when the customer initiates an unsolicited trade versus a recommended trade?",
+    "category": "ambiguous"
+  },
+  {
+    "id": "q-15",
+    "query": "If a customer's net worth drops significantly after being approved for Level 3 options, what should the branch manager do?",
+    "category": "ambiguous"
+  }
+]
