@@ -13,20 +13,41 @@ A portfolio demonstrating how a Product Manager designs **safe, auditable AI wor
 In regulated environments, AI initiatives rarely fail because models are weak.
 They fail because governance, accountability, and decision traceability are not designed into the product from day one.
 
-Rather than a collection of disconnected demos, this repository is organized as a **four-module system** that addresses this challenge through concrete product design decisions — not policy documents alone.
+Rather than a collection of disconnected demos, this repository is organized as a **five-module system** that addresses this challenge through concrete product design decisions — not policy documents alone.
 
 ---
 
-## The Four Modules
+## The Modules
 
 | Module | Purpose | Status |
 |--------|---------|--------|
-| [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | Tracks competitor AI releases and regulatory signals to inform strategic prioritization | 🟡 MVP build artifacts (varies by module) |
-| [ROI Decision Engine](./modules/roi-engine/) | Structured, risk-aware framework for prioritizing AI opportunities | 🟡 Framework + examples (non-executable scoring) |
+| [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | Tracks competitor AI releases and regulatory signals to inform strategic prioritization | 🟡 MVP build artifacts |
+| [ROI Decision Engine](./modules/roi-engine/) | Structured, risk-aware framework for prioritizing AI opportunities | 🟡 Framework + examples |
 | [Requirements Guardrails](./modules/requirements-guardrails/) | Detects ambiguity and compliance risk before model invocation | 🟡 Designed (not yet wired end-to-end) |
-| [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | Citation-first retrieval for high-risk workflows requiring traceability | 🟢 Runnable demo (lexical retrieval + evidence package) |
+| [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | Governance architecture for citation-first retrieval in high-risk workflows | 🟢 Architecture complete with evidence packages |
+| [**RAG Knowledge Pilot**](./modules/rag-knowledge-pilot/) | **Working retrieval system with measured grounding, refusal logic, and agentic reflection** | **🟢 Runnable with real metrics** |
 
-> Each module is intentionally scoped as an MVP — the **smallest defensible, auditable system** that a regulated organization could realistically approve as a first iteration.
+> Modules 1–4 define the governance architecture. Module 5 executes and measures it.
+
+---
+
+## Featured: RAG Knowledge Pilot (Module 5)
+
+The [RAG Knowledge Pilot](./modules/rag-knowledge-pilot/) is the primary executable artifact in this portfolio — a working retrieval system built on the governance principles defined in Modules 1–4.
+
+| Metric | Threshold 0.45 | Threshold 0.60 (no reflection) | Threshold 0.60 (with reflection) |
+|---|---:|---:|---:|
+| Grounded Answer Rate (GAR) | **100.0%** (11/11) | 72.7% (8/11) | **90.9%** (10/11) |
+| Refusal Correctness Rate (RCR) | **100.0%** (4/4) | **100.0%** (4/4) | **100.0%** (4/4) |
+
+Key capabilities:
+- OpenAI embedding-based vector retrieval over a compliance policy corpus
+- Categorical grounding decisions (GROUNDED / REFUSED) with structured reason codes
+- Configurable threshold to explore precision/recall tradeoffs
+- Agentic reflection loop that reformulates borderline queries and retries once — improving GAR from 72.7% to 90.9% with zero loss in refusal correctness
+- Evaluation harness computing GAR, RCR, and retrieval characteristics across 15 domain-realistic test queries
+
+→ [See full README with diagrams, results, and quick start](./modules/rag-knowledge-pilot/)
 
 ---
 
@@ -36,23 +57,22 @@ This portfolio contains both architecture documentation and working code. Being 
 
 | Layer | Status |
 |-------|--------|
-| Architecture, config, and contracts | ✅ Defined across all four modules |
-| Compliance Retrieval Assistant — minimal retrieval demo | ✅ Runs locally and generates evidence packages |
-| Grounding thresholds, refusal logic, access control | 🧩 Designed + evaluated, not implemented in the demo runner yet |
+| Architecture, config, and contracts | ✅ Defined across all modules |
+| RAG Knowledge Pilot — embedding retrieval, grounding, refusal, reflection | ✅ Runs locally with real metrics |
+| Compliance Retrieval Assistant — lexical retrieval demo + evidence packages | ✅ Runs locally |
+| Grounding thresholds, refusal logic, access control | ✅ Implemented and measured in Module 5; designed in Module 4 |
 | Cross-module integration | 🔄 In progress |
-
-The compliance-retrieval-assistant module includes a [minimal runnable demo](./modules/compliance-retrieval-assistant/README.md#run-the-demo) that loads a 10-document sample corpus, performs deterministic lexical retrieval, and writes a full evidence package (user response, auditor response, trace, and a human-readable bundle). Six evaluation test cases were executed against the demo runner to surface ambiguity, insufficient grounding, scope gaps, and policy-blocked scenarios. The same module's evaluation scorecard is used to document where retrieval alone is insufficient.
 
 ---
 
 ## How the Modules Connect
 
 ```
-Market Intelligence    →    ROI Engine    →    Guardrails    →    Retrieval Assistant
- (surfaces opportunities)   (prioritizes)      (enforces safety)   (delivers grounded outputs)
+Market Intelligence    →    ROI Engine    →    Guardrails    →    Retrieval Assistant    →    RAG Knowledge Pilot
+ (surfaces opportunities)   (prioritizes)      (enforces safety)   (defines governance)       (executes + measures)
 ```
 
-This mirrors how regulated organizations deploy AI: with governance embedded across the **entire lifecycle**, not bolted on after deployment.
+This mirrors how regulated organizations deploy AI: with governance embedded across the **entire lifecycle**, not bolted on after deployment. Modules 1–4 represent the architecture and governance design. Module 5 operationalizes that design into a working, measured system.
 
 ---
 
@@ -66,6 +86,7 @@ Rather than treating governance as a post-deployment control, responsible AI pri
 - **Requirements definition** — ambiguity and compliance detection (Guardrails)
 - **Model invocation** — routing, escalation, refusal paths (Guardrails)
 - **Output grounding** — citation-first retrieval with traceable sources (Retrieval Assistant)
+- **Measured execution** — evaluation-driven iteration with real metrics (RAG Knowledge Pilot)
 
 ---
 
@@ -87,7 +108,7 @@ The [/regulatory-governance/](./regulatory-governance/) folder documents represe
 ## Repository Structure
 
 ```
-/modules/                  → The four-module system (start here)
+/modules/                  → The five-module system (start here)
 /regulatory-governance/    → Regulations informing design decisions
 /architecture/             → System-level decisions and ADRs
 /evaluation/               → Shared evaluation framework
@@ -107,7 +128,8 @@ Each module includes its own README documenting scope, design rationale, tradeof
 | **Market Intelligence** | Signal ingestion pipeline design, categorization logic, ADRs |
 | **ROI Engine** | Scoring framework, regulatory risk weighting, sample evaluations |
 | **Guardrails** | Classification rules, routing logic, escalation design, refusal paths (designed) |
-| **Retrieval Assistant** | Policy-as-data configs, ADRs, evaluation scorecard, trace schema, response contract, **runnable `minirag.py` demo**, sample corpus (10 docs), evidence package outputs |
+| **Retrieval Assistant** | Policy-as-data configs, ADRs, evaluation scorecard, trace schema, response contract, runnable `minirag.py` demo, sample corpus, evidence package outputs |
+| **RAG Knowledge Pilot** | OpenAI embedding retrieval, cosine similarity search, categorical grounding, agentic reflection loop, evaluation harness (GAR/RCR), threshold experimentation, Mermaid diagrams |
 
 Artifacts emphasize **decision accountability and auditability**, not model optimization.
 
@@ -119,9 +141,8 @@ Artifacts emphasize **decision accountability and auditability**, not model opti
 |-------|-------|---------------|
 | Foundation | Opportunity discovery and prioritization frameworks | 🟡 Artifacts and design complete; not fully executable |
 | Build | Safety enforcement and grounded retrieval | ✅ Retrieval demo operational; guardrails designed |
+| Execute | Working AI feature with measured performance | ✅ RAG Knowledge Pilot live with real metrics |
 | Polish | Integration, case studies, evaluation depth | 🔄 In progress |
-
-Future iterations focus on **integration depth and narrative clarity**, not expanding model complexity.
 
 ---
 
@@ -138,4 +159,5 @@ Formal training completed during this transition, reinforcing the governance and
 ## Local Setup
 
 - See `requirements.txt` for Python dependencies
-- This repo includes a deterministic demo runner that does not require external APIs
+- Module 5 (RAG Knowledge Pilot) requires an OpenAI API key — see [Module 5 Setup](./modules/rag-knowledge-pilot/#setup)
+- Module 4 (Compliance Retrieval Assistant) includes a deterministic demo runner that does not require external APIs
