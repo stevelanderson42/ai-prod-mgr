@@ -1,29 +1,22 @@
-# Records Retention Policy
+# Records Retention Policy (Simplified)
 
-**doc_id:** doc-003
-**source:** Internal Compliance
-**effective_date:** 2024-01-01
-**collection:** internal-procedures
+Purpose:
+Maintain business records required by law and firm policy.
 
-## Purpose
+Scope:
+- Client communications (email, chat, certain SMS channels)
+- Marketing and retail communications
+- Supervisory approvals and compliance reviews
 
-This policy establishes minimum retention periods for business records in accordance with SEC Rule 17a-4 and FINRA Rule 4511.
+Minimum retention:
+- Retain business communications for required periods per applicable rules.
+- Preserve in a non-rewriteable / non-erasable format when required.
+- Index so records are searchable and retrievable.
 
-## Retention Schedule
+Operational notes:
+- Do not use unapproved messaging channels for business communications.
+- If a channel is approved, ensure journaling / capture is enabled.
+- Deletions on endpoints do not delete the retained record.
 
-| Record Type | Minimum Retention | Regulatory Basis |
-|---|---|---|
-| Client communications | 3 years | SEC 17a-4(b) |
-| Trade confirmations | 3 years | SEC 17a-4(b) |
-| Account records | 6 years | SEC 17a-4(a) |
-| Written complaints | 4 years | FINRA 4513 |
-| Supervisory procedures | 3 years after last use | SEC 17a-4(e) |
-| Advertising and sales literature | 3 years from last use | FINRA 2210(b) |
-
-## Electronic Storage
-
-Records stored electronically must meet WORM (Write Once, Read Many) requirements. Storage systems must preserve records in a non-rewriteable, non-erasable format and maintain an audit trail of all access.
-
-## Destruction
-
-Records may only be destroyed after the retention period expires and with documented approval from the Records Management Officer. A destruction log must be maintained.
+Escalation:
+If a user requests deletion of required records, escalate to compliance.

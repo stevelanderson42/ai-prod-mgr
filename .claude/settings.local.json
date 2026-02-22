@@ -18,7 +18,8 @@
       "Bash(do test:*)",
       "Bash(echo:*)",
       "Bash(done)",
-      "Bash(for file in policy-constraints.yaml role-permissions.yaml corpus-registry.yaml refusal-taxonomy.yaml)"
+      "Bash(for file in policy-constraints.yaml role-permissions.yaml corpus-registry.yaml refusal-taxonomy.yaml)",
+      "Bash(pip install:*)"
     ]
   }
 }
