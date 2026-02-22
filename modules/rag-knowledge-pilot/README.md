@@ -8,22 +8,32 @@ This module is intentionally executable, minimal, and instrumented — built to 
 
 ## Performance Summary
 
-| Metric | Threshold 0.6 | Threshold 0.8 |
+| Metric | Threshold 0.45 | Threshold 0.60 |
 |---|---:|---:|
-| Grounded Answer Rate (GAR) | XX% | XX% |
-| Refusal Correctness Rate (RCR) | XX% | XX% |
-| Avg Top-Chunk Similarity | X.XX | X.XX |
+| Grounded Answer Rate (GAR) | **100.0%** (11/11) | **72.7%** (8/11) |
+| Refusal Correctness Rate (RCR) | **100.0%** (4/4) | **100.0%** (4/4) |
+| Avg Top-Chunk Similarity | 0.5854 | 0.5854 |
 
 **Evaluation dataset:** 15 domain-realistic compliance queries
-**Query mix:** 9 should-ground · 4 should-refuse · 2 ambiguous
+**Query mix:** 11 should-ground · 4 should-refuse
 
----
+**Threshold tradeoff:** Raising the grounding threshold from 0.45 to 0.60 increases conservatism — fewer grounded answers while maintaining perfect refusal correctness. Borderline queries with top similarity scores around 0.49–0.59 flip to refusal under the stricter threshold.
 
-## Setup
+### Reproduce These Results
 
 ```bash
-pip install -r modules/rag-knowledge-pilot/requirements.txt
-export OPENAI_API_KEY=sk-...
+# Threshold 0.45 (default)
+python modules/rag-knowledge-pilot/src/main.py --evaluate --reindex
+
+# Threshold 0.60
+GROUNDING_THRESHOLD=0.60 python modules/rag-knowledge-pilot/src/main.py --evaluate --reindex
+```
+
+PowerShell:
+```powershell
+# Threshold 0.60
+$env:GROUNDING_THRESHOLD="0.60"
+python modules/rag-knowledge-pilot/src/main.py --evaluate --reindex
 ```
 
 ---
@@ -59,7 +69,7 @@ The system prints ranked retrieved chunks with similarity scores, a categorical 
 - **Retrieval architecture** with swappable embedding provider abstraction (hosted vs. local models)
 - **Measured grounding performance** using Grounded Answer Rate (GAR) and Refusal Correctness Rate (RCR)
 - **Configurable grounding threshold** to explore precision/recall tradeoffs
-- **Structured refusal behavior** with explicit reason codes and audit-ready logging
+- **Structured refusal behavior** with explicit reason codes and logged decisions
 - **Traceable retrieval outputs** — every query produces inspectable chunk rankings, scores, and decisions
 
 ---
@@ -104,13 +114,31 @@ This enables before/after comparisons when embedding models or thresholds change
 
 ## Threshold Experimentation
 
-Grounding decisions are threshold-driven. Running evaluation at multiple threshold values (e.g., 0.6 vs. 0.8) surfaces:
+Grounding decisions are threshold-driven. Running evaluation at multiple threshold values surfaces:
 
 - Precision vs. recall tradeoffs in grounding decisions
 - Retrieval sensitivity to similarity cutoffs
 - Refusal rate changes under tighter constraints
 
+At **0.45**, the system grounds all 11 groundable queries — including borderline cases with similarity scores as low as 0.49. At **0.60**, three borderline queries (scores 0.49, 0.58, 0.59) flip to refusal, reducing GAR to 72.7% while refusal correctness remains at 100%.
+
 This models how real AI features are tuned during pilot phases before broader rollout.
+
+---
+
+## Setup
+
+Requires an OpenAI API key for embeddings:
+
+```powershell
+# PowerShell (session)
+$env:OPENAI_API_KEY="sk-..."
+
+# Bash
+export OPENAI_API_KEY=sk-...
+```
+
+If the key is missing, the system exits gracefully with setup instructions (no stack trace).
 
 ---
 
