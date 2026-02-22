@@ -110,6 +110,7 @@ The [/regulatory-governance/](./regulatory-governance/) folder documents represe
 ```
 /modules/                  → The five-module system (start here)
 /regulatory-governance/    → Regulations informing design decisions
+/session-prompts/          → Claude Code session prompts used to build modules
 /architecture/             → System-level decisions and ADRs
 /evaluation/               → Shared evaluation framework
 /case-studies/             → Decision narratives from module development
