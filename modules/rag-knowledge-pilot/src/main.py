@@ -2,109 +2,90 @@
 """
 RAG Knowledge Pilot — main entry point.
 
-Accepts a --query argument, retrieves the most relevant corpus chunks using
-simple token overlap, and prints a structured result with grounding status
-and refusal code placeholders.
-
 Usage:
     python main.py --query "What are the margin requirements for a new account?"
-
-TODO: Replace token-overlap retrieval with vector-similarity search.
-TODO: Add refusal detection logic based on score thresholds and scope checks.
-TODO: Wire evaluation harness for batch scoring.
+    python main.py --evaluate
 """
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
-# Ensure src/ is importable when run directly
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from retrieval import retrieve  # noqa: E402
+from embeddings import OpenAIEmbeddingProvider  # noqa: E402
+from retrieval import retrieve, build_index      # noqa: E402
 
 # --- Configuration -----------------------------------------------------------
 
-DEFAULT_QUERY = "What are the margin requirements for a new customer account?"
+DEFAULT_QUERY = "Can a client trade options without a signed options agreement?"
 TOP_K = 3
-# TODO: Tune this threshold once vector retrieval is in place
-GROUNDING_SCORE_THRESHOLD = 0.15
+GROUNDING_THRESHOLD = float(os.environ.get("GROUNDING_THRESHOLD", "0.45"))
 
 
-def classify_result(retrieved_chunks: list[dict]) -> dict:
-    """Determine grounding status and refusal code from retrieval scores.
+# --- Classification ----------------------------------------------------------
 
-    TODO: Replace with a proper classifier / score-threshold model.
-    """
-    if not retrieved_chunks:
-        return {
-            "grounding_status": "refused",
-            "refusal_code": "NO_CHUNKS_RETRIEVED",
-        }
+def classify_result(chunks: list[dict]) -> dict:
+    """Determine grounding status from top retrieval score."""
+    if not chunks:
+        return {"grounding_status": "REFUSED", "refusal_code": "OUT_OF_SCOPE"}
 
-    top_score = retrieved_chunks[0]["score"]
-    if top_score < GROUNDING_SCORE_THRESHOLD:
-        return {
-            "grounding_status": "refused",
-            "refusal_code": "INSUFFICIENT_EVIDENCE",
-        }
+    top_score = chunks[0]["score"]
+    if top_score >= GROUNDING_THRESHOLD:
+        return {"grounding_status": "GROUNDED", "refusal_code": "NONE"}
+    else:
+        return {"grounding_status": "REFUSED", "refusal_code": "INSUFFICIENT_EVIDENCE"}
 
-    return {
-        "grounding_status": "grounded",
-        "refusal_code": None,
-    }
 
+# --- Output formatting -------------------------------------------------------
 
 def format_output(query: str, chunks: list[dict], classification: dict) -> str:
-    """Build a human-readable output block."""
     lines = [
-        "=" * 60,
-        "RAG Knowledge Pilot — Query Result",
-        "=" * 60,
+        f'query: "{query}"',
         "",
-        f"Query:  {query}",
-        "",
-        f"Grounding Status:  {classification['grounding_status']}",
-        f"Refusal Code:      {classification['refusal_code'] or '—'}",
-        "",
-        f"Retrieved Chunks (top {len(chunks)}):",
-        "-" * 40,
+        "retrieved_chunks:",
     ]
-
-    for i, chunk in enumerate(chunks, 1):
-        lines.append(f"  [{i}] {chunk['source']}  (score: {chunk['score']})")
-        lines.append(f"      {chunk['snippet'][:120]}...")
-        lines.append("")
-
-    lines.append("=" * 60)
+    for c in chunks:
+        lines.append(f"  - rank={c['rank']}  score={c['score']:.2f}  source={c['source']}")
+    lines.append("")
+    lines.append(f"grounding_status: {classification['grounding_status']}")
+    lines.append(f"refusal_code: {classification['refusal_code']}")
     return "\n".join(lines)
 
+
+# --- Main --------------------------------------------------------------------
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="RAG Knowledge Pilot — measured compliance retrieval"
     )
     parser.add_argument(
-        "--query", "-q",
-        type=str,
-        default=DEFAULT_QUERY,
-        help="The compliance question to retrieve against the corpus.",
+        "--query", "-q", type=str, default=DEFAULT_QUERY,
+        help="Compliance question to retrieve against the corpus.",
     )
     parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output results as JSON instead of formatted text.",
+        "--evaluate", action="store_true",
+        help="Run the full evaluation harness instead of a single query.",
+    )
+    parser.add_argument(
+        "--json", action="store_true",
+        help="Output results as JSON.",
     )
     args = parser.parse_args()
 
-    # Retrieve
-    chunks = retrieve(args.query, top_k=TOP_K)
+    provider = OpenAIEmbeddingProvider()
+    build_index(provider)
 
-    # Classify
+    if args.evaluate:
+        from evaluation import run_evaluation  # noqa: E402
+        run_evaluation(provider)
+        return
+
+    chunks = retrieve(args.query, provider, top_k=TOP_K)
     classification = classify_result(chunks)
 
-    # Output
     if args.json:
         result = {
             "query": args.query,

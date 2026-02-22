@@ -1,41 +1,132 @@
 """
-Evaluation module — compare retrieval results against expected outcomes.
+Evaluation harness — score retrieval results against expected outcomes.
 
-TODO: Expand to compute full metric suite (grounding accuracy, refusal accuracy,
-      top-k relevance) once vector retrieval is in place.
+Computes GAR, RCR, and average top-chunk similarity.
+Saves a timestamped JSON report to results/.
 """
 
 import json
+import os
+from datetime import datetime, timezone
 from pathlib import Path
 
-EVAL_DIR = Path(__file__).resolve().parent.parent / "evaluation"
+from retrieval import retrieve
+from embeddings import OpenAIEmbeddingProvider
+
+MODULE_DIR = Path(__file__).resolve().parent.parent
+EVAL_DIR = MODULE_DIR / "evaluation"
+RESULTS_DIR = MODULE_DIR / "results"
+
+GROUNDING_THRESHOLD = float(os.environ.get("GROUNDING_THRESHOLD", "0.45"))
 
 
 def load_test_queries() -> list[dict]:
-    """Load test queries from evaluation/test_queries.json."""
-    path = EVAL_DIR / "test_queries.json"
-    with open(path, encoding="utf-8") as f:
+    with open(EVAL_DIR / "test_queries.json", encoding="utf-8") as f:
         return json.load(f)
 
 
 def load_expected_outcomes() -> dict:
-    """Load expected outcomes keyed by query id."""
-    path = EVAL_DIR / "expected_outcomes.json"
-    with open(path, encoding="utf-8") as f:
+    with open(EVAL_DIR / "expected_outcomes.json", encoding="utf-8") as f:
         outcomes = json.load(f)
     return {item["id"]: item for item in outcomes}
 
 
-def evaluate_single(query_id: str, retrieved: list[dict], expected: dict) -> dict:
-    """Evaluate a single query result against its expected outcome.
+def classify(chunks: list[dict]) -> dict:
+    """Same threshold logic as main.py."""
+    if not chunks:
+        return {"grounding_status": "REFUSED", "refusal_code": "OUT_OF_SCOPE"}
+    top_score = chunks[0]["score"]
+    if top_score >= GROUNDING_THRESHOLD:
+        return {"grounding_status": "GROUNDED", "refusal_code": "NONE"}
+    return {"grounding_status": "REFUSED", "refusal_code": "INSUFFICIENT_EVIDENCE"}
 
-    TODO: Implement full scoring logic (source match, refusal detection).
-    """
-    return {
-        "query_id": query_id,
-        "expected_action": expected.get("expected_action"),
-        "actual_action": "ground",  # TODO: implement refusal detection
-        "top_source": retrieved[0]["source"] if retrieved else None,
-        "expected_source": expected.get("expected_source"),
-        "pass": None,  # TODO: compute pass/fail
+
+def run_evaluation(provider: OpenAIEmbeddingProvider) -> dict:
+    """Run all test queries, compute metrics, save report, and print summary."""
+    queries = load_test_queries()
+    expected = load_expected_outcomes()
+
+    results = []
+    ground_correct = 0
+    ground_total = 0
+    refuse_correct = 0
+    refuse_total = 0
+    top_scores = []
+
+    for q in queries:
+        qid = q["id"]
+        chunks = retrieve(q["query"], provider, top_k=3)
+        decision = classify(chunks)
+        exp = expected.get(qid, {})
+
+        top_score = chunks[0]["score"] if chunks else 0.0
+        top_scores.append(top_score)
+
+        expected_action = exp.get("expected_action", "ground")
+        actual_action = "ground" if decision["grounding_status"] == "GROUNDED" else "refuse"
+
+        if expected_action == "ground":
+            ground_total += 1
+            if actual_action == "ground":
+                ground_correct += 1
+        elif expected_action == "refuse":
+            refuse_total += 1
+            if actual_action == "refuse":
+                refuse_correct += 1
+
+        results.append({
+            "query_id": qid,
+            "query": q["query"],
+            "category": q.get("category"),
+            "expected_action": expected_action,
+            "actual_action": actual_action,
+            "top_score": round(top_score, 4),
+            "top_source": chunks[0]["source"] if chunks else None,
+            "grounding_status": decision["grounding_status"],
+            "refusal_code": decision["refusal_code"],
+        })
+
+    gar = (ground_correct / ground_total * 100) if ground_total else 0.0
+    rcr = (refuse_correct / refuse_total * 100) if refuse_total else 0.0
+    avg_top = sum(top_scores) / len(top_scores) if top_scores else 0.0
+
+    report = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "threshold": GROUNDING_THRESHOLD,
+        "metrics": {
+            "GAR": round(gar, 1),
+            "RCR": round(rcr, 1),
+            "avg_top_chunk_score": round(avg_top, 4),
+        },
+        "counts": {
+            "ground_correct": ground_correct,
+            "ground_total": ground_total,
+            "refuse_correct": refuse_correct,
+            "refuse_total": refuse_total,
+        },
+        "details": results,
     }
+
+    # Save report
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    report_path = RESULTS_DIR / f"eval_{ts}.json"
+    with open(report_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2)
+
+    # Print summary
+    print("=" * 50)
+    print("RAG Knowledge Pilot — Evaluation Summary")
+    print("=" * 50)
+    print(f"Threshold:              {GROUNDING_THRESHOLD}")
+    print(f"Grounded Answer Rate:   {gar:.1f}%  ({ground_correct}/{ground_total})")
+    print(f"Refusal Correctness:    {rcr:.1f}%  ({refuse_correct}/{refuse_total})")
+    print(f"Avg Top-Chunk Score:    {avg_top:.4f}")
+    print(f"Report saved:           {report_path.name}")
+    print("-" * 50)
+    for r in results:
+        match = "pass" if r["expected_action"] == r["actual_action"] else "MISS"
+        print(f"  {r['query_id']}  {match:<5}  exp={r['expected_action']:<7} act={r['actual_action']:<7} score={r['top_score']:.2f}")
+    print("=" * 50)
+
+    return report

@@ -1,22 +1,28 @@
 """
-Embeddings module — vector encoding for corpus chunks.
-
-TODO: Implement vector embeddings (e.g., sentence-transformers or OpenAI embeddings).
-      For Step 1, retrieval uses simple token overlap in retrieval.py.
+Embeddings module — embedding provider abstraction for corpus and query encoding.
 """
 
-
-def embed_text(text: str) -> list[float]:
-    """Return a vector embedding for the given text.
-
-    TODO: Replace with actual embedding model call.
-    """
-    raise NotImplementedError("Vector embeddings not yet implemented — using token overlap.")
+import os
+from openai import OpenAI
 
 
-def embed_corpus(chunks: list[str]) -> list[list[float]]:
-    """Embed all corpus chunks and return a list of vectors.
+DEFAULT_MODEL = "text-embedding-3-small"
 
-    TODO: Replace with batch embedding and optional caching.
-    """
-    raise NotImplementedError("Vector embeddings not yet implemented — using token overlap.")
+
+class OpenAIEmbeddingProvider:
+    """Wraps the OpenAI embeddings API."""
+
+    def __init__(self):
+        self.model = os.environ.get("OPENAI_EMBEDDING_MODEL", DEFAULT_MODEL)
+        self.client = OpenAI()  # reads OPENAI_API_KEY from env
+
+    def embed_texts(self, texts: list[str]) -> list[list[float]]:
+        """Embed a list of texts and return a list of float vectors."""
+        results = []
+        # Batch in groups of 100 to stay within API limits
+        batch_size = 100
+        for i in range(0, len(texts), batch_size):
+            batch = texts[i : i + batch_size]
+            response = self.client.embeddings.create(model=self.model, input=batch)
+            results.extend([item.embedding for item in response.data])
+        return results

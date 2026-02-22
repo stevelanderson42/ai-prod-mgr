@@ -19,6 +19,15 @@ This module is intentionally executable, minimal, and instrumented — built to 
 
 ---
 
+## Setup
+
+```bash
+pip install -r modules/rag-knowledge-pilot/requirements.txt
+export OPENAI_API_KEY=sk-...
+```
+
+---
+
 ## Quick Start
 
 Run a sample query from the repository root:
