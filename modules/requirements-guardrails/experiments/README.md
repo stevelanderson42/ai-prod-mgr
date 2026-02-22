@@ -35,6 +35,6 @@ For interviews and portfolio review, this folder demonstrates:
 
 ## Related Documents
 
-- [Full Prompt Experiments](../../prompt-experiments/) — Original experiment files
+- [Full Prompt Experiments](../../session-prompts/prompt-experiments/) — Original experiment files
 - [Rules Directory](../rules/) — Classification logic derived from experiments
 - [Evidence: Sample Classifications](../evidence/sample-classifications.md) — Experiments applied to real scenarios

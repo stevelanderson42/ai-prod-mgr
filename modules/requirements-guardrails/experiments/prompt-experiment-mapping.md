@@ -7,7 +7,7 @@
 
 ## Overview
 
-This folder maps prompt experiments from the `/prompt-experiments/` directory to Requirements Guardrails concepts. Each experiment demonstrates a pattern relevant to pre-invocation control.
+This folder maps prompt experiments from the `/session-prompts/prompt-experiments/` directory to Requirements Guardrails concepts. Each experiment demonstrates a pattern relevant to pre-invocation control.
 
 ---
 
@@ -27,7 +27,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 01: Suitability Classification
 
-**Location:** `/prompt-experiments/PromptExperiments_01_Suitability_Classification.md`
+**Location:** `/session-prompts/prompt-experiments/PromptExperiments_01_Suitability_Classification.md`
 
 **Guardrail application:** Classifies incoming queries as suitability-relevant or not. Feeds into compliance trigger detection.
 
@@ -44,7 +44,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 02: Compliance Rewrite
 
-**Location:** `/prompt-experiments/PromptExperiments_02_Compliance_Rewrite.md`
+**Location:** `/session-prompts/prompt-experiments/PromptExperiments_02_Compliance_Rewrite.md`
 
 **Guardrail application:** Transforms advisor language to remove prohibited patterns (guarantees, predictions).
 
@@ -61,7 +61,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 03: Transcript Extraction
 
-**Location:** `/prompt-experiments/PromptExperiments_03_Transcript_Extraction.md`
+**Location:** `/session-prompts/prompt-experiments/PromptExperiments_03_Transcript_Extraction.md`
 
 **Guardrail application:** Extracts structured data from unstructured input.
 
@@ -78,7 +78,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 04: Ambiguity Detection
 
-**Location:** `/prompt-experiments/PromptExperiments_04_Ambiguity_Detection.md`
+**Location:** `/session-prompts/prompt-experiments/PromptExperiments_04_Ambiguity_Detection.md`
 
 **Guardrail application:** Identifies requests with unclear intent.
 
@@ -95,7 +95,7 @@ This folder maps prompt experiments from the `/prompt-experiments/` directory to
 
 ### Experiment 05: Risk Disclosure
 
-**Location:** `/prompt-experiments/PromptExperiments_05_Grounded_Citation.md`
+**Location:** `/session-prompts/prompt-experiments/PromptExperiments_05_Grounded_Citation.md`
 
 **Guardrail application:** Detects when investment content lacks required risk disclosures.
 
@@ -136,7 +136,7 @@ Across experiments, consistent improvements emerged:
 
 ## Related Documents
 
-- [Full Prompt Experiments](../../prompt-experiments/) — Complete experiment files
+- [Full Prompt Experiments](../../session-prompts/prompt-experiments/) — Complete experiment files
 - [Rules Directory](../rules/) — Classification logic derived from experiments
 - [Outputs Directory](../outputs/) — Decision schema using experiment patterns
 - [Sample Classifications](../evidence/sample-classifications.md) — Applied examples
