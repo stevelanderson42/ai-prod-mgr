@@ -100,6 +100,22 @@ rag-knowledge-pilot/
 
 The structure is designed so retrieval strategy can evolve — lexical baseline → vector embeddings → provider swap → controlled retry logic — without changing module shape.
 
+### How Corpus Documents Become Searchable
+
+```mermaid
+flowchart LR
+    A["corpus/<br/>policy_margin.md<br/>policy_options_approval.md<br/>policy_suitability.md<br/>policy_comms_standard.md"] --> B["retrieval.py<br/>load_corpus()"]
+    B --> C["retrieval.py<br/>chunk_document()<br/>500 chars, 100 overlap"]
+    C --> D["~15-20 chunks<br/>with metadata:<br/>source_file, chunk_id,<br/>start_char, end_char"]
+    D --> E["embeddings.py<br/>embed_texts(all chunks)"]
+    E --> F["OpenAI API<br/>text-embedding-3-small<br/>→ 1536-dim vectors"]
+    F --> G["retrieval.py<br/>build_index()"]
+    G --> H["vector_index.json<br/>(persisted to disk)<br/>chunks + vectors + metadata"]
+
+    style A fill:#fff3cd,stroke:#ffc107
+    style H fill:#d4edda,stroke:#28a745
+```
+
 ---
 
 ## Evaluation Design
@@ -140,15 +156,92 @@ This models how real AI features are tuned during pilot phases before broader ro
 
 When the top retrieval score falls below the grounding threshold, the system can automatically reformulate the query and retry retrieval once before falling back to refusal. This is the "agentic" pattern — the system attempts to improve its own retrieval quality without human intervention.
 
-**Flow:**
+### Without Reflection
+
+```mermaid
+flowchart TD
+    A["User Query<br/><i>--query 'Can a client trade options...'</i>"] --> B["main.py<br/>parse arguments"]
+    B --> C["embeddings.py<br/>OpenAIEmbeddingProvider<br/>embed query → 1536-dim vector"]
+    C --> D["retrieval.py<br/>cosine similarity search<br/>against vector_index.json"]
+    D --> E["Top 3 chunks returned<br/>with similarity scores"]
+    E --> F{"main.py<br/>classify_result()<br/>top score ≥ threshold?"}
+    F -- "Yes" --> G["✅ GROUNDED<br/>refusal_code: NONE<br/>return chunks + scores"]
+    F -- "No" --> H["🛑 REFUSED<br/>refusal_code: INSUFFICIENT_EVIDENCE<br/>log reason + scores"]
+
+    style G fill:#d4edda,stroke:#28a745
+    style H fill:#f8d7da,stroke:#dc3545
 ```
-query → retrieve → check top score
-  → if score >= threshold: GROUNDED (no change)
-  → if score < threshold:
-      → reformulate query via OpenAI chat
-      → retry retrieval with reformulated query
-      → if improved and >= threshold: GROUNDED
-      → else: REFUSED
+
+### With Reflection
+
+```mermaid
+flowchart TD
+    A["User Query"] --> B["main.py<br/>parse arguments"]
+    B --> C["embeddings.py<br/>OpenAIEmbeddingProvider<br/>embed query"]
+    C --> D["retrieval.py<br/>cosine similarity search<br/>against vector_index.json"]
+    D --> E["Top 3 chunks returned<br/>with similarity scores"]
+    E --> F{"main.py<br/>top score ≥ threshold?"}
+    F -- "Yes" --> G["✅ GROUNDED<br/>refusal_code: NONE"]
+    F -- "No" --> R["reflection.py<br/>reformulate_query()<br/>OpenAI chat completion<br/><i>gpt-4o-mini</i>"]
+    R --> R2["Reformulated query returned"]
+    R2 --> C2["embeddings.py<br/>embed reformulated query"]
+    C2 --> D2["retrieval.py<br/>cosine similarity search<br/>(second attempt)"]
+    D2 --> E2["New top 3 chunks<br/>with updated scores"]
+    E2 --> F2{"main.py<br/>top score ≥ threshold?"}
+    F2 -- "Yes" --> G2["✅ GROUNDED<br/>(via reflection)<br/>both attempts logged"]
+    F2 -- "No" --> H2["🛑 REFUSED<br/>refusal_code: INSUFFICIENT_EVIDENCE<br/>both attempts logged"]
+
+    style G fill:#d4edda,stroke:#28a745
+    style G2 fill:#d4edda,stroke:#28a745
+    style H2 fill:#f8d7da,stroke:#dc3545
+    style R fill:#fff3cd,stroke:#ffc107
+```
+
+With reflection enabled, the system recovers 2 of 3 borderline queries at threshold 0.60, raising GAR from 72.7% to 90.9% while maintaining 100% refusal correctness.
+
+### Detailed View: Borderline Query With Reflection
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant main as main.py
+    participant emb as embeddings.py<br/>OpenAIEmbeddingProvider
+    participant api_emb as OpenAI API<br/>(text-embedding-3-small)
+    participant ret as retrieval.py
+    participant idx as vector_index.json
+    participant ref as reflection.py
+    participant api_chat as OpenAI API<br/>(gpt-4o-mini)
+
+    User->>main: --query "Are there restrictions on<br/>margin for new accounts?"
+    
+    Note over main,idx: First Attempt
+    main->>emb: embed_texts([query])
+    emb->>api_emb: POST /v1/embeddings
+    api_emb-->>emb: query vector
+    main->>ret: retrieve(query, top_k=3)
+    ret->>idx: load index
+    ret->>ret: cosine similarity search
+    ret-->>main: top score: 0.58
+
+    main->>main: classify_result()<br/>0.58 < threshold 0.60
+
+    Note over main,api_chat: Reflection Triggered
+    main->>ref: reformulate_query(query, chunks)
+    ref->>api_chat: POST /v1/chat/completions<br/>"Rewrite this query to better match<br/>a compliance policy corpus"
+    api_chat-->>ref: "What are the specific margin<br/>account requirements and restrictions<br/>for customer accounts?"
+    ref-->>main: reformulated query
+
+    Note over main,idx: Second Attempt
+    main->>emb: embed_texts([reformulated_query])
+    emb->>api_emb: POST /v1/embeddings
+    api_emb-->>emb: new query vector
+    main->>ret: retrieve(reformulated_query, top_k=3)
+    ret->>idx: load index
+    ret->>ret: cosine similarity search
+    ret-->>main: top score: 0.70
+
+    main->>main: classify_result()<br/>0.70 ≥ threshold 0.60
+    main-->>User: grounding_status: GROUNDED (via reflection)<br/>refusal_code: NONE<br/>both attempts logged
 ```
 
 **Controls:**
