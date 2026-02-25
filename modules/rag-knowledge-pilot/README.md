@@ -1,5 +1,7 @@
 # RAG Knowledge Pilot — Measured Retrieval System
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-rag--knowledge--pilot.streamlit.app-FF4B4B?logo=streamlit)](https://rag-knowledge-pilot.streamlit.app)
+
 An executable RAG pilot that demonstrates how a regulated AI knowledge feature can measure retrieval confidence, enforce structured refusal, and recover borderline queries using a controlled reflection loop.
 
 This module is intentionally executable, minimal, and instrumented — built to simulate how an internal AI knowledge feature would be piloted and evaluated inside a business team.
