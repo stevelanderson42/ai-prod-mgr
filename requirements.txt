@@ -7,4 +7,5 @@ numpy
 matplotlib
 scikit-learn
 openai
-streamlit
+streamlit==1.41.1
+altair<5
