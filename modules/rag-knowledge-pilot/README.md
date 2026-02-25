@@ -1,6 +1,6 @@
 # RAG Knowledge Pilot — Measured Retrieval System
 
-A feature-level Retrieval-Augmented Generation (RAG) pilot designed to demonstrate measurable retrieval behavior, grounded answer generation, structured refusal logic, and evaluation-driven iteration.
+An executable RAG pilot that demonstrates how a regulated AI knowledge feature can measure retrieval confidence, enforce structured refusal, and recover borderline queries using a controlled reflection loop.
 
 This module is intentionally executable, minimal, and instrumented — built to simulate how an internal AI knowledge feature would be piloted and evaluated inside a business team.
 
@@ -150,7 +150,7 @@ model: gpt-4o-mini
 [Reflection] Final decision: GROUNDED
 ```
 
-At threshold 0.70, the original query scores just below the grounding bar. The system automatically reformulates and retries — the second attempt clears the threshold and produces a grounded, cited answer.
+At threshold 0.70, the original query falls just below the grounding bar — triggering the reflection loop. The system reformulates the query and retries; the displayed chunks and scores reflect the successful retry attempt. The `[Reflection]` log at the bottom confirms the reformulated query and its score.
 
 This models real enterprise behavior: rather than failing on borderline input, the system makes one controlled attempt to improve retrieval before falling back to refusal.
 
@@ -178,7 +178,35 @@ This prints the retrieved chunk text alongside the answer — so reviewers can v
 
 ---
 
+## Live Demo Walkthrough
+
+The Streamlit UI makes the system's decision-making visible in real time. Launch it with:
+
+```bash
+streamlit run modules/rag-knowledge-pilot/src/app.py
+```
+
+Three example buttons demonstrate the core behaviors in one click each:
+
+**Grounded answer** — the system retrieves relevant policy chunks, confirms the top score exceeds the grounding threshold, and generates a cited response. No hallucination, no uncited claims.
+
+![Grounded answer](docs/screenshots/grounded.png)
+
+**Structured refusal** — an out-of-scope query retrieves low-scoring chunks. The system refuses rather than fabricate an answer, routes to a compliance specialist, and makes zero LLM calls. Refusal costs nothing.
+
+![Structured refusal](docs/screenshots/refusal.png)
+
+**Reflection recovery** — at a higher threshold (0.70), the original query scores just below the bar. The system automatically reformulates and retries, recovering a grounded answer on the second attempt. The blue info bar shows both scores.
+
+![Reflection recovery](docs/screenshots/reflection_recovery.png)
+
+The sidebar controls let you adjust the grounding threshold, toggle reflection, and switch between full generation and retrieve-only mode — making the precision/recall tradeoff interactive.
+
+---
+
 ## What This Pilot Demonstrates
+
+This module simulates how an internal compliance knowledge assistant would be piloted, evaluated, tuned, and governed before broader rollout.
 
 - **Grounded answer generation** — cited responses synthesized only from retrieved evidence, with structured refusal when evidence is insufficient
 - **Retrieval architecture** with swappable embedding provider abstraction (hosted vs. local models)
@@ -200,10 +228,12 @@ rag-knowledge-pilot/
     retrieval.py     # Chunking and retrieval logic
     reflection.py    # Agentic query reformulation (single-retry)
     generation.py    # Grounded answer synthesis with citations
+    app.py           # Streamlit UI for interactive demo
     evaluation.py    # Evaluation harness and scoring
   corpus/            # Synthetic internal compliance policy excerpts
   evaluation/        # Test queries and expected outcomes
   results/           # Scored evaluation run outputs
+  docs/screenshots/  # UI screenshots for documentation
 ```
 
 The structure is designed so retrieval strategy can evolve — lexical baseline → vector embeddings → provider swap → controlled retry logic — without changing module shape.
@@ -372,7 +402,24 @@ $env:OPENAI_API_KEY="sk-..."
 export OPENAI_API_KEY=sk-...
 ```
 
-If the key is missing, the system exits gracefully with setup instructions (no stack trace).
+For the Streamlit UI, also install:
+
+```bash
+pip install streamlit
+```
+
+If the key is missing, both the CLI and UI exit gracefully with setup instructions (no stack trace).
+
+---
+
+## Why This Matters
+
+In regulated domains, AI systems must know when to answer, when to retry, and when to refuse. This pilot makes those decisions measurable and auditable:
+
+- Hallucination risk is governed through measurable retrieval thresholds, not trust in model behavior
+- Refusal is treated as a first-class output — with reason codes, routing recommendations, and zero cost
+- Threshold tuning and reflection impact can be evaluated quantitatively before broader rollout
+- Every decision is traceable: query → retrieval scores → grounding classification → answer or refusal
 
 ---
 
