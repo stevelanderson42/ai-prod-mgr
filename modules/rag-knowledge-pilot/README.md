@@ -166,6 +166,16 @@ This models real enterprise behavior: rather than failing on borderline input, t
 
 The system treats **refusal as a first-class output, not an error** — and uses **measured retrieval confidence** to decide when to answer, when to retry, and when to say no.
 
+### Audit Trail: Verify Any Answer
+
+Add `--show-evidence` to any query to display the actual corpus text used to generate the answer:
+
+```bash
+python modules/rag-knowledge-pilot/src/main.py --query "What are the margin requirements for a new account?" --show-evidence
+```
+
+This prints the retrieved chunk text alongside the answer — so reviewers can verify that every cited claim traces back to source evidence. Also works with `--json` for structured output.
+
 ---
 
 ## What This Pilot Demonstrates

@@ -130,6 +130,10 @@ def main() -> None:
         "--retrieve-only", action="store_true",
         help="Skip answer generation — return retrieval results only (original behavior).",
     )
+    parser.add_argument(
+        "--show-evidence", action="store_true",
+        help="Print the retrieved chunk text used to generate the answer.",
+    )
     args = parser.parse_args()
 
     require_openai_key()
@@ -199,12 +203,23 @@ def main() -> None:
                     "total": gen_result.total_tokens,
                 },
             }
+        if args.show_evidence:
+            result["evidence"] = [
+                {"rank": c["rank"], "score": c["score"], "source": c["source"], "text": c["text"].strip()}
+                for c in chunks
+            ]
         print(json.dumps(result, indent=2))
     else:
         if gen_result:
             print(format_full_output(args.query, chunks, classification, gen_result))
         else:
             print(format_retrieval_output(args.query, chunks, classification))
+
+        if args.show_evidence:
+            print("\nevidence:")
+            for c in chunks:
+                print(f"\n  --- {c['source']} (rank={c['rank']}, score={c['score']:.2f}) ---")
+                print(f"  {c['text'].strip()}")
 
         if reflection_used:
             print(f"\n[Reflection] Triggered — reformulated query: \"{reformulated_query}\"")
