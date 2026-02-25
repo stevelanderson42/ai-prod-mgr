@@ -1,6 +1,6 @@
 # RAG Knowledge Pilot — Measured Retrieval System
 
-A feature-level Retrieval-Augmented Generation (RAG) pilot designed to demonstrate measurable retrieval behavior, structured refusal logic, and evaluation-driven iteration.
+A feature-level Retrieval-Augmented Generation (RAG) pilot designed to demonstrate measurable retrieval behavior, grounded answer generation, structured refusal logic, and evaluation-driven iteration.
 
 This module is intentionally executable, minimal, and instrumented — built to simulate how an internal AI knowledge feature would be piloted and evaluated inside a business team.
 
@@ -46,34 +46,131 @@ python modules/rag-knowledge-pilot/src/main.py --evaluate --reindex --no-reflect
 
 ---
 
-## Quick Start
+## Try It — Three Queries, Three Behaviors
 
-Run a sample query from the repository root:
+These three commands demonstrate the system's core decision-making: grounded citation, structured refusal, and agentic recovery.
+
+### 1. Grounded Answer — retrieves, cites, responds
 
 ```bash
-python modules/rag-knowledge-pilot/src/main.py --query "Can a client trade options without a signed options agreement?"
+python modules/rag-knowledge-pilot/src/main.py --query "What are the margin requirements for a new account?"
 ```
 
-**Example output:**
-
 ```
-query: "Can a client trade options without a signed options agreement?"
+query: "What are the margin requirements for a new account?"
 
 retrieved_chunks:
-  - rank=1  score=0.78  source=policy_options_approval.md
-  - rank=2  score=0.64  source=policy_margin.md
-  - rank=3  score=0.59  source=policy_suitability.md
+  - rank=1  score=0.70  source=policy_margin.md
+  - rank=2  score=0.56  source=policy_margin.md
+  - rank=3  score=0.51  source=policy_margin.md
 
 grounding_status: GROUNDED
 refusal_code: NONE
+
+answer:
+  For a new margin account, the minimum initial deposit required is $2,000
+  or 100% of the purchase price, whichever is less, before any margin trading
+  activity is permitted. Additionally, the firm reserves the right to impose
+  higher initial margin requirements for concentrated positions or volatile
+  securities [policy_margin.md].
+
+sources_cited: ['policy_margin.md']
+tokens: prompt=495  completion=61  total=556
+model: gpt-4o-mini
 ```
 
-The system prints ranked retrieved chunks with similarity scores, a categorical grounding decision, and a structured refusal code when applicable.
+High retrieval confidence → the system generates a cited answer from corpus evidence only.
+
+### 2. Structured Refusal — out-of-scope query, zero cost
+
+```bash
+python modules/rag-knowledge-pilot/src/main.py --query "What is the firm's vacation policy?"
+```
+
+```
+query: "What is the firm's vacation policy?"
+
+retrieved_chunks:
+  - rank=1  score=0.32  source=policy_comms_standard.md
+  - rank=2  score=0.22  source=policy_comms_standard.md
+  - rank=3  score=0.21  source=policy_options_approval.md
+
+grounding_status: REFUSED
+refusal_code: INSUFFICIENT_EVIDENCE
+
+refusal:
+  I don't have sufficient evidence in the policy corpus to answer this
+  question reliably. This query should be routed to a compliance specialist
+  for manual review.
+
+tokens: prompt=0  completion=0  total=0
+model: none (refusal — no LLM call)
+```
+
+Low retrieval scores → the system refuses rather than hallucinate. No LLM call, no cost, no risk. Reflection attempted a reformulation but retrieval remained below threshold — refusal upheld.
+
+### 3. Reflection Recovery — borderline query, agentic retry succeeds
+
+```powershell
+$env:GROUNDING_THRESHOLD="0.70"
+python modules/rag-knowledge-pilot/src/main.py --query "Do clients need approval before trading options?"
+```
+
+```bash
+GROUNDING_THRESHOLD=0.70 python modules/rag-knowledge-pilot/src/main.py --query "Do clients need approval before trading options?"
+```
+
+```
+query: "Do clients need approval before trading options?"
+
+retrieved_chunks:
+  - rank=1  score=0.71  source=policy_options_approval.md
+  - rank=2  score=0.61  source=policy_options_approval.md
+  - rank=3  score=0.56  source=policy_options_approval.md
+
+grounding_status: GROUNDED
+refusal_code: NONE
+
+answer:
+  Yes, clients need approval before trading options. No options order may
+  be entered for a customer account until the customer has signed and
+  returned the Options Agreement, and the firm has received and reviewed
+  a completed Options Account Application [policy_options_approval.md].
+  Additionally, options trading privileges are granted in tiered levels
+  based on customer experience, financial profile, and investment
+  objectives [policy_options_approval.md].
+
+sources_cited: ['policy_options_approval.md']
+tokens: prompt=508  completion=91  total=599
+model: gpt-4o-mini
+
+[Reflection] Triggered — reformulated query: "What are the approval
+  requirements for clients before they can trade options?"
+[Reflection] Retry top score: 0.71
+[Reflection] Final decision: GROUNDED
+```
+
+At threshold 0.70, the original query scores just below the grounding bar. The system automatically reformulates and retries — the second attempt clears the threshold and produces a grounded, cited answer.
+
+This models real enterprise behavior: rather than failing on borderline input, the system makes one controlled attempt to improve retrieval before falling back to refusal.
+
+---
+
+**What these three examples show together:**
+
+| Behavior | Query | Outcome | LLM cost |
+|---|---|---|---|
+| Grounded answer | In-domain, clear match | Cited response from corpus | Normal |
+| Structured refusal | Out-of-domain | Refusal + routing recommendation | Zero |
+| Agentic recovery | In-domain, borderline | Reformulate → retry → grounded answer | Reflection + generation |
+
+The system treats **refusal as a first-class output, not an error** — and uses **measured retrieval confidence** to decide when to answer, when to retry, and when to say no.
 
 ---
 
 ## What This Pilot Demonstrates
 
+- **Grounded answer generation** — cited responses synthesized only from retrieved evidence, with structured refusal when evidence is insufficient
 - **Retrieval architecture** with swappable embedding provider abstraction (hosted vs. local models)
 - **Agentic reflection loop** — automatic query reformulation and single-retry retrieval for borderline results
 - **Measured grounding performance** using Grounded Answer Rate (GAR) and Refusal Correctness Rate (RCR)
@@ -92,6 +189,7 @@ rag-knowledge-pilot/
     embeddings.py    # Embedding provider abstraction layer
     retrieval.py     # Chunking and retrieval logic
     reflection.py    # Agentic query reformulation (single-retry)
+    generation.py    # Grounded answer synthesis with citations
     evaluation.py    # Evaluation harness and scoring
   corpus/            # Synthetic internal compliance policy excerpts
   evaluation/        # Test queries and expected outcomes
@@ -212,7 +310,7 @@ sequenceDiagram
     participant ref as reflection.py
     participant api_chat as OpenAI API<br/>(gpt-4o-mini)
 
-    User->>main: --query "Are there restrictions on<br/>margin for new accounts?"
+    User->>main: --query "Do clients need approval<br/>before trading options?"
     
     Note over main,idx: First Attempt
     main->>emb: embed_texts([query])
@@ -221,14 +319,14 @@ sequenceDiagram
     main->>ret: retrieve(query, top_k=3)
     ret->>idx: load index
     ret->>ret: cosine similarity search
-    ret-->>main: top score: 0.58
+    ret-->>main: top score: below 0.70
 
-    main->>main: classify_result()<br/>0.58 < threshold 0.60
+    main->>main: classify_result()<br/>score < threshold 0.70
 
     Note over main,api_chat: Reflection Triggered
     main->>ref: reformulate_query(query, chunks)
     ref->>api_chat: POST /v1/chat/completions<br/>"Rewrite this query to better match<br/>a compliance policy corpus"
-    api_chat-->>ref: "What are the specific margin<br/>account requirements and restrictions<br/>for customer accounts?"
+    api_chat-->>ref: "What are the approval requirements<br/>for clients before they can<br/>trade options?"
     ref-->>main: reformulated query
 
     Note over main,idx: Second Attempt
@@ -238,9 +336,9 @@ sequenceDiagram
     main->>ret: retrieve(reformulated_query, top_k=3)
     ret->>idx: load index
     ret->>ret: cosine similarity search
-    ret-->>main: top score: 0.70
+    ret-->>main: top score: 0.71
 
-    main->>main: classify_result()<br/>0.70 ≥ threshold 0.60
+    main->>main: classify_result()<br/>0.71 ≥ threshold 0.70
     main-->>User: grounding_status: GROUNDED (via reflection)<br/>refusal_code: NONE<br/>both attempts logged
 ```
 
@@ -254,7 +352,7 @@ sequenceDiagram
 
 ## Setup
 
-Requires an OpenAI API key for embeddings:
+Requires an OpenAI API key for embeddings and generation:
 
 ```powershell
 # PowerShell (session)
