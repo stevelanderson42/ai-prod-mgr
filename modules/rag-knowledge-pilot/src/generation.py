@@ -94,11 +94,10 @@ def generate_answer(query: str, chunks: list[dict]) -> GenerationResult:
     answer = response.choices[0].message.content.strip()
     usage = response.usage
 
-    # Extract which sources were actually cited in the answer
-    sources_cited = []
-    for c in chunks:
-        if c["source"] in answer:
-            sources_cited.append(c["source"])
+    # Extract which sources were actually cited in the answer (de-duped)
+    sources_cited = list(dict.fromkeys(
+        c["source"] for c in chunks if c["source"] in answer
+    ))
 
     return GenerationResult(
         answer=answer,
