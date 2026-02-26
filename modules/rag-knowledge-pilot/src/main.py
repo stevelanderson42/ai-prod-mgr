@@ -124,7 +124,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--no-reflection", action="store_true",
-        help="Disable the agentic reflection loop.",
+        help="Disable the bounded reflection loop.",
     )
     parser.add_argument(
         "--retrieve-only", action="store_true",

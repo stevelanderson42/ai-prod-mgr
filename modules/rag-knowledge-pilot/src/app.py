@@ -84,7 +84,7 @@ with st.sidebar:
         help="Minimum similarity score required to ground an answer.",
     )
 
-    reflection_on = st.toggle("Reflection (agentic retry)", value=True)
+    reflection_on = st.toggle("Reflection (bounded retry)", value=True)
     generate_on = st.toggle("Generate answer", value=True)
 
     st.markdown("---")
@@ -100,12 +100,20 @@ with st.sidebar:
 st.title("🔍 RAG Knowledge Pilot")
 st.caption(
     "Compliance knowledge assistant with grounded retrieval, "
-    "structured refusal, and agentic reflection."
+    "structured refusal, and bounded reflection."
+)
+
+# --- How to use instructions --------------------------------------------------
+
+st.markdown(
+    "**How to use this demo:**  \n"
+    "1\\.  Select one of the example scenarios below (Grounded answer, Refusal, or Reflection recovery)  \n"
+    "2\\.  Press **Run** to see the system's response  \n"
+    "3\\.  Try another scenario, or type your own compliance question and press **Run** again"
 )
 
 # --- Example query buttons ----------------------------------------------------
 
-st.markdown("###### Try an example")
 example_cols = st.columns([1, 1, 1.3, 1.7])
 with example_cols[0]:
     if st.button("📗 Grounded answer", use_container_width=True):
@@ -134,12 +142,6 @@ with st.form("query_form", clear_on_submit=False):
     submitted = st.form_submit_button("Run", type="primary", use_container_width=True)
 
 if not submitted or not query:
-    st.markdown(
-        "<div style='padding: 3rem 0; color: #888; text-align: center;'>"
-        "Enter a question above or click an example, then press <strong>Run</strong>."
-        "</div>",
-        unsafe_allow_html=True,
-    )
     st.stop()
 
 # --- Retrieval + Reflection + Generation --------------------------------------
