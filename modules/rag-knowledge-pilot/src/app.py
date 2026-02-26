@@ -79,6 +79,7 @@ with st.sidebar:
         "Grounding threshold",
         min_value=0.30,
         max_value=0.80,
+        value=0.45,
         step=0.05,
         key="threshold_slider",
         help="Minimum similarity score required to ground an answer.",
