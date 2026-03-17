@@ -1,8 +1,6 @@
-# Regulated AI Workflow Architecture & Demos
+# Governance-First AI Product Portfolio | Steve Anderson
 
-A portfolio demonstrating how a Product Manager designs **safe, auditable AI workflows** for regulated environments such as financial services, healthcare, and insurance.
-
-*Designed as a portfolio artifact for senior AI Product Manager roles in regulated industries.*
+Senior Product Manager with 20+ years in regulated financial services, including 12 years at Charles Schwab. I'm now focused on AI product management where governance, traceability, and decision accountability must be designed in from the start — not bolted on after deployment. This portfolio demonstrates that approach through five connected modules mirroring how regulated organizations evaluate, prioritize, govern, and deploy AI — culminating in a working retrieval system with measured grounding and refusal performance.
 
 ---
 
@@ -146,13 +144,17 @@ Artifacts emphasize **decision accountability and auditability**, not model opti
 
 ---
 
-## Supporting Credentials
+## Credentials & Continuing Education
 
-Formal training completed during this transition, reinforcing the governance and lifecycle concepts applied throughout this repository:
+Formal certifications and applied training completed during this transition:
 
-- Microsoft Azure AI-900
-- Google Cloud Generative AI
-- DeepLearning.AI Prompt Engineering
+| Credential | Issuer | Status |
+|---|---|---|
+| Azure AI-900 — AI Fundamentals | Microsoft | ✅ Completed |
+| AI Essentials | Google | ✅ Completed |
+| Prompt Engineering for Developers | DeepLearning.AI | ✅ Completed |
+| AI Agentic Design Patterns with AutoGen | DeepLearning.AI | ✅ Completed |
+| AI Agents in LangGraph | DeepLearning.AI | ✅ Completed |
 
 ---
 
