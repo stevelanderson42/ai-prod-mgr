@@ -1,4 +1,3 @@
-import json
 import os
 from pathlib import Path
 
@@ -7,6 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
 from state import CaseState
+from nodes.utils import parse_json_response
 
 # Load .env from the module root (one level up from nodes/)
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
@@ -33,8 +33,8 @@ def classify_issue(state: CaseState) -> CaseState:
         HumanMessage(content=state["raw_input"]),
     ])
 
-    # Parse the JSON response
-    result = json.loads(response.content.strip())
+    # Parse the JSON response (strips markdown fences if present)
+    result = parse_json_response(response.content)
 
     issue_category = result["issue_category"]
     risk_level = result["risk_level"]
