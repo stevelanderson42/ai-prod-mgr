@@ -21,7 +21,9 @@
       "Bash(for file in policy-constraints.yaml role-permissions.yaml corpus-registry.yaml refusal-taxonomy.yaml)",
       "Bash(pip install:*)",
       "Bash(GROUNDING_THRESHOLD=\"0.60\" python:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(streamlit run:*)",
+      "Bash(code --add:*)"
     ]
   }
 }
