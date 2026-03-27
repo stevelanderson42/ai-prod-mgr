@@ -5,6 +5,8 @@
 > retrieving policy, and routing decisions with a full execution trace — demonstrating
 > how governed agentic systems operate in regulated environments.
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-case-triage-workflow.streamlit.app)
+
 ---
 
 ## What This Module Does
@@ -141,7 +143,7 @@ Five representative cases designed to exercise different triage paths:
 
 ## Status
 
-🔧 In Development — Phase 1 (LangGraph environment + state schema)
+✅ Live Demo: https://ai-case-triage-workflow.streamlit.app
 
 ---
 
