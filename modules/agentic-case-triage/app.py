@@ -10,19 +10,45 @@ st.set_page_config(
 
 st.title("AI Case Triage Workflow — Agentic Orchestration")
 
-DEFAULT_CASE = (
-    "Customer states their advisor recommended an unsuitable mutual fund product "
-    "that did not align with their stated risk tolerance or investment objectives. "
-    "Customer is requesting a full review of the recommendation and potential restitution."
-)
+SCENARIOS = {
+    "1. Suitability Complaint (Reg BI)": (
+        "Customer states their advisor recommended an unsuitable mutual fund product "
+        "that did not align with their stated risk tolerance or investment objectives. "
+        "Customer is requesting a full review of the recommendation and potential restitution."
+    ),
+    "2. Unauthorized Transaction (Fraud)": (
+        "Customer reports three unauthorized transactions totaling $4,200 on their "
+        "brokerage account over the past week. Customer states they did not authorize "
+        "these trades and believes their account credentials may have been compromised. "
+        "Requesting immediate account freeze and investigation."
+    ),
+    "3. Communication Complaint (FINRA 2210)": (
+        "Customer received a promotional communication from their advisor that included "
+        "projected returns and performance guarantees without adequate risk disclosures. "
+        "Customer states the communication was misleading and influenced their investment "
+        "decision."
+    ),
+    "4. Account Access / Fraud Report": (
+        "Customer is unable to access their online brokerage account and suspects "
+        "unauthorized access. Customer reports receiving password reset emails they did "
+        "not initiate and notices an unrecognized device in their account activity log."
+    ),
+    "5. Fee Dispute with Escalation": (
+        "Customer is disputing $340 in advisory fees charged over the past quarter, "
+        "stating the fees were not disclosed in their client agreement. Customer is "
+        "requesting a full fee breakdown and refund, and is threatening to escalate to "
+        "FINRA if not resolved within 5 business days."
+    ),
+}
 
 # ── Two-Column Layout ──────────────────────────────────────
 left, right = st.columns([0.4, 0.6])
 
 with left:
+    scenario = st.selectbox("Select Demo Scenario", list(SCENARIOS.keys()))
     case_text = st.text_area(
         "Submit Operational Case",
-        value=DEFAULT_CASE,
+        value=SCENARIOS[scenario],
         height=220,
     )
     run = st.button("Run Triage", type="primary")
