@@ -1,6 +1,6 @@
 # Governance-First AI Product Portfolio | Steve Anderson
 
-Senior Product Manager with 20+ years in regulated financial services, including 12 years at Charles Schwab. I'm now focused on AI product management where governance, traceability, and decision accountability must be designed in from the start — not bolted on after deployment. This portfolio demonstrates that approach through five connected modules mirroring how regulated organizations evaluate, prioritize, govern, and deploy AI — culminating in a working retrieval system with measured grounding and refusal performance.
+Senior Product Manager with 20+ years in regulated financial services, including 12 years at Charles Schwab. I'm now focused on AI product management where governance, traceability, and decision accountability must be designed in from the start — not bolted on after deployment. This portfolio demonstrates that approach through six connected modules mirroring how regulated organizations evaluate, prioritize, govern, and deploy AI — culminating in a working retrieval system with measured grounding and refusal performance, and a live agentic orchestration workflow.
 
 ---
 
@@ -11,7 +11,7 @@ Senior Product Manager with 20+ years in regulated financial services, including
 In regulated environments, AI initiatives rarely fail because models are weak.
 They fail because governance, accountability, and decision traceability are not designed into the product from day one.
 
-Rather than a collection of disconnected demos, this repository is organized as a **five-module system** that addresses this challenge through concrete product design decisions — not policy documents alone.
+Rather than a collection of disconnected demos, this repository is organized as a **six-module system** that addresses this challenge through concrete product design decisions — not policy documents alone.
 
 ---
 
@@ -23,15 +23,16 @@ Rather than a collection of disconnected demos, this repository is organized as 
 | [ROI Decision Engine](./modules/roi-engine/) | Structured, risk-aware framework for prioritizing AI opportunities | 🟡 Framework + examples |
 | [Requirements Guardrails](./modules/requirements-guardrails/) | Detects ambiguity and compliance risk before model invocation | 🟡 Designed (not yet wired end-to-end) |
 | [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | Governance architecture for citation-first retrieval in high-risk workflows | 🟢 Architecture complete with evidence packages |
-| [**RAG Knowledge Pilot**](./modules/rag-knowledge-pilot/) | **Working retrieval system with measured grounding, refusal logic, and agentic reflection** | **🟢 Runnable with real metrics** |
+| [**RAG Knowledge Pilot**](./modules/rag-knowledge-pilot/) | **Working retrieval system with measured grounding, refusal logic, and agentic reflection** | **🟢 Live deployed — rag-knowledge-pilot.streamlit.app** |
+| [**AI Case Triage Workflow**](./modules/agentic-case-triage/) | **LangGraph-orchestrated six-node agentic pipeline with live policy retrieval and execution trace** | **🟢 Live deployed — ai-case-triage-workflow.streamlit.app** |
 
-> Modules 1–4 define the governance architecture. Module 5 executes and measures it.
+> Modules 1–4 define the governance architecture. Module 5 executes and measures it. Module 6 orchestrates it agentically.
 
 ---
 
 ## Featured: RAG Knowledge Pilot (Module 5)
 
-The [RAG Knowledge Pilot](./modules/rag-knowledge-pilot/) is the primary executable artifact in this portfolio — a working retrieval system built on the governance principles defined in Modules 1–4.
+The [RAG Knowledge Pilot](./modules/rag-knowledge-pilot/) is the primary retrieval artifact in this portfolio — a working retrieval system built on the governance principles defined in Modules 1–4.
 
 | Metric | Threshold 0.45 | Threshold 0.60 (no reflection) | Threshold 0.60 (with reflection) |
 |---|---:|---:|---:|
@@ -49,6 +50,21 @@ Key capabilities:
 
 ---
 
+## Featured: AI Case Triage Workflow (Module 6)
+
+The [AI Case Triage Workflow](./modules/agentic-case-triage/) is the agentic orchestration artifact in this portfolio — a LangGraph-orchestrated six-node pipeline that classifies operational cases, retrieves live compliance policy from the Module 5 RAG corpus, and drives structured routing decisions with a full execution trace.
+
+Key capabilities:
+- Six-node LangGraph state machine with shared state flowing through every node
+- Live GPT-4o inference at five nodes — classification, entity extraction, priority scoring, internal note generation, and routing decision
+- Policy retrieval node directly consumes Module 5's RAG retrieval layer as a workflow tool — creating a true cross-module system dependency
+- Full execution trace logging every node's input, output, and rationale
+- Five pre-loaded regulatory scenarios (Reg BI, FINRA 2210, KYC/AML) demonstrating adaptive pipeline behavior across case types
+
+→ [See full README with sequence diagram and live demo](./modules/agentic-case-triage/)
+
+---
+
 ## Current State: What Runs vs. What's Designed
 
 This portfolio contains both architecture documentation and working code. Being explicit about which is which:
@@ -56,21 +72,23 @@ This portfolio contains both architecture documentation and working code. Being 
 | Layer | Status |
 |-------|--------|
 | Architecture, config, and contracts | ✅ Defined across all modules |
-| RAG Knowledge Pilot — embedding retrieval, grounding, refusal, reflection | ✅ Runs locally with real metrics |
+| RAG Knowledge Pilot — embedding retrieval, grounding, refusal, reflection | ✅ Live deployed with real metrics |
 | Compliance Retrieval Assistant — lexical retrieval demo + evidence packages | ✅ Runs locally |
 | Grounding thresholds, refusal logic, access control | ✅ Implemented and measured in Module 5; designed in Module 4 |
-| Cross-module integration | 🔄 In progress |
+| AI Case Triage Workflow — LangGraph orchestration, live GPT-4o, RAG integration | ✅ Live deployed with execution trace |
+| Cross-module integration (Module 6 → Module 5) | ✅ Implemented — Module 6 consumes Module 5 retrieval layer |
 
 ---
 
 ## How the Modules Connect
 
 ```
-Market Intelligence    →    ROI Engine    →    Guardrails    →    Retrieval Assistant    →    RAG Knowledge Pilot
- (surfaces opportunities)   (prioritizes)      (enforces safety)   (defines governance)       (executes + measures)
+Market Intelligence  →  ROI Engine  →  Guardrails  →  Retrieval Assistant  →  RAG Knowledge Pilot  →  AI Case Triage Workflow
+(surfaces              (prioritizes)   (enforces       (defines                (executes +              (orchestrates
+ opportunities)                         safety)         governance)             measures)                agentically)
 ```
 
-This mirrors how regulated organizations deploy AI: with governance embedded across the **entire lifecycle**, not bolted on after deployment. Modules 1–4 represent the architecture and governance design. Module 5 operationalizes that design into a working, measured system.
+This mirrors how regulated organizations deploy AI: with governance embedded across the **entire lifecycle**, not bolted on after deployment. Modules 1–4 represent the architecture and governance design. Module 5 operationalizes that design into a working, measured retrieval system. Module 6 orchestrates the full pipeline agentically — consuming Module 5 as a live retrieval tool.
 
 ---
 
@@ -85,6 +103,7 @@ Rather than treating governance as a post-deployment control, responsible AI pri
 - **Model invocation** — routing, escalation, refusal paths (Guardrails)
 - **Output grounding** — citation-first retrieval with traceable sources (Retrieval Assistant)
 - **Measured execution** — evaluation-driven iteration with real metrics (RAG Knowledge Pilot)
+- **Agentic orchestration** — bounded multi-step workflows with full execution trace (AI Case Triage Workflow)
 
 ---
 
@@ -106,7 +125,7 @@ The [/regulatory-governance/](./regulatory-governance/) folder documents represe
 ## Repository Structure
 
 ```
-/modules/                  → The five-module system (start here)
+/modules/                  → The six-module system (start here)
 /regulatory-governance/    → Regulations informing design decisions
 /session-prompts/          → Claude Code session prompts and structured prompt experiments
 /architecture/             → System-level decisions and ADRs
@@ -128,6 +147,7 @@ Each module includes its own README documenting scope, design rationale, tradeof
 | **Guardrails** | Classification rules, routing logic, escalation design, refusal paths (designed) |
 | **Retrieval Assistant** | Policy-as-data configs, ADRs, evaluation scorecard, trace schema, response contract, runnable `minirag.py` demo, sample corpus, evidence package outputs |
 | **RAG Knowledge Pilot** | OpenAI embedding retrieval, cosine similarity search, categorical grounding, agentic reflection loop, evaluation harness (GAR/RCR), threshold experimentation, Mermaid diagrams |
+| **AI Case Triage Workflow** | LangGraph six-node state machine, live GPT-4o inference, Module 5 RAG integration, execution trace, five regulatory scenarios, Streamlit UI, sequence diagram |
 
 Artifacts emphasize **decision accountability and auditability**, not model optimization.
 
@@ -140,7 +160,7 @@ Artifacts emphasize **decision accountability and auditability**, not model opti
 | Foundation | Opportunity discovery and prioritization frameworks | 🟡 Artifacts and design complete; not fully executable |
 | Build | Safety enforcement and grounded retrieval | ✅ Retrieval demo operational; guardrails designed |
 | Execute | Working AI feature with measured performance | ✅ RAG Knowledge Pilot live with real metrics |
-| Polish | Integration, case studies, evaluation depth | 🔄 In progress |
+| Orchestrate | Agentic workflow with cross-module integration | ✅ AI Case Triage Workflow live with execution trace |
 
 ---
 
@@ -162,4 +182,5 @@ Formal certifications and applied training completed during this transition:
 
 - See `requirements.txt` for Python dependencies
 - Module 5 (RAG Knowledge Pilot) requires an OpenAI API key — see [Module 5 Setup](./modules/rag-knowledge-pilot/#setup)
+- Module 6 (AI Case Triage Workflow) requires an OpenAI API key — see [Module 6 Setup](./modules/agentic-case-triage/#setup)
 - Module 4 (Compliance Retrieval Assistant) includes a deterministic demo runner that does not require external APIs
