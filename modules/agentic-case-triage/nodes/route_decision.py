@@ -9,7 +9,8 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from state import CaseState
 from nodes.utils import parse_json_response
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+# Load .env from the repo root
+load_dotenv(Path(__file__).resolve().parent.parent.parent.parent / ".env", override=True)
 
 SYSTEM_PROMPT = (
     "You are a compliance routing officer. Based on the full "
