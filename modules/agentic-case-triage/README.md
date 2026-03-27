@@ -40,6 +40,39 @@ This module shows something different:
 
 ---
 
+## System Architecture
+
+The workflow executes as a six-node LangGraph state machine.
+Each node reads accumulated state, performs its function
+(LLM call or retrieval), appends a trace entry, and passes
+enriched state to the next node.
+
+Node 3 is the cross-module integration point: it directly
+imports and executes the Module 5 RAG retrieval layer,
+querying the compliance corpus using a classification-derived
+query and returning ranked policy chunks that feed into all
+downstream nodes.
+
+![Sequence Diagram](docs/sequence-diagram.png)
+
+*The execution trace visible in the Streamlit UI mirrors
+this sequence exactly — every node's input and output
+is logged in real time.*
+
+---
+
+## Live Demo
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-case-triage-workflow.streamlit.app)
+
+![Module 6 UI Results](docs/ui-screenshot.png)
+*Six-node triage pipeline output with execution trace —
+Classification, Entities, Policy References, Priority,
+Internal Note, and Routing Decision displayed in
+expandable sections with full audit trail.*
+
+---
+
 ## Regulatory Anchors
 
 Case scenarios are designed around real FinServ operational triggers:
