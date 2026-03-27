@@ -58,7 +58,8 @@ with right:
             snippets = result.get("policy_snippets") or []
             if snippets:
                 for i, snippet in enumerate(snippets, 1):
-                    st.markdown(f"{i}. {snippet}")
+                    display = f"{i}. {snippet[:300]}..." if len(snippet) > 300 else f"{i}. {snippet}"
+                    st.caption(display)
             else:
                 st.info("No policy snippets retrieved.")
 
