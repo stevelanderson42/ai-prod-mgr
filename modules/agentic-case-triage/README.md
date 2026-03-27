@@ -1,9 +1,9 @@
 # Module 6 — AI Case Triage Workflow (Agentic Orchestration)
 
 > **10-Second Summary:**
-> Module 6 orchestrates multi-step AI triage workflows — classifying, enriching,
-> retrieving policy, and routing decisions with a full execution trace — demonstrating
-> how governed agentic systems operate in regulated environments.
+> A fully deployed, agentic AI workflow that classifies operational cases, retrieves
+> policy from a governed RAG layer, and routes decisions with a complete execution
+> trace — demonstrating how production AI systems operate in regulated environments.
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-case-triage-workflow.streamlit.app)
 
@@ -11,15 +11,13 @@
 
 ## What This Module Does
 
-This module simulates how a regulated financial services company triages operational
-cases (complaints, disputes, incidents) using a bounded, auditable AI workflow.
+This module simulates a real-world operational triage system used in regulated financial services.
 
-A user submits a case in plain text. The system runs it through a six-node LangGraph
-state machine — classifying the issue, extracting key entities, retrieving relevant
-policy, scoring priority, drafting an internal routing note, and producing a final
-routing decision.
+A user submits a case in plain text. The system executes a six-step workflow: classification, entity extraction, policy retrieval, priority scoring, internal note generation, and routing decision.
 
-Every step is logged. Every decision is traceable. Nothing is a black box.
+Each step operates on shared state, and every decision is logged in a visible execution trace.
+
+The result is a structured, auditable output — not just a generated response.
 
 ---
 
@@ -47,11 +45,12 @@ Each node reads accumulated state, performs its function
 (LLM call or retrieval), appends a trace entry, and passes
 enriched state to the next node.
 
-Node 3 is the cross-module integration point: it directly
-imports and executes the Module 5 RAG retrieval layer,
-querying the compliance corpus using a classification-derived
-query and returning ranked policy chunks that feed into all
-downstream nodes.
+Node 3 is the system's integration point with the Module 5 RAG layer.
+Instead of returning static knowledge, the workflow dynamically queries
+a versioned compliance corpus using a classification-derived query.
+The retrieved policy directly influences priority scoring, internal note
+generation, and routing decisions — creating a true system dependency,
+not a standalone demo.
 
 ![Sequence Diagram](docs/sequence-diagram.png)
 
@@ -84,6 +83,7 @@ adds what it produces. Nothing is lost between steps.
 ## Live Demo
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-case-triage-workflow.streamlit.app)
+*Public, no setup required — click and run the full workflow in seconds.*
 
 ![Module 6 UI Results](docs/ui-screenshot.png)
 *Six-node triage pipeline output with execution trace —
@@ -143,6 +143,16 @@ Five representative cases designed to exercise different triage paths:
 | 3 | Communication/disclosure complaint | FINRA 2210 → documentation review |
 | 4 | Account access / fraud report | security → immediate escalation |
 | 5 | Fee dispute with escalation flag | ops → supervisor review |
+
+---
+
+## What This Demonstrates
+
+- Designing **bounded agentic workflows** instead of open-ended agents
+- Integrating **retrieval systems as tools inside orchestration**
+- Combining **LLM reasoning with deterministic control logic**
+- Building **auditable AI systems with visible execution traces**
+- Deploying **end-to-end AI workflows to production (Streamlit Cloud)**
 
 ---
 
