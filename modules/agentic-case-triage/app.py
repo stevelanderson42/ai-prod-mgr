@@ -57,9 +57,11 @@ with right:
         with st.expander("Policy References", expanded=True):
             snippets = result.get("policy_snippets") or []
             if snippets:
-                for i, snippet in enumerate(snippets, 1):
-                    display = f"{i}. {snippet[:300]}..." if len(snippet) > 300 else f"{i}. {snippet}"
-                    st.caption(display)
+                for i, snippet in enumerate(snippets):
+                    lines = [l for l in snippet.split('\n')
+                             if not l.strip().startswith('#') and l.strip()]
+                    clean = ' '.join(lines)[:250]
+                    st.info(f"[{i+1}] {clean}...")
             else:
                 st.info("No policy snippets retrieved.")
 
