@@ -121,7 +121,7 @@ Node 2 — extract_entities
   Output: customer_id=implied, product=mutual_fund, advisor_id=implied, date=recent
 
 Node 3 — retrieve_policy
-  Input:  category=SUITABILITY_COMPLAINT
+  Input:  query="SUITABILITY_COMPLAINT Reg_BI compliance policy"
   Output: FINRA Rule 2111 snippet, Reg BI obligation summary
 
 ...and so on through Node 6.
@@ -163,10 +163,12 @@ Five representative cases designed to exercise different triage paths:
 
 | Module | Role in System |
 |---|---|
-| Module 3 — Requirements Guardrails | Pre-invocation risk control |
-| Module 4 — Compliance RAG | Governed execution layer |
-| Module 5 — RAG Knowledge Pilot | Retrieval layer consumed by Module 6 |
-| **Module 6 — AI Case Triage Workflow (Agentic Orchestration)** | **Agentic orchestration + runtime trace** |
+| Market Intelligence Monitor | External signal awareness for AI strategy |
+| ROI Decision Engine | Structured prioritization for AI initiatives |
+| Requirements Guardrails | Pre-invocation risk control |
+| Compliance Retrieval Assistant | Governed retrieval with citation and audit |
+| RAG Knowledge Pilot | Retrieval layer consumed by Module 6 |
+| **AI Case Triage Workflow (Agentic Orchestration)** | **Agentic orchestration + runtime trace** |
 
 ---
 
