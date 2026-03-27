@@ -59,6 +59,26 @@ downstream nodes.
 this sequence exactly — every node's input and output
 is logged in real time.*
 
+```
+User Input (plain text case)
+        ↓
+┌─────────────────────────────┐
+│   LangGraph State Machine   │
+│                             │
+│  Node 1: classify_issue     │  → issue type, risk category
+│  Node 2: extract_entities   │  → customer, product, dates, facts
+│  Node 3: retrieve_policy    │  → policy snippets (Module 5 RAG layer)
+│  Node 4: score_priority     │  → urgency score + rationale
+│  Node 5: draft_internal_note│  → structured routing summary
+│  Node 6: route_decision     │  → final routing + recommended action
+└─────────────────────────────┘
+        ↓
+Structured Output + Full Execution Trace
+```
+
+**Shared state flows through every node.** Each node reads what it needs,
+adds what it produces. Nothing is lost between steps.
+
 ---
 
 ## Live Demo
@@ -84,30 +104,6 @@ Case scenarios are designed around real FinServ operational triggers:
 | Unauthorized transaction | KYC / AML workflow |
 | Disclosure failure | SEC / Reg BI |
 | Escalation threshold | SR 11-7 model risk alignment |
-
----
-
-## System Architecture
-
-```
-User Input (plain text case)
-        ↓
-┌─────────────────────────────┐
-│   LangGraph State Machine   │
-│                             │
-│  Node 1: classify_issue     │  → issue type, risk category
-│  Node 2: extract_entities   │  → customer, product, dates, facts
-│  Node 3: retrieve_policy    │  → policy snippets (Module 5 RAG layer)
-│  Node 4: score_priority     │  → urgency score + rationale
-│  Node 5: draft_internal_note│  → structured routing summary
-│  Node 6: route_decision     │  → final routing + recommended action
-└─────────────────────────────┘
-        ↓
-Structured Output + Full Execution Trace
-```
-
-**Shared state flows through every node.** Each node reads what it needs,
-adds what it produces. Nothing is lost between steps.
 
 ---
 
@@ -142,8 +138,8 @@ Five representative cases designed to exercise different triage paths:
 
 | # | Scenario | Expected Path |
 |---|---|---|
-| 1 | Unauthorized transaction dispute | fraud → escalation |
-| 2 | Suitability complaint on product recommendation | Reg BI → compliance review |
+| 1 | Suitability complaint on product recommendation | Reg BI → compliance review |
+| 2 | Unauthorized transaction dispute | fraud → escalation |
 | 3 | Communication/disclosure complaint | FINRA 2210 → documentation review |
 | 4 | Account access / fraud report | security → immediate escalation |
 | 5 | Fee dispute with escalation flag | ops → supervisor review |
@@ -177,116 +173,4 @@ Five representative cases designed to exercise different triage paths:
 ## Status
 
 ✅ Live Demo: https://ai-case-triage-workflow.streamlit.app
-
----
-
----
----
-
-# State Schema (Python)
-# File: state.py
-
-```python
-from typing import TypedDict, Optional
-from langgraph.graph import StateGraph, END
-
-
-# ─────────────────────────────────────────────
-# SHARED STATE OBJECT
-# Flows through every node in the graph.
-# Each node reads what it needs, adds what it produces.
-# ─────────────────────────────────────────────
-
-class CaseState(TypedDict):
-
-    # ── Input ──────────────────────────────────
-    raw_input: str                    # Original plain-text case submission
-
-    # ── Node 1: classify_issue ─────────────────
-    issue_category: Optional[str]     # e.g. SUITABILITY_COMPLAINT, FRAUD, FEE_DISPUTE
-    risk_level: Optional[str]         # HIGH / MEDIUM / LOW
-    regulatory_trigger: Optional[str] # e.g. Reg_BI, FINRA_2210, KYC_AML
-
-    # ── Node 2: extract_entities ───────────────
-    entities: Optional[dict]          # customer_id, product, advisor, date, key_facts
-
-    # ── Node 3: retrieve_policy ────────────────
-    policy_snippets: Optional[list]   # Retrieved chunks from Module 5 RAG layer
-
-    # ── Node 4: score_priority ─────────────────
-    priority_score: Optional[int]     # 1 (low) → 5 (critical)
-    priority_rationale: Optional[str] # Plain-language explanation of score
-
-    # ── Node 5: draft_internal_note ────────────
-    internal_note: Optional[str]      # Structured summary for routing team
-
-    # ── Node 6: route_decision ─────────────────
-    routing_destination: Optional[str]    # e.g. COMPLIANCE_REVIEW, FRAUD_OPS, SUPERVISOR
-    recommended_action: Optional[str]     # What the receiving team should do first
-
-    # ── Execution Trace (built throughout) ─────
-    trace: list                        # Per-node log: step / input_summary / output_summary
-    error: Optional[str]               # Surface any node failure without crashing graph
-```
-
----
-
-## Trace Entry Pattern (use in every node)
-
-```python
-# At the end of each node function, append to trace:
-
-state["trace"].append({
-    "step": "classify_issue",           # node name
-    "input_summary": "...",             # 1-sentence description of what came in
-    "output_summary": "...",            # 1-sentence description of what was produced
-    "key_outputs": {                    # the actual values generated
-        "issue_category": state["issue_category"],
-        "risk_level": state["risk_level"],
-        "regulatory_trigger": state["regulatory_trigger"]
-    }
-})
-```
-
-This pattern is identical across all six nodes — only `step` and `key_outputs` change.
-
----
-
-## Initialization Pattern
-
-```python
-# How to initialize state before running the graph:
-
-initial_state: CaseState = {
-    "raw_input": "Customer complaint text goes here...",
-    "issue_category": None,
-    "risk_level": None,
-    "regulatory_trigger": None,
-    "entities": None,
-    "policy_snippets": None,
-    "priority_score": None,
-    "priority_rationale": None,
-    "internal_note": None,
-    "routing_destination": None,
-    "recommended_action": None,
-    "trace": [],        # starts empty, grows with each node
-    "error": None
-}
-```
-
----
-
-## What Comes Next (Phase 1 → 2)
-
-Phase 1: Install LangGraph, create state.py, run a single stub node
-         that classifies "hello world" and appends to trace. Prove graph executes.
-
-Phase 2: Wire all 6 nodes as stubs. Prove state flows correctly node-to-node
-         with trace entries at each step. No LLM yet.
-
-Phase 3: Replace stubs with real LLM calls, one node at a time.
-
-Phase 4: Add Streamlit UI. Display final output + full execution trace side by side.
-
-Phase 5: Polish scenarios, README, resume bullets.
 
