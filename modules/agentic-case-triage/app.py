@@ -45,6 +45,27 @@ SCENARIOS = {
 left, right = st.columns([0.4, 0.6])
 
 with left:
+    st.markdown("### What This Demo Shows")
+    st.markdown("""
+This demo simulates how an AI-orchestrated triage system
+processes operational cases in a regulated financial services
+environment. Submit a case in plain text — or select one of
+five pre-loaded scenarios — and watch a six-step agentic
+workflow classify the issue, extract key entities, retrieve
+relevant compliance policy, score priority, draft an internal
+routing note, and produce a final routing decision. Every step
+is logged in a visible execution trace.
+""")
+
+    st.markdown("### Select a Scenario to Get Started")
+    st.markdown("""
+Each scenario represents a real complaint or incident category
+that regulated firms handle daily — designed to exercise
+different regulatory triggers and produce different
+classification, policy retrieval, and routing outcomes.
+Select one to pre-populate the case text, or write your own below.
+""")
+
     scenario = st.selectbox("Select Demo Scenario", list(SCENARIOS.keys()))
     case_text = st.text_area(
         "Submit Operational Case",
@@ -52,6 +73,27 @@ with left:
         height=220,
     )
     run = st.button("Run Triage", type="primary")
+
+    st.markdown("---")
+    st.markdown("### Understanding Your Results")
+    st.markdown("""
+Results appear in the right panel. Each section reflects
+one stage of the workflow:
+""")
+    st.markdown("""
+- **Classification** — identifies the issue type, risk level,
+  and regulatory trigger
+- **Entities** — extracts structured facts from the case text
+- **Policy References** — shows compliance content retrieved
+  live from the knowledge corpus
+- **Priority** — scores urgency on a 1–5 scale with rationale
+- **Internal Note** — drafts a structured summary for the
+  routing team
+- **Routing Decision** — produces the final destination and
+  recommended action
+- **Execution Trace** — logs every node's input and output
+  in sequence
+""")
 
 with right:
     if run and case_text.strip():
