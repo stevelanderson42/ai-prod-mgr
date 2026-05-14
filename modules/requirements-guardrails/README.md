@@ -3,7 +3,7 @@
 **Pre-Invocation Risk & Ambiguity Detection for Regulated AI Workflows**
 
 **Status:** 🟡 In Progress  
-**Module:** 3 of 4 in the Regulated AI Workflow Toolkit
+**Module:** 3 of 6 in the Regulated AI Workflow Toolkit
 
 ---
 
@@ -36,13 +36,13 @@ This module provides a **third path**: structured input analysis that enables sa
 ## Where It Sits in the Workflow
 
 ```
-Market Intelligence    →    ROI Engine    →    [Guardrails]    →    RAG Assistant
+Market Intelligence    →    ROI Engine    →    [Guardrails]    →    Compliance Retrieval Assistant
  (surfaces opportunities)   (prioritizes)      (enforces safety)   (delivers outputs)
 ```
 
 **Upstream:** ROI Decision Engine determines *which* AI workflows to build  
 **This module:** Determines *whether* a specific request can safely proceed  
-**Downstream:** Compliant requests proceed to RAG Assistant for execution
+**Downstream:** Compliant requests proceed to Compliance Retrieval Assistant for execution
 
 Inputs arrive from users, workflows, or upstream systems. Outputs are routing decisions:
 - **Proceed** — Safe for model invocation
@@ -231,7 +231,7 @@ This module explicitly addresses requirements from key regulatory frameworks:
 
 Scope discipline is a senior PM signal. This module has clear boundaries:
 
-- ❌ **Does not generate responses** — That's Module 4 (RAG Assistant)
+- ❌ **Does not generate responses** — That's Module 4 (Compliance Retrieval Assistant)
 - ❌ **Does not prioritize opportunities** — That's Module 2 (ROI Engine)
 - ❌ **Does not attempt semantic "truth"** — It classifies risk, not factual accuracy
 - ❌ **Does not replace compliance review** — Escalation routes to humans
@@ -274,10 +274,10 @@ This module is complete when:
 - [x] Guardrail categories documented with triggers and outcomes
 - [x] Output contract defined and validated
 - [x] FINRA 2210 compliance triggers codified with examples
-- [ ] At least 10 sample inputs with classifications
-- [ ] Edge cases documented with PM rationale
-- [ ] ADR explaining deterministic routing decision
-- [ ] Integration contract with RAG Assistant defined
+- [x] At least 10 sample inputs with classifications
+- [x] Edge cases documented with PM rationale
+- [x] ADR explaining deterministic routing decision
+- [ ] Integration contract with Compliance Retrieval Assistant defined
 - [ ] Design principles reflected in all artifacts
 - [x] Sequence diagram showing request evaluation flow
 
@@ -301,7 +301,7 @@ This module is complete when:
 |--------|--------------|
 | **Market Intelligence** (Module 1) | No direct dependency; operates on different timescales |
 | **ROI Decision Engine** (Module 2) | Consumes workflow context; knows which use cases are approved |
-| **Compliance RAG Assistant** (Module 4) | Feeds PROCEED requests downstream; defines handoff contract |
+| **Compliance Retrieval Assistant** (Module 4) | Feeds PROCEED requests downstream; defines handoff contract |
 | **Audit Infrastructure** | Emits structured logs for all routing decisions |
 
 ---

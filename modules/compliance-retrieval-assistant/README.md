@@ -4,7 +4,7 @@
 
 A retrieval module designed for environments where AI answers need to be defensible, not just helpful. This module enforces grounding, citation, traceability, and structured refusal as core platform behaviors — not afterthoughts.
 
-**Module:** 4 of 4 in the [Regulated AI Workflow Architecture & Demos](../../README.md)
+**Module:** 4 of 6 in the [Regulated AI Workflow Toolkit](../README.md)
 
 ---
 

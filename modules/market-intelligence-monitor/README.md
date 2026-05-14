@@ -2,7 +2,7 @@
 **External Signal Awareness for Regulated AI Strategy**
 
 **Status:** 🟢 MVP Complete  
-**Module:** 1 of 4 in the Regulated AI Workflow Toolkit
+**Module:** 1 of 6 in the Regulated AI Workflow Toolkit
 
 ---
 
@@ -43,7 +43,7 @@ This module ensures AI strategy is informed by **external signals before interna
 
 ## Where It Sits in the Workflow
 
-**[Market Intelligence] → ROI Engine → Guardrails → RAG Assistant**  
+**[Market Intelligence] → ROI Engine → Guardrails → Compliance Retrieval Assistant**  
 *(external signals) → (prioritizes) → (validates) → (executes)*
 
 **This module:**

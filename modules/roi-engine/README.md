@@ -3,7 +3,7 @@
 **Structured Prioritization for Regulated AI Initiatives**
 
 **Status:** 🟢 MVP Complete  
-**Module:** 2 of 4 in the Regulated AI Workflow Toolkit
+**Module:** 2 of 6 in the Regulated AI Workflow Toolkit
 
 ---
 
@@ -38,7 +38,7 @@ This module corrects that imbalance by treating governance inputs as first-class
 ## Where It Sits in the Workflow
 
 ```
-Market Intelligence → [ROI Engine] → Guardrails → RAG Assistant
+Market Intelligence → [ROI Engine] → Guardrails → Compliance Retrieval Assistant
    (surfaces signals)    (prioritizes)   (validates)   (executes safely)
 ```
 

@@ -96,18 +96,20 @@ The `examples/` folder contains sample response files:
 
 | Example | Grounding Status | Demonstrates |
 |---------|------------------|--------------|
-| *(To be added)* | | |
+| `example-fully-grounded.json` | FULLY_GROUNDED | Basic successful answer with citations |
+| `example-partially-grounded.json` | PARTIALLY_GROUNDED | Some claims unsupported |
+| `example-refusal-policy-blocked.json` | REFUSED | Access denied by policy |
 
 ### Planned Examples
 
-- [ ] `fully-grounded-simple.json` — Basic successful answer
-- [ ] `fully-grounded-multi-source.json` — Answer citing multiple documents
-- [ ] `partially-grounded.json` — Some claims unsupported
-- [ ] `refusal-no-eligible-docs.json` — Out of scope query
-- [ ] `refusal-insufficient-grounding.json` — Found passages, can't answer
-- [ ] `refusal-policy-blocked.json` — Access denied
-- [ ] `refusal-ambiguous-query.json` — Needs clarification
-- [ ] `refusal-conflicting-sources.json` — Sources disagree
+- [x] `example-fully-grounded.json` — Basic successful answer
+- [ ] `example-fully-grounded-multi-source.json` — Answer citing multiple documents
+- [x] `example-partially-grounded.json` — Some claims unsupported
+- [ ] `example-refusal-no-eligible-docs.json` — Out of scope query
+- [ ] `example-refusal-insufficient-grounding.json` — Found passages, can't answer
+- [x] `example-refusal-policy-blocked.json` — Access denied
+- [ ] `example-refusal-ambiguous-query.json` — Needs clarification
+- [ ] `example-refusal-conflicting-sources.json` — Sources disagree
 
 ---
 

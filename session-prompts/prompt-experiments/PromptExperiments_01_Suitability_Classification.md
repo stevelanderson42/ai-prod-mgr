@@ -87,7 +87,7 @@ This pattern applies broadly: any classification task in financial services need
 
 ## Connection to Toolkit
 
-This classification pattern is foundational for the **Requirements Guardrails** module, where incoming user requests must be routed appropriately before the AI responds. It also informs the **Compliance RAG Assistant**, which needs to detect when a query requires sourced, compliant answers versus general information.
+This classification pattern is foundational for the **Requirements Guardrails** module, where incoming user requests must be routed appropriately before the AI responds. It also informs the **Compliance Retrieval Assistant**, which needs to detect when a query requires sourced, compliant answers versus general information.
 
 
 

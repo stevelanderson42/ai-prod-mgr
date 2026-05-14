@@ -64,7 +64,7 @@ synthesis_output.v1
 - Market Intelligence Monitor (MVP complete)
 - ROI Decision Engine (planned)
 - Requirements Guardrails (planned)
-- Compliance RAG Assistant (planned)
+- Compliance Retrieval Assistant (planned)
 
 ## Links
 

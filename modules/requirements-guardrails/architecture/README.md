@@ -17,7 +17,7 @@ This folder contains architecture decision records (ADRs) and system diagrams fo
 
 | Diagram | Description |
 |---------|-------------|
-| [Context Diagram](./Module%203%20-%20Requirements%20Guardrails%20-%20Context%20Diagram.PNG) | System position and internal flow |
+| [Context Diagram](../docs/diagrams/requirements_guardrails_Context_Diagram.PNG) | System position and internal flow |
 
 ---
 

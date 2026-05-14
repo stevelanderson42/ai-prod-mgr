@@ -26,7 +26,7 @@ The primary output of the Requirements Guardrails module. Each request produces 
 
 ### Output Contract
 
-Downstream systems (particularly the Compliance RAG Assistant) consume these outputs. The contract guarantees:
+Downstream systems (particularly the Compliance Retrieval Assistant) consume these outputs. The contract guarantees:
 
 1. Every request gets exactly one routing decision
 2. Decisions include traceable rule references

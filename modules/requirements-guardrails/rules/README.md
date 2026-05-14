@@ -39,7 +39,7 @@ User Request
    PROCEED
 ```
 
-**Evaluation order matters:** Prohibited content is checked first (immediate rejection), then compliance triggers (escalation), then ambiguity (clarification). Only requests passing all three checks proceed to the RAG Assistant.
+**Evaluation order matters:** Prohibited content is checked first (immediate rejection), then compliance triggers (escalation), then ambiguity (clarification). Only requests passing all three checks proceed to the Compliance Retrieval Assistant.
 
 ---
 

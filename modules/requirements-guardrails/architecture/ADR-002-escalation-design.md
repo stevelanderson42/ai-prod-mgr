@@ -209,7 +209,7 @@ ESCALATE Decision
 
 | System | Integration |
 |--------|-------------|
-| Compliance RAG Assistant | Receives PROCEED decisions only |
+| Compliance Retrieval Assistant | Receives PROCEED decisions only |
 | Case Management | Receives escalation payloads |
 | CRM | Updated with escalation history |
 | Audit Log | All escalations logged with full context |

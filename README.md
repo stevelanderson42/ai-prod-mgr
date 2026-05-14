@@ -21,8 +21,8 @@ Rather than a collection of disconnected demos, this repository is organized as 
 |--------|---------|--------|
 | [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | Tracks competitor AI releases and regulatory signals to inform strategic prioritization | 🟡 MVP build artifacts |
 | [ROI Decision Engine](./modules/roi-engine/) | Structured, risk-aware framework for prioritizing AI opportunities | 🟡 Framework + examples |
-| [Requirements Guardrails](./modules/requirements-guardrails/) | Detects ambiguity and compliance risk before model invocation | 🟡 Designed (not yet wired end-to-end) |
-| [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | Governance architecture for citation-first retrieval in high-risk workflows | 🟢 Architecture complete with evidence packages |
+| [Requirements Guardrails](./modules/requirements-guardrails/) | Detects ambiguity and compliance risk before model invocation | 🟡 In Progress |
+| [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | Governance architecture for citation-first retrieval in high-risk workflows | 🟡 Architecture complete with evidence packages |
 | [**RAG Knowledge Pilot**](./modules/rag-knowledge-pilot/) | **Working retrieval system with measured grounding, refusal logic, and agentic reflection** | **🟢 Live deployed — rag-knowledge-pilot.streamlit.app** |
 | [**AI Case Triage Workflow**](./modules/agentic-case-triage/) | **LangGraph-orchestrated six-node agentic pipeline with live policy retrieval and execution trace** | **🟢 Live deployed — ai-case-triage-workflow.streamlit.app** |
 
@@ -182,5 +182,5 @@ Formal certifications and applied training completed during this transition:
 
 - See `requirements.txt` for Python dependencies
 - Module 5 (RAG Knowledge Pilot) requires an OpenAI API key — see [Module 5 Setup](./modules/rag-knowledge-pilot/#setup)
-- Module 6 (AI Case Triage Workflow) requires an OpenAI API key — see [Module 6 Setup](./modules/agentic-case-triage/#setup)
+- Module 6 (AI Case Triage Workflow) requires an OpenAI API key — see [Module 6 Live Demo](./modules/agentic-case-triage/#live-demo)
 - Module 4 (Compliance Retrieval Assistant) includes a deterministic demo runner that does not require external APIs

@@ -100,7 +100,7 @@ The V1 pattern ("be helpful") is the default LLM behavior. Overriding it require
 
 ## Connection to Toolkit
 
-This pattern is essential for the **Requirements Guardrails** module, which must intercept unsafe queries before they reach the response generation layer. It also shapes the design of the **Compliance RAG Assistant**, where certain questions should trigger human escalation rather than AI-generated answers.
+This pattern is essential for the **Requirements Guardrails** module, which must intercept unsafe queries before they reach the response generation layer. It also shapes the design of the **Compliance Retrieval Assistant**, where certain questions should trigger human escalation rather than AI-generated answers.
 
 
 

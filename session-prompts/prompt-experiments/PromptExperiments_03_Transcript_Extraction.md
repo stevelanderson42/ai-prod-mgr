@@ -112,7 +112,7 @@ Schema-first prompting turns an LLM into a reliable data extraction tool. Withou
 
 ## Connection to Toolkit
 
-This extraction pattern is core to the **Compliance RAG Assistant**, which must pull structured information from policy documents, customer records, and regulatory filings. It also supports the **Market Intelligence Monitor**, where news and filings need to be parsed into consistent data structures for analysis.
+This extraction pattern is core to the **Compliance Retrieval Assistant**, which must pull structured information from policy documents, customer records, and regulatory filings. It also supports the **Market Intelligence Monitor**, where news and filings need to be parsed into consistent data structures for analysis.
 
 
 

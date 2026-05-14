@@ -24,7 +24,7 @@ AI products in regulated industries don't fail because models are weak — they 
 
 Every design decision in this portfolio was shaped by a regulatory context:
 
-- **Why does the RAG Assistant refuse instead of guess?** → Reg BI suitability requirements
+- **Why does the Compliance Retrieval Assistant refuse instead of guess?** → Reg BI suitability requirements
 - **Why are audit trails non-negotiable?** → SEC 17a-4 books and records
 - **Why is documentation so detailed?** → SR 11-7 model risk management
 - **Why do guardrails check for "fair and balanced" language?** → FINRA 2210 communication standards

@@ -103,7 +103,7 @@ Architecture diagrams are located in [docs/diagrams/](./docs/diagrams/) and embe
 Each case study links to concrete artifacts elsewhere in this repository:
 
 - [/modules/compliance-retrieval-assistant/](../modules/compliance-retrieval-assistant/) — Compliance Retrieval Assistant
-- [/modules/requirements-guardrails/](../modules/requirements-guardrails/) — Requirements Guardrails (Input Analyzer)
+- [/modules/requirements-guardrails/](../modules/requirements-guardrails/) — Requirements Guardrails
 - [/modules/roi-engine/](../modules/roi-engine/) — ROI Decision Engine
 - [/architecture/](../architecture/) — Cross-cutting architectural decisions
 - [/evaluation/](../evaluation/) — Scorecards and test cases

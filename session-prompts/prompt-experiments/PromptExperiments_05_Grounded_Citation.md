@@ -132,7 +132,7 @@ This is the core pattern for any RAG system in regulated environments. The model
 
 ## Connection to Toolkit
 
-This experiment directly informs the **Compliance RAG Assistant** architecture. The retrieval layer finds relevant documents; the generation layer must be constrained to use only what was retrieved. Without this grounding pattern, RAG systems become confident hallucination engines with citations that look legitimate but aren't.
+This experiment directly informs the **Compliance Retrieval Assistant** architecture. The retrieval layer finds relevant documents; the generation layer must be constrained to use only what was retrieved. Without this grounding pattern, RAG systems become confident hallucination engines with citations that look legitimate but aren't.
 
 
 

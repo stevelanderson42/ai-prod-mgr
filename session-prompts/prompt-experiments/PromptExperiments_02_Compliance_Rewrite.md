@@ -78,7 +78,7 @@ In regulated environments, prompts must include explicit constraints that mirror
 
 ## Connection to Toolkit
 
-This pattern directly supports the **Requirements Guardrails** module, where AI-generated or AI-edited content must pass compliance checks before reaching customers. It also informs how the **Compliance RAG Assistant** should frame responses — always with appropriate hedging and without forward-looking statements.
+This pattern directly supports the **Requirements Guardrails** module, where AI-generated or AI-edited content must pass compliance checks before reaching customers. It also informs how the **Compliance Retrieval Assistant** should frame responses — always with appropriate hedging and without forward-looking statements.
 
 
 

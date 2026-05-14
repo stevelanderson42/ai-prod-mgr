@@ -1,6 +1,6 @@
 # Case Study #1: Pre-Invocation Governance as a Product Control
 
-**Module:** Requirements Guardrails (Input Analyzer)  
+**Module:** Requirements Guardrails  
 **Focus:** Preventive AI governance, audit defensibility, controlled model access
 
 ---
