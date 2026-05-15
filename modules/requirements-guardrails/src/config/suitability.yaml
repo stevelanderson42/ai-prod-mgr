@@ -1,0 +1,115 @@
+version: "1.0"
+category: suitability
+description: >
+  Suitability context gap rules. These fire when a recommendation
+  or advice request is detected but required context fields are
+  missing. Default routing is CLARIFY with specific missing_context
+  fields that drive the clarification prompt.
+
+  Detection is heuristic: the Python layer checks (1) whether the
+  query is a recommendation/advice request, then (2) whether the
+  required context is present in the query or user metadata.
+
+rules:
+  # --- Missing Context (CLARIFY) ---
+
+  - id: suitability.missing_risk_tolerance
+    description: >
+      Recommendation request without stated or known risk tolerance.
+    classification: CLARIFY
+    regulation: "FINRA 2111(a)"
+    missing_context:
+      - "risk_tolerance"
+    detection:
+      type: heuristic
+      recommendation_signals:
+        - "what should I invest"
+        - "recommend"
+        - "suggest"
+        - "which fund"
+        - "asset allocation"
+      context_signals:
+        - "conservative"
+        - "moderate"
+        - "aggressive"
+        - "risk tolerance"
+        - "risk appetite"
+
+  - id: suitability.missing_time_horizon
+    description: >
+      Recommendation request without stated or known time horizon.
+    classification: CLARIFY
+    regulation: "FINRA 2111(a)"
+    missing_context:
+      - "time_horizon"
+    detection:
+      type: heuristic
+      recommendation_signals:
+        - "what should I invest"
+        - "recommend"
+        - "suggest"
+        - "which fund"
+        - "asset allocation"
+      context_signals:
+        - "years"
+        - "retirement"
+        - "short-term"
+        - "long-term"
+        - "time horizon"
+        - "by age"
+        - "by 20"
+
+  - id: suitability.missing_jurisdiction
+    description: >
+      Tax-related question without state or jurisdiction context.
+      Tax implications vary significantly by jurisdiction.
+    classification: CLARIFY
+    missing_context:
+      - "jurisdiction"
+    detection:
+      type: heuristic
+      tax_signals:
+        - "tax implications"
+        - "tax impact"
+        - "tax consequences"
+        - "convert"
+        - "Roth conversion"
+        - "state tax"
+      jurisdiction_signals:
+        - state abbreviations and names detected in query or metadata
+
+  - id: suitability.missing_account_type
+    description: >
+      Account-specific question without identifiable account type.
+    classification: CLARIFY
+    missing_context:
+      - "account_type"
+    detection:
+      type: heuristic
+      account_signals:
+        - "my account"
+        - "my portfolio"
+        - "my investments"
+      type_signals:
+        - "IRA"
+        - "401k"
+        - "Roth"
+        - "brokerage"
+        - "529"
+        - "HSA"
+
+  # --- Risk Indicators (ESCALATE) ---
+
+  - id: suitability.concentration_risk
+    description: >
+      Language suggesting dangerous portfolio concentration.
+    classification: ESCALATE
+    regulation: "FINRA 2111(a)"
+    detection:
+      type: keyword
+      patterns:
+        - "put everything in"
+        - "all-in on"
+        - "all my money in"
+        - "entire portfolio in"
+        - "100% in"

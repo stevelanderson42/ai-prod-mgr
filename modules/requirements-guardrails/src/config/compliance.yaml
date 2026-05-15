@@ -1,0 +1,174 @@
+version: "1.0"
+category: compliance
+description: >
+  Compliance trigger rules derived from FINRA 2210, FINRA 2111,
+  Reg BI, and FINRA 2020. Default routing is ESCALATE.
+
+  Rules eligible for produce-intent upgrade include a
+  produce_intent_upgrade field. When the Python classifier detects
+  that a query asks the system to generate violating content
+  (rather than merely containing violating language), the
+  classification is upgraded to the value of produce_intent_upgrade.
+  Rules without this field stay at their default classification
+  regardless of produce-intent detection.
+
+rules:
+  # --- Prohibited Language Patterns (FINRA 2210) ---
+
+  - id: compliance.guarantee_language
+    description: >
+      Performance guarantee language violating FINRA 2210 standards
+      for fair and balanced communication.
+    classification: ESCALATE
+    produce_intent_upgrade: BLOCK
+    regulation: "FINRA 2210(d)(1)(A)"
+    detection:
+      type: keyword
+      patterns:
+        - "guaranteed returns"
+        - "guarantee"
+        - "risk-free"
+        - "risk free"
+        - "can't lose"
+        - "cannot lose"
+        - "will definitely"
+        - "always performs"
+        - "never fails"
+        - "sure thing"
+        - "certain to"
+        - "certainty"
+
+  - id: compliance.predictions_projections
+    description: >
+      Forward-looking statements presented as fact.
+      v1 limitation: keyword-only detection may over-fire on
+      hypothetical or educational framing (e.g., "if the market
+      were to rise..."). Factual-vs-hypothetical disambiguation
+      deferred to v2 as a Python heuristic.
+    classification: ESCALATE
+    produce_intent_upgrade: BLOCK
+    regulation: "FINRA 2210(d)(1)(F)"
+    detection:
+      type: keyword
+      patterns:
+        - "will reach"
+        - "going to rise"
+        - "going to fall"
+        - "expect it to hit"
+        - "predict"
+        - "projection"
+        - "forecast"
+        - "by next quarter"
+        - "within 6 months"
+        - "by year end"
+
+  - id: compliance.unbalanced_claims
+    description: >
+      Presenting benefits without corresponding risk disclosure.
+      Requires multi-signal heuristic: positive performance language
+      present AND risk/disclaimer language absent.
+    classification: ESCALATE
+    produce_intent_upgrade: BLOCK
+    regulation: "FINRA 2210(d)(1)(A)"
+    detection:
+      type: heuristic
+      benefit_signals:
+        - "high returns"
+        - "strong performance"
+        - "outperform"
+        - "top-performing"
+        - "upside"
+      risk_signals:
+        - "risk"
+        - "volatility"
+        - "loss"
+        - "downside"
+        - "past performance"
+        - "no guarantee"
+
+  # --- Regulatory Boundary Violations ---
+
+  - id: compliance.investment_advice
+    description: >
+      General requests crossing the investment advice boundary
+      without licensed representative involvement. For specific
+      named-security buy/sell requests, see
+      prohibited.specific_security_recommendation (BLOCK).
+    classification: ESCALATE
+    regulation: "FINRA 2111, Reg BI"
+    detection:
+      type: regex
+      patterns:
+        - "should I (buy|sell|invest in)"
+        - "is .+ a good investment"
+        - "what (would you|do you) recommend"
+        - "what should I invest in"
+        - "which (fund|stock|etf|bond) should"
+
+  - id: compliance.tax_advice
+    description: >
+      Requests for specific tax determinations requiring
+      qualified tax professional guidance.
+    classification: ESCALATE
+    regulation: "IRC / State tax codes"
+    detection:
+      type: keyword
+      patterns:
+        - "how do I avoid taxes"
+        - "is this tax deductible"
+        - "tax impact"
+        - "tax implications"
+        - "tax consequences"
+        - "tax loophole"
+
+  - id: compliance.legal_advice
+    description: >
+      Requests for legal determinations requiring legal counsel.
+      Narrowed to unambiguous patterns only. Terms like "sue,"
+      "lawyer," and "attorney" excluded as standalone keywords
+      due to false-positive risk on legitimate queries.
+    classification: ESCALATE
+    detection:
+      type: keyword
+      patterns:
+        - "is this legal"
+        - "can I be sued"
+        - "what are my rights"
+        - "legal liability"
+
+  # --- Manipulation and Fraud Indicators ---
+
+  - id: compliance.market_manipulation
+    description: >
+      Language suggesting market manipulation or coordinated
+      trading schemes. Routes to BLOCK regardless of intent framing.
+    classification: BLOCK
+    regulation: "FINRA 2020, SEC Rule 10b-5"
+    detection:
+      type: keyword
+      patterns:
+        - "pump and dump"
+        - "pump"
+        - "short squeeze"
+        - "let's all buy"
+        - "drive up the price"
+        - "make it go up"
+        - "force short sellers"
+        - "coordinate buying"
+
+  - id: compliance.suspicious_activity
+    description: >
+      Structuring, AML, and third-party control indicators
+      suggesting potential fraud or regulatory violations.
+    classification: ESCALATE
+    regulation: "BSA/AML, SAR requirements"
+    detection:
+      type: keyword
+      patterns:
+        - "split it up to avoid"
+        - "under the limit"
+        - "under the reporting"
+        - "someone asked me to"
+        - "my friend wants me to"
+        - "hide the source"
+        - "where the money came from"

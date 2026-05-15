@@ -1,0 +1,156 @@
+version: "1.0"
+category: prohibited
+description: >
+  Prohibited content rules. All rules route to BLOCK with no
+  escalation path.
+
+  v1 scope: Categories 1, 3, and 4 from prohibited-content.md,
+  plus a Regulatory Boundary Violations section introduced during
+  v1 to resolve a documentation inconsistency between
+  sample-classifications.md (which routes specific named-security
+  buy/sell requests to BLOCK) and compliance-triggers.md section 3.1
+  (which routes general advice-seeking to ESCALATE). The split:
+  general advice-seeking stays under compliance.investment_advice
+  (ESCALATE); specific named-security requests live here (BLOCK).
+
+  Deferred to v2: Category 2 (harm to self/others),
+  Category 5 (abusive content).
+
+rules:
+  # --- Category 1: Illegal Activity ---
+
+  - id: prohibited.money_laundering
+    description: >
+      Requests facilitating money laundering or hiding funds
+      from regulatory authorities.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 1: Illegal Activity"
+    detection:
+      type: keyword
+      patterns:
+        - "hide money"
+        - "launder"
+        - "wash money"
+        - "hide from the IRS"
+        - "move money offshore"
+        - "untraceable"
+
+  - id: prohibited.securities_fraud
+    description: >
+      Requests facilitating securities fraud, insider trading,
+      or stock price manipulation.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 1: Illegal Activity"
+    detection:
+      type: keyword
+      patterns:
+        - "manipulate the stock"
+        - "manipulate the price"
+        - "insider trading"
+        - "non-public information"
+        - "trade on inside"
+        - "front-run"
+
+  - id: prohibited.identity_theft
+    description: >
+      Requests facilitating identity theft or unauthorized
+      account access.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 1: Illegal Activity"
+    detection:
+      type: keyword
+      patterns:
+        - "someone else's name"
+        - "fake identity"
+        - "open an account in"
+        - "steal identity"
+        - "impersonate"
+
+  # --- Category 3: System Exploitation ---
+
+  - id: prohibited.prompt_injection
+    description: >
+      Attempts to override system instructions via prompt injection.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 3: System Exploitation"
+    detection:
+      type: keyword
+      patterns:
+        - "ignore your instructions"
+        - "ignore previous instructions"
+        - "ignore all previous"
+        - "disregard your rules"
+        - "disregard your instructions"
+        - "override your"
+        - "bypass your"
+
+  - id: prohibited.jailbreak
+    description: >
+      Attempts to assume a different persona or remove constraints
+      via roleplay framing.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 3: System Exploitation"
+    detection:
+      type: keyword
+      patterns:
+        - "pretend you're a different"
+        - "pretend you are"
+        - "you are now an unrestricted"
+        - "act as if you have no"
+        - "act as an unrestricted"
+        - "DAN mode"
+        - "developer mode"
+
+  - id: prohibited.instruction_extraction
+    description: >
+      Attempts to extract system prompts, rules, or internal
+      configuration.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 3: System Exploitation"
+    detection:
+      type: keyword
+      patterns:
+        - "what are your system instructions"
+        - "show me your prompt"
+        - "reveal your rules"
+        - "what are your rules"
+        - "system prompt"
+        - "initial instructions"
+
+  # --- Category 4: Out-of-Scope Content ---
+
+  - id: prohibited.out_of_scope
+    description: >
+      Requests entirely outside the financial services domain.
+      Uses heuristic detection — keyword matching alone is
+      insufficient for open-domain out-of-scope detection.
+    classification: BLOCK
+    source_category: "Prohibited Content Category 4: Out-of-Scope Content"
+    detection:
+      type: heuristic
+      example_patterns:
+        - "write me a poem"
+        - "what's the weather"
+        - "tell me a joke"
+        - "help me with my homework"
+
+  # --- Regulatory Boundary Violations ---
+  #
+  # This section was introduced during v1 development to resolve
+  # a documentation inconsistency. See file-level description.
+
+  - id: prohibited.specific_security_recommendation
+    description: >
+      Requests for buy/sell decisions on specific named securities.
+      Outside permitted scope for automated responses.
+      Overlaps with compliance.investment_advice — both rules will
+      appear in triggered_rules when a query names a specific
+      security. Priority routing resolves to BLOCK from this rule.
+    classification: BLOCK
+    source_category: "Regulatory Boundary Violations"
+    detection:
+      type: regex
+      patterns:
+        - "should I (buy|sell) [A-Z]{1,5}\\b"
+        - "should I (buy|sell) .{1,30} (stock|shares|options)"
+        - "buy or sell [A-Z]{1,5}\\b"
