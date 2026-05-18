@@ -23,14 +23,10 @@ from src.models import Classification, Category, TriggeredRule, GuardrailResult
 
 @pytest.fixture
 def classify():
-    """Return the classifier function.
+    """Return the classifier function."""
+    from src.classifier import classify
 
-    Replace this fixture body with the real import once the
-    classifier is implemented in Session 2:
-        from src.classifier import classify
-        return classify
-    """
-    pytest.skip("Classifier not yet implemented (Session 2)")
+    return classify
 
 
 # ── PROCEED samples ───────────────────────────────────────────────
@@ -90,6 +86,11 @@ class TestClarifyRouting:
         assert result.category == Category.SUITABILITY
         assert "risk_tolerance" in result.missing_context
         assert "time_horizon" in result.missing_context
+        rule_ids = [r.rule_id for r in result.triggered_rules]
+        assert "compliance.investment_advice" in rule_ids, (
+            "Audit completeness: compliance rule suppressed by context-first override "
+            "must still appear in triggered_rules"
+        )
 
     def test_sample_10_missing_jurisdiction(self, classify):
         """Sample #10: 'What are the tax implications if I convert my
@@ -101,6 +102,11 @@ class TestClarifyRouting:
         assert result.classification == Classification.CLARIFY
         assert result.category == Category.SUITABILITY
         assert "jurisdiction" in result.missing_context
+        rule_ids = [r.rule_id for r in result.triggered_rules]
+        assert "compliance.tax_advice" in rule_ids, (
+            "Audit completeness: compliance rule suppressed by context-first override "
+            "must still appear in triggered_rules"
+        )
 
 
 # ── BLOCK samples ─────────────────────────────────────────────────
