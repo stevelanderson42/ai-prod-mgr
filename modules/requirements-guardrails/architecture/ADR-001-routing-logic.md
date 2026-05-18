@@ -241,6 +241,8 @@ When multiple rules match:
 3. CLARIFY takes precedence over PROCEED
 4. If no rules match → Default to ESCALATE (fail-safe)
 
+> **Note:** The priority routing described above has one documented exception. When suitability rules at CLARIFY are present alongside compliance rules at ESCALATE, the suitability CLARIFY drives user-facing routing while compliance rules remain in the audit trail. See [ADR-003: Context-First Override for Suitability CLARIFY Routing](./ADR-003-context-first-override.md) for the rationale.
+
 ### Change Management
 
 Rule and classifier changes require:
