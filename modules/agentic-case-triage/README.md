@@ -221,9 +221,9 @@ deliberately bounded orchestration. The chain is the architecture.
 
 ---
 
-✅ **Live demo:** https://ai-case-triage-workflow.streamlit.app
-✅ **Architecture:** Six-node LangGraph state machine
-✅ **Composition:** Module 4 → Module 5 → Module 6 (chain)
+✅ **Live demo:** https://ai-case-triage-workflow.streamlit.app  
+✅ **Architecture:** Six-node LangGraph state machine  
+✅ **Composition:** Module 4 → Module 5 → Module 6 (chain)  
 ✅ **Status:** Shipped
 
 *Part of the Regulated AI Workflow Toolkit — demonstrating governance-first AI product design for regulated industries.*
