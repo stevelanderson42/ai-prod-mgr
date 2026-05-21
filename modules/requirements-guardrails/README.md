@@ -7,9 +7,10 @@
 > a single-click toggle, so a reviewer can see how the classification
 > changes when the governance logic is turned off.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://requirements-guardrails.streamlit.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-requirements--guardrails.streamlit.app-FF4B4B?logo=streamlit)](https://requirements-guardrails.streamlit.app)
 
-*Public, no setup required — click and explore the classifier in seconds.*
+Click the "Live Demo" ribbon above to run the demo.
+
 
 ![Compare Mode — Sample 2 demonstrating ADR-003](docs/compare-mode-screenshot.png)
 
@@ -270,12 +271,12 @@ What is intentionally absent: no vector store, no embedding model, no LLM librar
 
 | Module | Status | Role in the toolkit |
 |--------|--------|---------------------|
-| 1. Market Intelligence Monitor | Design artifact | External signal awareness — what AI initiatives should the firm consider |
-| 2. ROI Decision Engine | Design artifact | Structured prioritization — which initiatives are worth pursuing |
-| **3. Requirements Guardrails** (this module) | **Working classifier + live demo** | **Pre-invocation control — should this request proceed, and with what context** |
-| 4. Compliance Retrieval Assistant | Architectural specification | In-flight retrieval and output governance — grounded responses with citation and refusal |
-| 5. RAG Knowledge Pilot | Working pilot + live demo | Executable proof of Module 4's principles — measured retrieval, structured refusal, agentic recovery |
-| 6. AI Case Triage Workflow | Working agent + live demo | Agentic orchestration that consumes Module 5's retrieval as a tool inside a six-node state machine |
+| 1. Market Intelligence Monitor | 📄 Design artifact | External signal awareness — what AI initiatives should the firm consider |
+| 2. ROI Decision Engine | 📄 Design artifact | Structured prioritization — which initiatives are worth pursuing |
+| **▶ 3. Requirements Guardrails** (this module) | ⚡ **Working classifier + live demo** | **Pre-invocation control — should this request proceed, and with what context** |
+| 4. Compliance Retrieval Assistant | 📘 Architectural specification | In-flight retrieval and output governance — grounded responses with citation and refusal |
+| 5. RAG Knowledge Pilot | ⚡ Working pilot + live demo | Executable proof of Module 4's principles — measured retrieval, structured refusal, agentic recovery |
+| 6. AI Case Triage Workflow | ⚡ Working agent + live demo | Agentic orchestration that consumes Module 5's retrieval as a tool inside a six-node state machine |
 
 The portfolio organizes around two veins:
 
