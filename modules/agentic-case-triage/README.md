@@ -5,7 +5,9 @@
 > policy from a governed RAG layer, and routes decisions with a complete execution
 > trace — demonstrating how production AI systems operate in regulated environments.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-case-triage-workflow.streamlit.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-ai--case--triage--workflow.streamlit.app-FF4B4B?logo=streamlit)](https://ai-case-triage-workflow.streamlit.app)
+
+Click the "Live Demo" ribbon above to run the demo.
 
 ---
 
@@ -82,14 +84,14 @@ adds what it produces. Nothing is lost between steps.
 
 ## Live Demo
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-case-triage-workflow.streamlit.app)
-*Public, no setup required — click and run the full workflow in seconds.*
+## Live Demo
 
 ![Module 6 UI Results](docs/ui-screenshot.png)
 *Six-node triage pipeline output with execution trace —
 Classification, Entities, Policy References, Priority,
 Internal Note, and Routing Decision displayed in
-expandable sections with full audit trail.*
+expandable sections with full audit trail. Click the **Live Demo**
+ribbon at the top of this README to run the full workflow.*
 
 ---
 
