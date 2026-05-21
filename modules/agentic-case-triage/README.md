@@ -84,8 +84,6 @@ adds what it produces. Nothing is lost between steps.
 
 ## Live Demo
 
-## Live Demo
-
 ![Module 6 UI Results](docs/ui-screenshot.png)
 *Six-node triage pipeline output with execution trace —
 Classification, Entities, Policy References, Priority,
