@@ -246,12 +246,13 @@ _CATEGORY_PRIORITY: dict[Category, int] = {
 
 def resolve_priority(
     triggered: list[tuple[Classification, Category, TriggeredRule]],
-) -> tuple[Classification, Category]:
+) -> tuple[Classification, Category, Optional[TriggeredRule]]:
     """Resolve the final classification when multiple rules fire.
 
     Applies BLOCK > ESCALATE > CLARIFY > PROCEED priority ordering
-    using Classification.priority. Returns the winning classification
-    and the category of the highest-priority triggered rule.
+    using Classification.priority. Returns the winning classification,
+    the category of the highest-priority triggered rule, and the
+    TriggeredRule that won (or None for the empty PROCEED case).
 
     When multiple rules share the same classification level,
     category priority is: prohibited > compliance > suitability.
@@ -268,7 +269,7 @@ def resolve_priority(
     only the mechanical priority ordering.
     """
     if not triggered:
-        return (Classification.PROCEED, Category.NONE)
+        return (Classification.PROCEED, Category.NONE, None)
 
     # Find highest classification level
     max_priority = max(t[0].priority for t in triggered)
@@ -279,4 +280,4 @@ def resolve_priority(
     # Tiebreak by category priority: prohibited > compliance > suitability
     winner = max(at_max, key=lambda t: _CATEGORY_PRIORITY.get(t[1], -1))
 
-    return (winner[0], winner[1])
+    return (winner[0], winner[1], winner[2])

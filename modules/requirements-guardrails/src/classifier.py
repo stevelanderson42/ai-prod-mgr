@@ -33,11 +33,7 @@ from src.rules.heuristics import (
 
 
 def _has_gate_signals(query: str, rule_id: str, signal_key: str) -> bool:
-    """Check whether a rule's gate signals are present in the query.
-
-    Reads the specified signal list from the rule's YAML detection
-    config and performs case-insensitive substring matching.
-    """
+    """Check whether a rule's gate signals are present in the query."""
     config = get_rule_config(rule_id)
     signals = config["detection"][signal_key]
     query_lower = query.lower()
@@ -45,13 +41,7 @@ def _has_gate_signals(query: str, rule_id: str, signal_key: str) -> bool:
 
 
 def _evaluate_heuristic(rule_id: str, query: str) -> bool:
-    """Dispatch a heuristic rule to its Python implementation.
-
-    Each heuristic rule has custom logic. Suitability rules use
-    per-rule gate signals from YAML — is_recommendation_request
-    gates risk_tolerance and time_horizon, while jurisdiction and
-    account_type use their own YAML-defined gate signals.
-    """
+    """Dispatch a heuristic rule to its Python implementation."""
     if rule_id == "compliance.unbalanced_claims":
         return has_unbalanced_claims(query)
 
@@ -78,71 +68,82 @@ def _evaluate_heuristic(rule_id: str, query: str) -> bool:
     return False
 
 
-# ── Context-First Override ───────────────────────────────────────
-#
-# DESIGN DECISION: When suitability rules fire at CLARIFY (indicating
-# missing context required for proper evaluation), compliance rules
-# at ESCALATE are suppressed from priority resolution.
-#
-# Rationale: Escalating to a human reviewer without the required
-# suitability context (risk tolerance, time horizon, jurisdiction)
-# wastes the reviewer's time — they would need to request the same
-# missing context before they could evaluate the compliance concern.
-# CLARIFY first, then re-evaluate on the next request.
-#
-# Constraints:
-#   - BLOCK rules are NEVER suppressed. A BLOCK from any category
-#     always wins, regardless of suitability gaps.
-#   - Suppressed compliance rules still appear in
-#     GuardrailResult.triggered_rules for audit completeness.
-#   - Only compliance ESCALATE rules are suppressed. Compliance
-#     BLOCK rules (e.g., from produce-intent upgrade or
-#     market_manipulation) are not affected.
-#
-# Assumption: produce-intent upgrade always transforms ESCALATE → BLOCK.
-# The override checks for ESCALATE specifically, so upgraded rules
-# (now at BLOCK) are never suppressed. If a future upgrade target
-# other than BLOCK is introduced, this logic must be revisited.
+# ── Mechanism Application (Pure, Non-Mutating) ───────────────────
+
+
+def _compute_effective_classifications(
+    confirmed_matches: list[RuleMatch],
+    produce_intent: bool,
+) -> dict[str, Classification]:
+    """Compute each rule's effective classification after produce-intent upgrade.
+
+    Returns a dict mapping rule_id -> effective_classification. Does NOT
+    mutate the input matches. When produce_intent is False, effective
+    equals original for every rule.
+    """
+    effective: dict[str, Classification] = {}
+    for m in confirmed_matches:
+        if produce_intent and m.produce_intent_upgrade is not None:
+            effective[m.rule_id] = m.produce_intent_upgrade
+        else:
+            effective[m.rule_id] = m.classification
+    return effective
 
 
 def _apply_context_first_override(
     confirmed_matches: list[RuleMatch],
-) -> list[tuple[Classification, Category, TriggeredRule]]:
-    """Build the priority resolution input, applying context-first override.
+    effective: dict[str, Classification],
+) -> tuple[list[tuple[Classification, Category, TriggeredRule]], set[str]]:
+    """Build priority resolution input, applying context-first override.
 
-    Returns a filtered list of (Classification, Category, TriggeredRule)
-    tuples for resolve_priority. When suitability CLARIFY rules are
-    present, compliance ESCALATE rules are excluded from this list
-    (but remain in confirmed_matches for audit purposes).
+    When suitability CLARIFY rules are present in the effective
+    classification map, compliance ESCALATE rules are excluded from
+    the priority resolution input. Returns:
+        - The filtered list for resolve_priority
+        - A set of rule_ids that were suppressed by the override
+
+    BLOCK rules are never suppressed. Upgraded rules (now at BLOCK
+    via produce_intent) are also never suppressed because the
+    suppression check tests for ESCALATE specifically.
     """
     has_suitability_clarify = any(
         m.category == Category.SUITABILITY
-        and m.classification == Classification.CLARIFY
+        and effective[m.rule_id] == Classification.CLARIFY
         for m in confirmed_matches
     )
 
     priority_input = []
+    suppressed_ids: set[str] = set()
+
     for m in confirmed_matches:
-        # Suppress compliance ESCALATE when suitability CLARIFY fires
+        eff_cls = effective[m.rule_id]
         if (has_suitability_clarify
                 and m.category == Category.COMPLIANCE
-                and m.classification == Classification.ESCALATE):
+                and eff_cls == Classification.ESCALATE):
+            suppressed_ids.add(m.rule_id)
             continue
         priority_input.append((
-            m.classification,
+            eff_cls,
             m.category,
-            TriggeredRule(rule_id=m.rule_id, description=m.description),
+            TriggeredRule(
+                rule_id=m.rule_id,
+                description=m.description,
+                category=m.category,
+                original_classification=m.classification,
+                effective_classification=eff_cls,
+            ),
         ))
 
-    return priority_input
+    return priority_input, suppressed_ids
 
 
-# ── Result Construction ──────────────────────────────────────────
+# ── Result Helpers ───────────────────────────────────────────────
 
 
 def _build_decision_reason(
     final_cls: Classification,
     confirmed_matches: list[RuleMatch],
+    effective: dict[str, Classification],
     missing_context: list[str],
 ) -> str:
     """Generate a human-readable decision reason."""
@@ -153,16 +154,14 @@ def _build_decision_reason(
         fields = ", ".join(missing_context)
         return f"Missing required context: {fields}."
 
-    # For BLOCK, check for out-of-scope specifically
     if final_cls == Classification.BLOCK:
         if any(m.rule_id == "prohibited.out_of_scope"
                for m in confirmed_matches
-               if m.classification == Classification.BLOCK):
+               if effective[m.rule_id] == Classification.BLOCK):
             return "Request is outside the financial services domain."
 
-    # For ESCALATE and BLOCK, use the first matching rule's description
     for m in confirmed_matches:
-        if m.classification == final_cls:
+        if effective[m.rule_id] == final_cls:
             return m.description
 
     return "Classification determined by rule evaluation."
@@ -171,6 +170,7 @@ def _build_decision_reason(
 def _build_next_action(
     final_cls: Classification,
     confirmed_matches: list[RuleMatch],
+    effective: dict[str, Classification],
     missing_context: list[str],
 ) -> str:
     """Generate a human-readable next action."""
@@ -185,10 +185,9 @@ def _build_next_action(
     if final_cls == Classification.ESCALATE:
         return "Route to human review with full context."
 
-    # BLOCK — soft redirect for out-of-scope, hard block otherwise
     if any(m.rule_id == "prohibited.out_of_scope"
            for m in confirmed_matches
-           if m.classification == Classification.BLOCK):
+           if effective[m.rule_id] == Classification.BLOCK):
         return (
             "This system is designed for financial services questions. "
             "I can help with investment, account, and financial planning "
@@ -201,26 +200,23 @@ def _build_next_action(
 # ── Main Entry Point ─────────────────────────────────────────────
 
 
-def classify(query: str) -> GuardrailResult:
+def classify(query: str, apply_mechanisms: bool = True) -> GuardrailResult:
     """Classify a query against all guardrail rules.
-
-    Steps:
-        1. Evaluate all three rule categories (keyword/regex + heuristic
-           candidates) via the YAML evaluator.
-        2. Resolve heuristic rules via Python functions.
-        3. Apply produce-intent upgrade to eligible compliance rules.
-        4. Apply context-first override (suitability CLARIFY suppresses
-           compliance ESCALATE from priority resolution).
-        5. Resolve priority routing to determine final classification.
-        6. Determine reporting category via tiebreaking.
-        7. Construct and return a fully-populated GuardrailResult.
 
     Args:
         query: The user's input text.
+        apply_mechanisms: When True (default), applies produce-intent
+            upgrade and context-first override. When False, returns the
+            literal priority-routing outcome with no mechanism modifications.
+            Used by Compare Mode in the Streamlit UI to demonstrate the
+            architectural effect of mechanisms (ADR-003, ADR-004). All
+            existing acceptance tests use the default (True) and behave
+            identically to the pre-Compare-Mode implementation.
 
     Returns:
         A GuardrailResult with classification, category, triggered_rules,
-        missing_context, decision_reason, and next_action populated.
+        missing_context, decision_reason, next_action, driver_rule_id,
+        and mechanisms_applied populated.
     """
     # Step 1: Evaluate all categories
     all_matches: list[RuleMatch] = []
@@ -234,47 +230,89 @@ def classify(query: str) -> GuardrailResult:
             if _evaluate_heuristic(match.rule_id, query):
                 confirmed_matches.append(match)
         else:
-            # Already confirmed by keyword/regex matching
             confirmed_matches.append(match)
 
-    # Step 3: Apply produce-intent upgrade
-    # Mutates RuleMatch.classification in place. Assumes upgrade target
-    # is BLOCK (see context-first override comment for implications).
-    if detect_produce_intent(query):
-        for match in confirmed_matches:
-            if match.produce_intent_upgrade is not None:
-                match.classification = match.produce_intent_upgrade
+    # Step 3: Compute effective classifications (produce-intent upgrade)
+    # No mutation — effective is a separate dict.
+    produce_intent_detected = detect_produce_intent(query) and apply_mechanisms
+    effective = _compute_effective_classifications(
+        confirmed_matches, produce_intent_detected
+    )
 
-    # Step 4: Build triggered_rules for audit (ALL confirmed rules,
-    # including those that will be suppressed by context-first override)
-    triggered_rules = [
-        TriggeredRule(rule_id=m.rule_id, description=m.description)
-        for m in confirmed_matches
-    ]
+    # Step 4: Apply context-first override (or skip when mechanisms disabled)
+    if apply_mechanisms:
+        priority_input, suppressed_ids = _apply_context_first_override(
+            confirmed_matches, effective
+        )
+    else:
+        # No override: every confirmed rule goes to priority resolution.
+        priority_input = [
+            (
+                effective[m.rule_id],
+                m.category,
+                TriggeredRule(
+                    rule_id=m.rule_id,
+                    description=m.description,
+                    category=m.category,
+                    original_classification=m.classification,
+                    effective_classification=effective[m.rule_id],
+                ),
+            )
+            for m in confirmed_matches
+        ]
+        suppressed_ids = set()
 
-    # Step 5: Apply context-first override and resolve priority
-    priority_input = _apply_context_first_override(confirmed_matches)
-    final_cls, final_cat = resolve_priority(priority_input)
+    # Step 5: Resolve priority — now also returns the driver rule
+    final_cls, final_cat, driver_rule = resolve_priority(priority_input)
 
-    # Step 6: Collect missing_context from suitability CLARIFY rules
+    # Step 6: Build the full triggered_rules audit list.
+    # Includes suppressed rules with the suppression flag set.
+    # Includes upgrade flags for rules whose effective != original.
+    triggered_rules = []
+    for m in confirmed_matches:
+        eff_cls = effective[m.rule_id]
+        was_upgraded = (
+            apply_mechanisms
+            and m.produce_intent_upgrade is not None
+            and produce_intent_detected
+        )
+        triggered_rules.append(TriggeredRule(
+            rule_id=m.rule_id,
+            description=m.description,
+            category=m.category,
+            original_classification=m.classification,
+            effective_classification=eff_cls,
+            suppressed_by_override=(m.rule_id in suppressed_ids),
+            upgraded_by_produce_intent=was_upgraded,
+        ))
+
+    # Step 7: Determine which mechanisms actually fired (and affected outcome).
+    mechanisms_applied: list[str] = []
+    if apply_mechanisms:
+        if any(r.upgraded_by_produce_intent for r in triggered_rules):
+            mechanisms_applied.append("produce_intent_upgrade")
+        if suppressed_ids:
+            mechanisms_applied.append("context_first_override")
+
+    # Step 8: Collect missing_context from suitability CLARIFY rules
     missing_context: list[str] = []
     if final_cls == Classification.CLARIFY:
         for m in confirmed_matches:
             if (m.category == Category.SUITABILITY
-                    and m.classification == Classification.CLARIFY):
+                    and effective[m.rule_id] == Classification.CLARIFY):
                 for ctx in m.missing_context:
                     if ctx not in missing_context:
                         missing_context.append(ctx)
 
-    # Step 7: Build human-readable fields
+    # Step 9: Build human-readable fields
     decision_reason = _build_decision_reason(
-        final_cls, confirmed_matches, missing_context,
+        final_cls, confirmed_matches, effective, missing_context,
     )
     next_action = _build_next_action(
-        final_cls, confirmed_matches, missing_context,
+        final_cls, confirmed_matches, effective, missing_context,
     )
 
-    # Step 8: Construct result
+    # Step 10: Construct result
     return GuardrailResult(
         classification=final_cls,
         category=final_cat,
@@ -282,4 +320,6 @@ def classify(query: str) -> GuardrailResult:
         next_action=next_action,
         triggered_rules=triggered_rules,
         missing_context=missing_context,
+        driver_rule_id=driver_rule.rule_id if driver_rule else None,
+        mechanisms_applied=mechanisms_applied,
     )

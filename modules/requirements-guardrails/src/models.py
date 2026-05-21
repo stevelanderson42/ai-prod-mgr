@@ -61,10 +61,28 @@ class TriggeredRule:
         rule_id: Identifier in {category}.{rule_name} format.
                  Example: 'compliance.guarantee_language'
         description: Human-readable explanation of what the rule detects.
+        category: Which guardrail category this rule belongs to.
+                  Enables UI rendering without parsing rule_id.
+        original_classification: The rule's default classification as
+                  defined in YAML, before any mechanism modification.
+        effective_classification: The rule's classification after
+                  produce-intent upgrade is considered. Equals
+                  original_classification when no upgrade applies.
+        suppressed_by_override: True when context-first override
+                  excluded this rule from priority resolution.
+                  The rule remains in triggered_rules for audit
+                  completeness; this flag signals UI rendering.
+        upgraded_by_produce_intent: True when produce-intent upgrade
+                  modified this rule's effective_classification.
     """
 
     rule_id: str
     description: str
+    category: Category = Category.NONE
+    original_classification: Classification = Classification.PROCEED
+    effective_classification: Classification = Classification.PROCEED
+    suppressed_by_override: bool = False
+    upgraded_by_produce_intent: bool = False
 
 
 @dataclass
@@ -87,6 +105,12 @@ class GuardrailResult:
                          only one determines the final classification.
         missing_context: Fields the user must provide (CLARIFY only).
                          Empty list for non-CLARIFY decisions.
+        driver_rule_id: rule_id of the rule that won priority resolution.
+                        None when classification is PROCEED.
+        mechanisms_applied: List of mechanism names that affected the
+                        outcome. Possible values: "context_first_override",
+                        "produce_intent_upgrade". Empty list when no
+                        mechanism modified the literal priority outcome.
     """
 
     classification: Classification
@@ -95,6 +119,8 @@ class GuardrailResult:
     next_action: str
     triggered_rules: list[TriggeredRule] = field(default_factory=list)
     missing_context: list[str] = field(default_factory=list)
+    driver_rule_id: Optional[str] = None
+    mechanisms_applied: list[str] = field(default_factory=list)
     request_id: str = field(default_factory=lambda: str(uuid4()))
     timestamp: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
@@ -105,4 +131,13 @@ class GuardrailResult:
         result = asdict(self)
         result["classification"] = self.classification.value
         result["category"] = self.category.value
+        # Convert nested TriggeredRule enums
+        for rule in result["triggered_rules"]:
+            rule["category"] = rule["category"]
+            if hasattr(rule.get("category"), "value"):
+                rule["category"] = rule["category"].value
+            if hasattr(rule.get("original_classification"), "value"):
+                rule["original_classification"] = rule["original_classification"].value
+            if hasattr(rule.get("effective_classification"), "value"):
+                rule["effective_classification"] = rule["effective_classification"].value
         return result
