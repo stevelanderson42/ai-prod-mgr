@@ -1,4 +1,4 @@
-# RAG Knowledge Pilot — Measured Retrieval System
+# Module 5 - RAG Knowledge Pilot — Measured Retrieval System
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-rag--knowledge--pilot.streamlit.app-FF4B4B?logo=streamlit)](https://rag-knowledge-pilot.streamlit.app)
 

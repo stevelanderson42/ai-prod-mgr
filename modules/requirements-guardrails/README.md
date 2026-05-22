@@ -1,4 +1,4 @@
-# Requirements Guardrails — Pre-Invocation Classifier with Interactive Mechanism Demo
+# Module 3 - Requirements Guardrails — Pre-Invocation Classifier with Interactive Mechanism Demo
 
 > **10-Second Summary:**
 > A working deterministic classifier that decides whether an AI request can

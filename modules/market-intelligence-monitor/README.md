@@ -1,4 +1,4 @@
-# Market Intelligence Monitor  
+# Module 1 - Market Intelligence Monitor  
 **External Signal Awareness for Regulated AI Strategy**
 
 **Status:** 🟢 MVP Complete  
