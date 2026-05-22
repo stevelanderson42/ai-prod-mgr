@@ -1,4 +1,4 @@
-Module 4 - # Compliance Retrieval Assistant
+# Module 4 - Compliance Retrieval Assistant
 
 **Governance-First Retrieval for Regulated AI Workflows**
 
