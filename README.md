@@ -1,59 +1,46 @@
-# Governance-First AI Product Portfolio | Steve L. Anderson
+# AI Product Systems Portfolio | Steve L. Anderson
 
-Senior Product Manager with 20+ years in regulated financial services, including 12 years at Charles Schwab, now focused on AI product management for environments where governance, traceability, and decision accountability have to be designed in from the start rather than added after deployment.
+Senior Product Manager building agentic workflows, RAG systems, evaluation frameworks, and guardrails — paired with 20+ years of product experience in regulated financial services, including 12 years at Charles Schwab.
 
-This portfolio is a six-module system that mirrors how regulated organizations evaluate, prioritize, govern, and deploy AI across the full lifecycle. Three modules are live and interactive: a pre-invocation guardrail classifier, a measured retrieval system, and an agentic orchestration workflow. The other three are design and architecture artifacts that establish the governance framework the working modules operate within.
+This portfolio is a set of working AI systems that translate LLM capabilities into the things products actually need: classification, retrieval, routing, escalation, grounded generation, execution tracing, and measurable quality controls. Three of the systems are live and interactive. The remaining work is the product strategy, architecture, and governance design that the working systems operate within — the controls that have to hold in environments like the one I came from.
 
----
-
-## The Core Challenge
-
-> **How do you enable real business value from AI while enforcing governance, traceability, and risk controls across the full lifecycle?**
-
-In regulated environments, AI initiatives rarely fail because the models are weak. They fail because governance, accountability, and decision traceability weren't designed into the product from day one — and retrofitting them after deployment is expensive, slow, and often incomplete.
-
-This portfolio addresses that gap as a six-module system. Each module is a concrete product-design decision about how governance gets built in at a specific stage of the lifecycle — from opportunity selection through agentic orchestration.
+<!-- IMAGE SLOT 1 — HERO / SYSTEM OVERVIEW (optional but high value)
+     A single banner-style image directly under the intro gives a skimmer an instant "this is a system" impression.
+     Best option: a clean horizontal diagram of the six-module flow (the same chain shown lower in this README),
+     exported as a wide PNG (~1200x300). Could be a styled version of the Mermaid flow, or a Figma/draw.io export.
+     Hero diagram of the six-module flow. -->
+![Six-module AI product system overview](./modules/docs/modules_overview.png)
 
 ---
 
-## The Modules
+## Live Systems
 
-| Module | Status | Purpose |
-|--------|--------|---------|
-| 1. [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | 📄 Design artifact | Tracks competitor AI releases and regulatory signals to inform strategic prioritization |
-| 2. [ROI Decision Engine](./modules/roi-engine/) | 📄 Design artifact | Structured, risk-aware framework for prioritizing AI opportunities |
-| 3. [**Requirements Guardrails**](./modules/requirements-guardrails/) | ⚡ **Working classifier + live demo** | Pre-invocation control — deterministic routing (PROCEED / CLARIFY / ESCALATE / BLOCK) with an interactive Compare Mode that exposes the governance mechanisms |
-| 4. [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | 📘 Architectural specification | Governance architecture for citation-first retrieval in high-risk workflows |
-| 5. [**RAG Knowledge Pilot**](./modules/rag-knowledge-pilot/) | ⚡ **Working pilot + live demo** | Measured retrieval system — 90.9% grounded answer rate, 100% refusal correctness, agentic reflection |
-| 6. [**AI Case Triage Workflow**](./modules/agentic-case-triage/) | ⚡ **Working agent + live demo** | LangGraph six-node agentic pipeline with live policy retrieval and full execution trace |
+Three working modules, each with a live demo.
 
-> Modules 1, 2, and 4 establish the governance architecture. Modules 3, 5, and 6 are live, interactive systems that operate within it.
+### 🟢 AI Case Triage Workflow
 
----
+A LangGraph six-node agentic pipeline. Live GPT-4o inference at five nodes — classification, entity extraction, priority scoring, internal note generation, and routing decision — plus a policy-retrieval node that consumes the RAG system below as a live tool, and a full execution trace on every run.
 
-## Featured: Requirements Guardrails (Module 3)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-ai--case--triage--workflow.streamlit.app-FF4B4B?logo=streamlit)](https://ai-case-triage-workflow.streamlit.app)
 
-The [Requirements Guardrails classifier](./modules/requirements-guardrails/) is the pre-invocation control layer of the portfolio — a deterministic classifier that decides whether an AI request can safely proceed before any model is invoked, returning one of four routing decisions: PROCEED, CLARIFY, ESCALATE, or BLOCK.
+<!-- IMAGE SLOT 2 — CASE TRIAGE EXECUTION TRACE (highest priority screenshot)
+     Screenshot of the live app showing a completed run: the six-node trace with real per-node
+     input/output/rationale visible. This is the single strongest "it actually runs" proof on the page —
+     a skimmer believes the build the moment they see a real execution trace.
+     Lives in the module's own docs folder. -->
+![AI Case Triage Workflow results](./modules/agentic-case-triage/docs/Agentic_Triage_Results_Screenshot.png)
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-requirements--guardrails.streamlit.app-FF4B4B?logo=streamlit)](https://requirements-guardrails.streamlit.app)
+- Six-node LangGraph state machine with shared state flowing through every node
+- Live GPT-4o inference at five nodes (classification, extraction, priority scoring, note generation, routing)
+- Policy-retrieval node consumes the RAG Knowledge Pilot as a live workflow tool — a real cross-module dependency, not a standalone demo
+- Full execution trace logging every node's input, output, and rationale
+- Five regulatory scenarios (Reg BI, FINRA 2210, KYC/AML) exercising different pipeline paths
 
-What makes it distinct is the **Compare Mode** in the live demo: a single toggle that runs the classifier with and without its two governance mechanisms, side by side, so a reviewer can see exactly how the architecture changes the outcome. The same query that routes to ESCALATE under literal priority routing routes to CLARIFY once the context-first override applies — and the demo shows both, with the relevant architectural decision linked inline.
+→ [Full README with sequence diagram and live demo](./modules/agentic-case-triage/)
 
-Key capabilities:
-- Deterministic routing with no general-purpose LLM at the decision boundary — every classification traces to a rule firing or a documented mechanism
-- Context-first override (ADR-003) — suppresses premature escalation when the request lacks the context a human reviewer would need anyway
-- Produce-intent upgrade (ADR-004) — distinguishes a request that *contains* prohibited language from one that asks the system to *generate* it, and routes them differently
-- Full audit trail on every decision, including rules suppressed by the override — the transparency a compliance reviewer or auditor would expect
-- Deliberately scoped v1 (ADR-005) — three of five guardrail categories implemented, the other two deferred with documented engineering-complexity and duty-of-care reasoning
-- 21 passing tests covering routing behavior and mechanism effects
+### 🟢 RAG Knowledge Pilot
 
-→ [See full README with architecture diagrams, ADR index, and Compare Mode walkthrough](./modules/requirements-guardrails/)
-
----
-
-## Featured: RAG Knowledge Pilot (Module 5)
-
-The [RAG Knowledge Pilot](./modules/rag-knowledge-pilot/) is the measured retrieval artifact of the portfolio — a working retrieval system that operationalizes the governance principles specified in Module 4, and the layer that Module 6 consumes as a tool.
+An embedding-based retrieval system with measured quality. An agentic reflection loop reformulates borderline queries and retries once — lifting the grounded-answer rate from 72.7% to 90.9% with zero loss in refusal correctness.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-rag--knowledge--pilot.streamlit.app-FF4B4B?logo=streamlit)](https://rag-knowledge-pilot.streamlit.app)
 
@@ -62,123 +49,94 @@ The [RAG Knowledge Pilot](./modules/rag-knowledge-pilot/) is the measured retrie
 | Grounded Answer Rate (GAR) | **100.0%** (11/11) | 72.7% (8/11) | **90.9%** (10/11) |
 | Refusal Correctness Rate (RCR) | **100.0%** (4/4) | **100.0%** (4/4) | **100.0%** (4/4) |
 
-Key capabilities:
+<!-- IMAGE SLOT 3 — RAG RESULTS / EVALUATION VIEW (high priority screenshot)
+     Screenshot of the live app showing either (a) a grounded answer with its citations, or
+     (b) the evaluation harness output with the GAR/RCR numbers rendered. Option (b) reinforces the
+     Lives in the module's own docs/screenshots folder. -->
+![RAG Knowledge Pilot reflection recovery](./modules/rag-knowledge-pilot/docs/screenshots/reflection_recovery.png)
+
 - OpenAI embedding-based vector retrieval over a compliance policy corpus
 - Categorical grounding decisions (GROUNDED / REFUSED) with structured reason codes — refusal treated as a first-class output, not an error
 - Configurable grounding threshold to explore the precision/recall tradeoff
-- Agentic reflection loop that reformulates borderline queries and retries once — improving GAR from 72.7% to 90.9% with zero loss in refusal correctness
+- Agentic reflection loop that reformulates borderline queries and retries once
 - Evaluation harness computing GAR, RCR, and retrieval characteristics across 15 domain-realistic test queries
 
-→ [See full README with diagrams, results, and quick start](./modules/rag-knowledge-pilot/)
+→ [Full README with diagrams, results, and quick start](./modules/rag-knowledge-pilot/)
+
+### 🟢 Requirements Guardrails
+
+A deterministic pre-invocation classifier that decides whether an AI request can safely proceed before any model is invoked, returning one of four routing decisions: PROCEED, CLARIFY, ESCALATE, or BLOCK. No general-purpose LLM at the decision boundary — every classification traces to a rule firing or a documented mechanism.
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-requirements--guardrails.streamlit.app-FF4B4B?logo=streamlit)](https://requirements-guardrails.streamlit.app)
+
+<!-- IMAGE SLOT 4 — GUARDRAILS COMPARE MODE (high priority screenshot)
+     Screenshot of the live demo's Compare Mode showing the same query producing two different
+     routing decisions side by side (e.g. ESCALATE under literal routing vs CLARIFY once the
+     context-first override applies). The side-by-side is the distinctive visual — it shows the
+     Lives in the module's own docs folder. -->
+![Requirements Guardrails Compare Mode](./modules/requirements-guardrails/docs/compare-mode-screenshot.png)
+
+- Deterministic routing with full audit trail on every decision, including rules suppressed by an override
+- **Compare Mode** — a single toggle runs the classifier with and without its two governance mechanisms, side by side, so a reviewer sees exactly how the architecture changes the outcome
+- Context-first override (ADR-003) — suppresses premature escalation when the request lacks context a human reviewer would need anyway
+- Produce-intent upgrade (ADR-004) — distinguishes a request that *contains* prohibited language from one asking the system to *generate* it
+- Deliberately scoped v1 (ADR-005) — three of five guardrail categories implemented, the other two deferred with documented reasoning
+- 21 passing tests covering routing behavior and mechanism effects
+
+→ [Full README with architecture diagrams, ADR index, and Compare Mode walkthrough](./modules/requirements-guardrails/)
 
 ---
 
-## Featured: AI Case Triage Workflow (Module 6)
+## How It Fits Together
 
-The [AI Case Triage Workflow](./modules/agentic-case-triage/) is the agentic orchestration artifact of the portfolio — a LangGraph six-node pipeline that classifies operational cases, retrieves live compliance policy from Module 5's RAG layer, and drives structured routing decisions with a full execution trace. It is the most downstream layer of the architectural chain: Module 4 specifies the governance, Module 5 operationalizes and measures it, Module 6 consumes it as a tool inside a bounded orchestration.
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-ai--case--triage--workflow.streamlit.app-FF4B4B?logo=streamlit)](https://ai-case-triage-workflow.streamlit.app)
-
-Key capabilities:
-- Six-node LangGraph state machine with shared state flowing through every node
-- Live GPT-4o inference at five nodes — classification, entity extraction, priority scoring, internal note generation, and routing decision
-- Policy retrieval node consumes Module 5's RAG layer as a live workflow tool — a real cross-module dependency, not a standalone demo
-- Full execution trace logging every node's input, output, and rationale — the audit trail is the architecture, not an afterthought
-- Five regulatory scenarios (Reg BI, FINRA 2210, KYC/AML) exercising different pipeline paths across case types
-
-→ [See full README with sequence diagram and live demo](./modules/agentic-case-triage/)
-
----
-
-## How the Modules Connect
+The six modules mirror how organizations evaluate, prioritize, design, govern, and deploy AI across a product lifecycle. The three live systems above are the working layer; the other three define the framework they run inside.
 
 ```
-Market Intelligence  →  ROI Engine  →  Guardrails  →  Retrieval Assistant  →  RAG Knowledge Pilot  →  AI Case Triage Workflow
-(surfaces              (prioritizes)   (pre-invocation (specifies              (operationalizes +       (orchestrates
- opportunities)                         control)        governance)             measures)                agentically)
+Market Intelligence → ROI Engine → Guardrails → Retrieval Assistant → RAG Knowledge Pilot → Case Triage Workflow
+(surfaces             (prioritizes)  (pre-invocation (specifies            (operationalizes +     (orchestrates
+ opportunities)                       control)        governance)           measures)              agentically)
 ```
 
-The sequence mirrors how regulated organizations deploy AI: governance embedded across the lifecycle rather than added after deployment. The modules also fall into two veins. **Modules 1, 2, and 4** are design and architecture artifacts — they establish the framework. **Modules 3, 5, and 6** are live, interactive systems that operate within it.
+What ties the working layer together is a real cross-module dependency, not three standalone demos: the Retrieval Assistant specifies the governance, the RAG Knowledge Pilot operationalizes and measures it, and the Case Triage Workflow consumes that retrieval as a tool inside a bounded agentic orchestration. Requirements Guardrails sits alongside this chain as the pre-invocation control — it governs what reaches a model at all.
 
-A specific chain runs through the working layer: Module 4 specifies the governance architecture, Module 5 operationalizes and measures it, and Module 6 consumes Module 5's retrieval as a tool inside a bounded orchestration. Module 3 sits alongside this chain as the pre-invocation control surface — it governs what reaches a model at all, complementary to Module 4's governance of what a model retrieves and returns.
+<!-- IMAGE SLOT 5 — MODULE DEPENDENCY DIAGRAM (optional)
+     If you want a rendered version of the chain above instead of the ASCII block, this is the spot.
+     NOTE: if you have Mermaid source, you can embed it directly as a ```mermaid code block and GitHub
+     renders it natively — no image file needed. Paste the Mermaid and I'll wire it in. Otherwise:
+     Save a diagram export as ./docs/images/module-dependency.png and uncomment the line below. -->
+<!-- ![Module dependency diagram](./docs/images/module-dependency.png) -->
+
+### The Full Six-Module Map
+
+| Module | Layer | Purpose |
+|--------|-------|---------|
+| 1. [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | Strategy & architecture | Tracks competitor AI releases and regulatory signals to inform strategic prioritization |
+| 2. [ROI Decision Engine](./modules/roi-engine/) | Strategy & architecture | Structured, risk-aware framework for prioritizing AI opportunities |
+| 3. [**Requirements Guardrails**](./modules/requirements-guardrails/) | ⚡ Live system | Pre-invocation control — deterministic routing with interactive Compare Mode |
+| 4. [Compliance Retrieval Assistant](./modules/compliance-retrieval-assistant/) | Strategy & architecture | Governance architecture for citation-first retrieval in high-risk workflows |
+| 5. [**RAG Knowledge Pilot**](./modules/rag-knowledge-pilot/) | ⚡ Live system | Measured retrieval — 90.9% grounded answer rate, 100% refusal correctness, agentic reflection |
+| 6. [**AI Case Triage Workflow**](./modules/agentic-case-triage/) | ⚡ Live system | LangGraph six-node agentic pipeline with live policy retrieval and full execution trace |
 
 ---
 
-## Governance-by-Design Approach
+## Why Reliability and Controls Matter
 
-This portfolio applies a **governance-by-design** philosophy grounded in model risk management lifecycle thinking (e.g., SR 11-7 style controls) and responsible AI design patterns.
+The controls these systems implement — grounded retrieval, refusal as a first-class output, escalation paths, deterministic routing, full audit traces — aren't abstract. They're the difference between an AI demo and an AI feature that can ship inside FINRA, SEC, and SR 11-7 constraints. That's the environment I spent 12 years in, and it's where this kind of building is hardest and most valuable.
 
-Rather than treating governance as a post-deployment control, responsible AI principles are embedded at each stage:
+Regulation operates as shared context that informs concrete design decisions across modules — auditability, traceability, escalation paths, defensible outputs. Representative regulations that shaped the systems:
 
-- **Opportunity selection** — regulatory-aware prioritization (ROI Engine)
-- **Requirements definition** — ambiguity and compliance detection (Guardrails, live)
-- **Model invocation** — deterministic routing, escalation, and refusal paths with an interactive Compare Mode (Guardrails, live)
-- **Output grounding** — citation-first retrieval with traceable sources (Retrieval Assistant)
-- **Measured execution** — evaluation-driven iteration with real metrics (RAG Knowledge Pilot)
-- **Agentic orchestration** — bounded multi-step workflows with full execution trace (AI Case Triage Workflow)
-
----
-
-## Regulatory Context
-
-AI products in regulated industries operate within external constraints long before models are selected or features are shipped. This portfolio treats regulation as shared context that informs product design decisions such as auditability, traceability, escalation paths, and defensible outputs. To avoid duplicating legal text across modules, regulatory considerations are maintained centrally and referenced where relevant.
-
-The [/regulatory-governance/](./regulatory-governance/) folder documents representative regulations that influenced system design decisions across modules:
-
-| Regulation | What It Governs | Design Implications |
+| Regulation | What It Governs | Design Implication |
 |------------|-----------------|---------------------|
 | [SR 11-7](./regulatory-governance/finserv/sr-11-7-model-risk.md) | Model risk management | Documentation standards, validation artifacts |
 | [FINRA 2210](./regulatory-governance/finserv/finra-2210-communications.md) | Communications with the public | Fair-and-balanced language checks in Guardrails |
 | [SEC 17a-4](./regulatory-governance/finserv/sec-17a-4-books-records.md) | Books and records | Trace schema, immutable audit trails |
 | [Reg BI](./regulatory-governance/finserv/reg-bi-suitability.md) | Suitability requirements | Mandatory clarification or refusal paths |
 
----
-
-## Repository Structure
-
-```
-/modules/                  → The six-module system (start here)
-/regulatory-governance/    → Regulations informing design decisions
-/session-prompts/          → Claude Code session prompts and structured prompt experiments
-/architecture/             → System-level decisions and ADRs
-/evaluation/               → Shared evaluation framework
-/case-studies/             → Decision narratives from module development
-EXECUTION_LOG.md           → Weekly progress through the 17-week plan
-```
-
-Each module includes its own README documenting scope, design rationale, tradeoffs, and artifacts.
-
----
-
-## Key Artifacts by Module
-
-| Module | Representative Artifacts |
-|--------|--------------------------|
-| **Market Intelligence** | Signal ingestion pipeline design, categorization logic, ADRs |
-| **ROI Engine** | Scoring framework, regulatory risk weighting, sample evaluations |
-| **Guardrails** | Working classifier (3 categories), deterministic routing, context-first override + produce-intent upgrade mechanisms, Compare Mode UI, 21 passing tests, 5 ADRs, live Streamlit demo |
-| **Retrieval Assistant** | Policy-as-data configs, ADRs, evaluation scorecard, trace schema, response contract, runnable `minirag.py` demo, sample corpus, evidence package outputs |
-| **RAG Knowledge Pilot** | OpenAI embedding retrieval, cosine similarity search, categorical grounding, agentic reflection loop, evaluation harness (GAR/RCR), threshold experimentation, Mermaid diagrams |
-| **AI Case Triage Workflow** | LangGraph six-node state machine, live GPT-4o inference, Module 5 RAG integration, execution trace, five regulatory scenarios, Streamlit UI, sequence diagram |
-
-Artifacts emphasize **decision accountability and auditability**, not model optimization.
-
----
-
-## Progress
-
-| Phase | Focus | Current State |
-|-------|-------|---------------|
-| Foundation | Opportunity discovery and prioritization frameworks | 📄 Design artifacts complete (Modules 1–2) |
-| Build | Pre-invocation control and grounded retrieval | ⚡ Guardrails classifier live with Compare Mode; retrieval operational |
-| Execute | Working AI feature with measured performance | ✅ RAG Knowledge Pilot live with real metrics |
-| Orchestrate | Agentic workflow with cross-module integration | ✅ AI Case Triage Workflow live with execution trace |
+Full regulatory notes: [/regulatory-governance/](./regulatory-governance/)
 
 ---
 
 ## Credentials & Continuing Education
-
-Formal certifications and applied training completed during this transition:
 
 | Credential | Issuer | Status |
 |---|---|---|
@@ -193,7 +151,8 @@ Formal certifications and applied training completed during this transition:
 ## Local Setup
 
 - See `requirements.txt` for Python dependencies
-- Module 3 (Requirements Guardrails) runs with no external API — deterministic classifier; `streamlit run app.py` from the module folder, or use the [live demo](https://requirements-guardrails.streamlit.app)
-- Module 4 (Compliance Retrieval Assistant) includes a deterministic demo runner that does not require external APIs
-- Module 5 (RAG Knowledge Pilot) requires an OpenAI API key — see [Module 5 Setup](./modules/rag-knowledge-pilot/#setup)
-- Module 6 (AI Case Triage Workflow) requires an OpenAI API key — see [Module 6 Live Demo](./modules/agentic-case-triage/#live-demo)
+- **Module 3 (Requirements Guardrails)** — runs with no external API; `streamlit run app.py` from the module folder, or use the [live demo](https://requirements-guardrails.streamlit.app)
+- **Module 5 (RAG Knowledge Pilot)** — requires an OpenAI API key; see [Module 5 Setup](./modules/rag-knowledge-pilot/#setup)
+- **Module 6 (AI Case Triage Workflow)** — requires an OpenAI API key; see [Module 6 Live Demo](./modules/agentic-case-triage/#live-demo)
+
+Each module includes its own README documenting scope, design rationale, tradeoffs, and artifacts.
