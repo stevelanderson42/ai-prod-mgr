@@ -1,0 +1,310 @@
+[
+  {
+    "case_id": "CASE-ADV-1",
+    "case_type": "advisor",
+    "label": "Clear elevated risk \u2014 Marcus Webb",
+    "description": "Multiple structured signals fire simultaneously; free-text is neutral.",
+    "expected_band": "Elevated",
+    "actual_band": "Elevated",
+    "actual_score": 75,
+    "factors": [
+      {
+        "signal": "Comp ratio",
+        "value": "0.83x peer median",
+        "points": 20
+      },
+      {
+        "signal": "Production trend",
+        "value": "-9% vs. firm avg",
+        "points": 20
+      },
+      {
+        "signal": "Engagement decline",
+        "value": "45% drop",
+        "points": 15
+      }
+    ],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-ADV-2",
+    "case_type": "advisor",
+    "label": "Subtle risk \u2014 Diana Chen",
+    "description": "Structured signals look clean; free-text notes from manager carry the signal.",
+    "expected_band": "Watch",
+    "actual_band": "Watch",
+    "actual_score": 34,
+    "factors": [
+      {
+        "signal": "Free-text sentiment",
+        "value": "exploring options, recruiter contact, not feeling valued, less engaged",
+        "points": 20,
+        "note_excerpt": "\"exploring options\", \"recruiter contact\", \"not feeling valued\", \"less engaged\""
+      },
+      {
+        "signal": "Tenure",
+        "value": "3 years",
+        "points": 10
+      },
+      {
+        "signal": "Comp ratio",
+        "value": "1.02x peer median",
+        "points": 4
+      }
+    ],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-ADV-3",
+    "case_type": "advisor",
+    "label": "Retrospective \u2014 James Okafor (illustrative, not validation)",
+    "description": "Already departed; score snapshot from 90 days pre-departure shows Elevated.",
+    "expected_band": "Elevated",
+    "actual_band": "Elevated",
+    "actual_score": 62,
+    "factors": [
+      {
+        "signal": "Engagement decline",
+        "value": "42% drop",
+        "points": 15
+      },
+      {
+        "signal": "Comp ratio",
+        "value": "0.88x peer median",
+        "points": 14
+      },
+      {
+        "signal": "Production trend",
+        "value": "-6% vs. firm avg",
+        "points": 14
+      }
+    ],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-1-follow",
+    "case_type": "household-follow",
+    "label": "High follow, low baseline \u2014 The Paterson Family (follow likelihood)",
+    "description": "Satisfied household whose entire relationship is through the advisor; high follow likelihood, low baseline risk.",
+    "expected_band": "High",
+    "actual_band": "High",
+    "actual_score": 86,
+    "factors": [
+      {
+        "signal": "Advisor tenure ratio",
+        "value": "7yr / 7yr",
+        "points": 25
+      },
+      {
+        "signal": "Acquisition origin",
+        "value": "advisor_book",
+        "points": 20
+      },
+      {
+        "signal": "Service breadth",
+        "value": "1 service(s)",
+        "points": 15
+      }
+    ],
+    "missing_signals": [],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-1-baseline",
+    "case_type": "household-baseline",
+    "label": "High follow, low baseline \u2014 The Paterson Family (baseline risk)",
+    "description": "Satisfied household whose entire relationship is through the advisor; high follow likelihood, low baseline risk.",
+    "expected_band": "Low",
+    "actual_band": "Low",
+    "actual_score": 5,
+    "factors": [
+      {
+        "signal": "Fee percentile",
+        "value": "45th percentile",
+        "points": 5
+      },
+      {
+        "signal": "Trailing performance",
+        "value": "+1.2% vs. benchmark",
+        "points": 0
+      },
+      {
+        "signal": "Service complaints",
+        "value": "0 in 12 months",
+        "points": 0
+      }
+    ],
+    "missing_signals": [],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-2-follow",
+    "case_type": "household-follow",
+    "label": "Low follow, high baseline \u2014 The Nakamura Family (follow likelihood)",
+    "description": "Long firm tenure, multiple firm relationships, but independently dissatisfied; low follow likelihood, high baseline risk.",
+    "expected_band": "Low",
+    "actual_band": "Low",
+    "actual_score": 6,
+    "factors": [
+      {
+        "signal": "Advisor tenure ratio",
+        "value": "2yr / 14yr",
+        "points": 3
+      },
+      {
+        "signal": "Digital engagement",
+        "value": "7.0 logins/mo",
+        "points": 3
+      },
+      {
+        "signal": "Acquisition origin",
+        "value": "firm_originated",
+        "points": 0
+      }
+    ],
+    "missing_signals": [],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-2-baseline",
+    "case_type": "household-baseline",
+    "label": "Low follow, high baseline \u2014 The Nakamura Family (baseline risk)",
+    "description": "Long firm tenure, multiple firm relationships, but independently dissatisfied; low follow likelihood, high baseline risk.",
+    "expected_band": "High",
+    "actual_band": "High",
+    "actual_score": 83,
+    "factors": [
+      {
+        "signal": "Fee percentile",
+        "value": "82th percentile",
+        "points": 20
+      },
+      {
+        "signal": "Service complaints",
+        "value": "3 in 12 months",
+        "points": 20
+      },
+      {
+        "signal": "Trailing performance",
+        "value": "-3.5% vs. benchmark",
+        "points": 16
+      }
+    ],
+    "missing_signals": [],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-3-follow",
+    "case_type": "household-follow",
+    "label": "Low on both \u2014 The Brennan Family (follow likelihood)",
+    "description": "Deeply embedded, multiple firm relationships, satisfied; low on both scores.",
+    "expected_band": "Low",
+    "actual_band": "Low",
+    "actual_score": 3,
+    "factors": [
+      {
+        "signal": "Advisor tenure ratio",
+        "value": "3yr / 10yr",
+        "points": 3
+      },
+      {
+        "signal": "Acquisition origin",
+        "value": "firm_originated",
+        "points": 0
+      },
+      {
+        "signal": "Service breadth",
+        "value": "5 service(s)",
+        "points": 0
+      }
+    ],
+    "missing_signals": [],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-3-baseline",
+    "case_type": "household-baseline",
+    "label": "Low on both \u2014 The Brennan Family (baseline risk)",
+    "description": "Deeply embedded, multiple firm relationships, satisfied; low on both scores.",
+    "expected_band": "Low",
+    "actual_band": "Low",
+    "actual_score": 9,
+    "factors": [
+      {
+        "signal": "Fee percentile",
+        "value": "44th percentile",
+        "points": 5
+      },
+      {
+        "signal": "Satisfaction survey",
+        "value": "8/10",
+        "points": 4
+      },
+      {
+        "signal": "Trailing performance",
+        "value": "+2.8% vs. benchmark",
+        "points": 0
+      }
+    ],
+    "missing_signals": [],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-4-follow",
+    "case_type": "household-follow",
+    "label": "Insufficient signal \u2014 The Domingo Account (follow likelihood)",
+    "description": "New account with sparse data; system declines to score, distinguishing missing from unreliable.",
+    "expected_band": "Insufficient data",
+    "actual_band": "Insufficient data",
+    "actual_score": null,
+    "factors": [],
+    "missing_signals": [
+      {
+        "signal": "Advisor tenure ratio",
+        "reason": "Denominator < 1 year (0.3 years); ratio will converge as tenure grows"
+      },
+      {
+        "signal": "Acquisition origin",
+        "reason": "Not yet recorded in CRM"
+      },
+      {
+        "signal": "Firm contacts",
+        "reason": "Insufficient interaction history"
+      },
+      {
+        "signal": "Digital engagement",
+        "reason": "Account portal never activated; cannot distinguish 'doesn't use' from 'never set up'"
+      },
+      {
+        "signal": "Communication exclusivity",
+        "reason": "Insufficient interaction history"
+      }
+    ],
+    "pass": true
+  },
+  {
+    "case_id": "CASE-HH-4-baseline",
+    "case_type": "household-baseline",
+    "label": "Insufficient signal \u2014 The Domingo Account (baseline risk)",
+    "description": "New account with sparse data; system declines to score, distinguishing missing from unreliable.",
+    "expected_band": "Insufficient data",
+    "actual_band": "Insufficient data",
+    "actual_score": null,
+    "factors": [],
+    "missing_signals": [
+      {
+        "signal": "Trailing performance vs. benchmark",
+        "reason": "Less than 6 months of history"
+      },
+      {
+        "signal": "Net flow trend",
+        "reason": "Less than 6 months of history"
+      },
+      {
+        "signal": "Satisfaction survey",
+        "reason": "No survey on file"
+      }
+    ],
+    "pass": true
+  }
+]
