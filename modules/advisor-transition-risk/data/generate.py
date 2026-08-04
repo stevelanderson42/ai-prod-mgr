@@ -445,10 +445,12 @@ def _high_follow_household(household_id: str, advisor_id: str,
     tenure ratio near 1.0, advisor_book origin, narrow services,
     few firm contacts, low portal use, high comm exclusivity.
     """
-    if random.random() < 0.05:
-        aum = round(random.uniform(15_000_000, 40_000_000), -4)
+    # Narrower AUM range than default to keep acquired-book advisors
+    # from having unrealistically large total book AUM
+    if random.random() < 0.04:
+        aum = round(random.uniform(10_000_000, 25_000_000), -4)
     else:
-        aum = round(random.uniform(1_000_000, 15_000_000), -4)
+        aum = round(random.uniform(1_000_000, 10_000_000), -4)
 
     # Tenure ratio near 1.0 — client arrived with the advisor
     firm_tenure = round(random.uniform(
@@ -614,9 +616,12 @@ def _generate_transition_entries(households: list[dict],
 # ---------------------------------------------------------------------------
 
 MIN_CONCENTRATION_PCT = 8.0  # No advisor below this
+MIN_ELEVATED_CONCENTRATION_PCT = 25.0  # Elevated advisors should show meaningful exposure
 
 
-def _ensure_min_concentration(advisor: dict, book: list[dict]) -> list[dict]:
+def _ensure_min_concentration(advisor: dict, book: list[dict],
+                               min_pct: float = MIN_CONCENTRATION_PCT,
+                               max_replacements: int = 5) -> list[dict]:
     """Ensure the advisor's book has enough High-follow households to meet
     the minimum concentration threshold. Replaces the lowest-AUM non-High
     households with high-follow ones until the threshold is met."""
@@ -633,9 +638,8 @@ def _ensure_min_concentration(advisor: dict, book: list[dict]) -> list[dict]:
     current_conc = high_aum / total_aum * 100
 
     # Keep replacing until we hit the floor
-    max_replacements = 5  # safety cap
     replacements = 0
-    while current_conc < MIN_CONCENTRATION_PCT and replacements < max_replacements:
+    while current_conc < min_pct and replacements < max_replacements:
         # Find lowest-AUM non-High, non-designed household to replace
         candidates = sorted(
             [h for h in book
@@ -753,7 +757,7 @@ def generate() -> dict:
     for adv in advisors:
         aid = adv["advisor_id"]
         if aid == "ADV-WEBB":
-            advisor_hh_counts[aid] = 38  # + 4 designed = 42
+            advisor_hh_counts[aid] = 30  # + 4 designed = 34
         elif aid == "ADV-OKAFOR":
             advisor_hh_counts[aid] = 28
         elif aid == "ADV-CHEN":
@@ -765,7 +769,7 @@ def generate() -> dict:
 
     # Scale random advisor counts to hit ~1000 total (minus designed HH)
     designed_hh_count = len(HOUSEHOLD_CASES)  # 4
-    fixed_counts = {"ADV-WEBB": 38, "ADV-OKAFOR": 28, "ADV-CHEN": 30, "ADV-RUSSO": 35}
+    fixed_counts = {"ADV-WEBB": 30, "ADV-OKAFOR": 28, "ADV-CHEN": 30, "ADV-RUSSO": 35}
     fixed_total = sum(fixed_counts.values()) + designed_hh_count
     random_aids = [a for a in advisor_hh_counts if a not in fixed_counts]
     random_total = sum(advisor_hh_counts[a] for a in random_aids)
@@ -792,9 +796,19 @@ def generate() -> dict:
         aid = adv["advisor_id"]
         n = advisor_hh_counts.get(aid, 20)
 
-        # Russo: explicit slot assignment, shuffled so types aren't clumped
-        russo_slots = (["hf"] * 7 + ["lf"] * 18 + ["rand"] * 10)
-        random.shuffle(russo_slots)
+        # Explicit slot assignments for designed/planted advisors
+        # Shuffled so household types aren't clumped in the list
+        def _make_slots(hf: int, lf: int, rand: int) -> list[str]:
+            s = ["hf"] * hf + ["lf"] * lf + ["rand"] * rand
+            random.shuffle(s)
+            return s
+
+        if aid == "ADV-RUSSO":
+            slots = _make_slots(7, 18, 10)   # target ~19% concentration
+        elif aid == "ADV-OKAFOR":
+            slots = _make_slots(16, 4, 8)    # target ~45% concentration
+        else:
+            slots = []  # not used for other advisors
 
         for j in range(n):
             hh_id = f"HH-{hh_counter:04d}"
@@ -807,10 +821,8 @@ def generate() -> dict:
                     hh = _high_follow_household(hh_id, aid, adv["tenure_years"])
                 else:
                     hh = _random_household(hh_id, aid, adv["tenure_years"])
-            elif aid == "ADV-RUSSO":
-                # Explicit mix: 8 high-follow, 17 low-follow, 10 random
-                # out of 35 → targets ~15-20% concentration
-                slot = russo_slots[j] if j < len(russo_slots) else "rand"
+            elif aid in ("ADV-RUSSO", "ADV-OKAFOR"):
+                slot = slots[j] if j < len(slots) else "rand"
                 if slot == "hf":
                     hh = _high_follow_household(hh_id, aid, adv["tenure_years"])
                 elif slot == "lf":
@@ -835,10 +847,20 @@ def generate() -> dict:
         hh.update(baseline_result)
 
     # --- Ensure every advisor meets minimum concentration floor ---
+    # Elevated advisors get a higher floor so the band shows genuine range
+    designed_ids = {"ADV-WEBB", "ADV-OKAFOR", "ADV-CHEN", "ADV-RUSSO"}
     for adv in advisors:
         aid = adv["advisor_id"]
         book = advisor_books[aid]
-        book = _ensure_min_concentration(adv, book)
+        if (adv["flight_risk_band"] == "Elevated"
+                and aid not in designed_ids):
+            # Random Elevated advisors: raise floor to 25-35%
+            old_floor = MIN_CONCENTRATION_PCT
+            target = MIN_ELEVATED_CONCENTRATION_PCT
+            book = _ensure_min_concentration(
+                adv, book, min_pct=target, max_replacements=15)
+        else:
+            book = _ensure_min_concentration(adv, book)
         advisor_books[aid] = book
 
     # --- Compute advisor-level aggregates ---
