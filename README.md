@@ -1,21 +1,38 @@
 # AI Product Systems Portfolio | Steve L. Anderson
 
-Senior Product Manager building agentic workflows, RAG systems, evaluation frameworks, and guardrails — paired with 20+ years of product experience in regulated financial services, including 12 years at Charles Schwab.
+Senior Product Manager. I build and ship working AI systems — agentic workflows, retrieval with measured quality, decision scoring, and pre-invocation controls — drawing on 20+ years of enterprise product experience in regulated financial services, including 12 years at Charles Schwab.
 
-This portfolio is a set of working AI systems that translate LLM capabilities into the things products actually need: classification, retrieval, routing, escalation, grounded generation, execution tracing, and measurable quality controls. Three of the systems are live and interactive. The remaining work is the product strategy, architecture, and governance design that the working systems operate within — the controls that have to hold in environments like the one I came from.
+Four of the systems here are live and interactive. The rest is the product strategy, architecture, and governance design the working systems operate within.
 
-<!-- IMAGE SLOT 1 — HERO / SYSTEM OVERVIEW (optional but high value)
-     A single banner-style image directly under the intro gives a skimmer an instant "this is a system" impression.
-     Best option: a clean horizontal diagram of the six-module flow (the same chain shown lower in this README),
-     exported as a wide PNG (~1200x300). Could be a styled version of the Mermaid flow, or a Figma/draw.io export.
-     Hero diagram of the six-module flow. -->
 ![Six-module AI product system overview](./modules/docs/modules_overview.png)
 
 ---
 
-## Live Systems
+## Applied Product Systems
 
-Three working modules, each with a live demo.
+Domain product work built outside the six-module lifecycle below.
+
+### 🟢 Advisor Transition Risk
+
+Advisor attrition and client attrition are usually tracked as separate metrics. At a wealth-management firm where the client relationship sits with an individual advisor, they are one causal chain. This models that chain in three stages — which advisors may depart, which households would follow them out, and how much of the book a transition actually recovered.
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-stevelanderson42.github.io%2Fadvisor--transition--risk-4338ca)](https://stevelanderson42.github.io/advisor-transition-risk/)
+
+![Advisor Transition Risk — advisor list view](./modules/advisor-transition-risk/docs/advisor-list-screenshot.png)
+
+- Two independent household scores — baseline departure risk and follow likelihood given a specific advisor's exit — because they're driven by different signals and imply different interventions
+- Transparent additive scoring; every band decomposes into its contributing factors inline
+- Explicit distinction between *missing* data and data that is *present but unreliable*, with the system declining to score rather than producing a confident number from nothing
+- Python scoring engine computing offline; static React front end reading a fixed JSON payload — no server, no keys in client code
+- Eleven designed test cases verifying the implementation against its specification
+
+→ [Full README, including the decision log](./modules/advisor-transition-risk/)
+
+---
+
+## The Six-Module Lifecycle
+
+Three working modules, each with a live demo, sitting inside a framework of three strategy and architecture modules.
 
 ### 🟢 AI Case Triage Workflow
 
@@ -23,11 +40,6 @@ A LangGraph six-node agentic pipeline. Live GPT-4o inference at five nodes — c
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-ai--case--triage--workflow.streamlit.app-FF4B4B?logo=streamlit)](https://ai-case-triage-workflow.streamlit.app)
 
-<!-- IMAGE SLOT 2 — CASE TRIAGE EXECUTION TRACE (highest priority screenshot)
-     Screenshot of the live app showing a completed run: the six-node trace with real per-node
-     input/output/rationale visible. This is the single strongest "it actually runs" proof on the page —
-     a skimmer believes the build the moment they see a real execution trace.
-     Lives in the module's own docs folder. -->
 ![AI Case Triage Workflow results](./modules/agentic-case-triage/docs/Agentic_Triage_Results_Screenshot.png)
 
 - Six-node LangGraph state machine with shared state flowing through every node
@@ -49,10 +61,6 @@ An embedding-based retrieval system with measured quality. An agentic reflection
 | Grounded Answer Rate (GAR) | **100.0%** (11/11) | 72.7% (8/11) | **90.9%** (10/11) |
 | Refusal Correctness Rate (RCR) | **100.0%** (4/4) | **100.0%** (4/4) | **100.0%** (4/4) |
 
-<!-- IMAGE SLOT 3 — RAG RESULTS / EVALUATION VIEW (high priority screenshot)
-     Screenshot of the live app showing either (a) a grounded answer with its citations, or
-     (b) the evaluation harness output with the GAR/RCR numbers rendered. Option (b) reinforces the
-     Lives in the module's own docs/screenshots folder. -->
 ![RAG Knowledge Pilot reflection recovery](./modules/rag-knowledge-pilot/docs/screenshots/reflection_recovery.png)
 
 - OpenAI embedding-based vector retrieval over a compliance policy corpus
@@ -69,11 +77,6 @@ A deterministic pre-invocation classifier that decides whether an AI request can
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-requirements--guardrails.streamlit.app-FF4B4B?logo=streamlit)](https://requirements-guardrails.streamlit.app)
 
-<!-- IMAGE SLOT 4 — GUARDRAILS COMPARE MODE (high priority screenshot)
-     Screenshot of the live demo's Compare Mode showing the same query producing two different
-     routing decisions side by side (e.g. ESCALATE under literal routing vs CLARIFY once the
-     context-first override applies). The side-by-side is the distinctive visual — it shows the
-     Lives in the module's own docs folder. -->
 ![Requirements Guardrails Compare Mode](./modules/requirements-guardrails/docs/compare-mode-screenshot.png)
 
 - Deterministic routing with full audit trail on every decision, including rules suppressed by an override
@@ -87,7 +90,7 @@ A deterministic pre-invocation classifier that decides whether an AI request can
 
 ---
 
-## How It Fits Together
+## How the Six Fit Together
 
 The six modules mirror how organizations evaluate, prioritize, design, govern, and deploy AI across a product lifecycle. The three live systems above are the working layer; the other three define the framework they run inside.
 
@@ -99,17 +102,11 @@ Market Intelligence → ROI Engine → Guardrails → Retrieval Assistant → RA
 
 What ties the working layer together is a real cross-module dependency, not three standalone demos: the Retrieval Assistant specifies the governance, the RAG Knowledge Pilot operationalizes and measures it, and the Case Triage Workflow consumes that retrieval as a tool inside a bounded agentic orchestration. Requirements Guardrails sits alongside this chain as the pre-invocation control — it governs what reaches a model at all.
 
-<!-- IMAGE SLOT 5 — MODULE DEPENDENCY DIAGRAM (optional)
-     If you want a rendered version of the chain above instead of the ASCII block, this is the spot.
-     NOTE: if you have Mermaid source, you can embed it directly as a ```mermaid code block and GitHub
-     renders it natively — no image file needed. Paste the Mermaid and I'll wire it in. Otherwise:
-     Save a diagram export as ./docs/images/module-dependency.png and uncomment the line below. -->
-<!-- ![Module dependency diagram](./docs/images/module-dependency.png) -->
-
-### The Full Six-Module Map
+### The Full Module Map
 
 | Module | Layer | Purpose |
 |--------|-------|---------|
+| [**Advisor Transition Risk**](./modules/advisor-transition-risk/) | ⚡ Live system | Standalone — advisor departure risk and the client exposure it creates |
 | 1. [Market Intelligence Monitor](./modules/market-intelligence-monitor/) | Strategy & architecture | Tracks competitor AI releases and regulatory signals to inform strategic prioritization |
 | 2. [ROI Decision Engine](./modules/roi-engine/) | Strategy & architecture | Structured, risk-aware framework for prioritizing AI opportunities |
 | 3. [**Requirements Guardrails**](./modules/requirements-guardrails/) | ⚡ Live system | Pre-invocation control — deterministic routing with interactive Compare Mode |
@@ -151,8 +148,13 @@ Full regulatory notes: [/regulatory-governance/](./regulatory-governance/)
 ## Local Setup
 
 - See `requirements.txt` for Python dependencies
-- **Module 3 (Requirements Guardrails)** — runs with no external API; `streamlit run app.py` from the module folder, or use the [live demo](https://requirements-guardrails.streamlit.app)
-- **Module 5 (RAG Knowledge Pilot)** — requires an OpenAI API key; see [Module 5 Setup](./modules/rag-knowledge-pilot/#setup)
-- **Module 6 (AI Case Triage Workflow)** — requires an OpenAI API key; see [Module 6 Live Demo](./modules/agentic-case-triage/#live-demo)
+- **Advisor Transition Risk** — Python generator plus a Vite front end; see [module README](./modules/advisor-transition-risk/) or the [live demo](https://stevelanderson42.github.io/advisor-transition-risk/)
+- **Requirements Guardrails** — runs with no external API; `streamlit run app.py` from the module folder, or use the [live demo](https://requirements-guardrails.streamlit.app)
+- **RAG Knowledge Pilot** — requires an OpenAI API key; see [setup instructions](./modules/rag-knowledge-pilot/#setup)
+- **AI Case Triage Workflow** — requires an OpenAI API key; see [live demo](./modules/agentic-case-triage/#live-demo)
 
 Each module includes its own README documenting scope, design rationale, tradeoffs, and artifacts.
+
+---
+
+[Portfolio](https://stevelanderson42.github.io) · [LinkedIn](https://www.linkedin.com/in/steve-l-anderson-1a16391/) · stevelanderson.42@gmail.com
