@@ -238,6 +238,24 @@ export function ModelView() {
         stated explicitly below.
       </div>
 
+      {/* --- Advisor-Level Aggregates --- */}
+      <h2 style={sectionHeader}>Advisor-Level Aggregates</h2>
+      <p style={subHeader}>
+        These are computed from an advisor's book after household scoring. They are not scoring inputs.
+      </p>
+      <p style={{ fontSize: '13px', lineHeight: 1.7, marginBottom: '8px' }}>
+        <strong>Exposed AUM</strong> — the sum of AUM across households in this advisor's book scored High follow likelihood (defined below). The dollars that would plausibly leave with the advisor.
+      </p>
+      <p style={{ fontSize: '13px', lineHeight: 1.7, marginBottom: '8px' }}>
+        <strong>Concentration</strong> — exposed AUM divided by total book AUM. The share of the book that is advisor-attached rather than firm-attached.
+      </p>
+      <p style={{ fontSize: '13px', lineHeight: 1.7, marginBottom: '8px' }}>
+        Households whose follow likelihood could not be scored are excluded from the numerator but remain in the denominator. This is deliberate: an unscored household is not evidence of low risk, and counting it as exposed would be a guess. Excluding it from the numerator makes concentration a conservative estimate, and any advisor whose book contains unscored households carries a visible note.
+      </p>
+      <p style={{ fontSize: '13px', lineHeight: 1.7, marginBottom: '24px' }}>
+        <strong>Why this exists.</strong> Flight risk answers whether an advisor is likely to leave. Concentration answers what it would cost. They are independent — an advisor at high flight risk with a firm-embedded book represents little exposure, and an advisor at moderate risk with a heavily advisor-attached book may represent a great deal. Prioritizing on flight risk alone sorts by probability and ignores magnitude.
+      </p>
+
       {/* --- Advisor Flight Risk --- */}
       <h2 style={sectionHeader}>Advisor Flight Risk</h2>
       <p style={subHeader}>
