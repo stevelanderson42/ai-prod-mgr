@@ -213,8 +213,16 @@ export function App() {
           color: colors.textMuted,
           textAlign: 'center',
         }}>
-          Synthetic data generated {data.metadata.generated} &mdash;{' '}
-          {data.metadata.advisor_count} advisors, {data.metadata.household_count} households
+          <div>
+            Synthetic data generated {data.metadata.generated} &mdash;{' '}
+            {data.metadata.advisor_count} advisors, {data.metadata.household_count} households
+          </div>
+          <div style={{ marginTop: '8px' }}>
+            Built by Steve L. Anderson{' · '}
+            <a href="https://stevelanderson42.github.io/" style={{ color: colors.textMuted }}>Portfolio</a>
+            {' · '}
+            <a href="https://github.com/stevelanderson42/ai-prod-mgr/tree/main/modules/advisor-transition-risk" style={{ color: colors.textMuted }}>Source</a>
+          </div>
         </div>
       </div>
     </div>
